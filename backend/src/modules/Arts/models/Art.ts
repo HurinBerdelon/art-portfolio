@@ -13,7 +13,7 @@ export class Art {
     description?: string
 
     @Field()
-    image: string
+    image?: string
 
     @Field()
     dimension: string

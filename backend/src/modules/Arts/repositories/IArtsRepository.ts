@@ -7,6 +7,6 @@ export interface IArtsRepository {
     getArtByUniqueCode(uniqueCode: string): Promise<Art>
     getAllArts(): Promise<Art[]>
 
-    updateArt({ id, title, description, image, dimension, productionDate }: Art): Promise<void>
+    updateArt({ id, title, description, dimension, productionDate }: Art): Promise<void>
     deleteArt(id: string): Promise<void>
 }

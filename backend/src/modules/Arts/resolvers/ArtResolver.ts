@@ -8,6 +8,8 @@ import { FindAllArtsUseCase } from "../useCases/FindAllArts/FindAllArtsUseCase";
 import { FindArtByIdUseCase } from "../useCases/FindArtById/FindArtByIdUseCase";
 import { CreateArtUseCase } from "../useCases/CreateArt/CreateArtUseCase";
 import { getHashFilename, tmpFolder } from "../../../config/upload";
+import { EditArtUseCase } from "../useCases/EditArt/EditArtUseCase";
+import { DeleteArtUseCase } from "../useCases/DeleteArt/DeleteArtUseCase";
 
 @Resolver()
 export class ArtResolver {
@@ -63,6 +65,40 @@ export class ArtResolver {
             description,
             productionDate
         })
+
+        return true
+    }
+
+    @Mutation(() => Boolean)
+    async updateArt(
+        @Arg('title') title: string,
+        @Arg('dimension') dimension: string,
+        @Arg('description') description: string,
+        @Arg('uniqueCode') uniqueCode: string,
+        @Arg('productionDate') productionDate: Date
+    ) {
+
+        const editArtUseCase = container.resolve(EditArtUseCase)
+
+        await editArtUseCase.execute({
+            dimension,
+            title,
+            uniqueCode,
+            description,
+            productionDate
+        })
+
+        return true
+    }
+
+    @Query(() => Boolean)
+    async deleteArt(
+        @Arg('id') id: string
+    ) {
+
+        const deleteArtUseCase = container.resolve(DeleteArtUseCase)
+
+        await deleteArtUseCase.execute(id)
 
         return true
     }

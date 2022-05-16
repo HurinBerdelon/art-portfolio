@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 80%;
+    width: 100%;
     padding: 1rem;
 
     ul {
@@ -13,10 +13,22 @@ export const Container = styled.div`
         li {
             height: 3rem;
             display: grid;
-            grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+            grid-template-columns: 0.25fr 0.25fr 1fr 2fr 2fr 3.5fr;
             text-align: center;
             align-items: center;
             gap: 1rem;
+
+            .editIcon:hover {
+                color: #00F;
+            }
+
+            .deleteIcon:hover {
+                color: #f00;
+            }
+
+            svg {
+                cursor: pointer;
+            }
 
             p {
                 display: block;
@@ -34,13 +46,5 @@ export const Container = styled.div`
                 }
             }
         }
-    }
-
-    .newArt {
-        position: absolute;
-        margin: 0 1rem 1rem 0;
-        bottom: 0;
-        right: 0;
-
     }
 `

@@ -51,20 +51,23 @@ export function Gallery({ arts }: GalleryProps): JSX.Element {
             />
             {pictures.map(picture => {
                 return (
-                    <div
+                    <a
+                        href={`http://localhost:3000/image/${picture.id}`}
                         key={picture.id}
-                        onClick={() => {
+                        onClick={(event) => {
+                            event.preventDefault()
                             setCurrentPicture(picture)
                             handleToggleGalleyModal()
                         }}
                         className='card'
                     >
+
                         <div
                             className='content'
                         >
                             <img src={picture.image} alt={picture.title} />
                         </div>
-                    </div>
+                    </a>
                 )
             })}
         </Container>

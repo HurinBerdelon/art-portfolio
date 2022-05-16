@@ -2,6 +2,7 @@ import { useMutation, gql } from "@apollo/client"
 import { FormEvent, useEffect, useState } from "react"
 import Modal from 'react-modal'
 import { ArtSchema } from "../../../schemas/Art"
+import { Container } from "./style"
 
 const CREATE_ART = gql`
     mutation(
@@ -62,48 +63,57 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
             className={'react-modal-content'}
         >
 
-            <h1>Upload File</h1>
-            <form
-                onSubmit={handleSubmitForm}
+            <button
+                type='button'
+                onClick={onRequestClose}
+                className='react-modal-close'
             >
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="UniqueCode"
-                    value={uniqueCode}
-                    onChange={(event) => setUniqueCode(event.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Description"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Dimension"
-                    value={dimension}
-                    onChange={(event) => setDimension(event.target.value)}
-                />
-                <input
-                    type="date"
-                    placeholder="Production Date"
-                    onChange={(event) => setProductionDate(new Date(event.target.value))}
-                />
+                <img src="/images/close.svg" alt="close-modal-button" />
+            </button>
 
-                <input type='file' onChange={(event) => setImage(event.target.files[0])} />
+            <Container>
+                <h2>Save New Art</h2>
+                <form
+                    onSubmit={handleSubmitForm}
+                >
+                    <input
+                        type="text"
+                        placeholder="Title"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="UniqueCode"
+                        value={uniqueCode}
+                        onChange={(event) => setUniqueCode(event.target.value)}
+                    />
+                    <textarea
+                        placeholder="Description"
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Dimension"
+                        value={dimension}
+                        onChange={(event) => setDimension(event.target.value)}
+                    />
+                    <input
+                        type="date"
+                        placeholder="Production Date"
+                        onChange={(event) => setProductionDate(new Date(event.target.value))}
+                    />
 
-                <button type="submit">
-                    Save
-                </button>
-            </form>
+                    <input type='file' onChange={(event) => setImage(event.target.files[0])} />
 
-        </Modal>
+                    <button type="submit">
+                        Save
+                    </button>
+                </form>
+            </Container>
+
+        </Modal >
 
     )
 }

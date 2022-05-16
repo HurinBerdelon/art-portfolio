@@ -1,10 +1,13 @@
 import Modal from 'react-modal'
+import { FacebookShareButton, FacebookIcon } from 'react-share'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { Container } from "./style";
-import { OrderedArts } from "../Gallery";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Tooltip } from '@mui/material';
 import dayjs from 'dayjs';
+import { OrderedArts } from "../Gallery";
+import { Container } from "./style";
+import { ShareButton } from '../ShareButtons';
 
 
 interface GalleryModalProps {
@@ -79,10 +82,17 @@ export function GalleryModal({ isOpen, onRequestClose, currentPicture, setCurren
                 </section>
 
                 <section className="infoContainer">
-                    <h2>{currentPicture.title}</h2>
-                    <p className='dateInfo'>{dayjs(currentPicture.productionDate).format('MMMM [of] YYYY')}</p>
-                    <p className="dimensionInfo">{currentPicture.dimension}</p>
-                    <p className='descriptionInfo'>{currentPicture.description}</p>
+                    <div className="infos">
+
+                        <h2>{currentPicture.title}</h2>
+                        <p className='dateInfo'>{dayjs(currentPicture.productionDate).format('MMMM [of] YYYY')}</p>
+                        <p className="dimensionInfo">{currentPicture.dimension}</p>
+                        <p className='descriptionInfo'>{currentPicture.description}</p>
+                    </div>
+
+                    <div className="shareMedia">
+                        <ShareButton currentPictureId={currentPicture.id} />
+                    </div>
                 </section>
             </Container>
         </Modal>

@@ -1,15 +1,48 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 
     display: flex;
     gap: 1rem;
 
+    .dropdown {
+        position: relative;
+        z-index: 1;
+        
+        &:hover {
+            .dropContent {
+                display: flex;
+            }
+        }
+    }
+
+    .dropbtn {
+        background: none;
+        border: none;
+        position: absolute;
+        
+        margin: 0.5rem 0 0 0.5rem;
+
+        &:hover {
+            color: var(--gray-500);
+        }
+    } 
+
+    .dropContent {
+        display: none;
+        position: absolute;
+        top: 2rem;
+
+        padding: 2rem 0 0 0.5rem;
+    }
+
     .imageContainer {
         width: 65%;
-        height: 100%;
+        height: 96%;
+        margin: 1rem;
 
         border-radius: 0.5rem;
         
@@ -46,7 +79,8 @@ export const Container = styled.div`
 
     .infoContainer {
         width: 35%;
-        height: 100%;
+        height: 96%;
+        margin: 1rem;
 
         background: var(--gray-100);
         border-radius: 0.5rem;
@@ -63,8 +97,8 @@ export const Container = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0 1rem;
             height: 100%;
+            padding: 0 1rem;
 
             .dateInfo {
                 font-size: .85rem;

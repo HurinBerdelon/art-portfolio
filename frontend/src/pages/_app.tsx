@@ -1,7 +1,6 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { createUploadLink } from 'apollo-upload-client'
 import { AppProps } from 'next/app'
-import { ArtProvider } from '../hooks/useArt'
 import { BodyContainer, GlobalStyle } from '../styles/global'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,12 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<ApolloProvider client={client}>
-			<ArtProvider>
-				<BodyContainer>
-					<GlobalStyle />
-					<Component {...pageProps} />
-				</BodyContainer>
-			</ArtProvider>
+			<BodyContainer>
+				<GlobalStyle />
+				<Component {...pageProps} />
+			</BodyContainer>
 		</ApolloProvider>
 	)
 }

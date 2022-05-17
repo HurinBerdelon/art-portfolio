@@ -71,6 +71,7 @@ export class ArtResolver {
 
     @Mutation(() => Boolean)
     async updateArt(
+        @Arg('id') id: string,
         @Arg('title') title: string,
         @Arg('dimension') dimension: string,
         @Arg('description') description: string,
@@ -81,6 +82,7 @@ export class ArtResolver {
         const editArtUseCase = container.resolve(EditArtUseCase)
 
         await editArtUseCase.execute({
+            id,
             dimension,
             title,
             uniqueCode,

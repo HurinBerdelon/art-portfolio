@@ -50,7 +50,7 @@ export class PrismaArtRepository implements IArtsRepository {
         return arts
     }
 
-    async updateArt({ id, title, description, dimension, productionDate }: Art): Promise<void> {
+    async updateArt({ id, title, description, dimension, productionDate, uniqueCode }: Art): Promise<void> {
         await this.artRepository.art.update({
             where: {
                 id
@@ -59,7 +59,8 @@ export class PrismaArtRepository implements IArtsRepository {
                 title,
                 description,
                 dimension,
-                productionDate
+                productionDate,
+                uniqueCode
             }
         })
     }

@@ -9,7 +9,7 @@ export class EditArtUseCase {
         private artsRepository: IArtsRepository
     ) { }
 
-    async execute({ id, title, dimension, description, productionDate }: Art): Promise<void> {
+    async execute({ id, title, dimension, uniqueCode, description, productionDate }: Art): Promise<void> {
 
         const art = await this.artsRepository.getArtById(id)
 
@@ -22,7 +22,8 @@ export class EditArtUseCase {
             title,
             dimension,
             description,
-            productionDate
+            productionDate,
+            uniqueCode
         })
     }
 }

@@ -22,7 +22,7 @@ scalar DateTime
 
 type Mutation {
   saveArt(description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
-  updateArt(description: String!, dimension: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
+  updateArt(description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
 }
 
 type Query {

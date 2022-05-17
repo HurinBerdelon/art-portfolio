@@ -39,8 +39,9 @@ export const Container = styled.div`
                 height: 16rem;
                 border: solid 1px;
                 border-radius: 0.25rem;
-                text-align: center;
-                font-size: 1.125rem
+                text-align: justify;
+                padding: 0.25rem;
+                font-size: 1.125rem;
             }
 
             button {

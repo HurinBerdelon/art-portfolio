@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps = async () => {
                 id
                 title
                 description
-                image
+                image 
                 dimension
                 uniqueCode
                 productionDate

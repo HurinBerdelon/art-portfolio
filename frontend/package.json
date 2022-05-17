@@ -17,6 +17,7 @@
     "@types/graphql": "^14.5.0",
     "apollo-upload-client": "^17.0.0",
     "dayjs": "^1.11.2",
+    "formik": "^2.2.9",
     "graphql": "^15.4.0",
     "next": "12.1.5",
     "react": "18.0.0",
@@ -26,7 +27,8 @@
     "react-modal": "^3.14.4",
     "react-router-dom": "^6.3.0",
     "react-share": "^4.4.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/apollo-upload-client": "^17.0.0",

@@ -12,10 +12,9 @@ export const Container = styled.div`
 
     form {
         width: 50%;
-        margin-top: 2rem;
+        margin-top: 1rem;
         display: flex;
         flex-direction: column;
-        gap: 0.25rem;
 
         input {
             height: 2rem;
@@ -23,13 +22,19 @@ export const Container = styled.div`
             border-radius: 0.25rem;
             text-align: center;
             font-size: 1.125rem;
+
+            &:not(:first-of-type) {
+                margin-top: 0.25rem;
+            }
+
         }
 
         textarea {
-            height: 16rem;
+            height: 14rem;
             border: solid 1px;
             border-radius: 0.25rem;
-            text-align: center;
+            padding: 0.25rem;
+            text-align: justify;
             font-size: 1.125rem
         }
 
@@ -37,6 +42,11 @@ export const Container = styled.div`
             height: 2rem;
             border: solid 1px;
             border-radius: 0.25rem;
+        }
+
+        .errorMessage {
+            color: #f00;
+            font-size: .825rem;
         }
     }
 `

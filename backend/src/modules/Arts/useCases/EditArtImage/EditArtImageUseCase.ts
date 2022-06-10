@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { IStorageProvider } from '../../../../shared/providers/storageProvider/IStorageProvider';
 import { Art } from '../../models/Art';
 import { IArtsRepository } from '../../repositories/IArtsRepository';
 
@@ -6,7 +7,9 @@ import { IArtsRepository } from '../../repositories/IArtsRepository';
 export class EditArtImageUseCase {
     constructor(
         @inject('ArtsRepository')
-        private artsRepository: IArtsRepository
+        private artsRepository: IArtsRepository,
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider
     ) { }
 
     async execute({ id, image }: Art): Promise<void> {
@@ -17,9 +20,19 @@ export class EditArtImageUseCase {
             throw new Error('Art not Found!')
         }
 
+        const oldImageSplit = art.image.split('/')
+        const oldFilename = oldImageSplit[oldImageSplit.length - 1]
+
+        await this.storageProvider.delete('pictures', oldFilename)
+
+        const newImageSplit = image.split('/')
+        const newFilename = newImageSplit[newImageSplit.length - 1]
+
+        const imageURL = await this.storageProvider.save('pictures', newFilename)
+
         await this.artsRepository.updateArtImage({
             id,
-            image
+            image: imageURL
         })
     }
 }

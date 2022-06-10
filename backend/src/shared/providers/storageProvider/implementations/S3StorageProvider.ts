@@ -26,14 +26,16 @@ export class S3StorageProvider implements IStorageProvider {
         await this.client.putObject({
             Bucket: `${process.env.AWS_BUCKET}/${folder}`,
             Key: file,
-            // ACL: 'public-read',
+            ACL: 'public-read',
             Body: fileContent,
             ContentType,
         }).promise()
 
         await fs.promises.unlink(originalName)
 
-        return file
+        const imageURL = `${process.env.AWS_BUCKET_URL}/${folder}/${file}`
+
+        return imageURL
     }
 
     async delete(folder: string, file: string): Promise<void> {

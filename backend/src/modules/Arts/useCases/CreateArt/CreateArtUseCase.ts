@@ -9,8 +9,8 @@ export class CreateArtUseCase {
     constructor(
         @inject('ArtsRepository')
         private artsRepository: IArtsRepository,
-        // @inject('StorageProvider')
-        // private storageProvider: IStorageProvider
+        @inject('StorageProvider')
+        private storageProvider: IStorageProvider
     ) { }
 
     async execute({ image, category, dimension, description, uniqueCode, title, productionDate }: Art): Promise<void> {
@@ -21,13 +21,16 @@ export class CreateArtUseCase {
             throw new Error(`Art with code ${uniqueCode} already exists!`)
         }
 
-        // const imageURL = await this.storageProvider.save('pictures', image)
+        const imageSplit = image.split('/')
+        const filename = imageSplit[imageSplit.length - 1]
+
+        const imageURL = await this.storageProvider.save('pictures', filename)
 
         await this.artsRepository.saveArt({
             title,
             category,
             dimension,
-            image,
+            image: imageURL,
             description,
             uniqueCode,
             productionDate

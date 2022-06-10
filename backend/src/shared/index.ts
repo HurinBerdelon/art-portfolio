@@ -11,10 +11,10 @@ container.registerSingleton<IArtsRepository>(
 
 const diskStorage = {
     // local: LocalStorageProvider,
-    s3: S3StorageProvider
+    AWS_S3: S3StorageProvider
 }
 
-// container.registerSingleton<IStorageProvider>(
-//     'StorageProvider',
-//     diskStorage[process.env.disk]
-// )
+container.registerSingleton<IStorageProvider>(
+    'StorageProvider',
+    diskStorage[process.env.STORAGE_DISK]
+)

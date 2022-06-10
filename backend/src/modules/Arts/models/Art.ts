@@ -7,7 +7,10 @@ export class Art {
     id?: string
 
     @Field()
-    title: string
+    title?: string
+
+    @Field()
+    category?: string
 
     @Field()
     description?: string
@@ -16,7 +19,7 @@ export class Art {
     image?: string
 
     @Field()
-    dimension: string
+    dimension?: string
 
     @Field()
     uniqueCode?: string

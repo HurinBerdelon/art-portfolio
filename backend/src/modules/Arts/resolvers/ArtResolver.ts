@@ -10,6 +10,9 @@ import { CreateArtUseCase } from "../useCases/CreateArt/CreateArtUseCase";
 import { getHashFilename, tmpFolder } from "../../../config/upload";
 import { EditArtUseCase } from "../useCases/EditArt/EditArtUseCase";
 import { DeleteArtUseCase } from "../useCases/DeleteArt/DeleteArtUseCase";
+import { FindArtsByCategory } from "../useCases/FindArtsByCategory/FindArtsByCategoryUseCase";
+import { EditArtImageUseCase } from "../useCases/EditArtImage/EditArtImageUseCase";
+import { ArtCategory } from "../models/ArtCategory";
 
 @Resolver()
 export class ArtResolver {
@@ -19,6 +22,18 @@ export class ArtResolver {
         const findAllArtsUseCase = container.resolve(FindAllArtsUseCase)
 
         const arts = await findAllArtsUseCase.execute()
+
+        return arts
+    }
+
+    @Query(() => [Art])
+    async artsByCategory(
+        @Arg('category') category: string,
+    ) {
+
+        const findArtsByCategory = container.resolve(FindArtsByCategory)
+
+        const arts = await findArtsByCategory.execute(ArtCategory[category.toLowerCase()])
 
         return arts
     }
@@ -37,6 +52,7 @@ export class ArtResolver {
     @Mutation(() => Boolean)
     async saveArt(
         @Arg('title') title: string,
+        @Arg('category') category: string,
         @Arg('dimension') dimension: string,
         @Arg('description') description: string,
         @Arg('uniqueCode') uniqueCode: string,
@@ -59,7 +75,8 @@ export class ArtResolver {
 
         await createArtUseCase.execute({
             dimension,
-            image: `http://localhost:4000/images/${hashFilename}`,
+            category: ArtCategory[category.toLowerCase()],
+            image: `${process.env.API_URL}/images/${hashFilename}`,
             title,
             uniqueCode,
             description,
@@ -73,6 +90,7 @@ export class ArtResolver {
     async updateArt(
         @Arg('id') id: string,
         @Arg('title') title: string,
+        @Arg('category') category: string,
         @Arg('dimension') dimension: string,
         @Arg('description') description: string,
         @Arg('uniqueCode') uniqueCode: string,
@@ -83,11 +101,39 @@ export class ArtResolver {
 
         await editArtUseCase.execute({
             id,
-            dimension,
             title,
             uniqueCode,
+            category: ArtCategory[category],
+            dimension,
             description,
             productionDate
+        })
+
+        return true
+    }
+
+    @Mutation(() => Boolean)
+    async updateArtImage(
+        @Arg('id') id: string,
+        @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
+    ) {
+
+        const hashFilename = getHashFilename(filename)
+
+        const imagePath = `${tmpFolder}/${hashFilename}`
+
+        await new Promise(async (resolve, reject) =>
+            createReadStream()
+                .pipe(createWriteStream(imagePath))
+                .on('finish', () => resolve(true))
+                .on('error', () => reject(false))
+        )
+
+        const editArtImageUseCase = container.resolve(EditArtImageUseCase)
+
+        await editArtImageUseCase.execute({
+            id,
+            image: `${process.env.API_URL}/images/${hashFilename}`,
         })
 
         return true

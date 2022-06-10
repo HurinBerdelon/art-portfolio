@@ -1,15 +1,17 @@
 import { prisma } from "../../../../services/prisma";
 import { Art } from "../../models/Art";
+import { ArtCategory } from "../../models/ArtCategory";
 import { IArtsRepository } from "../IArtsRepository";
 
 export class PrismaArtRepository implements IArtsRepository {
 
     private artRepository = prisma
 
-    async saveArt({ title, description, image, uniqueCode, dimension, productionDate }: Art): Promise<void> {
+    async saveArt({ title, category, description, image, uniqueCode, dimension, productionDate }: Art): Promise<void> {
         await this.artRepository.art.create({
             data: {
                 title,
+                category,
                 dimension,
                 image,
                 description,
@@ -39,28 +41,52 @@ export class PrismaArtRepository implements IArtsRepository {
         return art
     }
 
-    async getAllArts(): Promise<Art[]> {
+    async getArtsByCategory(category: string): Promise<Art[]> {
         const arts = await this.artRepository.art.findMany({
+            where: {
+                category
+            },
             orderBy: {
-                productionDate: 'asc'
+                productionDate: 'desc'
             }
-        }
-        )
+        })
 
         return arts
     }
 
-    async updateArt({ id, title, description, dimension, productionDate, uniqueCode }: Art): Promise<void> {
+    async getAllArts(): Promise<Art[]> {
+        const arts = await this.artRepository.art.findMany({
+            orderBy: {
+                productionDate: 'desc'
+            }
+        })
+
+        return arts
+    }
+
+    async updateArt({ id, title, category, description, dimension, productionDate, uniqueCode }: Art): Promise<void> {
         await this.artRepository.art.update({
             where: {
                 id
             },
             data: {
                 title,
+                category,
                 description,
                 dimension,
                 productionDate,
                 uniqueCode
+            }
+        })
+    }
+
+    async updateArtImage({ id, image }: Art): Promise<void> {
+        await this.artRepository.art.update({
+            where: {
+                id
+            },
+            data: {
+                image
             }
         })
     }

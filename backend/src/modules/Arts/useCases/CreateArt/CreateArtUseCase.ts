@@ -13,7 +13,7 @@ export class CreateArtUseCase {
         // private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ image, dimension, description, uniqueCode, title, productionDate }: Art): Promise<void> {
+    async execute({ image, category, dimension, description, uniqueCode, title, productionDate }: Art): Promise<void> {
 
         const artAlreadyExistis = await this.artsRepository.getArtByUniqueCode(uniqueCode)
 
@@ -25,6 +25,7 @@ export class CreateArtUseCase {
 
         await this.artsRepository.saveArt({
             title,
+            category,
             dimension,
             image,
             description,

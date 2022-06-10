@@ -10,10 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// enum ArtCategory {
+//   drawing
+//   painting
+//   craftsmanship
+//   string_art
+// }
+
 model Art {
   id             String   @id @default(uuid())
   uniqueCode     String   @unique
   title          String
+  category       String
   image          String
   description    String?
   dimension      String

@@ -6,7 +6,13 @@ export const GlobalStyle = createGlobalStyle`
 
         --gray-100: #e5e5e8;
         --gray-500: #525254;
-        --gray-900: #23232f;
+        --gray-900: #232423;
+
+        --beige-100: #FFF9F2;
+        --beige-500: #D0C9C0;
+        --green-400: #6D8B74;
+        --green-600: #3D4D3E;
+        --green-900: #2B332C;
     }
     
     * {
@@ -60,8 +66,8 @@ export const GlobalStyle = createGlobalStyle`
     .react-modal-content {
         width: 90%;
         height: 90%;
-        background: var(--white);
-        padding: 0 3rem;
+        background: var(--beige-100);
+        padding: 1rem 3rem;
         position:relative;
         border-radius: 0.5rem;
     }

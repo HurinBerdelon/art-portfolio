@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.nav`
-    width: 20%;
-    min-width: 200px;
+    width: 15%;
+    min-width: 250px;
     height: 100%;
-    background: var(--gray-100);
-    /* position: fixed; */
+    background: var(--green-600);
     
     display: flex;
     flex-direction: column;
@@ -13,7 +12,7 @@ export const Container = styled.nav`
     justify-content: space-evenly;
 
     h1 {
-        color: var(--gray-900);
+        color: var(--beige-100);
     }
 
     .media-links {
@@ -23,11 +22,11 @@ export const Container = styled.nav`
         justify-content: flex-start;
         gap: 1rem;
 
-        color: var(--gray-900);
+        color: var(--beige-100);
 
         a {
             svg:hover {
-                filter: brightness(1.5)
+                color: var(--beige-500);
             }
         }
     }

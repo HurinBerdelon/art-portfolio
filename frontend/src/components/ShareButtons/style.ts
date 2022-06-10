@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     position: relative;
-    width: 100%;
+    width: 50%;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,14 +13,14 @@ export const Container = styled.div`
         display: none;
         flex-direction: column;
         align-items: center;
+
         gap: 0.75rem;
-        /* background: #f00; */
+        background: var(--green-900);
+        border-radius: 0.25rem;
 
         position: absolute;
         bottom: 2rem;
         z-index: 1;
-        
-        /* padding-bottom: 2rem; */
 
         height: 5rem;
         width: 100%;
@@ -29,12 +30,14 @@ export const Container = styled.div`
 
             gap: 1rem;
             justify-content: center; 
+
+            color: var(--beige-100);
             
             svg {
                 font-size: 2rem;    
                 
                 &:hover {
-                    color: var(--gray-500);
+                    color: var(--beige-500);
                     cursor: pointer;
                 }
             }
@@ -51,8 +54,11 @@ export const Container = styled.div`
             justify-content: center; 
             font-size: 1rem;
 
+            background: none;
+            color: var(--beige-100);
+
             &:hover {
-                color: var(--gray-500);
+                color: var(--beige-500);
             }
         }
 
@@ -65,8 +71,11 @@ export const Container = styled.div`
         align-items: center;
         gap: 0.5rem;
 
+        background: none;
+        color: var(--beige-100);
+
         &:hover{
-            color: var(--gray-500);
+            color: var(--beige-500);
         }
     }
 

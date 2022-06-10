@@ -4,6 +4,7 @@ import { Tooltip } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import { Container } from "./style";
 import { LinkToPages } from './LinkToPages';
+import Link from 'next/link';
 
 interface NavBarProps {
     // currentPage: string,

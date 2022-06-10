@@ -5,6 +5,8 @@ export const Container = styled.div`
     height: 100vh;
     overflow: hidden;
 
+    background: var(--beige-100);
+
     display: flex;
     gap: 1rem;
 
@@ -19,24 +21,36 @@ export const Container = styled.div`
         }
     }
 
-    .dropbtn {
+    .dropMenu {
         background: none;
         border: none;
         position: absolute;
+        color: var(--green-900);
+        border-radius: 0.25rem 0.25rem 0 0;
         
         margin: 0.5rem 0 0 0.5rem;
+        width: 12.5rem;
+
+        transition: 0.2s;
 
         &:hover {
-            color: var(--gray-500);
+            color: var(--beige-100);
+            background: var(--green-600);
         }
     } 
 
     .dropContent {
         display: none;
         position: absolute;
-        top: 2rem;
+        top: 2.5rem;
 
-        padding: 2rem 0 0 0.5rem;
+        margin: 0.5rem 0 0 0.5rem;
+        width: 12.5rem;
+
+        background: var(--green-600);
+        border-radius: 0 0 0.25rem 0.25rem;        
+
+        padding: 2rem 0 2rem 0.5rem;
     }
 
     .imageContainer {
@@ -54,27 +68,6 @@ export const Container = styled.div`
         img {
             height: 33rem;
         }
-
-        button {
-            background: none;
-            border: none;
-            outline: none;
-            color: var(--gray-900);
-
-            svg:hover{
-                filter: brightness(1.5);
-            }
-        }
-
-        .buttonPrevious {
-            position: absolute;
-            left: 0rem;
-        }
-
-        .buttonNext {
-            position: absolute;
-            right: 1rem;
-        }
     }
 
     .infoContainer {
@@ -82,7 +75,7 @@ export const Container = styled.div`
         height: 96%;
         margin: 1rem;
 
-        background: var(--gray-100);
+        background: var(--green-600);
         border-radius: 0.5rem;
 
         display: flex;
@@ -99,6 +92,8 @@ export const Container = styled.div`
             justify-content: center;
             height: 100%;
             padding: 0 1rem;
+
+            color: var(--beige-100);
 
             .dateInfo {
                 font-size: .85rem;

@@ -13,10 +13,11 @@ export const Container = styled.div`
         li {
             height: 3rem;
             display: grid;
-            grid-template-columns: 0.25fr 0.25fr 1fr 2fr 2fr 3.5fr;
+            grid-template-columns: 0.25fr 0.25fr 1fr 2fr 2fr 2fr 3.5fr; //icon icon img code category tittle description
             text-align: center;
             align-items: center;
             gap: 1rem;
+            color: var(--green-900);
 
             .editIcon:hover {
                 color: #00F;

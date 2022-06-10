@@ -26,7 +26,7 @@ export const Container = styled.div`
             background: none;
             border: none;
             outline: none;
-            color: var(--gray-900);
+            color: var(--green-900);
 
             svg:hover{
                 filter: brightness(1.5);
@@ -46,10 +46,12 @@ export const Container = styled.div`
 
     .infoContainer {
         width: 35%;
-        height: 100%;
+        height: calc(100% - 2rem);
 
-        background: var(--gray-100);
+        background: var(--green-600);
+        color: var(--beige-100);
         border-radius: 0.5rem;
+        margin: 1rem 0;
 
         display: flex;
         flex-direction: column;

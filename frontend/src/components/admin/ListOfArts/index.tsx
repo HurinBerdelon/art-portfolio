@@ -2,7 +2,7 @@ import { useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ArtSchema } from "../../../schemas/Art";
-import { UpdateArtModal } from "../../Modals/updateArtModal";
+import { UpdateArtModal } from "../Modals/updateArtModal";
 import { Container } from "./style";
 import { Tooltip } from "@mui/material";
 import { apolloClient } from "../../../services/apolloClient";
@@ -40,6 +40,7 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                     <div></div>
                     <h3>Image</h3>
                     <h3>UniqueCode</h3>
+                    <h3>Category</h3>
                     <h3>Tittle</h3>
                     <h3>Description</h3>
                 </li>
@@ -65,6 +66,7 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                             <img src={art.image} alt={art.title} />
                         </div>
                         <h4>{art.uniqueCode}</h4>
+                        <h4>{art.category}</h4>
                         <h3>{art.title}</h3>
                         <p>{art.description}</p>
                     </li>

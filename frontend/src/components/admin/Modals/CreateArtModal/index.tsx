@@ -1,13 +1,23 @@
 import { useMutation, gql } from "@apollo/client"
-import { Field, Form, Formik } from "formik"
+import { Tooltip } from "@mui/material"
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Field, Form, Formik, FormikValues } from "formik"
+import { useEffect, useState } from "react"
+import { createRef } from "react"
+import Dropzone, { DropzoneRef } from "react-dropzone"
 import Modal from 'react-modal'
-import { saveArtYupSchema } from "../../../schemas/Art"
+import { saveArtYupSchema } from "../../../../schemas/Art"
 import { Container } from "./style"
+import { availableImageTypes } from "../../../../config/availableImageType";
+import { availableCategories } from "../../../../config/availableCategories";
+import { DropImage } from "../DropImage";
+import { InputZone } from "../InputZone";
 
 const CREATE_ART = gql`
     mutation(
         $file: Upload!,
         $uniqueCode: String!,
+        $category: String!
         $description: String!,
         $dimension: String!,
         $title: String!,
@@ -16,6 +26,7 @@ const CREATE_ART = gql`
             saveArt(
                 file: $file,
                 uniqueCode: $uniqueCode, 
+                category: $category
                 description: $description, 
                 dimension: $dimension, 
                 title: $title,
@@ -30,13 +41,20 @@ interface CreateArtModalProps {
 export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps): JSX.Element {
 
     const [saveArt] = useMutation(CREATE_ART)
+    const [preview, setPreview] = useState<string>()
 
-    const handleSubmitForm = (values) => {
+    useEffect(() => {
+        setPreview('')
+    }, [onRequestClose])
+
+
+    const handleSubmitForm = (values: FormikValues) => {
 
         saveArt({
             variables: {
                 file: values.file,
                 uniqueCode: values.uniqueCode,
+                category: values.category,
                 description: values.description,
                 dimension: values.dimension,
                 title: values.title,
@@ -50,6 +68,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
     const initialValues = {
         file: '',
         uniqueCode: '',
+        category: '',
         description: '',
         dimension: '',
         title: '',
@@ -80,46 +99,19 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
                     validationSchema={saveArtYupSchema}
                 >
                     {({ errors, setFieldValue }) => (
+
                         <Form>
-                            <Field
-                                type="text"
-                                name='title'
-                                placeholder="Title"
+                            <DropImage
+                                errors={errors}
+                                setFieldValue={setFieldValue}
+                                preview={preview}
+                                setPreview={setPreview}
                             />
-                            {errors.title && <div className="errorMessage">{errors.title}</div>}
-                            <Field
-                                type="text"
-                                name='uniqueCode'
-                                placeholder="UniqueCode"
+                            <InputZone
+                                errors={errors}
+                                initialValues={initialValues}
+                                setFieldValue={setFieldValue}
                             />
-                            {errors.uniqueCode && <div className="errorMessage">{errors.uniqueCode}</div>}
-                            <textarea
-                                name='description'
-                                placeholder="Description"
-                            />
-                            {errors.description && <div className="errorMessage">{errors.description}</div>}
-                            <Field
-                                type="text"
-                                name='dimension'
-                                placeholder="Dimension"
-                            />
-                            {errors.dimension && <div className="errorMessage">{errors.dimension}</div>}
-                            <Field
-                                type="date"
-                                name='productionDate'
-                                placeholder="Production Date"
-                            />
-                            {errors.productionDate && <div className="errorMessage">{errors.productionDate}</div>}
-
-                            <input
-                                type="file"
-                                onChange={(event) => {
-                                    setFieldValue('file', event.target.files[0])
-                                }}
-                            />
-                            {errors.file && <div className="errorMessage">{errors.file}</div>}
-
-                            <button type="submit">Save</button>
                         </Form>
                     )}
                 </Formik>

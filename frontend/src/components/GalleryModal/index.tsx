@@ -1,31 +1,29 @@
 import Modal from 'react-modal'
-import { FacebookShareButton, FacebookIcon } from 'react-share'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Tooltip } from '@mui/material';
 import dayjs from 'dayjs';
-import { OrderedArts } from "../Gallery";
 import { Container } from "./style";
 import { ShareButton } from '../ShareButtons';
+import { ArtSchema } from '../../schemas/Art';
 
 
 interface GalleryModalProps {
     isOpen: boolean
     onRequestClose(): void
-    currentPicture: OrderedArts
-    setCurrentPicture(currentPicture: OrderedArts): void
-    arts: OrderedArts[]
+    currentPicture: ArtSchema
+    setCurrentPicture(currentPicture: ArtSchema): void
+    arts: ArtSchema[]
 }
 
 
 export function GalleryModal({ isOpen, onRequestClose, currentPicture, setCurrentPicture, arts }: GalleryModalProps): JSX.Element {
 
     function handleNextPicture(order: number) {
-        const newPicture = arts.find(picture => picture.order === order)
+        const newPicture = arts[order]
 
         if (!newPicture) {
-            const firstPicture = arts.find(picture => picture.order === 1)
+            const firstPicture = arts[0]
             setCurrentPicture(firstPicture)
         } else {
             setCurrentPicture(newPicture)
@@ -33,10 +31,10 @@ export function GalleryModal({ isOpen, onRequestClose, currentPicture, setCurren
     }
 
     function handlePreviousPicture(order: number) {
-        const newPicture = arts.find(picture => picture.order === order)
+        const newPicture = arts[order]
 
         if (!newPicture) {
-            const firstPicture = arts.find(picture => picture.order === arts.length)
+            const firstPicture = arts[arts.length - 1]
             setCurrentPicture(firstPicture)
         } else {
             setCurrentPicture(newPicture)
@@ -64,7 +62,7 @@ export function GalleryModal({ isOpen, onRequestClose, currentPicture, setCurren
                 <section className="imageContainer">
                     <button
                         className="buttonPrevious"
-                        onClick={() => handlePreviousPicture(currentPicture.order - 1)}
+                        onClick={() => handlePreviousPicture(arts.indexOf(currentPicture) - 1)}
                     >
                         <Tooltip title='Previous Picture'>
                             <ArrowBackIosIcon />
@@ -73,7 +71,7 @@ export function GalleryModal({ isOpen, onRequestClose, currentPicture, setCurren
                     <img src={currentPicture.image} alt={currentPicture.title} />
                     <button
                         className="buttonNext"
-                        onClick={() => handleNextPicture(currentPicture.order + 1)}
+                        onClick={() => handleNextPicture(arts.indexOf(currentPicture) + 1)}
                     >
                         <Tooltip title='Next Picture'>
                             <ArrowForwardIosIcon />

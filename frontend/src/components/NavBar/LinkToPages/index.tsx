@@ -1,45 +1,37 @@
+import { availableCategories } from "../../../config/availableCategories";
+import { ActiveLink } from "../ActiveLink";
 import { Container } from "./style";
+
+const CATEGORY_PAGES = availableCategories.map(category => {
+    return {
+        title: category
+            .replace('-', ' ')
+            // string.capitalize() to each word => string-art => String Art
+            .replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))),
+        href: `/${category}`
+    }
+})
+
+const PAGES = [
+    { title: 'Home', href: '/' },
+    ...CATEGORY_PAGES,
+    { title: 'About', href: '#' },
+    { title: 'Contact', href: '#' },
+    { title: 'Admin', href: '/admin' },
+]
 
 export function LinkToPages(): JSX.Element {
     return (
         <Container>
-            <li
-            // className={props.currentPage === 'home' ? 'active' : ''}
-            // onClick={() => props.setCurrentPage('home')}
-            >
-                <a href="/">Home</a>
-            </li>
-            <li
-            // className={props.currentPage === 'illustration' ? 'active' : ''}
-            // onClick={() => props.setCurrentPage('illustration')}
-            >
-                Illustration
-            </li>
-            <li
-            // className={props.currentPage === 'craftsmanship' ? 'active' : ''}
-            // onClick={() => props.setCurrentPage('craftsmanship')}
-            >
-                Craftsmanship
-            </li>
-            <li
-            // className={props.currentPage === 'about' ? 'active' : ''}
-            // onClick={() => props.setCurrentPage('about')}
-            >
-                About
-            </li>
-            <li
-            // className={props.currentPage === 'contact' ? 'active' : ''}
-            // onClick={() => props.setCurrentPage('contact')}
-            >
-                Contact
-            </li>
-
-            <li
-            // className={props.currentPage === 'admin' ? 'active' : ''}
-            // onClick={() => props.setCurrentPage('admin')}
-            >
-                <a href="/admin"> Admin </a>
-            </li>
+            {PAGES.map((page) => (
+                <ActiveLink
+                    key={page.title}
+                    href={page.href}
+                    activeClassName="active"
+                >
+                    <a>{page.title}</a>
+                </ActiveLink>
+            ))}
         </Container>
     )
 }

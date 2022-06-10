@@ -18,17 +18,16 @@ export function ShareButton({ currentPictureId }: ShareButtonProps): JSX.Element
 
                 <div className="socialMediaContent">
 
-                    <FacebookShareButton url={'#'}>
+                    <FacebookShareButton url={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}image/${currentPictureId}`}>
                         <FacebookIcon />
                     </FacebookShareButton>
 
-                    <WhatsappShareButton url={'#'}>
+                    <WhatsappShareButton url={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}image/${currentPictureId}`}>
                         <WhatsAppIcon />
                     </WhatsappShareButton>
                 </div>
 
-
-                <CopyToClipboard text={`http://localhost:3000/image/${currentPictureId}`}>
+                <CopyToClipboard text={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}image/${currentPictureId}`}>
                     <button className="copyPaste">
                         <ContentCopyIcon />
                         <h4>Copy Link</h4>

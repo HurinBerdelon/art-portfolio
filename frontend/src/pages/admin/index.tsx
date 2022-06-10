@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { ListOfArts } from "../../components/admin/ListOfArts";
 import { NewArtButton } from "../../components/admin/NewArtButton";
-import { CreateArtModal } from "../../components/Modals/CreateArtModal";
+import { CreateArtModal } from "../../components/admin/Modals/CreateArtModal";
 import { NavBar } from "../../components/NavBar";
 import { ArtSchema } from "../../schemas/Art";
 import { apolloClient } from "../../services/apolloClient";
@@ -27,9 +27,7 @@ export default function Admin({ arts }: AdminProps): JSX.Element {
             <Head>
                 <title>Admin | HurinBerdelon</title>
             </Head>
-            <NavBar
-            // currentPage={currentPage} setCurrentPage={setCurrentPage} 
-            />
+            <NavBar />
 
             <Container>
                 <div className="newArtButton">
@@ -49,12 +47,14 @@ export default function Admin({ arts }: AdminProps): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async () => {
 
-    const { data } = await apolloClient.query({
-        query: gql`
+    try {
+        const { data } = await apolloClient.query({
+            query: gql`
         query Arts {
             arts {
                 id
                 title
+                category
                 description
                 image
                 dimension
@@ -63,11 +63,19 @@ export const getServerSideProps: GetServerSideProps = async () => {
             }
         }
     `
-    })
+        })
 
-    return {
-        props: {
-            arts: data.arts
+        return {
+            props: {
+                arts: data.arts
+            }
+        }
+    } catch (error) {
+        return {
+            props: {
+                arts: [],
+                error: error.message
+            }
         }
     }
 }

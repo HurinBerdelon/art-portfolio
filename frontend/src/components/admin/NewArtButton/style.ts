@@ -9,7 +9,10 @@ export const Container = styled.button`
     border: 1px solid;
     border-radius: 0.25rem;
 
+    background: var(--green-600);
+    color: var(--beige-100);
+
     &:hover {
-        background: var(--gray-100);
+        background: var(--green-400);
     }
 `

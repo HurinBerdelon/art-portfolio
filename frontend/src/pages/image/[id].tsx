@@ -16,7 +16,7 @@ export default function SinglePicture({ art }: SinglePictureProps): JSX.Element 
     return (
         <Container>
             <div className="dropdown">
-                <button className="dropbtn">
+                <button className="dropMenu">
                     <h1>HurinBerdelon</h1>
                 </button>
                 <div className="dropContent">
@@ -56,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     id
                     title
                     description
+                    category
                     image
                     dimension
                     uniqueCode

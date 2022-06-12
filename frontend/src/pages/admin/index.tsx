@@ -16,6 +16,8 @@ interface AdminProps {
 
 export default function Admin({ arts }: AdminProps): JSX.Element {
 
+    const [artsOnScreen, setArtsOnScreen] = useState(arts)
+
     const [isCreateArtModalOpen, setIsCreateArtModalOpen] = useState(false)
 
     function handleToggleCreateArtModal() {
@@ -33,7 +35,7 @@ export default function Admin({ arts }: AdminProps): JSX.Element {
                 <div className="newArtButton">
                     <NewArtButton handleToggleCreateArtModal={handleToggleCreateArtModal} />
                 </div>
-                <ListOfArts arts={arts} />
+                <ListOfArts arts={artsOnScreen} setArts={setArtsOnScreen} />
             </Container>
 
             <CreateArtModal

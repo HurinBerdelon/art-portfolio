@@ -2,5 +2,5 @@ export const availableCategories = [
     'drawing',
     'painting',
     'craftsmanship',
-    'string-art'
+    'string_art'
 ]

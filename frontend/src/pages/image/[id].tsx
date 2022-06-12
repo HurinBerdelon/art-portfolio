@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client"
 import dayjs from "dayjs"
 import { GetServerSideProps } from "next"
+import Head from "next/head"
 import { LinkToPages } from "../../components/NavBar/LinkToPages"
 import { ShareButton } from "../../components/ShareButtons"
 import { ArtSchema } from "../../schemas/Art"
@@ -14,33 +15,39 @@ interface SinglePictureProps {
 export default function SinglePicture({ art }: SinglePictureProps): JSX.Element {
 
     return (
-        <Container>
-            <div className="dropdown">
-                <button className="dropMenu">
-                    <h1>HurinBerdelon</h1>
-                </button>
-                <div className="dropContent">
-                    <LinkToPages />
-                </div>
-            </div>
-            <section className="imageContainer">
-                <img src={art.image} alt={art.title} />
-            </section>
+        <>
+            <Head>
+                <title>{`${art.title} | HurinBerdelon`}</title>
+            </Head>
 
-            <section className="infoContainer">
-                <div className="infos">
-
-                    <h2>{art.title}</h2>
-                    <p className='dateInfo'>{dayjs(art.productionDate).format('MMMM [of] YYYY')}</p>
-                    <p className="dimensionInfo">{art.dimension}</p>
-                    <p className='descriptionInfo'>{art.description}</p>
+            <Container>
+                <div className="dropdown">
+                    <button className="dropMenu">
+                        <h1>HurinBerdelon</h1>
+                    </button>
+                    <div className="dropContent">
+                        <LinkToPages />
+                    </div>
                 </div>
+                <section className="imageContainer">
+                    <img src={art.image} alt={art.title} />
+                </section>
 
-                <div className="shareMedia">
-                    <ShareButton currentPictureId={art.id} />
-                </div>
-            </section>
-        </Container>
+                <section className="infoContainer">
+                    <div className="infos">
+
+                        <h2>{art.title}</h2>
+                        <p className='dateInfo'>{dayjs(art.productionDate).format('MMMM [of] YYYY')}</p>
+                        <p className="dimensionInfo">{art.dimension}</p>
+                        <p className='descriptionInfo'>{art.description}</p>
+                    </div>
+
+                    <div className="shareMedia">
+                        <ShareButton currentPictureId={art.id} />
+                    </div>
+                </section>
+            </Container>
+        </>
     )
 }
 

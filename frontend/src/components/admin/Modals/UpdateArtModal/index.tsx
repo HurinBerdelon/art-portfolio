@@ -48,10 +48,12 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
 
     const [updateArt] = useMutation(UPDATE_ART)
     const [updateArtImage] = useMutation(UPDATE_ART_IMAGE)
+    const [gqlError, setGqlError] = useState('')
     const [preview, setPreview] = useState<string>()
 
     useEffect(() => {
         setPreview(art.image)
+        setGqlError('')
     }, [art, onRequestClose])
 
     const handleSubmitForm = (values: FormikValues) => {
@@ -75,9 +77,8 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
                 title: values.title,
                 productionDate: values.productionDate
             }
-        })
-
-        onRequestClose()
+        }).then(() => onRequestClose())
+            .catch(() => setGqlError('Code Already in use'))
     }
 
     const initialValues = {
@@ -123,6 +124,7 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
                             />
                             <InputZone
                                 initialValues={initialValues}
+                                gqlError={gqlError}
                                 errors={errors}
                                 setFieldValue={setFieldValue}
                             />

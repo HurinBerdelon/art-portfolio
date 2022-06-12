@@ -1,4 +1,5 @@
 import { Field, FormikErrors } from "formik";
+import { useEffect } from "react";
 import { availableCategories } from "../../../../config/availableCategories";
 import { Container } from "./style";
 
@@ -16,9 +17,16 @@ interface InputArtProps {
     errors: ErrorProps
     setFieldValue(field: string, value: any): void
     initialValues: any
+    gqlError?: string
 }
 
-export function InputZone({ errors, setFieldValue, initialValues }: InputArtProps): JSX.Element {
+export function InputZone({ errors, setFieldValue, initialValues, gqlError }: InputArtProps): JSX.Element {
+
+    useEffect(() => {
+        if (gqlError) {
+            setFieldValue('uniqueCode', '')
+        }
+    }, [gqlError])
 
     return (
         <Container>
@@ -39,9 +47,11 @@ export function InputZone({ errors, setFieldValue, initialValues }: InputArtProp
                     {errors.category ? errors.category : "Category"}
                 </option>
                 {availableCategories.map(category => (
-                    <option>
+                    <option
+                        value={category}
+                    >
                         {category
-                            .replace('-', ' ')
+                            .replace('_', ' ')
                             // string.capitalize() to each word => string-art => String Art
                             .replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}
                     </option>
@@ -50,8 +60,8 @@ export function InputZone({ errors, setFieldValue, initialValues }: InputArtProp
             <Field
                 type="text"
                 name='uniqueCode'
-                placeholder={errors.uniqueCode ? errors.uniqueCode : "Unique Code"}
-                className={errors.uniqueCode ? 'errorMessage' : ''}
+                placeholder={gqlError ? gqlError : (errors.uniqueCode ? errors.uniqueCode : "Unique Code")}
+                className={gqlError ? 'errorMessage' : (errors.uniqueCode ? 'errorMessage' : '')}
             />
             <Field
                 as='textarea'

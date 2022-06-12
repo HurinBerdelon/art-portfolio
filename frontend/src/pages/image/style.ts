@@ -56,7 +56,7 @@ export const Container = styled.div`
     .imageContainer {
         width: 65%;
         height: 96%;
-        margin: 1rem;
+        margin-top: 1rem;
 
         border-radius: 0.5rem;
         
@@ -66,7 +66,9 @@ export const Container = styled.div`
         position: relative;
 
         img {
-            height: 33rem;
+            object-fit: contain;
+            width: 100%;
+            max-height: 33rem;
         }
     }
 

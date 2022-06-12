@@ -5,7 +5,7 @@ import { Container } from "./style";
 const CATEGORY_PAGES = availableCategories.map(category => {
     return {
         title: category
-            .replace('-', ' ')
+            .replace('_', ' ')
             // string.capitalize() to each word => string-art => String Art
             .replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase()))),
         href: `/${category}`

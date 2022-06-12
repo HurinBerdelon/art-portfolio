@@ -38,8 +38,13 @@ export const Container = styled.div`
         font-weight: 300;
     }
 
-    .errorMessage {
+    select.errorMessage {
         color: #f00;
+    }
+
+    .errorMessage {
+        border: 1px solid #f00;
+        
         &::placeholder {
             color: #f00;
         }

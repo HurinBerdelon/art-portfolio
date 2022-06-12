@@ -20,7 +20,6 @@ export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Eleme
 
     useEffect(() => {
         setArtsOnScree(arts)
-        console.log(arts)
     }, [arts])
 
     // string.capitalize()

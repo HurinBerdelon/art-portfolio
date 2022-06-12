@@ -41,10 +41,12 @@ interface CreateArtModalProps {
 export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps): JSX.Element {
 
     const [saveArt] = useMutation(CREATE_ART)
+    const [gqlError, setGqlError] = useState('')
     const [preview, setPreview] = useState<string>()
 
     useEffect(() => {
         setPreview('')
+        setGqlError('')
     }, [onRequestClose])
 
 
@@ -60,9 +62,8 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
                 title: values.title,
                 productionDate: values.productionDate
             }
-        })
-
-        onRequestClose()
+        }).then(() => onRequestClose())
+            .catch(() => setGqlError('Code Already in use'))
     }
 
     const initialValues = {
@@ -109,6 +110,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
                             />
                             <InputZone
                                 errors={errors}
+                                gqlError={gqlError}
                                 initialValues={initialValues}
                                 setFieldValue={setFieldValue}
                             />

@@ -27,6 +27,12 @@ export const Container = styled.div`
                 color: #f00;
             }
 
+            .uniqueCode {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 1rem;
+            }
+
             svg {
                 cursor: pointer;
             }

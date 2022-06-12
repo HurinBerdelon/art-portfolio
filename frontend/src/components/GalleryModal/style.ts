@@ -10,6 +10,7 @@ export const Container = styled.div`
     .imageContainer {
         width: 65%;
         height: 100%;
+        margin-right: 1rem;
 
         border-radius: 0.5rem;
         
@@ -19,7 +20,9 @@ export const Container = styled.div`
         position: relative;
 
         img {
-            height: 33rem;
+            object-fit: contain;
+            width: 100%;
+            max-height: 33rem;
         }
 
         button {
@@ -27,6 +30,7 @@ export const Container = styled.div`
             border: none;
             outline: none;
             color: var(--green-900);
+            padding: 0.25rem;
 
             svg:hover{
                 filter: brightness(1.5);
@@ -35,12 +39,12 @@ export const Container = styled.div`
 
         .buttonPrevious {
             position: absolute;
-            left: 0rem;
+            left: -2rem;
         }
 
         .buttonNext {
             position: absolute;
-            right: 1rem;
+            right: -2rem;
         }
     }
 

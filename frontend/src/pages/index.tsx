@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import { useState } from "react";
 import { Gallery } from "../components/Gallery";
 import { NavBar } from "../components/NavBar";
 import { ArtSchema } from "../schemas/Art";
@@ -12,13 +13,15 @@ interface HomeProps {
 
 export default function Home({ arts }: HomeProps) {
 
+	const [artsOnScreen, setArtsOnScreen] = useState(arts)
+
 	return (
 		<>
 			<Head>
 				<title>Home | HurinBerdelon</title>
 			</Head>
 			<NavBar />
-			<Gallery arts={arts} />
+			<Gallery arts={artsOnScreen} />
 		</>
 	)
 }

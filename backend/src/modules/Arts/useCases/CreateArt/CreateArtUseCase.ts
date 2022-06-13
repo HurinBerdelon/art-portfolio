@@ -1,7 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { IStorageProvider } from "../../../../shared/providers/storageProvider/IStorageProvider";
-import { Art } from "../../models/Art";
-import { IArtsRepository } from "../../repositories/IArtsRepository";
+import { createArtDTO, IArtsRepository } from "../../repositories/IArtsRepository";
 
 @injectable()
 export class CreateArtUseCase {
@@ -13,7 +12,7 @@ export class CreateArtUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ image, category, dimension, description, uniqueCode, title, productionDate }: Art): Promise<void> {
+    async execute({ image, categoryTitle, dimension, description, uniqueCode, title, productionDate }: createArtDTO): Promise<void> {
 
         const artAlreadyExistis = await this.artsRepository.getArtByUniqueCode(uniqueCode)
 
@@ -21,14 +20,11 @@ export class CreateArtUseCase {
             throw new Error(`Art with code ${uniqueCode} already exists!`)
         }
 
-        const imageSplit = image.split('/')
-        const filename = imageSplit[imageSplit.length - 1]
-
-        const imageURL = await this.storageProvider.save('pictures', filename)
+        const imageURL = await this.storageProvider.save('pictures', image)
 
         await this.artsRepository.saveArt({
             title,
-            category,
+            categoryTitle,
             dimension,
             image: imageURL,
             description,

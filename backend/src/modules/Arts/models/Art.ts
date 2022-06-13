@@ -4,32 +4,32 @@ import { Field, ID, ObjectType } from "type-graphql";
 export class Art {
 
     @Field(_type => ID)
-    id?: string
+    id: string
 
     @Field()
-    title?: string
+    title: string
 
     @Field()
-    category?: string
+    categoryTitle: string
 
     @Field()
     description?: string
 
     @Field()
-    image?: string
+    image: string
 
     @Field()
-    dimension?: string
+    dimension: string
 
     @Field()
-    uniqueCode?: string
+    uniqueCode: string
 
     @Field()
-    productionDate?: Date
+    productionDate: Date
 
     @Field()
-    createdAt?: Date
+    createdAt: Date
 
     @Field()
-    updatedAt?: Date
+    updatedAt: Date
 }

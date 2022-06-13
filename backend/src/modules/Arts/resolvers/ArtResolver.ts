@@ -12,7 +12,6 @@ import { EditArtUseCase } from "../useCases/EditArt/EditArtUseCase";
 import { DeleteArtUseCase } from "../useCases/DeleteArt/DeleteArtUseCase";
 import { FindArtsByCategory } from "../useCases/FindArtsByCategory/FindArtsByCategoryUseCase";
 import { EditArtImageUseCase } from "../useCases/EditArtImage/EditArtImageUseCase";
-import { ArtCategory } from "../models/ArtCategory";
 
 @Resolver()
 export class ArtResolver {
@@ -33,7 +32,7 @@ export class ArtResolver {
 
         const findArtsByCategory = container.resolve(FindArtsByCategory)
 
-        const arts = await findArtsByCategory.execute(ArtCategory[category.toLowerCase()])
+        const arts = await findArtsByCategory.execute(category)
 
         return arts
     }
@@ -75,8 +74,8 @@ export class ArtResolver {
 
         await createArtUseCase.execute({
             dimension,
-            category: ArtCategory[category.toLowerCase()],
-            image: `${process.env.API_URL}/images/${hashFilename}`,
+            categoryTitle: category,
+            image: hashFilename,
             title,
             uniqueCode,
             description,
@@ -103,7 +102,7 @@ export class ArtResolver {
             id,
             title,
             uniqueCode,
-            category: ArtCategory[category],
+            categoryTitle: category,
             dimension,
             description,
             productionDate
@@ -133,7 +132,7 @@ export class ArtResolver {
 
         await editArtImageUseCase.execute({
             id,
-            image: `${process.env.API_URL}/images/${hashFilename}`,
+            image: hashFilename,
         })
 
         return true

@@ -1,6 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { Art } from '../../models/Art';
-import { IArtsRepository } from '../../repositories/IArtsRepository';
+import { IArtsRepository, updateArtDTO } from '../../repositories/IArtsRepository';
 
 @injectable()
 export class EditArtUseCase {
@@ -9,7 +8,7 @@ export class EditArtUseCase {
         private artsRepository: IArtsRepository
     ) { }
 
-    async execute({ id, title, category, dimension, uniqueCode, description, productionDate }: Art): Promise<void> {
+    async execute({ id, title, categoryTitle, dimension, uniqueCode, description, productionDate }: updateArtDTO): Promise<void> {
 
         const art = await this.artsRepository.getArtById(id)
         const artWithCode = await this.artsRepository.getArtByUniqueCode(uniqueCode)
@@ -25,7 +24,7 @@ export class EditArtUseCase {
         await this.artsRepository.updateArt({
             id,
             title,
-            category,
+            categoryTitle,
             dimension,
             description,
             productionDate,

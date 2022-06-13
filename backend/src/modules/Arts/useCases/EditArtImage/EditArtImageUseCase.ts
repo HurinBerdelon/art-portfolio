@@ -25,14 +25,8 @@ export class EditArtImageUseCase {
 
         await this.storageProvider.delete('pictures', oldFilename)
 
-        const newImageSplit = image.split('/')
-        const newFilename = newImageSplit[newImageSplit.length - 1]
+        const imageURL = await this.storageProvider.save('pictures', image)
 
-        const imageURL = await this.storageProvider.save('pictures', newFilename)
-
-        await this.artsRepository.updateArtImage({
-            id,
-            image: imageURL
-        })
+        await this.artsRepository.updateArtImage(id, imageURL)
     }
 }

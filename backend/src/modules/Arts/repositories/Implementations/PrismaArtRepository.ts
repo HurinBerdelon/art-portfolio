@@ -1,17 +1,16 @@
+import { Art } from "@prisma/client";
 import { prisma } from "../../../../services/prisma";
-import { Art } from "../../models/Art";
-import { ArtCategory } from "../../models/ArtCategory";
-import { IArtsRepository } from "../IArtsRepository";
+import { createArtDTO, IArtsRepository, updateArtDTO } from "../IArtsRepository";
 
 export class PrismaArtRepository implements IArtsRepository {
 
-    private artRepository = prisma
+    private artRepository = prisma.art
 
-    async saveArt({ title, category, description, image, uniqueCode, dimension, productionDate }: Art): Promise<void> {
-        await this.artRepository.art.create({
+    async saveArt({ title, categoryTitle, description, image, uniqueCode, dimension, productionDate }: createArtDTO): Promise<void> {
+        await this.artRepository.create({
             data: {
                 title,
-                category,
+                categoryTitle,
                 dimension,
                 image,
                 description,
@@ -22,7 +21,7 @@ export class PrismaArtRepository implements IArtsRepository {
     }
 
     async getArtById(id: string): Promise<Art> {
-        const art = await this.artRepository.art.findUnique({
+        const art = await this.artRepository.findUnique({
             where: {
                 id
             }
@@ -32,7 +31,7 @@ export class PrismaArtRepository implements IArtsRepository {
     }
 
     async getArtByUniqueCode(uniqueCode: string): Promise<Art> {
-        const art = await this.artRepository.art.findUnique({
+        const art = await this.artRepository.findUnique({
             where: {
                 uniqueCode
             }
@@ -41,10 +40,10 @@ export class PrismaArtRepository implements IArtsRepository {
         return art
     }
 
-    async getArtsByCategory(category: string): Promise<Art[]> {
-        const arts = await this.artRepository.art.findMany({
+    async getArtsByCategory(categoryTitle: string): Promise<Art[]> {
+        const arts = await this.artRepository.findMany({
             where: {
-                category
+                categoryTitle
             },
             orderBy: {
                 productionDate: 'desc'
@@ -55,7 +54,7 @@ export class PrismaArtRepository implements IArtsRepository {
     }
 
     async getAllArts(): Promise<Art[]> {
-        const arts = await this.artRepository.art.findMany({
+        const arts = await this.artRepository.findMany({
             orderBy: {
                 productionDate: 'desc'
             }
@@ -64,14 +63,14 @@ export class PrismaArtRepository implements IArtsRepository {
         return arts
     }
 
-    async updateArt({ id, title, category, description, dimension, productionDate, uniqueCode }: Art): Promise<void> {
-        await this.artRepository.art.update({
+    async updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<void> {
+        await this.artRepository.update({
             where: {
                 id
             },
             data: {
                 title,
-                category,
+                categoryTitle,
                 description,
                 dimension,
                 productionDate,
@@ -80,8 +79,8 @@ export class PrismaArtRepository implements IArtsRepository {
         })
     }
 
-    async updateArtImage({ id, image }: Art): Promise<void> {
-        await this.artRepository.art.update({
+    async updateArtImage(id: string, image: string): Promise<void> {
+        await this.artRepository.update({
             where: {
                 id
             },
@@ -92,7 +91,7 @@ export class PrismaArtRepository implements IArtsRepository {
     }
 
     async deleteArt(id: string): Promise<void> {
-        await this.artRepository.art.delete({
+        await this.artRepository.delete({
             where: {
                 id
             }

@@ -7,6 +7,7 @@ import { InputZone } from "../InputZone"
 import { DropImage } from "../DropImage"
 import { useEffect, useState } from "react"
 import dayjs from "dayjs"
+import { revalidateSSG } from "../../../../services/revalidate"
 
 const UPDATE_ART = gql`
     mutation(
@@ -77,7 +78,14 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
                 title: values.title,
                 productionDate: values.productionDate
             }
-        }).then(() => onRequestClose())
+        }).then(() => {
+            if (values.category !== art.category) {
+                revalidateSSG({ path: values.category })
+            }
+            revalidateSSG({ path: art.category })
+            revalidateSSG({ path: '' })
+            onRequestClose()
+        })
             .catch(() => setGqlError('Code Already in use'))
     }
 

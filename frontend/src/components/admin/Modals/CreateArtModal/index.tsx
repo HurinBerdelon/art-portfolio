@@ -1,17 +1,12 @@
 import { useMutation, gql } from "@apollo/client"
-import { Tooltip } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Field, Form, Formik, FormikValues } from "formik"
+import { Form, Formik, FormikValues } from "formik"
 import { useEffect, useState } from "react"
-import { createRef } from "react"
-import Dropzone, { DropzoneRef } from "react-dropzone"
 import Modal from 'react-modal'
 import { saveArtYupSchema } from "../../../../schemas/Art"
 import { Container } from "./style"
-import { availableImageTypes } from "../../../../config/availableImageType";
-import { availableCategories } from "../../../../config/availableCategories";
 import { DropImage } from "../DropImage";
 import { InputZone } from "../InputZone";
+import { revalidateSSG } from "../../../../services/revalidate"
 
 const CREATE_ART = gql`
     mutation(
@@ -62,7 +57,11 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
                 title: values.title,
                 productionDate: values.productionDate
             }
-        }).then(() => onRequestClose())
+        }).then(() => {
+            revalidateSSG({ path: values.category })
+            revalidateSSG({ path: '' })
+            onRequestClose()
+        })
             .catch(() => setGqlError('Code Already in use'))
     }
 

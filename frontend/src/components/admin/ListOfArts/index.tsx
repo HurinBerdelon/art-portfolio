@@ -9,6 +9,7 @@ import { Tooltip } from "@mui/material";
 import { apolloClient } from "../../../services/apolloClient";
 import { gql } from "@apollo/client";
 import { ArtInfo } from "./ArtInfo";
+import { revalidateSSG } from "../../../services/revalidate";
 
 interface ListOfArtsProps {
     arts: ArtSchema[]
@@ -20,15 +21,18 @@ export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
     const [isUpdateArtModalOpen, setIsUpdateArtModalOpen] = useState(false)
     const [currentArt, setCurrentArt] = useState({} as ArtSchema)
 
-    async function handleDeleteArt(id: string) {
+    async function handleDeleteArt(art: ArtSchema) {
 
         await apolloClient.query({
             query: gql`
                 query DeleteArt{
-                    deleteArt(id: "${id}") 
+                    deleteArt(id: "${art.id}") 
                 }
             `
         })
+
+        revalidateSSG({ path: art.category })
+        revalidateSSG({ path: '' })
     }
 
     function handleToggleUpdateArtModal() {
@@ -74,7 +78,7 @@ export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
                         <Tooltip title='Delete Art'>
                             <DeleteIcon
                                 className="deleteIcon"
-                                onClick={() => handleDeleteArt(art.id)}
+                                onClick={() => handleDeleteArt(art)}
                             />
                         </Tooltip>
                         <div>

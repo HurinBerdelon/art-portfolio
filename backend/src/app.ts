@@ -10,12 +10,16 @@ import { ArtResolver } from './modules/Arts/resolvers/ArtResolver'
 import 'dotenv/config'
 import './shared'
 import { tmpFolder } from './config/upload';
+import { CategoryResolver } from './modules/Categories/resolvers/CategoryResolver';
+import { UserResolver } from './modules/Users/resolvers/UserResolver';
 
 export async function app() {
 
 	const schema = await buildSchema({
 		resolvers: [
 			ArtResolver,
+			CategoryResolver,
+			UserResolver
 		],
 		emitSchemaFile: path.resolve(__dirname, 'schema.gql')
 	})

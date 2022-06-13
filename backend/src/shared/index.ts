@@ -1,12 +1,26 @@
 import { container } from 'tsyringe'
 import { IArtsRepository } from '../modules/Arts/repositories/IArtsRepository'
 import { PrismaArtRepository } from '../modules/Arts/repositories/Implementations/PrismaArtRepository'
+import { ICategoryRepository } from '../modules/Categories/repositories/ICategoryRepository'
+import { PrismaCategoryRepository } from '../modules/Categories/repositories/Implementations/PrismaCategoryRepository'
+import { PrismaUserRepository } from '../modules/Users/repositories/Implementations/PrismaUserRepository'
+import { IUserRepository } from '../modules/Users/repositories/IUserRepository'
 import { S3StorageProvider } from './providers/storageProvider/implementations/S3StorageProvider'
 import { IStorageProvider } from './providers/storageProvider/IStorageProvider'
 
 container.registerSingleton<IArtsRepository>(
     'ArtsRepository',
     PrismaArtRepository
+)
+
+container.registerSingleton<ICategoryRepository>(
+    'CategoriesRepository',
+    PrismaCategoryRepository
+)
+
+container.registerSingleton<IUserRepository>(
+    'UsersRepository',
+    PrismaUserRepository
 )
 
 const diskStorage = {

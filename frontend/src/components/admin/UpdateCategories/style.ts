@@ -17,15 +17,21 @@ export const Container = styled.div`
         justify-content: space-between;
         gap: 1rem;
         border-bottom: 1px dashed var(--green-900);
-    }
+        position: relative;
 
-    button {
-        background: none;
-        border: none;
-        color: var(--green-900);
+        .buttons {
+            display: flex;
 
-        &:hover {
-            filter: brightness(2);
+            svg:hover {
+                filter: brightness(2);
+            }
+            
+            button {
+                background: none;
+                border: none;
+                color: var(--green-900);
+            }
         }
     }
+
 `

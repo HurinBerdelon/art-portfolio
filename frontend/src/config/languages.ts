@@ -1,7 +1,7 @@
-export const languages = [
-    { code: 'de', flag: '🇩🇪' },
-    { code: 'en', flag: '🇬🇧' },
-    { code: 'es', flag: '🇪🇸' },
-    { code: 'fr', flag: '🇫🇷' },
-    { code: 'pt-BR', flag: '🇧🇷' },
-]
+export const languages = {
+    de: { code: 'de', flag: '🇩🇪' },
+    en: { code: 'en', flag: '🇬🇧' },
+    es: { code: 'es', flag: '🇪🇸' },
+    fr: { code: 'fr', flag: '🇫🇷' },
+    "pt-BR": { code: 'pt-BR', flag: '🇧🇷' },
+}

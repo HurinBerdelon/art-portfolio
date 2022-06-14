@@ -8,8 +8,8 @@ export function NewCategory(): JSX.Element {
 
     const { createCategory } = useCategory()
 
-    async function handleSubmit(values: FormikValues, close) {
-        await createCategory(values.title)
+    function handleSubmit(values: FormikValues, close) {
+        createCategory(values.title)
 
         close()
     }

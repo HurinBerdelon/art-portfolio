@@ -1,3 +1,4 @@
+import { Category } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { ICategoryRepository } from "../../repositories/ICategoryRepository";
 
@@ -9,7 +10,8 @@ export class CreateCategoryUseCase {
         private categoryRepository: ICategoryRepository
     ) { }
 
-    async execute(title: string): Promise<void> {
-        await this.categoryRepository.create(title)
+    async execute(title: string): Promise<Category> {
+        const category = await this.categoryRepository.create(title)
+        return category
     }
 }

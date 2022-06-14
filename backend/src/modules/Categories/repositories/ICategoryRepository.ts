@@ -5,6 +5,6 @@ export interface ICategoryRepository {
     findById(id: string): Promise<Category>
     findByTitle(title: string): Promise<Category>
     findAll(): Promise<Category[]>
-    updateTitle(id: string, title: string): Promise<void>
+    updateTitle(id: string, title: string): Promise<Category>
     delete(id: string): Promise<void>
 }

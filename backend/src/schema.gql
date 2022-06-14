@@ -17,6 +17,7 @@ type Art {
 }
 
 type Category {
+  Translations: [Translation!]!
   createdAt: DateTime!
   id: ID!
   title: String!
@@ -28,12 +29,13 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 scalar DateTime
 
 type Mutation {
-  createCategory(title: String!): Boolean!
+  createCategory(title: String!): Category!
   createUser(password: String!, username: String!): User!
   saveArt(category: String!, description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
   updateArt(category: String!, description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
   updateArtImage(file: Upload!, id: String!): Boolean!
-  updateCategory(id: String!, title: String!): Boolean!
+  updateCategory(id: String!, title: String!): Category!
+  updateTranslation(categoryTitle: String!, id: String!, language: String!, title: String!): Translation!
   updateUser(id: String!, password: String!, username: String!): Boolean!
 }
 
@@ -45,6 +47,14 @@ type Query {
   deleteCategory(id: String!): Boolean!
   getCategories: [Category!]!
   getUser: [User!]!
+}
+
+type Translation {
+  categoryTitle: String!
+  createdAt: DateTime!
+  id: ID!
+  language: String!
+  title: String!
 }
 
 """The `Upload` scalar type represents a file upload."""

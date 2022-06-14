@@ -1,3 +1,4 @@
+import { Category } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { ICategoryRepository } from '../../repositories/ICategoryRepository';
 
@@ -8,14 +9,16 @@ export class UpdateCategoryTitleUseCase {
         private categoriesRepository: ICategoryRepository
     ) { }
 
-    async execute(id: string, title: string): Promise<void> {
+    async execute(id: string, title: string): Promise<Category> {
 
-        const category = await this.categoriesRepository.findById(id)
+        const categoryAlreadyExists = await this.categoriesRepository.findById(id)
 
-        if (!category) {
+        if (!categoryAlreadyExists) {
             throw new Error(`Category ${title} not Found`)
         }
 
-        await this.categoriesRepository.updateTitle(id, title)
+        const category = await this.categoriesRepository.updateTitle(id, title)
+
+        return category
     }
 }

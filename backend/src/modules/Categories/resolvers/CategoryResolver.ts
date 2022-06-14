@@ -19,19 +19,19 @@ export class CategoryResolver {
         return categories
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Category)
     async createCategory(
         @Arg('title') title: string
     ) {
 
         const createCategoryUseCase = container.resolve(CreateCategoryUseCase)
 
-        await createCategoryUseCase.execute(title)
+        const category = await createCategoryUseCase.execute(title)
 
-        return true
+        return category
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Category)
     async updateCategory(
         @Arg('id') id: string,
         @Arg('title') title: string
@@ -39,9 +39,9 @@ export class CategoryResolver {
 
         const updateCategoryUseCase = container.resolve(UpdateCategoryTitleUseCase)
 
-        await updateCategoryUseCase.execute(id, title)
+        const category = await updateCategoryUseCase.execute(id, title)
 
-        return true
+        return category
     }
 
     @Query(() => Boolean)

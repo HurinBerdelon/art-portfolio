@@ -13,6 +13,9 @@ export class PrismaCategoryRepository implements ICategoryRepository {
         const category = await this.categoryRepository.create({
             data: {
                 title: formatedTitle
+            },
+            include: {
+                Translations: true
             }
         })
 
@@ -40,19 +43,33 @@ export class PrismaCategoryRepository implements ICategoryRepository {
     }
 
     async findAll(): Promise<Category[]> {
-        const categories = await this.categoryRepository.findMany()
+        const categories = await this.categoryRepository.findMany({
+            orderBy: {
+                createdAt: 'asc'
+            },
+            include: {
+                Translations: true
+            }
+        })
         return categories
     }
 
-    async updateTitle(id: string, title: string): Promise<void> {
-        await this.categoryRepository.update({
+    async updateTitle(id: string, title: string): Promise<Category> {
+
+        const formatedTitle = title.split(' ').join('_').toLowerCase()
+
+        const category = await this.categoryRepository.update({
             where: {
                 id
             },
             data: {
-                title
+                title: formatedTitle
+            },
+            include: {
+                Translations: true
             }
         })
+        return category
     }
 
     async delete(id: string): Promise<void> {

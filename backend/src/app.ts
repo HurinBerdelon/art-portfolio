@@ -12,6 +12,7 @@ import './shared'
 import { tmpFolder } from './config/upload';
 import { CategoryResolver } from './modules/Categories/resolvers/CategoryResolver';
 import { UserResolver } from './modules/Users/resolvers/UserResolver';
+import { TranslationResolver } from './modules/Translations/resolvers/TranslationResolver';
 
 export async function app() {
 
@@ -19,7 +20,8 @@ export async function app() {
 		resolvers: [
 			ArtResolver,
 			CategoryResolver,
-			UserResolver
+			TranslationResolver,
+			UserResolver,
 		],
 		emitSchemaFile: path.resolve(__dirname, 'schema.gql')
 	})

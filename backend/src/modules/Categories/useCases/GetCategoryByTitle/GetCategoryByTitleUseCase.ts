@@ -10,7 +10,7 @@ export class GetCategoryByTitleUseCase {
     ) { }
 
     async execute(title: string): Promise<Category> {
-        const category = await this.categoriesRepository.findById(title)
+        const category = await this.categoriesRepository.findByTitle(title)
 
         return category
 

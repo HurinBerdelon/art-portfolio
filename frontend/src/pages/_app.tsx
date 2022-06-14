@@ -1,6 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { appWithTranslation } from 'next-i18next'
 import { createUploadLink } from 'apollo-upload-client'
 import { AppProps } from 'next/app'
+import { CategoryProvider } from '../hooks/useCategory'
 import { BodyContainer, GlobalStyle } from '../styles/global'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,12 +16,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<ApolloProvider client={client}>
-			<BodyContainer>
-				<GlobalStyle />
-				<Component {...pageProps} />
-			</BodyContainer>
+			<CategoryProvider>
+				<BodyContainer>
+					<GlobalStyle />
+					<Component {...pageProps} />
+				</BodyContainer>
+			</CategoryProvider>
 		</ApolloProvider>
 	)
 }
 
-export default MyApp
+export default appWithTranslation(MyApp)

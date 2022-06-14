@@ -19,10 +19,20 @@ model User {
 }
 
 model Category {
-  id        String   @id @default(uuid())
-  Art       Art[]
-  title     String   @unique
-  createdAt DateTime @default(now())
+  id           String         @id @default(uuid())
+  title        String         @unique
+  Art          Art[]
+  Translations Translations[]
+  createdAt    DateTime       @default(now())
+}
+
+model Translations {
+  id            String   @id @default(uuid())
+  title         String
+  language      String
+  category      Category @relation(fields: [categoryTitle], references: [title], onDelete: Cascade)
+  categoryTitle String
+  createdAt     DateTime @default(now())
 }
 
 model Art {

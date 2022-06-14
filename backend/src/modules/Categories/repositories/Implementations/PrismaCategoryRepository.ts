@@ -7,9 +7,12 @@ export class PrismaCategoryRepository implements ICategoryRepository {
     private categoryRepository = prisma.category
 
     async create(title: string): Promise<Category> {
+
+        const formatedTitle = title.split(' ').join('_').toLowerCase()
+
         const category = await this.categoryRepository.create({
             data: {
-                title
+                title: formatedTitle
             }
         })
 

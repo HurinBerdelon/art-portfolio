@@ -2,10 +2,8 @@ import { gql } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { Gallery } from "../../components/Gallery";
 import { NavBar } from "../../components/NavBar";
-import { availableCategories } from "../../config/availableCategories";
 import { ArtSchema } from "../../schemas/Art";
 import { apolloClient } from "../../services/apolloClient";
 
@@ -16,11 +14,6 @@ interface ByCategoryPageProps {
 export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Element {
 
     const router = useRouter()
-    const [artsOnScreen, setArtsOnScree] = useState(arts)
-
-    useEffect(() => {
-        setArtsOnScree(arts)
-    }, [arts])
 
     // string.capitalize()
     const title = router.asPath.split('/')[1].replace(/^\w/, (c) => c.toUpperCase())
@@ -33,15 +26,25 @@ export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Eleme
             </Head>
 
             <NavBar />
-            <Gallery arts={artsOnScreen} />
+            <Gallery arts={arts} />
         </>
     )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-    const paths = availableCategories.map(category => {
-        return { params: { category: category } }
+    const data = await apolloClient.query({
+        query: gql`
+            query GetCategories {
+                getCategories {
+                    title
+                }
+            }
+        `
+    })
+
+    const paths = data.data.getCategories.map(category => {
+        return { params: { category: category.title } }
     })
 
     return {
@@ -61,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                     artsByCategory(category: "${String(category).replace('-', '_')}") {
                         id
                         title
-                        category
+                        categoryTitle
                         description
                         image 
                         dimension

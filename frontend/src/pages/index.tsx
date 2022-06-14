@@ -13,15 +13,13 @@ interface HomeProps {
 
 export default function Home({ arts }: HomeProps) {
 
-	const [artsOnScreen, setArtsOnScreen] = useState(arts)
-
 	return (
 		<>
 			<Head>
 				<title>Home | HurinBerdelon</title>
 			</Head>
 			<NavBar />
-			<Gallery arts={artsOnScreen} />
+			<Gallery arts={arts} />
 		</>
 	)
 }
@@ -35,7 +33,7 @@ export const getStaticProps: GetStaticProps = async () => {
             arts {
                 id
                 title
-				category
+				categoryTitle
                 description
                 image 
                 dimension

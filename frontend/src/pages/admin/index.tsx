@@ -1,22 +1,17 @@
+import { useState } from "react";
 import { gql } from "@apollo/client";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { hash } from 'bcrypt'
 import { ListOfArts } from "../../components/admin/ListOfArts";
 import { NewArtButton } from "../../components/admin/NewArtButton";
 import { CreateArtModal } from "../../components/admin/Modals/CreateArtModal";
 import { NavBar } from "../../components/NavBar";
-import { ArtSchema } from "../../schemas/Art";
 import { apolloClient } from "../../services/apolloClient";
 import { Container } from "./style";
 
-interface AdminProps {
-    arts: ArtSchema[]
-}
 
-export default function Admin({ arts }: AdminProps): JSX.Element {
-
-    const [artsOnScreen, setArtsOnScreen] = useState(arts)
+export default function Admin(): JSX.Element {
 
     const [isCreateArtModalOpen, setIsCreateArtModalOpen] = useState(false)
 
@@ -35,7 +30,7 @@ export default function Admin({ arts }: AdminProps): JSX.Element {
                 <div className="newArtButton">
                     <NewArtButton handleToggleCreateArtModal={handleToggleCreateArtModal} />
                 </div>
-                <ListOfArts arts={artsOnScreen} setArts={setArtsOnScreen} />
+                <ListOfArts />
             </Container>
 
             <CreateArtModal
@@ -49,35 +44,76 @@ export default function Admin({ arts }: AdminProps): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async () => {
 
-    try {
-        const { data } = await apolloClient.query({
-            query: gql`
-        query Arts {
-            arts {
-                id
-                title
-                category
-                description
-                image
-                dimension
-                uniqueCode
-                productionDate
+    const { data } = await apolloClient.query({
+        query: gql`
+            query GetUser {
+                getUser {
+                    username
+                    password
+                }
             }
-        }
-    `
+        `
+    })
+
+    let user: { username: string, password: string }
+
+    if (data.getUser.length === 0) {
+
+        const passwordHash = await hash('admin', 8)
+
+        const { data } = await apolloClient.mutate({
+            mutation: gql`
+                mutation CreateUser {
+                    createUser(username: "admin", password: "${passwordHash}", ) {
+                        id
+                        username
+                        password
+                    }
+                }
+            `
         })
 
-        return {
-            props: {
-                arts: data.arts
-            }
-        }
-    } catch (error) {
-        return {
-            props: {
-                arts: [],
-                error: error.message
-            }
+        user = data.createUser
+
+    } else {
+        [user] = data.getUser
+    }
+
+    return {
+        props: {
+
         }
     }
+
+    // try {
+    //     const { data } = await apolloClient.query({
+    //         query: gql`
+    //             query Arts {
+    //                 arts {
+    //                     id
+    //                     title
+    //                     category
+    //                     description
+    //                     image
+    //                     dimension
+    //                     uniqueCode
+    //                     productionDate
+    //                 }
+    //             }
+    //         `
+    //     })
+
+    //     return {
+    //         props: {
+    //             arts: data.arts
+    //         }
+    //     }
+    // } catch (error) {
+    //     return {
+    //         props: {
+    //             arts: [],
+    //             error: error.message
+    //         }
+    //     }
+    // }
 }

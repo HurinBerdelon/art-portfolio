@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     id
                     title
                     description
-                    category
+                    categoryTitle
                     image
                     dimension
                     uniqueCode

@@ -19,6 +19,11 @@ export const Container = styled.div`
             gap: 1rem;
             color: var(--green-900);
 
+            h3 {
+                height: 2rem;
+                position:relative;
+            }
+
             .editIcon:hover {
                 color: #00F;
             }
@@ -44,7 +49,7 @@ export const Container = styled.div`
                 overflow: hidden;
             }
 
-            div {
+            .imageContent {
                 height: 3rem;
 
                 img {

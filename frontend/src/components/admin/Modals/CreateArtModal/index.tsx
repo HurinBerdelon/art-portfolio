@@ -51,24 +51,24 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
             variables: {
                 file: values.file,
                 uniqueCode: values.uniqueCode,
-                category: values.category,
+                category: values.categoryTitle,
                 description: values.description,
                 dimension: values.dimension,
                 title: values.title,
                 productionDate: values.productionDate
             }
         }).then(() => {
-            revalidateSSG({ path: values.category })
+            revalidateSSG({ path: values.categoryTitle })
             revalidateSSG({ path: '' })
             onRequestClose()
         })
-            .catch(() => setGqlError('Code Already in use'))
+            .catch(() => { setGqlError('Code Already in use') })
     }
 
     const initialValues = {
         file: '',
         uniqueCode: '',
-        category: '',
+        categoryTitle: '',
         description: '',
         dimension: '',
         title: '',

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InfoIcon from '@mui/icons-material/Info';
@@ -7,19 +7,42 @@ import { UpdateArtModal } from "../Modals/UpdateArtModal";
 import { Container } from "./style";
 import { Tooltip } from "@mui/material";
 import { apolloClient } from "../../../services/apolloClient";
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import { ArtInfo } from "./ArtInfo";
 import { revalidateSSG } from "../../../services/revalidate";
+import { NewCategoryButton } from "../NewCategory/NewCategoryButton";
+import { Popover } from '@headlessui/react'
+import { NewCategory } from "../NewCategory";
+import { UpdateCategories } from "../UpdateCategories";
+import { UpdateCategoryButton } from "../UpdateCategories/UpdateCategoryButton";
 
-interface ListOfArtsProps {
-    arts: ArtSchema[]
-    setArts(arts: ArtSchema[]): void
-}
+const GET_ARTS = gql`
+    query Arts {
+        arts {
+            id
+            title
+            categoryTitle
+            description
+            image
+            dimension
+            uniqueCode
+            productionDate
+        }
+    }
+`
 
-export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
+export function ListOfArts(): JSX.Element {
 
+    const data = useQuery(GET_ARTS)
+    const [arts, setArts] = useState<ArtSchema[]>([])
     const [isUpdateArtModalOpen, setIsUpdateArtModalOpen] = useState(false)
     const [currentArt, setCurrentArt] = useState({} as ArtSchema)
+
+    useEffect(() => {
+        if (!data.loading) {
+            setArts(data.data.arts)
+        }
+    }, [data])
 
     async function handleDeleteArt(art: ArtSchema) {
 
@@ -31,7 +54,7 @@ export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
             `
         })
 
-        revalidateSSG({ path: art.category })
+        revalidateSSG({ path: art.categoryTitle })
         revalidateSSG({ path: '' })
     }
 
@@ -47,9 +70,19 @@ export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
                     <div></div>
                     <h3>Image</h3>
                     <h3>UniqueCode</h3>
-                    <h3>Category</h3>
                     <h3>
-                        Tittle
+                        Category
+                        <Popover>
+                            <UpdateCategoryButton />
+                            <UpdateCategories />
+                        </Popover>
+                        <Popover>
+                            <NewCategoryButton />
+                            <NewCategory />
+                        </Popover>
+                    </h3>
+                    <h3>
+                        Title
                         {/* <input
                             type="search"
                             onChange={(event) => setArts(
@@ -81,7 +114,7 @@ export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
                                 onClick={() => handleDeleteArt(art)}
                             />
                         </Tooltip>
-                        <div>
+                        <div className="imageContent">
                             <img src={art.image} alt={art.title} />
                         </div>
                         <h4 className="uniqueCode">
@@ -91,7 +124,7 @@ export function ListOfArts({ arts, setArts }: ListOfArtsProps): JSX.Element {
                             </Tooltip>
                         </h4>
                         <h4>
-                            {art.category
+                            {art.categoryTitle
                                 .replace('_', ' ')
                                 // string.capitalize() to each word => string-art => String Art
                                 .replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))

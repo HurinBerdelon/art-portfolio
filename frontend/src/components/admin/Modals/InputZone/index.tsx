@@ -1,12 +1,12 @@
 import { Field, FormikErrors } from "formik";
 import { useEffect } from "react";
-import { availableCategories } from "../../../../config/availableCategories";
+import { useCategory } from "../../../../hooks/useCategory";
 import { Container } from "./style";
 
 interface ErrorProps {
     title?: string;
     uniqueCode?: string;
-    category?: string;
+    categoryTitle?: string;
     file?: string | undefined;
     description?: string;
     dimension?: string;
@@ -22,6 +22,8 @@ interface InputArtProps {
 
 export function InputZone({ errors, setFieldValue, initialValues, gqlError }: InputArtProps): JSX.Element {
 
+    const { categories } = useCategory()
+
     useEffect(() => {
         if (gqlError) {
             setFieldValue('uniqueCode', '')
@@ -36,21 +38,22 @@ export function InputZone({ errors, setFieldValue, initialValues, gqlError }: In
                 placeholder={errors.title ? errors.title : "Title"}
                 className={errors.title ? 'errorMessage' : ''}
             />
+
             <select
-                onChange={(event) => setFieldValue('category', event.target.value)}
-                defaultValue={initialValues.category ? initialValues.category : 'default'}
-                className={errors.category ? 'errorMessage' : ''}
+                onChange={(event) => setFieldValue('categoryTitle', event.target.value)}
+                defaultValue={initialValues.categoryTitle ? initialValues.categoryTitle : 'default'}
+                className={errors.categoryTitle ? 'errorMessage' : ''}
             >
                 <option
                     disabled
                     value="default">
-                    {errors.category ? errors.category : "Category"}
+                    {errors.categoryTitle ? errors.categoryTitle : "Category"}
                 </option>
-                {availableCategories.map(category => (
+                {categories.map(category => (
                     <option
-                        value={category}
+                        value={category.title}
                     >
-                        {category
+                        {category.title
                             .replace('_', ' ')
                             // string.capitalize() to each word => string-art => String Art
                             .replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}

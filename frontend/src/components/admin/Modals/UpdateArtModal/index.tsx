@@ -71,7 +71,7 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
         updateArt({
             variables: {
                 id: art.id,
-                category: values.category,
+                category: values.categoryTitle,
                 uniqueCode: values.uniqueCode,
                 description: values.description,
                 dimension: values.dimension,
@@ -79,10 +79,10 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
                 productionDate: values.productionDate
             }
         }).then(() => {
-            if (values.category !== art.category) {
-                revalidateSSG({ path: values.category })
+            if (values.category !== art.categoryTitle) {
+                revalidateSSG({ path: values.categoryTitle })
             }
-            revalidateSSG({ path: art.category })
+            revalidateSSG({ path: art.categoryTitle })
             revalidateSSG({ path: '' })
             onRequestClose()
         })
@@ -91,7 +91,7 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
 
     const initialValues = {
         file: '',
-        category: art.category,
+        categoryTitle: art.categoryTitle,
         uniqueCode: art.uniqueCode,
         description: art.description,
         dimension: art.dimension,

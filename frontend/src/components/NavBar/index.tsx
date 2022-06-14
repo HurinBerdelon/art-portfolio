@@ -14,7 +14,7 @@ interface NavBarProps {
 export function NavBar(props: NavBarProps): JSX.Element {
     return (
         <Container>
-            <h1>HurinBerdelon</h1>
+            <h1>FeCardozo Workshop</h1>
             {/* <img src='/images/logo.png' alt="logo" /> */}
             <LinkToPages />
 

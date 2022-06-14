@@ -85,6 +85,7 @@ export function GalleryModal({ isOpen, onRequestClose, currentPicture, setCurren
                         <h2>{currentPicture.title}</h2>
                         <p className='dateInfo'>{dayjs(currentPicture.productionDate).format('MMMM [of] YYYY')}</p>
                         <p className="dimensionInfo">{currentPicture.dimension}</p>
+                        <p className="categoryInfo">{currentPicture.categoryTitle}</p>
                         <p className='descriptionInfo'>{currentPicture.description}</p>
                     </div>
 

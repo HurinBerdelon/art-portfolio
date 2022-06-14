@@ -13,6 +13,7 @@ export const Container = styled.nav`
 
     h1 {
         color: var(--beige-100);
+        text-align: center;
     }
 
     .media-links {

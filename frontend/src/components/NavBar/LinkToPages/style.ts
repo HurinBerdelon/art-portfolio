@@ -5,6 +5,29 @@ export const Container = styled.nav`
     flex-direction: column;
     gap: 0.25rem;
     width: 8rem;
+
+    .categoryButton {
+        color: var(--beige-100);
+        cursor: pointer;
+
+        display: flex;
+        justify-content: flex-start;
+
+        svg {
+            margin-left: -0.6rem;
+        }
+    }
+
+    .categoryPages {
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 140%;
+    }
     
     a {
         position: relative;

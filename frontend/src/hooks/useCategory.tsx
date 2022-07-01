@@ -33,7 +33,7 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
     let tempCategories: CategorySchema[]
 
     useEffect(() => {
-        tempCategories = structuredClone(categories)
+        // tempCategories = structuredClone(categories)
     }, [categories])
 
     useEffect(() => {

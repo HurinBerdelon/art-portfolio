@@ -1,26 +1,17 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { appWithTranslation } from 'next-i18next'
-import { createUploadLink } from 'apollo-upload-client'
 import { AppProps } from 'next/app'
 import { CategoryProvider } from '../hooks/useCategory'
-import { BodyContainer, GlobalStyle } from '../styles/global'
+import { GlobalStyle } from '../styles/global'
+import { apolloClient } from '../services/apolloClient'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
-	const client = new ApolloClient({
-		link: createUploadLink({
-			uri: `http://localhost:4000/graphql`
-		}),
-		cache: new InMemoryCache(),
-	})
-
 	return (
-		<ApolloProvider client={client}>
+		<ApolloProvider client={apolloClient}>
 			<CategoryProvider>
-				<BodyContainer>
-					<GlobalStyle />
-					<Component {...pageProps} />
-				</BodyContainer>
+				<GlobalStyle />
+				<Component {...pageProps} />
 			</CategoryProvider>
 		</ApolloProvider>
 	)

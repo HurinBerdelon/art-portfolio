@@ -9,7 +9,7 @@ export function Navigation(): JSX.Element {
     return (
         <Container>
             <div className="links">
-                <ActiveLink href='#' activeClassName="active" className='effectLinks'>
+                <ActiveLink href='/' activeClassName="active" className='effectLinks'>
                     <a >Home</a>
                 </ActiveLink>
 

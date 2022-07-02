@@ -22,6 +22,8 @@ export const Container = styled.div`
     
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    padding-top: 6rem;
 
     background: ${props => props.theme.colors.backgroundOne};
 

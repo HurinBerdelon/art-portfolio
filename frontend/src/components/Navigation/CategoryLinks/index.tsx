@@ -35,8 +35,8 @@ export function CategoryLinks(): JSX.Element {
                             <a>Craftmanship</a>
                         </ActiveLink>
 
-                        <ActiveLink href='#' activeClassName="active" className='effectLinks'>
-                            <a>Drawing</a>
+                        <ActiveLink href='/drawings' activeClassName="active" className='effectLinks'>
+                            <a>Drawings</a>
                         </ActiveLink>
                     </span>
                 )

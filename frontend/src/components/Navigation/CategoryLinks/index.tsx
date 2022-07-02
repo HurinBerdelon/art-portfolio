@@ -2,7 +2,7 @@ import { useState } from "react";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { Container } from "./style";
-import Link from "next/link";
+import { ActiveLink } from "../ActiveLink";
 
 
 export function CategoryLinks(): JSX.Element {
@@ -31,13 +31,13 @@ export function CategoryLinks(): JSX.Element {
                     <span
                         className="categoriesLink"
                     >
-                        <Link href='#'>
+                        <ActiveLink href='#' activeClassName="active" className='effectLinks'>
                             <a>Craftmanship</a>
-                        </Link>
+                        </ActiveLink>
 
-                        <Link href='#' >
+                        <ActiveLink href='#' activeClassName="active" className='effectLinks'>
                             <a>Drawing</a>
-                        </Link>
+                        </ActiveLink>
                     </span>
                 )
                 : null

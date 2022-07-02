@@ -1,27 +1,32 @@
-import Link from "next/link";
+import { ActiveLink } from "./ActiveLink";
+import { AdminLink } from "./AdminLink";
 import { CategoryLinks } from "./CategoryLinks";
-import { MediaLinks } from "./MediaLinks";
+import { SocialMediaLinks } from "./SocialMediaLinks";
 import { Container } from "./style";
 
 export function Navigation(): JSX.Element {
 
     return (
         <Container>
-            <Link href='#'>
-                <a className='effectLinks' >Home</a>
-            </Link>
+            <div className="links">
+                <ActiveLink href='#' activeClassName="active" className='effectLinks'>
+                    <a >Home</a>
+                </ActiveLink>
 
-            <CategoryLinks />
+                <CategoryLinks />
 
-            <Link href='#' >
-                <a className='effectLinks'>Contact</a>
-            </Link>
+                <ActiveLink href='#' activeClassName="active" className='effectLinks'>
+                    <a>Contact</a>
+                </ActiveLink>
 
-            <Link href='#' >
-                <a className='effectLinks'>About</a>
-            </Link>
+                <ActiveLink href='#' activeClassName="active" className='effectLinks'>
+                    <a>About</a>
+                </ActiveLink>
+            </div>
 
-            <MediaLinks />
+            <SocialMediaLinks />
+
+            <AdminLink />
 
         </Container>
     )

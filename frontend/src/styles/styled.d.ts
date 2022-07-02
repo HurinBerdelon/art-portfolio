@@ -13,7 +13,6 @@ declare module 'styled-components' {
 
             textOne: string,
             textTwo: string,
-            textThree: string,
 
             black: string,
             white: string,

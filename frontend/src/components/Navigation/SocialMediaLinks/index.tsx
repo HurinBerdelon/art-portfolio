@@ -4,7 +4,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import { Container } from "./style";
 
-export function MediaLinks(): JSX.Element {
+export function SocialMediaLinks(): JSX.Element {
 
     return (
         <Container>

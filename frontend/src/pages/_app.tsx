@@ -4,15 +4,18 @@ import { AppProps } from 'next/app'
 import { CategoryProvider } from '../hooks/useCategory'
 import { GlobalStyle } from '../styles/global'
 import { apolloClient } from '../services/apolloClient'
+import { SessionProvider } from 'next-auth/react'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<ApolloProvider client={apolloClient}>
-			<CategoryProvider>
-				<GlobalStyle />
-				<Component {...pageProps} />
-			</CategoryProvider>
+			<SessionProvider>
+				<CategoryProvider>
+					<GlobalStyle />
+					<Component {...pageProps} />
+				</CategoryProvider>
+			</SessionProvider>
 		</ApolloProvider>
 	)
 }

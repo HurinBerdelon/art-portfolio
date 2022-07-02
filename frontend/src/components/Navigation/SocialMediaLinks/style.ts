@@ -6,10 +6,12 @@ export const Container = styled.div`
     justify-content: flex-start;
     gap: 1rem;
     padding-top: 1rem; // 16px
+    margin: 0 auto;
+    color: ${props => props.theme.colors.textTwo};
 
     svg {
         cursor: pointer;
-        color: ${props => props.theme.colors.textThree};
+        color: ${props => props.theme.colors.textTwo};
     }
     
     a {

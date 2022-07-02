@@ -10,7 +10,7 @@ export function NavBarMenu(): JSX.Element {
             <Menu>
                 {({ open }) => (
                     <>
-                        <div className={open && 'contentOverlay'}></div>
+                        <div className={open ? 'contentOverlay' : ''}></div>
                         <Menu.Button>
                             <MenuIcon />
                         </Menu.Button>

@@ -7,7 +7,6 @@ export function Header(): JSX.Element {
     return (
         <Container>
             <h2>FeCardozo</h2>
-            {/* <MenuIcon /> */}
             <NavBarMenu />
         </Container>
     )

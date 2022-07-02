@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.section`
     background: ${props => props.theme.colors.boxOne};
-    flex: 1;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
 

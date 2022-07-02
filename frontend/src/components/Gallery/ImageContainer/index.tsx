@@ -5,11 +5,11 @@ import { Container } from "./style";
 import { ArtSchema } from "../../../schemas/Art";
 
 interface ImageContainerProps {
-    artIndex: number
     currentArt: ArtSchema
+    artIndex?: number
     shouldRenderButtons?: boolean
-    handlePreviousPicture(index: number): void
-    handleNextPicture(index: number): void
+    handlePreviousPicture?: (index: number) => void
+    handleNextPicture?: (index: number) => void
 }
 
 export function ImageContainer({

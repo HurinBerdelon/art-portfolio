@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../components/Gallery";
 import { Header } from "../components/Header";
@@ -14,10 +15,16 @@ interface HomeProps {
 export default function Home({ arts }: HomeProps): JSX.Element {
 
     return (
-        <ThemeProvider theme={light}>
-            <Header />
-            <Gallery arts={arts} />
-        </ThemeProvider>
+        <>
+            <Head>
+                <title>Home | FeCardozo Workshop</title>
+            </Head>
+
+            <ThemeProvider theme={light}>
+                <Header />
+                <Gallery arts={arts} />
+            </ThemeProvider>
+        </>
     )
 }
 

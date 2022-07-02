@@ -6,6 +6,9 @@ import dayjs from "dayjs";
 import { ArtSchema } from "../../../schemas/Art";
 import { Container, ContentOverlay } from "./style";
 import { ShareButton } from "../../ShareButtons";
+import { useEffect, useState } from "react";
+import { ImageContainer } from "../ImageContainer";
+import { InfoContainer } from "../InfoContainer";
 
 interface GalleryModalProps {
     currentArt: ArtSchema
@@ -20,6 +23,12 @@ export function GalleryModal({ arts, currentArt, isOpen, setCurrentArt, setIsOpe
     if (!currentArt) {
         return (null)
     }
+
+    const [currentIndex, setCurrentIndex] = useState(arts.indexOf(currentArt))
+
+    useEffect(() => {
+        setCurrentIndex(arts.indexOf(currentArt))
+    }, [currentArt])
 
     function handleCloseModal() { setIsOpen(false) }
 
@@ -58,41 +67,14 @@ export function GalleryModal({ arts, currentArt, isOpen, setCurrentArt, setIsOpe
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
+                    <ImageContainer
+                        artIndex={currentIndex}
+                        currentArt={currentArt}
+                        handleNextPicture={handleNextPicture}
+                        handlePreviousPicture={handlePreviousPicture}
+                    />
 
-                    <section className="imageContainer">
-                        <button
-                            className="buttonPrevious"
-                            onClick={() => handlePreviousPicture(arts.indexOf(currentArt) - 1)}
-                        >
-                            <Tooltip title='Previous Picture'>
-                                <ArrowBackIosIcon />
-                            </Tooltip>
-                        </button>
-                        <img src={currentArt.image} alt={currentArt.title} />
-                        <button
-                            className="buttonNext"
-                            onClick={() => handleNextPicture(arts.indexOf(currentArt) + 1)}
-                        >
-                            <Tooltip title='Next Picture'>
-                                <ArrowForwardIosIcon />
-                            </Tooltip>
-                        </button>
-                    </section>
-
-                    <section className="infoContainer">
-                        <div className="infos">
-
-                            <h2>{currentArt.title}</h2>
-                            <p className='dateInfo'>{dayjs(currentArt.productionDate).format('MMMM [of] YYYY')}</p>
-                            <p className="dimensionInfo">{currentArt.dimension}</p>
-                            <p className="categoryInfo">{currentArt.categoryTitle}</p>
-                            <p className='descriptionInfo'>{currentArt.description}</p>
-                        </div>
-
-                        <div className="shareMedia">
-                            <ShareButton currentPictureId={currentArt.id} />
-                        </div>
-                    </section>
+                    <InfoContainer currentArt={currentArt} />
                 </Container>
             </Dialog.Panel>
         </Dialog>

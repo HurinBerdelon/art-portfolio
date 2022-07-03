@@ -2,7 +2,6 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { getSession } from 'next-auth/react'
 import { ToastContainer } from 'react-toastify'
-import { NavBar } from "../../components/NavBar";
 import { Container } from "./style";
 import { apolloClient } from "../../services/apolloClient";
 import { gql } from "@apollo/client";
@@ -10,6 +9,8 @@ import { ThemeProvider } from "styled-components";
 import light from "../../styles/themes/light";
 import { Header } from "../../components/Header";
 import { ListOfArts } from "../../components/admin/ListOfArts";
+import { ArtProvider } from "../../hooks/useArts";
+import { ArtOrCategory } from "../../components/admin/ArtOrCategory";
 
 export default function Admin(): JSX.Element {
 
@@ -18,14 +19,16 @@ export default function Admin(): JSX.Element {
             <Head>
                 <title>Admin | HurinBerdelon</title>
             </Head>
-            <NavBar />
 
             <ToastContainer />
             <ThemeProvider theme={light}>
-                <Container>
-                    <Header />
-                    <ListOfArts />
-                </Container>
+                <ArtProvider>
+                    <Container>
+                        <Header />
+                        <ArtOrCategory />
+                        <ListOfArts />
+                    </Container>
+                </ArtProvider>
             </ThemeProvider>
         </>
     )

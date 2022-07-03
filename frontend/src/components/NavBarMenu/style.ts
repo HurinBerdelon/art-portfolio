@@ -7,9 +7,9 @@ export const Container = styled.div`
         width: 50vw;
 
         position: absolute;
-        z-index: 1;
+        z-index: 3;
         background: ${props => props.theme.colors.boxOne};
-        right: 0; 
+        right: 0;
 
         font-size: 1.35rem;
     }
@@ -20,7 +20,7 @@ export const Container = styled.div`
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: -1;
+        z-index: 2;
 
         display: flex;
         align-items: center;

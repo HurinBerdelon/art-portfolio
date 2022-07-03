@@ -1,12 +1,18 @@
 import { Container } from "./style";
-import MenuIcon from '@mui/icons-material/Menu';
 import { NavBarMenu } from "../NavBarMenu";
+import Link from "next/link";
 
 export function Header(): JSX.Element {
 
     return (
         <Container>
-            <h2>FeCardozo</h2>
+            <Link
+                href={'/'}
+            >
+                <a>
+                    <h2>FeCardozo</h2>
+                </a>
+            </Link>
             <NavBarMenu />
         </Container>
     )

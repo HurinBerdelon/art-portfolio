@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     flex: 1;
     height: 100%;
-    background: ${props => props.theme.colors.backgroundTwo};
+    background: ${props => props.theme.colors.backgroundOne};
     
     main {
         height: 90%;

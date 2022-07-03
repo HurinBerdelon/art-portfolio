@@ -6,7 +6,7 @@ export const NoArtsContainer = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${props => props.theme.colors.backgroundTwo};
+    background: ${props => props.theme.colors.backgroundOne};
 `
 
 export const Container = styled.section`

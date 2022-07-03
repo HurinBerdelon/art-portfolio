@@ -5,12 +5,13 @@ export const Container = styled.div`
     .categoriesButton {
         color: ${props => props.theme.colors.textTwo};
         cursor: pointer;
-
+        
         display: flex;
         justify-content: flex-start;
         align-items: center;
-
+        
         svg {
+            color: ${props => props.theme.colors.textTwo};
             margin-left: -0.8rem; // -12.8px
         }
     }

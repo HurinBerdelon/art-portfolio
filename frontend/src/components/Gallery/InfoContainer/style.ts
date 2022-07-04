@@ -4,13 +4,15 @@ export const Container = styled.section`
     background: ${props => props.theme.colors.boxOne};
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
+    
     position: relative;
+
+    color: ${props => props.theme.colors.textOne};
 
     .infos {
         display: flex;

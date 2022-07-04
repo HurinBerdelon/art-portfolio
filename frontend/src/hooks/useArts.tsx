@@ -13,7 +13,7 @@ interface ArtContextProps {
     // saveArt(values: FormikValues): void
     // updateArt(values: FormikValues): void
     // updateArtImage(values: FormikValues): void
-    // deleteARt(id: string): void
+    // deleteArt(id: string): void
 }
 
 const ArtContext = createContext<ArtContextProps>(

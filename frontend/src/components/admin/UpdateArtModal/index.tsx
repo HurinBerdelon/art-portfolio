@@ -8,8 +8,8 @@ import { toastError, toastSuccess } from "../../../services/toastProvider"
 import { revalidateSSG } from "../../../services/revalidate"
 import { Dialog } from "@headlessui/react"
 import { Container } from "./style"
-import { DropImage } from "../Forms/DropImage"
-import { InputZone } from "../Forms/InputZone"
+import { DropImage } from "../ArtForms/DropImage"
+import { InputZone } from "../ArtForms/InputZone"
 import { ModalContentOverlay } from "../../../styles/global"
 
 const UPDATE_ART = gql`

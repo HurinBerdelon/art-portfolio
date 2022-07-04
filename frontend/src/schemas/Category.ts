@@ -1,3 +1,5 @@
+import { Router } from 'next/router'
+import * as yup from 'yup'
 interface TranslationSchema {
     id: string
     title: string
@@ -7,6 +9,5 @@ interface TranslationSchema {
 export interface CategorySchema {
     id: string
     title: string
-    createdAt: Date
     Translations: TranslationSchema[]
 }

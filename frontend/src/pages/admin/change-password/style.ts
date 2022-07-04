@@ -16,7 +16,7 @@ export const Container = styled.div`
 
         h1 {
             font-size: 1.35rem;
-            color: var(--white);
+            color: ${props => props.theme.colors.textTwo};
         }
 
         form {
@@ -34,20 +34,20 @@ export const Container = styled.div`
             }
 
             .errorMessage {
-                border: 1px solid #f00;
+                border: 1px solid ${props => props.theme.colors.danger};
                 
                 &::placeholder {
-                    color: #f00;
+                    color: ${props => props.theme.colors.danger};
                 }
             }
 
             .errorMessageDiv {
-                color: #f00;
+                color: ${props => props.theme.colors.danger};
             }
 
             .buttonSubmit {
-                background: var(--green-600);
-                color: var(--white);
+                background: ${props => props.theme.colors.boxOne};
+                color: ${props => props.theme.colors.textTwo};
                 font-weight: 400;
 
                 margin-top: 0.5rem;

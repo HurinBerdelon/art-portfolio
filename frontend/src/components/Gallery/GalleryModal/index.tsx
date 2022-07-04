@@ -1,14 +1,10 @@
 import { Dialog } from "@headlessui/react";
-import { Tooltip } from "@mui/material";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import dayjs from "dayjs";
 import { ArtSchema } from "../../../schemas/Art";
-import { Container, ContentOverlay } from "./style";
-import { ShareButton } from "../../ShareButtons";
+import { Container, } from "./style";
 import { useEffect, useState } from "react";
 import { ImageContainer } from "../ImageContainer";
 import { InfoContainer } from "../InfoContainer";
+import { ModalContentOverlay } from "../../../styles/global";
 
 interface GalleryModalProps {
     currentArt: ArtSchema
@@ -56,7 +52,7 @@ export function GalleryModal({ arts, currentArt, isOpen, setCurrentArt, setIsOpe
 
     return (
         <Dialog open={isOpen} onClose={handleCloseModal}>
-            <ContentOverlay className="contentOverlay" aria-hidden={true}></ContentOverlay>
+            <ModalContentOverlay aria-hidden={true} />
             <Dialog.Panel>
                 <Container>
                     <button

@@ -8,11 +8,16 @@ import { Container } from "./style";
 import { useArts } from "../../../hooks/useArts";
 import { ArtSchema } from "../../../schemas/Art";
 import { ArtInfo } from "../ArtInfo";
+import { CreateArtModal } from "../CreateArtModal";
+import { UpdateArtModal } from "../UpdateArtModal";
 
 export function ListOfArts(): JSX.Element {
 
     const [searchingFor, setSearchingFor] = useState('title')
     const [currentInput, setCurrentInput] = useState('')
+    const [isCreateArtModalOpen, setIsCreateArtModalOpen] = useState(false)
+    const [isUpdateArtModalOpen, setIsUpdateArtModalOpen] = useState(false)
+    const [artBeeingUpdated, setArtBeeingUpdated] = useState<ArtSchema>(null)
 
     const { arts } = useArts()
 
@@ -30,6 +35,17 @@ export function ListOfArts(): JSX.Element {
 
     return (
         <Container>
+            <CreateArtModal
+                isOpen={isCreateArtModalOpen}
+                onRequestClose={() => setIsCreateArtModalOpen(false)}
+            />
+
+            <UpdateArtModal
+                isOpen={isUpdateArtModalOpen}
+                onRequestClose={() => setIsUpdateArtModalOpen(false)}
+                art={artBeeingUpdated}
+            />
+
             <SearchBar
                 searchingFor={searchingFor}
                 setSearchingFor={setSearchingFor}
@@ -41,7 +57,9 @@ export function ListOfArts(): JSX.Element {
                 <thead>
                     <tr>
                         <th className="settings">
-                            <AddCircleIcon />
+                            <AddCircleIcon
+                                onClick={() => setIsCreateArtModalOpen(true)}
+                            />
                         </th>
                         <th>Image</th>
                         <th>Title</th>
@@ -51,7 +69,14 @@ export function ListOfArts(): JSX.Element {
                 <tbody>
                     {artsOnScreen?.map(art => (
                         <tr key={art.id}>
-                            <td className="settings"><SettingsIcon /></td>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
                             <td>
                                 <div className="imageContainer">
                                     <img src={art.image} alt={art.title} />

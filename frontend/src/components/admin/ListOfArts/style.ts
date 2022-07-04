@@ -32,15 +32,16 @@ export const Container = styled.section`
                 color: ${props => props.theme.colors.textOne};
                 min-height: 40px;
 
+                svg {
+                    cursor: pointer;
+                    color: ${props => props.theme.colors.textOne};
+                }
+
                 .title {
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
                     gap: 0.5rem;
-
-                    svg {
-                        font-size: 1.5rem;
-                    }
                 }
 
                 .imageContainer {

@@ -17,6 +17,9 @@ declare module 'styled-components' {
             black: string,
             white: string,
             gray: string,
+
+            danger: string
         }
     }
 }
+

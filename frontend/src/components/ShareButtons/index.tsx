@@ -25,22 +25,21 @@ export function ShareButton({ currentPictureId }: ShareButtonProps): JSX.Element
 
                         <div className="socialMediaContent">
 
-                            <FacebookShareButton url={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}image/${currentPictureId}`}>
+                            <FacebookShareButton url={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}/image/${currentPictureId}`}>
                                 <FacebookIcon />
                             </FacebookShareButton>
 
-                            <WhatsappShareButton url={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}image/${currentPictureId}`}>
+                            <WhatsappShareButton url={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}/image/${currentPictureId}`}>
                                 <WhatsAppIcon />
                             </WhatsappShareButton>
                         </div>
 
-                        <CopyToClipboard text={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}image/${currentPictureId}`}>
+                        <CopyToClipboard text={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}/image/${currentPictureId}`}>
                             <button className="copyPaste">
                                 <ContentCopyIcon />
                                 <h4>Copy Link</h4>
                             </button>
                         </CopyToClipboard>
-
 
                     </div>
                 </Popover.Panel>

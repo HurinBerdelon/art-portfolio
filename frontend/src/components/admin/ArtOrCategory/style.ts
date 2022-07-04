@@ -10,11 +10,12 @@ export const Container = styled.nav`
     a {
         background: ${props => props.theme.colors.gray};
         color: ${props => props.theme.colors.textTwo};
-        width: 100px;
+        width: 125px;
         text-align: center;
         border-radius: 0.25rem;
 
         font-weight: 500;
+        padding: 0.25rem;
 
         &.active {
             background: ${props => props.theme.colors.boxOne};

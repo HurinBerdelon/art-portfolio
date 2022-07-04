@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { Container } from "./style";
+import { useEffect } from "react";
 
 interface SearchBarProps {
     searchingFor: string
@@ -12,7 +13,10 @@ interface SearchBarProps {
     setCurrentInput: (currentInput: string) => void
 }
 
-const SEARCH_OPTIONS = ['title', 'category']
+const SEARCH_OPTIONS = [
+    { key: 'title', name: 'Title' },
+    { key: 'categoryTitle', name: 'Category' }
+]
 
 export function SearchBar({
     searchingFor,
@@ -20,29 +24,31 @@ export function SearchBar({
     setSearchingFor
 }: SearchBarProps): JSX.Element {
 
+    const currentSearch = SEARCH_OPTIONS.find(item => item.key === searchingFor)
+
     return (
         <Container>
             <Listbox value={searchingFor} onChange={setSearchingFor}>
                 <Listbox.Button>
-                    {searchingFor}
+                    {currentSearch.name}
                     <ArrowDropDownIcon />
                 </Listbox.Button>
                 <Listbox.Options className='options'>
                     {SEARCH_OPTIONS.map(option => (
                         <Listbox.Option
-                            key={option}
-                            value={option}
+                            key={option.key}
+                            value={option.key}
                         >
                             {({ selected }) => (
                                 selected
                                     ? (<span>
                                         <CheckBoxIcon />
-                                        {option}
+                                        {option.name}
                                     </span>
                                     )
                                     : (<span>
                                         <CheckBoxOutlineBlankIcon />
-                                        {option}
+                                        {option.name}
                                     </span>
                                     )
                             )}

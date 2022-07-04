@@ -9,18 +9,20 @@ export const Container = styled.section`
             margin-bottom: 0.5rem;
         }
 
-        tbody tr {
-            padding: 0 0.5rem;
-        }
-
         tbody tr, thead tr{
             width: 100%;
+            padding: 0 0.5rem;
 
             display: grid;
-            grid-template-columns: 0.5fr 0.5fr 2fr 4fr 2fr;
+            grid-template-columns: 1.5fr 2fr 4fr 2fr;
 
             td {
                 border-bottom: 1px dashed ${props => props.theme.colors.textOne};
+            }
+
+            .settings {
+                display: flex;
+                justify-content: center;
             }
 
             th, td {
@@ -28,6 +30,7 @@ export const Container = styled.section`
                 align-items: center;
                 text-align: left;
                 color: ${props => props.theme.colors.textOne};
+                min-height: 40px;
 
                 .title {
                     display: flex;
@@ -36,7 +39,7 @@ export const Container = styled.section`
                     gap: 0.5rem;
 
                     svg {
-                        font-size: 1rem;
+                        font-size: 1.5rem;
                     }
                 }
 

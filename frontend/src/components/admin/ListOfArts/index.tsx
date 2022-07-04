@@ -1,10 +1,13 @@
-import { useState } from "react";
-import DeleteIcon from '@mui/icons-material/Delete';
+import { useEffect, useState } from "react";
 import InfoIcon from '@mui/icons-material/Info';
-import EditIcon from '@mui/icons-material/Edit';
+// import DeleteIcon from '@mui/icons-material/Delete';
+// import EditIcon from '@mui/icons-material/Edit';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SearchBar } from "../SearchBar";
 import { Container } from "./style";
 import { useArts } from "../../../hooks/useArts";
+import { ArtSchema } from "../../../schemas/Art";
 
 export function ListOfArts(): JSX.Element {
 
@@ -12,6 +15,18 @@ export function ListOfArts(): JSX.Element {
     const [currentInput, setCurrentInput] = useState('')
 
     const { arts } = useArts()
+
+    const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>()
+
+    useEffect(() => {
+        setArtsOnScreen(arts)
+    }, [arts])
+
+    useEffect(() => {
+        if (artsOnScreen) {
+            setArtsOnScreen(arts.filter(art => art[searchingFor].toLowerCase().includes(currentInput.toLowerCase())))
+        }
+    }, [currentInput, searchingFor])
 
     return (
         <Container>
@@ -25,18 +40,18 @@ export function ListOfArts(): JSX.Element {
             <table>
                 <thead>
                     <tr>
-                        <th></th>
-                        <th></th>
+                        <th className="settings">
+                            <AddCircleIcon />
+                        </th>
                         <th>Image</th>
                         <th>Title</th>
                         <th>Category</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {arts?.map(art => (
+                    {artsOnScreen?.map(art => (
                         <tr key={art.id}>
-                            <td><EditIcon /></td>
-                            <td><DeleteIcon /></td>
+                            <td className="settings"><SettingsIcon /></td>
                             <td>
                                 <div className="imageContainer">
                                     <img src={art.image} alt={art.title} />

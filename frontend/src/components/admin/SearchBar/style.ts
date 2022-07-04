@@ -11,11 +11,11 @@ export const Container = styled.div`
     justify-content: space-between;
 
     position: relative;
-
+    
     input {
         border: none;
         background: none;
-        flex: 1;
+        width: 100%;
         color: ${props => props.theme.colors.textOne};
         padding: 0 0.5rem;
 
@@ -29,6 +29,7 @@ export const Container = styled.div`
         padding: 0.125rem 0 0.125rem 1rem;
         display: flex;
         align-items: center;
+        border-radius: 0.25rem 0 0 0.25rem;
 
         color: ${props => props.theme.colors.textTwo};
         background: ${props => props.theme.colors.boxOne};

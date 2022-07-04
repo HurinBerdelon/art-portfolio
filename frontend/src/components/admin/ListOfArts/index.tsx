@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import InfoIcon from '@mui/icons-material/Info';
 // import DeleteIcon from '@mui/icons-material/Delete';
 // import EditIcon from '@mui/icons-material/Edit';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -8,6 +7,7 @@ import { SearchBar } from "../SearchBar";
 import { Container } from "./style";
 import { useArts } from "../../../hooks/useArts";
 import { ArtSchema } from "../../../schemas/Art";
+import { ArtInfo } from "../ArtInfo";
 
 export function ListOfArts(): JSX.Element {
 
@@ -59,7 +59,7 @@ export function ListOfArts(): JSX.Element {
                             </td>
                             <td>
                                 <span className="title">
-                                    <InfoIcon />
+                                    <ArtInfo art={art} />
                                     {art.title}
                                 </span>
                             </td>

@@ -5,6 +5,8 @@ import { useRouter } from "next/router"
 import { ModalContentOverlay } from "../../../styles/global"
 import { Container } from "./style"
 import { CategorySchema } from '../../../schemas/Category'
+import { languages } from '../../../config/languages'
+import { useCategory } from '../../../hooks/useCategory'
 
 interface UpdateCategoryModalProps {
     isOpen: boolean
@@ -18,10 +20,26 @@ export function UpdateCategoryModal({ isOpen, onRequestClose, category }: Update
         return null
     }
 
+    const { updateCategory, updateTranslation } = useCategory()
+
     const handleSubmitForm = (values: FormikValues) => {
 
-        console.log(values)
+        updateCategory(category.id, values.en)
 
+        Object.keys(values).map(locale => {
+            if (locale !== 'en' && values[locale]) {
+                console.log(locale, category)
+
+                updateTranslation({
+                    id: category.Translations.find(translation => translation.language === locale)?.id,
+                    title: values[locale],
+                    categoryTitle: values['en'],
+                    language: locale
+                })
+            }
+        })
+
+        onRequestClose()
     }
 
     const { locales } = useRouter()
@@ -29,7 +47,7 @@ export function UpdateCategoryModal({ isOpen, onRequestClose, category }: Update
     const initialValues: { [k: string]: string } = {}
 
     locales.map(locale => {
-        if (locale === 'en') initialValues['title'] = category.title
+        if (locale === 'en') initialValues['en'] = category.title
         else {
             const translation = category.Translations.find(item => item.language === locale)
             initialValues[locale] = translation ? translation.title : ''
@@ -44,7 +62,7 @@ export function UpdateCategoryModal({ isOpen, onRequestClose, category }: Update
     // })
 
     const saveCategorySchema = yup.object().shape({
-        title: yup.string().required('Title is required'),
+        en: yup.string().required('Title is required'),
     })
 
     return (
@@ -72,21 +90,27 @@ export function UpdateCategoryModal({ isOpen, onRequestClose, category }: Update
                                 {locales.map(locale => {
                                     if (locale === 'en') {
                                         return (
-                                            <Field
-                                                type="text"
-                                                name='title'
-                                                placeholder={errors.title ? errors.title : "Title"}
-                                                className={errors.title ? 'errorMessage' : ''}
-                                            />
+                                            <div key={locale} className="inputContainer">
+                                                <span>{languages[locale].flag}</span>
+                                                <Field
+                                                    type="text"
+                                                    name={locale}
+                                                    placeholder={errors[locale] ? errors[locale] : "Title"}
+                                                    className={errors[locale] ? 'errorMessage' : ''}
+                                                />
+                                            </div>
                                         )
                                     } else {
                                         return (
-                                            <Field
-                                                type="text"
-                                                name={locale}
-                                                placeholder={errors[locale] ? errors[locale] : `${locale} translation`}
-                                                className={errors[locale] ? 'errorMessage' : ''}
-                                            />
+                                            <div key={locale} className="inputContainer">
+                                                <span>{languages[locale].flag}</span>
+                                                <Field
+                                                    type="text"
+                                                    name={locale}
+                                                    placeholder={errors[locale] ? errors[locale] : `${locale} translation`}
+                                                    className={errors[locale] ? 'errorMessage' : ''}
+                                                />
+                                            </div>
                                         )
                                     }
                                 })}

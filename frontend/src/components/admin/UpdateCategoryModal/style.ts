@@ -4,8 +4,8 @@ export const Container = styled.div`
 
     position: absolute;
     z-index: 2;
-    top: 1rem;
-    bottom: 1rem;
+    top: 20%;
+    bottom: 20%;
     left: 1rem;
     right: 1rem;
     border-radius: 0.5rem;
@@ -29,7 +29,29 @@ export const Container = styled.div`
         justify-content: center;
         gap: 0.25rem;
 
-        input, .buttonSubmit {
+        .inputContainer {
+            width: 320px;
+            border: solid 1px ${props => props.theme.colors.textOne};
+            border-radius: 0.25rem;
+            background: ${props => props.theme.colors.white};
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+
+            span {
+                padding: 0.25rem;
+            }
+
+            input {
+                background: none;
+                border: none;
+                outline: none;
+                padding-left: 0.5rem;
+                font-size: 1.125rem;
+            }
+        }
+
+        .buttonSubmit {
         
             width: 320px;
             border: solid 1px ${props => props.theme.colors.textOne};

@@ -7,6 +7,7 @@ import { CreateCategoryModal } from '../CreateCategoryModal';
 import { useState } from 'react';
 import { UpdateCategoryModal } from '../UpdateCategoryModal';
 import { CategorySchema } from '../../../schemas/Category';
+import { languages } from '../../../config/languages';
 
 export function ListOfCategories(): JSX.Element {
 
@@ -45,8 +46,8 @@ export function ListOfCategories(): JSX.Element {
                             />
                         </th>
                         {locales.map(locale => (
-                            <th key={locale}>
-                                {locale}
+                            <th className='flags' key={locale}>
+                                {languages[locale].flag}
                             </th>
 
                         ))}

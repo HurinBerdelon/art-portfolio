@@ -4,6 +4,8 @@ import { Field, Form, Formik, FormikValues } from "formik"
 import { useRouter } from "next/router"
 import { ModalContentOverlay } from "../../../styles/global"
 import { Container } from "./style"
+import { languages } from '../../../config/languages'
+import { useCategory } from '../../../hooks/useCategory'
 
 interface CreateCategoryModalProps {
     isOpen: boolean
@@ -12,9 +14,14 @@ interface CreateCategoryModalProps {
 
 export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryModalProps): JSX.Element {
 
+    const { createCategory } = useCategory()
+
     const handleSubmitForm = (values: FormikValues) => {
 
-        console.log(values)
+        createCategory(values.title)
+        // console.log(values)
+
+        onRequestClose()
 
     }
 
@@ -61,27 +68,15 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
                         {({ errors }) => (
 
                             <Form>
-                                {locales.map(locale => {
-                                    if (locale === 'en') {
-                                        return (
-                                            <Field
-                                                type="text"
-                                                name='title'
-                                                placeholder={errors.title ? errors.title : "Title"}
-                                                className={errors.title ? 'errorMessage' : ''}
-                                            />
-                                        )
-                                    } else {
-                                        return (
-                                            <Field
-                                                type="text"
-                                                name={locale}
-                                                placeholder={errors[locale] ? errors[locale] : `${locale} translation`}
-                                                className={errors[locale] ? 'errorMessage' : ''}
-                                            />
-                                        )
-                                    }
-                                })}
+                                <div className="inputContainer">
+                                    <span>{languages.en.flag}</span>
+                                    <Field
+                                        type="text"
+                                        name='title'
+                                        placeholder={errors.title ? errors.title : "Title"}
+                                        className={errors.title ? 'errorMessage' : ''}
+                                    />
+                                </div>
 
                                 <button className='buttonSubmit' type="submit">Save</button>
                             </Form>

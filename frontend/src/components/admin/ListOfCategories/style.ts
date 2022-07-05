@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.section`
 
+    margin-top: 1rem;
+
     table {
         width: 100%;
 
@@ -14,6 +16,10 @@ export const Container = styled.section`
 
             td {
                 border-bottom: 1px dashed ${props => props.theme.colors.textOne};
+            }
+
+            .flags {
+                font-size: 1.65rem;
             }
 
             .settings {

@@ -2,22 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    position: absolute;
-    z-index: 2;
-    top: 20%;
-    bottom: 20%;
-    left: 1rem;
-    right: 1rem;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    overflow-y: scroll;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 1.85rem;
 
-    background: ${props => props.theme.colors.backgroundOne};
+    padding: 1rem;
 
     form {
         width: 100%;
@@ -79,8 +70,6 @@ export const Container = styled.div`
                 filter: brightness(1.2);
             }
         }
-
-
     }
 
     h2 {
@@ -88,9 +77,15 @@ export const Container = styled.div`
         color: ${props => props.theme.colors.textOne};
     }
 
-    .react-modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+    .delete {
+        display: flex;
+        align-items: center;
+        align-self: flex-end;
+        font-weight: 500;
+        color: ${props => props.theme.colors.danger};
+        
+        svg {
+            font-size: 2rem;
+        }
     }
 `

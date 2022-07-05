@@ -5,9 +5,9 @@ import { Container } from "./style";
 import { useRouter } from 'next/router';
 import { CreateCategoryModal } from '../CreateCategoryModal';
 import { useState } from 'react';
-import { UpdateCategoryModal } from '../UpdateCategoryModal';
 import { CategorySchema } from '../../../schemas/Category';
 import { languages } from '../../../config/languages';
+import { SettingsCategoryModal } from '../SettingsCategoryModal';
 
 export function ListOfCategories(): JSX.Element {
 
@@ -31,7 +31,7 @@ export function ListOfCategories(): JSX.Element {
                 isOpen={isCreateCategoryModalOpen}
                 onRequestClose={() => setIsCreateCategoryModalOpen(false)}
             />
-            <UpdateCategoryModal
+            <SettingsCategoryModal
                 category={categoryOnUpdate}
                 isOpen={isUpdateCategoryModalOpen}
                 onRequestClose={() => setIsUpdateCategoryModalOpen(false)}

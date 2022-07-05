@@ -1,21 +1,21 @@
-import { Dialog } from "@headlessui/react"
+import { useEffect, useState } from "react"
 import ReactCardFlip from 'react-card-flip'
-import { ModalContentOverlay } from "../../../styles/global"
+import { Dialog } from "@headlessui/react"
+import { ArtSchema } from "../../../schemas/Art"
 import { Container } from "./style"
-import { CategorySchema } from '../../../schemas/Category'
-import { useEffect, useState } from 'react'
-import { UpdateCategory } from './UpdateCategory'
-import { DeleteCategory } from './DeleteCategory'
+import { ModalContentOverlay } from "../../../styles/global"
+import { UpdateArt } from "./UpdateArt"
+import { DeleteArt } from "./DeleteArt"
 
-interface SettingsCategoryModalProps {
+interface SettingsArtModalProps {
     isOpen: boolean
-    category: CategorySchema
     onRequestClose(): void
+    art: ArtSchema
 }
 
-export function SettingsCategoryModal({ isOpen, onRequestClose, category }: SettingsCategoryModalProps): JSX.Element {
+export function SettingsArtModal({ isOpen, onRequestClose, art }: SettingsArtModalProps): JSX.Element {
 
-    if (!category) {
+    if (!art) {
         return null
     }
 
@@ -26,7 +26,7 @@ export function SettingsCategoryModal({ isOpen, onRequestClose, category }: Sett
     }, [onRequestClose])
 
     return (
-        <Dialog open={isOpen} onClose={onRequestClose}>
+        <Dialog open={isOpen} onClose={onRequestClose} >
             <ModalContentOverlay aria-hidden={true} />
             <Dialog.Panel>
                 <Container>
@@ -37,25 +37,30 @@ export function SettingsCategoryModal({ isOpen, onRequestClose, category }: Sett
                     >
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
+
                     <ReactCardFlip
                         isFlipped={isCardFlipped}
                         flipDirection={'horizontal'}
                     >
-                        <UpdateCategory
-                            category={category}
+                        <UpdateArt
+                            art={art}
                             onRequestClose={onRequestClose}
                             setIsCardFlipped={setIsCardFlipped}
                         />
-                        <DeleteCategory
-                            category={category}
+                        <DeleteArt
+                            art={art}
                             onRequestClose={onRequestClose}
                             setIsCardFlipped={setIsCardFlipped}
                         />
 
                     </ReactCardFlip>
+
+
                 </Container>
             </Dialog.Panel>
 
-        </Dialog >
+
+        </Dialog>
+
     )
 }

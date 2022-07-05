@@ -2,10 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-
-
     .content {
-
         position: absolute;
         z-index: 1;
         background: ${props => props.theme.colors.backgroundTwo};
@@ -13,6 +10,7 @@ export const Container = styled.div`
         min-width: 180px;
         min-height: 100px;
         padding: 1rem;
+        border-radius: 0.25rem;
         
         display: flex;
         flex-direction: column;

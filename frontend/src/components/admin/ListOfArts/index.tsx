@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import EditIcon from '@mui/icons-material/Edit';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SearchBar } from "../SearchBar";
@@ -9,7 +7,7 @@ import { useArts } from "../../../hooks/useArts";
 import { ArtSchema } from "../../../schemas/Art";
 import { ArtInfo } from "../ArtInfo";
 import { CreateArtModal } from "../CreateArtModal";
-import { UpdateArtModal } from "../UpdateArtModal";
+import { SettingsArtModal } from "../SettingsArtModal";
 
 export function ListOfArts(): JSX.Element {
 
@@ -40,7 +38,7 @@ export function ListOfArts(): JSX.Element {
                 onRequestClose={() => setIsCreateArtModalOpen(false)}
             />
 
-            <UpdateArtModal
+            <SettingsArtModal
                 isOpen={isUpdateArtModalOpen}
                 onRequestClose={() => setIsUpdateArtModalOpen(false)}
                 art={artBeeingUpdated}

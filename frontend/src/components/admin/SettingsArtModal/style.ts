@@ -11,28 +11,12 @@ export const Container = styled.div`
     border-radius: 0.5rem;
     padding: 1rem;
     overflow-y: scroll;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    
     background: ${props => props.theme.colors.backgroundOne};
 
-    form {
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    h2 {
-        margin-top: 1rem;
-        color:${props => props.theme.colors.textOne};
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .react-modal-close {
         position: absolute;

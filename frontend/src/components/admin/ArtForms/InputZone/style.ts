@@ -19,11 +19,11 @@ export const Container = styled.div`
     }
 
     input, select, .buttonSubmit {
-        height: 4rem;
+        height: 2.125rem;
     }
 
     textarea {
-        height: 16rem;
+        height: 10rem;
         resize: none;
         padding: 0.25rem 0.5rem;
         text-align: justify;

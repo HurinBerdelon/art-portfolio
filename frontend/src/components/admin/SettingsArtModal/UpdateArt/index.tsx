@@ -1,16 +1,15 @@
-import { useMutation, gql } from "@apollo/client"
-import { Form, Formik, FormikValues } from 'formik'
-import { useEffect, useState } from "react"
-import dayjs from "dayjs"
-import { ArtSchema, updateArtYupSchema } from "../../../schemas/Art"
-import { useArts } from "../../../hooks/useArts"
-import { toastError, toastSuccess } from "../../../services/toastProvider"
-import { revalidateSSG } from "../../../services/revalidate"
-import { Dialog } from "@headlessui/react"
-import { Container } from "./style"
-import { DropImage } from "../ArtForms/DropImage"
-import { InputZone } from "../ArtForms/InputZone"
-import { ModalContentOverlay } from "../../../styles/global"
+import { gql, useMutation } from "@apollo/client";
+import dayjs from "dayjs";
+import { Form, Formik, FormikValues } from "formik";
+import { useEffect, useState } from "react";
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { useArts } from "../../../../hooks/useArts";
+import { ArtSchema, updateArtYupSchema } from "../../../../schemas/Art";
+import { revalidateSSG } from "../../../../services/revalidate";
+import { toastError, toastSuccess } from "../../../../services/toastProvider";
+import { DropImage } from "../../ArtForms/DropImage";
+import { InputZone } from "../../ArtForms/InputZone";
+import { Container } from "./style";
 
 const UPDATE_ART = gql`
     mutation(
@@ -60,17 +59,13 @@ const UPDATE_ART_IMAGE = gql`
                 }
         }`
 
-interface UpdateArttModalProps {
-    isOpen: boolean
+interface UpdateArtProps {
     onRequestClose(): void
     art: ArtSchema
+    setIsCardFlipped(isCardFlipped: boolean): void
 }
 
-export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalProps): JSX.Element {
-
-    if (!art) {
-        return null
-    }
+export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtProps): JSX.Element {
 
     const { arts, setArts } = useArts()
     const [updateArt] = useMutation(UPDATE_ART)
@@ -141,44 +136,36 @@ export function UpdateArtModal({ isOpen, onRequestClose, art }: UpdateArttModalP
     }
 
     return (
-        <Dialog open={isOpen} onClose={onRequestClose} >
-            <ModalContentOverlay aria-hidden={true} />
-            <Dialog.Panel>
-                <Container>
-                    <button
-                        type='button'
-                        onClick={onRequestClose}
-                        className='react-modal-close'
-                    >
-                        <img src="/images/close.svg" alt="close-modal-button" />
-                    </button>
-                    <h2>Update Art</h2>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={values => handleSubmitForm(values)}
-                        validationSchema={updateArtYupSchema}
-                    >
-                        {({ errors, setFieldValue }) => (
-                            <Form>
-                                <DropImage
-                                    errors={errors}
-                                    setFieldValue={setFieldValue}
-                                    preview={preview}
-                                    setPreview={setPreview}
-                                />
-                                <InputZone
-                                    initialValues={initialValues}
-                                    errors={errors}
-                                    setFieldValue={setFieldValue}
-                                />
-                            </Form>
-                        )}
-                    </Formik>
-                </Container>
-            </Dialog.Panel>
-
-
-        </Dialog>
-
+        <Container>
+            <h2>Update Art</h2>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={values => handleSubmitForm(values)}
+                validationSchema={updateArtYupSchema}
+            >
+                {({ errors, setFieldValue }) => (
+                    <Form>
+                        <DropImage
+                            errors={errors}
+                            setFieldValue={setFieldValue}
+                            preview={preview}
+                            setPreview={setPreview}
+                        />
+                        <InputZone
+                            initialValues={initialValues}
+                            errors={errors}
+                            setFieldValue={setFieldValue}
+                        />
+                    </Form>
+                )}
+            </Formik>
+            <span
+                className="delete"
+                onClick={() => setIsCardFlipped(true)}
+            >
+                Delete Category
+                <ArrowRightAltIcon />
+            </span>
+        </Container>
     )
 }

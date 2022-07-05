@@ -14,6 +14,10 @@ export const Container = styled.div`
     overflow-y: scroll;
     margin: auto 0;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .react-modal-close {
         position: absolute;
         z-index: 2;

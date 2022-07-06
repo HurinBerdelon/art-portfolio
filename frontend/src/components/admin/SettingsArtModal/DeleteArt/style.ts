@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
+    margin-top: 50%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -39,13 +41,13 @@ export const Container = styled.div`
         }
 
         .cancelButton {
-            background: ${props => props.theme.colors.boxOne};
-            color: ${props => props.theme.colors.textTwo};
+            background: ${props => props.theme.colors.gray};
+            color: ${props => props.theme.colors.textThree};
         }
 
         .confirmButton {
             background: ${props => props.theme.colors.danger};
-            color: ${props => props.theme.colors.textTwo};
+            color: ${props => props.theme.colors.textThree};
         }
     }
 

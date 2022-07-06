@@ -11,7 +11,7 @@ export const Container = styled.div`
     left: 0.5rem;
 
     svg {
-        color: ${props => props.theme.colors.textTwo};
+        color: ${props => props.theme.colors.textOne};
         cursor: pointer;
 
         &:hover {
@@ -20,7 +20,7 @@ export const Container = styled.div`
     }
     
     p {
-        color: ${props => props.theme.colors.boxOne};
+        color: ${props => props.theme.colors.textOne};
         filter: brightness(1.4);
         font-weight: 400;
         font-size: 0.8rem;

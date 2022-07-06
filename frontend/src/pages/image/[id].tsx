@@ -5,9 +5,9 @@ import { ThemeProvider } from "styled-components"
 import { ImageContainer } from "../../components/Gallery/ImageContainer"
 import { InfoContainer } from "../../components/Gallery/InfoContainer"
 import { Header } from "../../components/Header"
+import { useCurrentTheme } from "../../hooks/useTheme"
 import { ArtSchema } from "../../schemas/Art"
 import { apolloClient } from "../../services/apolloClient"
-import light from "../../styles/themes/light"
 import { Container } from "./style"
 
 interface SinglePictureProps {
@@ -16,13 +16,15 @@ interface SinglePictureProps {
 
 export default function SinglePicture({ art }: SinglePictureProps): JSX.Element {
 
+    const { currentTheme } = useCurrentTheme()
+
     return (
         <>
             <Head>
                 <title>{`${art.title} | HurinBerdelon`}</title>
             </Head>
 
-            <ThemeProvider theme={light}>
+            <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
                     <main>

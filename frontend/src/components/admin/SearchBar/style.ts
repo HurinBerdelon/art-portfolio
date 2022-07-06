@@ -31,7 +31,7 @@ export const Container = styled.div`
         align-items: center;
         border-radius: 0.25rem 0 0 0.25rem;
 
-        color: ${props => props.theme.colors.textTwo};
+        color: ${props => props.theme.colors.textThree};
         background: ${props => props.theme.colors.boxOne};
         font-size: 1.125rem;
         font-weight: 500;
@@ -50,7 +50,7 @@ export const Container = styled.div`
     .options {
         position: absolute;
         top: 2.25rem;
-        color: ${props => props.theme.colors.textTwo};
+        color: ${props => props.theme.colors.textThree};
         background: ${props => props.theme.colors.boxOne};
         padding: 1rem;
         list-style: none;

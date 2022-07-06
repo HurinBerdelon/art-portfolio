@@ -6,13 +6,15 @@ import { Container } from "./style";
 import { apolloClient } from "../../services/apolloClient";
 import { gql } from "@apollo/client";
 import { ThemeProvider } from "styled-components";
-import light from "../../styles/themes/light";
 import { Header } from "../../components/Header";
 import { ListOfArts } from "../../components/admin/ListOfArts";
 import { ArtProvider } from "../../hooks/useArts";
 import { ArtOrCategory } from "../../components/admin/ArtOrCategory";
+import { useCurrentTheme } from "../../hooks/useTheme";
 
 export default function Admin(): JSX.Element {
+
+    const { currentTheme } = useCurrentTheme()
 
     return (
         <>
@@ -21,7 +23,7 @@ export default function Admin(): JSX.Element {
             </Head>
 
             <ToastContainer />
-            <ThemeProvider theme={light}>
+            <ThemeProvider theme={currentTheme}>
                 <ArtProvider>
                     <Container>
                         <Header />

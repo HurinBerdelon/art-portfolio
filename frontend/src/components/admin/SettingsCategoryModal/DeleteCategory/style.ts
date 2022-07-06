@@ -40,13 +40,13 @@ export const Container = styled.div`
         }
 
         .cancelButton {
-            background: ${props => props.theme.colors.boxOne};
-            color: ${props => props.theme.colors.textTwo};
+            background: ${props => props.theme.colors.gray};
+            color: ${props => props.theme.colors.textThree};
         }
 
         .confirmButton {
             background: ${props => props.theme.colors.danger};
-            color: ${props => props.theme.colors.textTwo};
+            color: ${props => props.theme.colors.textThree};
         }
     }
 

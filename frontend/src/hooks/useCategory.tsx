@@ -165,7 +165,7 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
 
             setCategories(tempCategories)
         }).then(() => toastSuccess(`Category deleted`))
-            .catch(error => console.log(error.message))
+            .catch(() => toastError(`There are arts registered in this category, please delete them before delete the category`))
 
 
     }

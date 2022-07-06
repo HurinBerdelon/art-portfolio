@@ -17,7 +17,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    background: ${props => props.theme.colors.backgroundOne};
+    background: ${props => props.theme.colors.backgroundTwo};
 
     form {
         width: 100%;

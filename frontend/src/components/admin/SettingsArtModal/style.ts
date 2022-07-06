@@ -12,11 +12,12 @@ export const Container = styled.div`
     padding: 1rem;
     overflow-y: scroll;
     
-    background: ${props => props.theme.colors.backgroundOne};
+    background: ${props => props.theme.colors.backgroundTwo};
 
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     .react-modal-close {
         position: absolute;

@@ -4,10 +4,12 @@ import { ThemeProvider } from "styled-components";
 import { ArtOrCategory } from "../../../components/admin/ArtOrCategory";
 import { ListOfCategories } from "../../../components/admin/ListOfCategories";
 import { Header } from "../../../components/Header";
-import light from "../../../styles/themes/light";
+import { useCurrentTheme } from "../../../hooks/useTheme";
 import { Container } from "./style";
 
 export default function Categories(): JSX.Element {
+
+    const { currentTheme } = useCurrentTheme()
 
     return (
         <>
@@ -16,7 +18,7 @@ export default function Categories(): JSX.Element {
             </Head>
 
             <ToastContainer />
-            <ThemeProvider theme={light}>
+            <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
                     <ArtOrCategory />

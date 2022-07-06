@@ -8,13 +8,17 @@ export default {
         boxOne: '#6D8B74',
         boxTwo: '#3D4D3E',
 
+        buttons: '#6D8B74',
+        inputBG: '#FFFFFF',
+
         textOne: '#2B332C',
         textTwo: '#FFF9F2',
+        textThree: '#FFF9F2',
 
         black: '#000000',
         white: '#FFFFFF',
         gray: '#525254',
 
-        danger: '#C3423F'
+        danger: '#9B2726'
     }
 }

@@ -1,6 +1,7 @@
 import { Container } from "./style";
 import { NavBarMenu } from "../NavBarMenu";
 import Link from "next/link";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 
 export function Header(): JSX.Element {
 
@@ -13,6 +14,7 @@ export function Header(): JSX.Element {
                     <h2>FeCardozo</h2>
                 </a>
             </Link>
+            <ThemeSwitcher />
             <NavBarMenu />
         </Container>
     )

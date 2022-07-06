@@ -17,6 +17,7 @@ export const Container = styled.div`
     }
 
     h2 {
+        /* margin-top: 3rem; */
         color:${props => props.theme.colors.textOne};
     }
 

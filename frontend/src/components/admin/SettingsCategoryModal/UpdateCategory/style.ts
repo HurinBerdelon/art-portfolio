@@ -22,33 +22,24 @@ export const Container = styled.div`
 
         .inputContainer {
             width: 320px;
-            border: solid 1px ${props => props.theme.colors.textOne};
             border-radius: 0.25rem;
-            background: ${props => props.theme.colors.white};
+            background: ${props => props.theme.colors.inputBG};
             font-size: 1.5rem;
             display: flex;
             align-items: center;
-
+            
             span {
                 padding: 0.25rem;
             }
-
+            
             input {
+                color: ${props => props.theme.colors.textOne};
                 background: none;
                 border: none;
                 outline: none;
                 padding-left: 0.5rem;
                 font-size: 1.125rem;
             }
-        }
-
-        .buttonSubmit {
-        
-            width: 320px;
-            border: solid 1px ${props => props.theme.colors.textOne};
-            border-radius: 0.25rem;
-            text-align: center;
-            font-size: 1.125rem;
         }
 
         .errorMessage {
@@ -60,9 +51,15 @@ export const Container = styled.div`
         }
 
         .buttonSubmit {
-            background: ${props => props.theme.colors.boxOne};
-            color: ${props => props.theme.colors.textTwo};
+            background: ${props => props.theme.colors.buttons};
+            color: ${props => props.theme.colors.textThree};
             font-weight: 400;
+            border: none;
+
+            width: 320px;
+            border-radius: 0.25rem;
+            text-align: center;
+            font-size: 1.25rem;
 
             margin-top: 0.75rem;
 

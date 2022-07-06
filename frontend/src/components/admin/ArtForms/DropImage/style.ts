@@ -54,6 +54,7 @@ export const Container = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
+            color: ${props => props.theme.colors.textOne};
             /* padding: 140px 90px; */
         }
 

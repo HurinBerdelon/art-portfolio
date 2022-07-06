@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     height: 320px;
-    background: ${props => props.theme.colors.backgroundOne};
+    background: ${props => props.theme.colors.backgroundTwo};
 
     position: absolute;
     z-index: 2;

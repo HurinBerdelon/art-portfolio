@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 
     .categoriesButton {
-        color: ${props => props.theme.colors.textTwo};
+        color: ${props => props.theme.colors.textOne};
         cursor: pointer;
         
         display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.div`
         align-items: center;
         
         svg {
-            color: ${props => props.theme.colors.textTwo};
+            color: ${props => props.theme.colors.textOne};
             margin-left: -0.8rem; // -12.8px
         }
     }
@@ -25,6 +25,6 @@ export const Container = styled.div`
 
         overflow-y: auto;
         overflow-x: hidden;
-        color: ${props => props.theme.colors.textTwo};
+        color: ${props => props.theme.colors.textOne};
     }
 `

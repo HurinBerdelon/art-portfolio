@@ -4,15 +4,16 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../components/Gallery";
 import { Header } from "../components/Header";
+import { useCurrentTheme } from "../hooks/useTheme";
 import { ArtSchema } from "../schemas/Art";
-import { apolloClient } from "../services/apolloClient";
-import light from '../styles/themes/light'
-
+import { apolloClient } from "../services/apolloClient"
 interface HomeProps {
     arts: ArtSchema[]
 }
 
 export default function Home({ arts }: HomeProps): JSX.Element {
+
+    const { currentTheme } = useCurrentTheme()
 
     return (
         <>
@@ -20,7 +21,7 @@ export default function Home({ arts }: HomeProps): JSX.Element {
                 <title>Home | FeCardozo Workshop</title>
             </Head>
 
-            <ThemeProvider theme={light}>
+            <ThemeProvider theme={currentTheme}>
                 <Header />
                 <Gallery arts={arts} />
             </ThemeProvider>

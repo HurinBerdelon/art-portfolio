@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../../components/Gallery";
 import { Header } from "../../components/Header";
+import { useCurrentTheme } from "../../hooks/useTheme";
 import { ArtSchema } from "../../schemas/Art";
 import { apolloClient } from "../../services/apolloClient";
-import light from "../../styles/themes/light";
 
 interface ByCategoryPageProps {
     arts: ArtSchema[]
@@ -16,6 +16,7 @@ interface ByCategoryPageProps {
 export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Element {
 
     const router = useRouter()
+    const { currentTheme } = useCurrentTheme()
 
     // string.capitalize()
     const title = router.asPath.split('/')[1].replace(/^\w/, (c) => c.toUpperCase())
@@ -27,7 +28,7 @@ export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Eleme
                 <title>{title} | HurinBerdelon</title>
             </Head>
 
-            <ThemeProvider theme={light}>
+            <ThemeProvider theme={currentTheme}>
                 <Header />
                 <Gallery arts={arts} />
             </ThemeProvider>

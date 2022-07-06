@@ -12,10 +12,15 @@ export const Container = styled.div`
     input, textarea, select, .buttonSubmit {
         
         width: 320px;
-        border: solid 1px ${props => props.theme.colors.textOne};
+        /* border: solid 1px ${props => props.theme.colors.textOne}; */
+        border: none;
         border-radius: 0.25rem;
         text-align: center;
         font-size: 1.125rem;
+
+        &::placeholder {
+            color: ${props => props.theme.colors.gray};
+        }
     }
 
     input, select, .buttonSubmit {
@@ -23,6 +28,7 @@ export const Container = styled.div`
     }
 
     textarea {
+        background: ${props => props.theme.colors.inputBG};
         height: 10rem;
         resize: none;
         padding: 0.25rem 0.5rem;
@@ -30,8 +36,13 @@ export const Container = styled.div`
         display: block;
     }
 
+    input {
+        background: ${props => props.theme.colors.inputBG};
+    }
+
     select {
-        background: #FFF;
+        background: ${props => props.theme.colors.inputBG};
+        color: ${props => props.theme.colors.gray};
         font-family: 'Poppins';
         font-weight: 300;
     }
@@ -49,8 +60,8 @@ export const Container = styled.div`
     }
 
     .buttonSubmit {
-        background: ${props => props.theme.colors.boxOne};
-        color: ${props => props.theme.colors.textTwo};
+        background: ${props => props.theme.colors.buttons};
+        color: ${props => props.theme.colors.textThree};
         font-weight: 400;
 
         margin-top: 0.75rem;

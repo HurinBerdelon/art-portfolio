@@ -11,8 +11,12 @@ declare module 'styled-components' {
             boxOne: string,
             boxTwo: string,
 
+            buttons: string,
+            inputBG: string,
+
             textOne: string,
             textTwo: string,
+            textThree: string,
 
             black: string,
             white: string,

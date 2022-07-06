@@ -12,7 +12,7 @@ export const Container = styled.div`
         flex-direction: column;
         align-items: center;
 
-        background: ${props => props.theme.colors.boxTwo};
+        background: ${props => props.theme.colors.backgroundTwo};
         border-radius: 0.25rem;
 
         position: absolute;
@@ -29,7 +29,7 @@ export const Container = styled.div`
             gap: 1rem;
             justify-content: center; 
 
-            color: ${props => props.theme.colors.textTwo};
+            color: ${props => props.theme.colors.textOne};
             
             svg {
                 font-size: 2rem;    
@@ -50,7 +50,7 @@ export const Container = styled.div`
             justify-content: center; 
             font-size: 1rem;
 
-            color: ${props => props.theme.colors.textTwo};
+            color: ${props => props.theme.colors.textOne};
 
             &:hover {
                 filter: brightness(0.8);

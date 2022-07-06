@@ -7,11 +7,11 @@ export const Container = styled.div`
     gap: 1rem;
     padding-top: 1rem; // 16px
     margin: 0 auto;
-    color: ${props => props.theme.colors.textOne};
+    color: ${props => props.theme.colors.textThree};
 
     svg {
         cursor: pointer;
-        color: ${props => props.theme.colors.textOne};
+        color: ${props => props.theme.colors.textThree};
     }
     
     a {

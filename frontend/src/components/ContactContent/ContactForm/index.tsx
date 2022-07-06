@@ -16,6 +16,7 @@ export function ContactForm(): JSX.Element {
         message: '',
     }
 
+    // TODO
     function handleSubmit(values: FormikValues) {
         console.log(values)
     }

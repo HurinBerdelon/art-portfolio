@@ -20,7 +20,7 @@ export const Container = styled.div`
         .effectLinks {
             position: relative;
             cursor: pointer;
-            color: ${props => props.theme.colors.textOne};
+            color: ${props => props.theme.colors.textThree};
             
             &::after {
                 content: '';
@@ -30,7 +30,7 @@ export const Container = styled.div`
                 position: absolute;
                 bottom: 0.5px;
                 left: 0px;
-                background: ${props => props.theme.colors.textOne};
+                background: ${props => props.theme.colors.textThree};
                 transition: 0.75s
             }
             

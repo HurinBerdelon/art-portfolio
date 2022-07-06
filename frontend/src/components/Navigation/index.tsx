@@ -19,7 +19,7 @@ export function Navigation(): JSX.Element {
                     <a>Contact</a>
                 </ActiveLink>
 
-                <ActiveLink href='#' activeClassName="active" className='effectLinks'>
+                <ActiveLink href='/about' activeClassName="active" className='effectLinks'>
                     <a>About</a>
                 </ActiveLink>
             </div>

@@ -163,7 +163,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
-                Delete Category
+                Delete Art
                 <ArrowRightAltIcon />
             </span>
         </Container>

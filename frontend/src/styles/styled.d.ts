@@ -13,6 +13,7 @@ declare module 'styled-components' {
 
             buttons: string,
             inputBG: string,
+            inputPlaceholder: string,
 
             textOne: string,
             textTwo: string,

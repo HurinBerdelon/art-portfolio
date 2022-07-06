@@ -10,6 +10,7 @@ export default {
 
         buttons: '#6D8B74',
         inputBG: '#FFFFFF',
+        inputPlaceholder: '#A1B3AC',
 
         textOne: '#2B332C',
         textTwo: '#FFF9F2',

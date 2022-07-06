@@ -25,7 +25,7 @@ export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Eleme
 
         <>
             <Head>
-                <title>{title} | HurinBerdelon</title>
+                <title>{title} | FeCardozo Workshop</title>
             </Head>
 
             <ThemeProvider theme={currentTheme}>

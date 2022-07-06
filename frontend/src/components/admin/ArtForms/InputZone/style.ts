@@ -12,14 +12,15 @@ export const Container = styled.div`
     input, textarea, select, .buttonSubmit {
         
         width: 320px;
-        /* border: solid 1px ${props => props.theme.colors.textOne}; */
-        border: none;
+        border: 1px solid transparent;
         border-radius: 0.25rem;
         text-align: center;
         font-size: 1.125rem;
+        color: ${props => props.theme.colors.textOne};
+        outline: none;
 
         &::placeholder {
-            color: ${props => props.theme.colors.gray};
+            color: ${props => props.theme.colors.inputPlaceholder};
         }
     }
 
@@ -38,6 +39,7 @@ export const Container = styled.div`
 
     input {
         background: ${props => props.theme.colors.inputBG};
+        color: ${props => props.theme.colors.textOne};
     }
 
     select {

@@ -15,7 +15,7 @@ export function Navigation(): JSX.Element {
 
                 <CategoryLinks />
 
-                <ActiveLink href='#' activeClassName="active" className='effectLinks'>
+                <ActiveLink href='/contact' activeClassName="active" className='effectLinks'>
                     <a>Contact</a>
                 </ActiveLink>
 

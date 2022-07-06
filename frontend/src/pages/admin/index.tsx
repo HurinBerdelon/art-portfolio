@@ -19,7 +19,7 @@ export default function Admin(): JSX.Element {
     return (
         <>
             <Head>
-                <title>Admin | HurinBerdelon</title>
+                <title>Admin | FeCardozo Workshop</title>
             </Head>
 
             <ToastContainer />

@@ -50,7 +50,7 @@ export default function ChangePassword(): JSX.Element {
     return (
         <>
             <Head>
-                <title>Change Password | HurinBerdelon</title>
+                <title>Change Password | FeCardozo Workshop</title>
             </Head>
             <Container>
                 <div className="box">

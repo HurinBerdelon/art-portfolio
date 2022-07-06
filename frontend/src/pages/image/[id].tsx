@@ -21,7 +21,7 @@ export default function SinglePicture({ art }: SinglePictureProps): JSX.Element 
     return (
         <>
             <Head>
-                <title>{`${art.title} | HurinBerdelon`}</title>
+                <title>{`${art.title} | FeCardozo Workshop`}</title>
             </Head>
 
             <ThemeProvider theme={currentTheme}>

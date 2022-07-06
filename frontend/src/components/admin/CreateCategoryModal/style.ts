@@ -50,7 +50,7 @@ export const Container = styled.div`
                 font-size: 1.125rem;
 
                 &::placeholder {
-                    color: ${props => props.theme.colors.gray};
+                    color: ${props => props.theme.colors.inputPlaceholder};
                 }
             }
         }

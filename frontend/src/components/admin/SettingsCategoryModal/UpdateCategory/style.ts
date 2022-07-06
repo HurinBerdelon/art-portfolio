@@ -39,6 +39,10 @@ export const Container = styled.div`
                 outline: none;
                 padding-left: 0.5rem;
                 font-size: 1.125rem;
+
+                &::placeholder {
+                    color: ${props => props.theme.colors.inputPlaceholder};
+                }
             }
         }
 

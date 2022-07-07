@@ -1,13 +1,12 @@
 import Head from "next/head";
-import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
-import { AdminLinks } from "../../../components/admin/AdminLinks";
-import { ListOfCategories } from "../../../components/admin/ListOfCategories";
-import { Header } from "../../../components/Header";
-import { useCurrentTheme } from "../../../hooks/useTheme";
+import { AboutConfigContent } from "../../../../components/admin/AboutConfigContent";
+import { AdminLinks } from "../../../../components/admin/AdminLinks";
+import { Header } from "../../../../components/Header";
+import { useCurrentTheme } from "../../../../hooks/useTheme";
 import { Container } from "./style";
 
-export default function Categories(): JSX.Element {
+export default function AboutConfig(): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
 
@@ -17,12 +16,11 @@ export default function Categories(): JSX.Element {
                 <title>Admin | FeCardozo Workshop</title>
             </Head>
 
-            <ToastContainer />
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
                     <AdminLinks />
-                    <ListOfCategories />
+                    <AboutConfigContent />
                 </Container>
             </ThemeProvider>
         </>

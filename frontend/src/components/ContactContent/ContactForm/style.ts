@@ -46,7 +46,8 @@ export const Container = styled.div`
         .buttonSubmit {
             background: ${props => props.theme.colors.buttons};
             color: ${props => props.theme.colors.textThree};
-            font-weight: 400;
+            font-weight: 500;
+            font-size: 1.25rem;
 
             &:hover {
                 filter: brightness(1.2);

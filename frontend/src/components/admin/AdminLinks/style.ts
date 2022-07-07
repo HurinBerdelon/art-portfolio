@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.nav`
 
-    margin-top: 0.5rem;
+    margin: 0.5rem 0;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -10,7 +10,7 @@ export const Container = styled.nav`
     a {
         background: ${props => props.theme.colors.gray};
         color: ${props => props.theme.colors.textThree};
-        width: 125px;
+        width: 100px;
         text-align: center;
         border-radius: 0.25rem;
 

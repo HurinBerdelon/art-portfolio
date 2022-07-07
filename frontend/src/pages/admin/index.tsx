@@ -9,8 +9,8 @@ import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/Header";
 import { ListOfArts } from "../../components/admin/ListOfArts";
 import { ArtProvider } from "../../hooks/useArts";
-import { ArtOrCategory } from "../../components/admin/ArtOrCategory";
 import { useCurrentTheme } from "../../hooks/useTheme";
+import { AdminLinks } from "../../components/admin/AdminLinks";
 
 export default function Admin(): JSX.Element {
 
@@ -27,7 +27,7 @@ export default function Admin(): JSX.Element {
                 <ArtProvider>
                     <Container>
                         <Header />
-                        <ArtOrCategory />
+                        <AdminLinks />
                         <ListOfArts />
                     </Container>
                 </ArtProvider>

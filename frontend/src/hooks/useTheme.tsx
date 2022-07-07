@@ -18,6 +18,8 @@ export function CurrentThemeProvider({ children }: ThemeProviderProps): JSX.Elem
 
     const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(light)
 
+    // TODO: Persist theme on LocalStorage
+
     function toggleCurrentTheme() {
         if (currentTheme.title === 'dark') setCurrentTheme(light)
         if (currentTheme.title === 'light') setCurrentTheme(dark)

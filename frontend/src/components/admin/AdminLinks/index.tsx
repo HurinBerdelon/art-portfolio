@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Container } from "./style";
 
-export function ArtOrCategory(): JSX.Element {
+export function AdminLinks(): JSX.Element {
 
     const { asPath } = useRouter()
 
@@ -18,6 +18,12 @@ export function ArtOrCategory(): JSX.Element {
                 href='/admin/categories'
             >
                 <a className={asPath === '/admin/categories' ? 'active' : ''}>Categories</a>
+            </Link>
+
+            <Link
+                href='/admin/configs/about'
+            >
+                <a className={asPath === '/admin/configs/about' ? 'active' : ''}>About</a>
             </Link>
         </Container>
     )

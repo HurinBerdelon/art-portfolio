@@ -4,7 +4,7 @@ import { Form, Formik, FormikValues } from "formik";
 import { useEffect, useState } from "react";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useArts } from "../../../../hooks/useArts";
-import { ArtSchema, updateArtYupSchema } from "../../../../schemas/Art";
+import { ArtSchema, saveArtYupSchema, updateArtYupSchema } from "../../../../schemas/Art";
 import { revalidateSSG } from "../../../../services/revalidate";
 import { toastError, toastSuccess } from "../../../../services/toastProvider";
 import { DropImage } from "../../ArtForms/DropImage";
@@ -72,8 +72,12 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     const [updateArtImage] = useMutation(UPDATE_ART_IMAGE)
     const [preview, setPreview] = useState<string>()
 
-    useEffect(() => {
+    function createPreview() {
         setPreview(art.image)
+    }
+
+    useEffect(() => {
+        createPreview()
     }, [art, onRequestClose])
 
     const handleSubmitForm = (values: FormikValues) => {
@@ -141,7 +145,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
             <Formik
                 initialValues={initialValues}
                 onSubmit={values => handleSubmitForm(values)}
-                validationSchema={updateArtYupSchema}
+                validationSchema={preview ? updateArtYupSchema : saveArtYupSchema}
             >
                 {({ errors, setFieldValue }) => (
                     <Form>
@@ -150,6 +154,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                             setFieldValue={setFieldValue}
                             preview={preview}
                             setPreview={setPreview}
+                            createPreview={createPreview}
                         />
                         <InputZone
                             initialValues={initialValues}

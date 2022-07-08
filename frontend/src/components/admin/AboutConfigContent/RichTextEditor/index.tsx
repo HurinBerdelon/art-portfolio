@@ -2,32 +2,21 @@ import { ContentState, convertFromHTML, convertToRaw, Editor, EditorState, RichU
 import { useEffect, useState } from "react";
 import draftToHtml from "draftjs-to-html";
 import { Container } from "./style";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import BLOCK_TYPES from '../../../../config/richText/blockTypes'
+import INLINE_STYLES from '../../../../config/richText/inlineTypes'
 
 import ReactHtmlParser from 'react-html-parser'
 
 interface RichTextEditorProps {
     prevContent: string
+    setHtmlContent(htmlContent: string): void
 }
 
-const BLOCK_TYPES = [
-    { label: "title", style: "header-two" },
-    { label: "subtitle", style: "header-three" },
-    { label: "subsubtitle", style: "header-four" },
-    { label: "UL", style: "unordered-list-item" },
-    { label: "OL", style: "ordered-list-item" },
-]
-
-const INLINE_STYLES = [
-    { label: "B", style: "BOLD" },
-    { label: "I", style: "ITALIC" },
-    { label: "U", style: "UNDERLINE" },
-    { label: "Monospace", style: "CODE" }
-]
-
-export function RichTextEditor({ prevContent }: RichTextEditorProps): JSX.Element {
+export function RichTextEditor({ prevContent, setHtmlContent }: RichTextEditorProps): JSX.Element {
 
     const [editorState, setEditorState] = useState<EditorState>()
-    const [htmlContent, setHtmlContent] = useState('')
     const [editor, setEditor] = useState(false)
     const [activeStates, setActiveStates] = useState({
         "header-two": false,
@@ -76,18 +65,24 @@ export function RichTextEditor({ prevContent }: RichTextEditorProps): JSX.Elemen
             "header-four": false,
             "unordered-list-item": false,
             "ordered-list-item": false,
+            ...activeStates
         }
 
         function onClickButton(event) {
+
             event.preventDefault()
             onToggle(style)
             setActiveStates(prevActiveStates => {
-                if (isBlock) return { ...defaultActiveBlockStates, [label]: !prevActiveStates[label] }
-                return { ...prevActiveStates, [label]: !prevActiveStates[label] }
+                if (isBlock) return { ...defaultActiveBlockStates, [style]: !prevActiveStates[style] }
+                return { ...prevActiveStates, [style]: !prevActiveStates[style] }
             })
         }
         return (
-            <button className={activeStates[label] === true ? 'active' : ''} onMouseDown={onClickButton}>{label}</button>
+            <button className={activeStates[style] === true ? 'active' : ''} onMouseDown={onClickButton}>
+                {label === 'UL' && <FormatListBulletedIcon />}
+                {label === 'OL' && <FormatListNumberedIcon />}
+                {label !== 'UL' && label !== 'OL' && label}
+            </button>
         )
     }
 
@@ -147,9 +142,6 @@ export function RichTextEditor({ prevContent }: RichTextEditorProps): JSX.Elemen
                     editorState={editorState}
                     onChange={setEditorState}
                 />
-                <div className="buttonContainer">
-                    <button className="saveButton">Save</button>
-                </div>
             </div>
         </Container>
     )

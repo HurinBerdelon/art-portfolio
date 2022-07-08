@@ -2,9 +2,11 @@ import { createRef } from "react";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { Tooltip } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import UndoIcon from '@mui/icons-material/Undo';
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { Container } from "./style";
 import { FormikErrors } from "formik";
+import { create } from "domain";
 
 interface ErrorProps {
     title?: string;
@@ -17,13 +19,14 @@ interface ErrorProps {
 }
 
 interface DropImageProps {
-    setFieldValue(field: string, value: any): void
     errors: ErrorProps
     preview: string
     setPreview(preview: string): void
+    setFieldValue(field: string, value: any): void
+    createPreview?: () => void
 }
 
-export function DropImage({ errors, setFieldValue, preview, setPreview }: DropImageProps): JSX.Element {
+export function DropImage({ errors, setFieldValue, preview, setPreview, createPreview }: DropImageProps): JSX.Element {
 
     const dropzoneRef = createRef<DropzoneRef>()
 
@@ -68,9 +71,17 @@ export function DropImage({ errors, setFieldValue, preview, setPreview }: DropIm
                             {...getRootProps()}
                         >
                             < input {...getInputProps()} />
+                            {createPreview && <UndoIcon
+                                className="undoButton" onClick={(event) => {
+                                    // Recreate the preview
+                                    createPreview()
+                                    // prevent Input to be open
+                                    event.stopPropagation()
+                                }}
+                            />}
                             {isDragActive ?
                                 <p>Drop the file Here</p> :
-                                <p>Drag 'n Drop file here</p>}
+                                <p>Click or Drag 'n Drop file here</p>}
 
                             {errors.file && <div className="errorMessage">{String(errors.file)}</div>}
                         </div>

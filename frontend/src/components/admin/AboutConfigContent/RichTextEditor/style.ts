@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    margin: 1rem;
+    width: 320px;
     border: 1px solid ${props => props.theme.colors.backgroundTwo};
     border-radius: 0.25rem;
 
@@ -21,10 +21,21 @@ export const Container = styled.div`
             
             button {
                 min-width: 25px;
+                min-height: 28px;
                 padding: 0.25rem 0.5rem;
                 border-radius: 0.25rem;
+
                 background:  ${props => props.theme.colors.gray};
                 color:  ${props => props.theme.colors.textThree};
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 500;
+
+                svg {
+                    font-size: 1.5rem;
+                }
             }
 
             .active {
@@ -35,23 +46,9 @@ export const Container = styled.div`
 
     .editorContent {
         padding: .5rem;
+        min-height: 100px;
         background: ${props => props.theme.colors.inputBG};
         color: ${props => props.theme.colors.textOne};
         border-top: 1px solid ${props => props.theme.colors.backgroundTwo};
-
-        .buttonContainer {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-
-            .saveButton {
-                background: ${props => props.theme.colors.buttons};
-                color:  ${props => props.theme.colors.textThree};
-                font-weight: 500;
-                padding: 0.25rem 0.5rem;
-                border-radius: 0.25rem;
-            }
-        }
-
     }
 `

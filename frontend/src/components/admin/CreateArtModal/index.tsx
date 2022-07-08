@@ -55,10 +55,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
         setPreview('')
     }, [onRequestClose])
 
-
     const handleSubmitForm = (values: FormikValues) => {
-
-        console.log(values)
 
         function sortArtsByDate(newArt: ArtSchema) {
             const tempArts = [...arts]

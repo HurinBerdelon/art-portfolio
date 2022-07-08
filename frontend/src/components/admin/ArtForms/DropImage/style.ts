@@ -47,6 +47,7 @@ export const Container = styled.div`
         border: 1px dashed ${props => props.theme.colors.textOne};
         border-radius: 0.25rem;
         cursor: pointer;
+        position: relative;
 
         p {
             width: 320px;
@@ -61,6 +62,19 @@ export const Container = styled.div`
         &:hover {
             border: 1px dashed ${props => props.theme.colors.danger};
             color: ${props => props.theme.colors.danger};
+        }
+
+        .undoButton {
+            position: absolute;
+            z-index: 2;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            font-size: 2rem;
+            color: ${props => props.theme.colors.danger};
+
+            &:hover{
+                cursor: pointer;
+            }
         }
 
         .errorMessage {

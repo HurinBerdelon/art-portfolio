@@ -43,7 +43,6 @@ export class UserResolver {
         @Arg('username') username: string,
         @Arg('password') password: string
     ) {
-        console.log('hit here')
 
         const updateUserUseCase = container.resolve(UpdateUserUseCase)
 

@@ -13,14 +13,13 @@ export function ActiveLink({ activeClassName, className = '', children, ...props
     const { asPath } = useRouter()
 
     const classNameActive = asPath === props.href
-        ? activeClassName
-        : ''
+        ? `${activeClassName} ${className}`
+        : `${className}`
 
     return (
         <Link {...props}>
             {cloneElement(children, {
-                className,
-                classNameActive
+                className: classNameActive
             })}
         </Link>
     )

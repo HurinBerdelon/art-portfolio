@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { Container } from "./style";
 import { ActiveLink } from "../ActiveLink";
 import { useCategory } from "../../../hooks/useCategory";
+import { useRouter } from "next/router";
 
 
 export function CategoryLinks(): JSX.Element {
 
     const [isShowingCategories, setIsShowingCategories] = useState(false)
     const { categories } = useCategory()
+    const { asPath } = useRouter()
+
+    useEffect(() => {
+        const isAtCategoryPage = categories.find(category => category.title === asPath.split('/')[1])
+        if (isAtCategoryPage) setIsShowingCategories(true)
+    }, [])
 
     function toggleShowCategories() {
         setIsShowingCategories(!isShowingCategories)

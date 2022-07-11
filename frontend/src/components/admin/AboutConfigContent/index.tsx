@@ -1,39 +1,86 @@
 import { Container } from "./style";
 import "draft-js/dist/Draft.css";
-import { RichTextEditor } from "./RichTextEditor";
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useState } from "react";
-import { UpdateAboutYourself } from "./UpdateAboutYourself";
-import { UpdateAboutBusiness } from "./UpdateAboutBusiness";
+import { UpdateAbout } from "./UpdateAbout";
+import { useRouter } from "next/router";
+import { languages } from "../../../config/languages";
 
 export function AboutConfigContent(): JSX.Element {
 
-    const [isUpdateAboutYourselfOpen, setIsUpdateAboutYourselfOpen] = useState(false)
-    const [isUpdateAboutBusinessOpen, setIsUpdateAboutBusinessOpen] = useState(false)
+    const [isUpdateAboutOpen, setIsUpdateAboutModalOpen] = useState(false)
+    const [categoryOnUpdate, setCategoryOnUpdate] = useState<'yourself' | 'business'>()
+    const [idiomOnUpdate, setIdiomOnUpdate] = useState('')
+    const { locales } = useRouter()
 
     return (
         <Container>
             <h3 className="pageTitle">
-                In this page you can create and edit the texts that will be shown in portfolio about page.
+                About Page Content
             </h3>
+            <p className="pageDescription">
+                The about page can have two sections, one to talk about yourself and one to talk about your business.
+                Here they are separeted for this sections and for the idioms present on your portfolio.
+                The date that appears is the last update date, so you can know if a section is up to date.
+            </p>
 
-            <button onClick={() => setIsUpdateAboutYourselfOpen(true)}>
-                Open Yourself
-            </button>
-            <button onClick={() => setIsUpdateAboutBusinessOpen(true)}>
-                Open Business
-            </button>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        {locales.map(locale => (
+                            <th className='title' key={locale}>{languages[locale].flag}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>About Yourself</td>
+                        {locales.map(locale => (
+                            <td
+                                key={locale}
+                                className='settings'
+                            >
+                                11/07/2022
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setCategoryOnUpdate('yourself')
+                                        setIdiomOnUpdate(locale)
+                                        setIsUpdateAboutModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                        ))}
+                    </tr>
+                    <tr>
+                        <td>About Business</td>
+                        {locales.map(locale => (
+                            <td
+                                key={locale}
+                                className='settings'
+                            >
+                                12/07/2022
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setCategoryOnUpdate('business')
+                                        setIdiomOnUpdate(locale)
+                                        setIsUpdateAboutModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                        ))}
+                    </tr>
+                </tbody>
+            </table>
 
-            <UpdateAboutYourself
-                isOpen={isUpdateAboutYourselfOpen}
-                onRequestClose={() => setIsUpdateAboutYourselfOpen(false)}
-                prevAboutYourself={'<p>Talk about yourserf...</p>'}
+
+            <UpdateAbout
+                isOpen={isUpdateAboutOpen}
+                onRequestClose={() => setIsUpdateAboutModalOpen(false)}
+                prevContent={'<p>Talk about yourserf...</p>'}
+                category={categoryOnUpdate}
+                idiom={idiomOnUpdate}
             />
-            <UpdateAboutBusiness
-                isOpen={isUpdateAboutBusinessOpen}
-                onRequestClose={() => setIsUpdateAboutBusinessOpen(false)}
-                prevAboutBusiness={'<p>Talk about your products or services...</p>'}
-            />
-
         </Container>
     )
 }

@@ -73,7 +73,20 @@ export class PrismaTextContentRepository implements ITextContentRepository {
                 id
             },
             data: {
-                text: text
+                text
+            }
+        })
+        return textContent
+    }
+
+    async updateImage(id: string, imageUrl: string): Promise<TextContent> {
+
+        const textContent = await this.textContentRepository.update({
+            where: {
+                id
+            },
+            data: {
+                imageUrl
             }
         })
         return textContent

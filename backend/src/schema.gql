@@ -30,11 +30,14 @@ scalar DateTime
 
 type Mutation {
   createCategory(title: String!): Category!
+  createTextContent(file: Upload!, idiom: String!, page: String!, text: String!, type: String!): TextContent!
   createUser(password: String!, username: String!): User!
   saveArt(category: String!, description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Art!
   updateArt(category: String!, description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Art!
   updateArtImage(file: Upload!, id: String!): Art!
   updateCategory(id: String!, title: String!): Category!
+  updateTextContent(id: String!, text: String!): TextContent!
+  updateTextContentImage(file: Upload!, id: String!): TextContent!
   updateTranslation(categoryTitle: String!, id: String!, language: String!, title: String!): Translation!
   updateUser(id: String!, password: String!, username: String!): Boolean!
 }
@@ -45,8 +48,23 @@ type Query {
   artsByCategory(category: String!): [Art!]!
   deleteArt(id: String!): Boolean!
   deleteCategory(id: String!): Boolean!
+  deleteTextContent(id: String!): Boolean!
   getCategories: [Category!]!
+  getTextContentByType(type: String!): [TextContent!]!
+  getTextContents: [TextContent!]!
+  getTextContentsByPage(page: String!): [TextContent!]!
   getUser: [User!]!
+}
+
+type TextContent {
+  createdAt: DateTime!
+  id: ID!
+  idiom: String!
+  imageUrl: String!
+  page: String!
+  text: String!
+  type: String!
+  updatedAt: DateTime!
 }
 
 type Translation {

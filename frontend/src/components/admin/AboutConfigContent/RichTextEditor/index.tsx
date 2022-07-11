@@ -10,11 +10,11 @@ import INLINE_STYLES from '../../../../config/richText/inlineTypes'
 import ReactHtmlParser from 'react-html-parser'
 
 interface RichTextEditorProps {
-    prevContent: string
+    prevContent?: string
     setHtmlContent(htmlContent: string): void
 }
 
-export function RichTextEditor({ prevContent, setHtmlContent }: RichTextEditorProps): JSX.Element {
+export function RichTextEditor({ prevContent = '', setHtmlContent }: RichTextEditorProps): JSX.Element {
 
     const [editorState, setEditorState] = useState<EditorState>()
     const [editor, setEditor] = useState(false)

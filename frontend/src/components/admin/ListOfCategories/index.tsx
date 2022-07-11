@@ -63,13 +63,13 @@ export function ListOfCategories(): JSX.Element {
                                 }}
                                 />
                             </td>
-                            <td>{category.title}</td>
+                            <td>{capitalize(category.title)}</td>
                             {locales.map(locale => {
                                 const translation = category.Translations.find(item => item.language === locale)
                                 if (locale === 'en') return null
                                 if (!translation) return <td key={locale}></td>
                                 return (
-                                    <td key={translation.id}>{translation.title}</td>
+                                    <td key={translation.id}>{capitalize(translation.title)}</td>
                                 )
                             })}
                         </tr>

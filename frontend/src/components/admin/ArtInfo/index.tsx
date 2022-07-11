@@ -1,6 +1,6 @@
 import { Popover } from "@headlessui/react";
 import dayjs from "dayjs";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import InfoIcon from '@mui/icons-material/Info';
 import { ArtSchema } from "../../../schemas/Art";
 import { Container } from "./style";
 
@@ -13,7 +13,7 @@ export function ArtInfo({ art }: ArtInfoProps): JSX.Element {
         <Container>
             <Popover>
                 <Popover.Button>
-                    <AddCircleIcon />
+                    <InfoIcon />
                 </Popover.Button>
                 <Popover.Panel className='content'>
                     <h2>Title: <span>{art.title}</span></h2>

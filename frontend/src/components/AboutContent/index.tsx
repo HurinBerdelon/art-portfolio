@@ -7,6 +7,10 @@ export function AboutContent(): JSX.Element {
         <Container>
             <h1>About</h1>
 
+            <div className="imageContainer">
+                <img src="/images/logo.png" alt="" />
+            </div>
+
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis cumque eos dolore? Possimus, maxime
                 sapiente, provident tempora laborum dolorum autem dolore commodi aliquid fuga impedit natus eveniet nesciunt,
@@ -14,7 +18,7 @@ export function AboutContent(): JSX.Element {
             </p>
 
             <div className="imageContainer">
-                <img src="" alt="" />
+                <img src="/images/logo.png" alt="" />
             </div>
 
             <p>

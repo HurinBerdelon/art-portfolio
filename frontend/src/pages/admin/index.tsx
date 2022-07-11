@@ -45,6 +45,7 @@ interface UserProps {
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
+
     const session = await getSession({ req })
 
     if (!session) {

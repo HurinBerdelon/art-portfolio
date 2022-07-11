@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import * as yup from 'yup'
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { useTextContent } from "../../../../hooks/useTextContent";
-import { TextContentSchema } from "../../../../schemas/TextContent";
 import { revalidateSSG } from "../../../../services/revalidate";
 import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
@@ -13,113 +12,77 @@ import { DropImage } from "../../ArtForms/DropImage";
 import { RichTextEditor } from "../RichTextEditor";
 import { Container } from "./style";
 
-const UPDATE_TEXT_CONTENT = gql`
+const CREATE_TEXT_CONTENT = gql`
     mutation(
-        $id: String!,
-        $text: String!,
-        ) {
-            updateTextContent(
-                id: $id
-                text: $text, 
-            ){
-                id
-                page
-                type
-                text
-                idiom,
-                imageUrl
-                updatedAt
-            }
-    }`
-
-const UPDATE_TEXT_CONTENT_IMAGE = gql`
-    mutation(
-        $id: String!,
         $file: Upload!,
+        $text: String!,
+        $page: String!
+        $type: String!,
+        $idiom: String!,
         ) {
-            updateTextContentImage(
-                id: $id
-                file: $file, 
+            createTextContent(
+                file: $file,
+                text: $text, 
+                page: $page
+                type: $type, 
+                idiom: $idiom, 
             ){
                 id
                 page
                 type
                 text
-                idiom,
+                idiom
                 imageUrl
                 updatedAt
             }
     }`
 
-interface UpdateAboutProps {
+interface CreateAboutProps {
     isOpen: boolean
-    textContentOnUpdate: TextContentSchema
+    category: 'aboutYourself' | 'aboutBusiness'
+    idiom: string
     onRequestClose(): void
 }
 
-export function UpdateAbout({
+export function CreateAbout({
     isOpen,
-    textContentOnUpdate,
+    category,
+    idiom,
     onRequestClose
-}: UpdateAboutProps): JSX.Element {
+}: CreateAboutProps): JSX.Element {
 
     const [htmlContent, setHtmlContent] = useState('')
     const [preview, setPreview] = useState('')
-    const [updateTextContent] = useMutation(UPDATE_TEXT_CONTENT)
-    const [updateTextContentImage] = useMutation(UPDATE_TEXT_CONTENT_IMAGE)
+    const [createTextContent] = useMutation(CREATE_TEXT_CONTENT)
     const { setTextContents, textContents } = useTextContent()
 
-    function createPreview() {
-        setPreview(textContentOnUpdate.imageUrl)
-    }
-
     useEffect(() => {
-        if (textContentOnUpdate) createPreview()
-    }, [textContentOnUpdate, onRequestClose])
+        setPreview('')
+    }, [onRequestClose])
 
-    if (!textContentOnUpdate) {
-        return null
+    function createPreview() {
     }
 
-    function updateText(values: FormikValues) {
-        updateTextContent({
+    function createText(values: FormikValues) {
+        createTextContent({
             variables: {
-                id: textContentOnUpdate.id,
-                text: htmlContent
+                file: values.file,
+                text: htmlContent,
+                type: category,
+                page: 'about',
+                idiom
             }
         }).then(response => {
-            const index = textContents.findIndex(item => item.id === textContentOnUpdate.id)
-            const tempTextContents = [...textContents]
-
-            tempTextContents.splice(index, 1, response.data.updateTextContent)
-
-            setTextContents(tempTextContents)
-            toastSuccess(`Text was updated!`)
-        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
-
-
-        updateTextContentImage({
-            variables: {
-                id: textContentOnUpdate.id,
-                file: values.file
-            }
-        }).then(response => {
-            const index = textContents.findIndex(item => item.id === textContentOnUpdate.id)
-            const tempTextContents = [...textContents]
-
-            tempTextContents.splice(index, 1, response.data.updateTextContentImage)
-
-            setTextContents(tempTextContents)
-            toastSuccess(`Image was updated!`)
+            setTextContents([...textContents, response.data.createTextContent])
+            toastSuccess('Text Saved!')
             revalidateSSG({ path: 'about' })
             onRequestClose()
-        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }).catch((error) => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }
 
     function handleSubmitForm(values: FormikValues) {
 
-        console.log('updating', values, htmlContent)
-        updateText(values)
+        createText(values)
     }
 
     const imageSchema = yup.object().shape({
@@ -149,7 +112,7 @@ export function UpdateAbout({
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
-                    <h2>Update your <span> {textContentOnUpdate.type}</span> section</h2>
+                    <h2>Create your <span> {category}</span> section</h2>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}
@@ -162,9 +125,9 @@ export function UpdateAbout({
                                     preview={preview}
                                     setFieldValue={setFieldValue}
                                     setPreview={setPreview}
-                                    createPreview={createPreview}
+                                    createPreview={preview ? createPreview : null}
                                 />
-                                <RichTextEditor prevContent={textContentOnUpdate.text} setHtmlContent={setHtmlContent} />
+                                <RichTextEditor setHtmlContent={setHtmlContent} />
                                 <button type='submit' className="buttonSubmit">
                                     Save
                                 </button>

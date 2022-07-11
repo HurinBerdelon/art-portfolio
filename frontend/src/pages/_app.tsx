@@ -6,6 +6,7 @@ import { GlobalStyle } from '../styles/global'
 import { apolloClient } from '../services/apolloClient'
 import { SessionProvider } from 'next-auth/react'
 import { CurrentThemeProvider } from '../hooks/useTheme'
+import { TextContentProvider } from '../hooks/useTextContent'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -14,8 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<CurrentThemeProvider>
 				<SessionProvider>
 					<CategoryProvider>
-						<GlobalStyle />
-						<Component {...pageProps} />
+						<TextContentProvider>
+							<GlobalStyle />
+							<Component {...pageProps} />
+						</TextContentProvider>
 					</CategoryProvider>
 				</SessionProvider>
 			</CurrentThemeProvider>

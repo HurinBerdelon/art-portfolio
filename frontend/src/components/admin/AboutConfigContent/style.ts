@@ -4,13 +4,31 @@ export const Container = styled.div`
 
     .pageTitle {
         color: ${props => props.theme.colors.textOne};
-        margin-top: 1rem;
+        margin: 1rem 0;
         text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        button {
+            display: flex;
+        }
     }
 
     .pageDescription {
-        padding: 1rem 3rem;
+        position: absolute;
+        z-index: 1;
+        background: ${props => props.theme.colors.backgroundTwo};
+        
+        min-width: 180px;
+        max-width: 280px;
+        right: 1rem;
+        border-radius: 0.25rem;
+        
+        padding: 1rem 2rem;
         font-size: 0.8rem;
+        font-weight: 400;
         text-align: justify;
     }
 

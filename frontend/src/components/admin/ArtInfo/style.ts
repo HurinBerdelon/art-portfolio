@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
+    button {
+        display: flex;
+    }
+
     .content {
         position: absolute;
         z-index: 1;

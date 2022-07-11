@@ -8,13 +8,21 @@ import { DropImage } from "../../ArtForms/DropImage";
 import { RichTextEditor } from "../RichTextEditor";
 import { Container } from "./style";
 
-interface UpdateAboutBusinessProps {
+interface UpdateAboutProps {
     isOpen: boolean
-    prevAboutBusiness: string
+    prevContent: string
+    category: 'yourself' | 'business'
+    idiom: string
     onRequestClose(): void
 }
 
-export function UpdateAboutBusiness({ isOpen, prevAboutBusiness, onRequestClose }: UpdateAboutBusinessProps): JSX.Element {
+export function UpdateAbout({
+    isOpen,
+    prevContent,
+    category,
+    idiom,
+    onRequestClose
+}: UpdateAboutProps): JSX.Element {
 
     const [htmlContent, setHtmlContent] = useState('')
     const [preview, setPreview] = useState('')
@@ -24,13 +32,14 @@ export function UpdateAboutBusiness({ isOpen, prevAboutBusiness, onRequestClose 
     }, [onRequestClose])
 
     function createPreview() {
-
+        // TODO
+        // save htmlContent at database
+        // revalidateSSG for aboutPage
     }
 
     function handleSubmitForm(values: FormikValues) {
 
         console.log(values)
-        console.log(htmlContent)
     }
 
     const imageSchema = yup.object().shape({
@@ -60,7 +69,7 @@ export function UpdateAboutBusiness({ isOpen, prevAboutBusiness, onRequestClose 
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
-                    <h2>Create your <span>about products</span> section</h2>
+                    <h2>Create your <span>about {category}</span> section</h2>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}
@@ -75,10 +84,8 @@ export function UpdateAboutBusiness({ isOpen, prevAboutBusiness, onRequestClose 
                                     setPreview={setPreview}
                                 // createPreview={preview ? createPreview : null}
                                 />
-                                <RichTextEditor
-                                    prevContent={prevAboutBusiness}
-                                    setHtmlContent={setHtmlContent} />
-                                <button className="buttonSubmit" type='submit'>
+                                <RichTextEditor prevContent={prevContent} setHtmlContent={setHtmlContent} />
+                                <button type='submit' className="buttonSubmit">
                                     Save
                                 </button>
                             </Form>

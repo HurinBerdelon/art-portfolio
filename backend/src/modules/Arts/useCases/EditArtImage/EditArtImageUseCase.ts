@@ -1,6 +1,6 @@
+import { Art } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { IStorageProvider } from '../../../../shared/providers/storageProvider/IStorageProvider';
-import { Art } from '../../models/Art';
 import { IArtsRepository } from '../../repositories/IArtsRepository';
 
 @injectable()
@@ -12,21 +12,23 @@ export class EditArtImageUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ id, image }: Art): Promise<void> {
+    async execute(id: string, image: string): Promise<Art> {
 
-        const art = await this.artsRepository.getArtById(id)
+        const artAlreadyExists = await this.artsRepository.getArtById(id)
 
-        if (!art) {
+        if (!artAlreadyExists) {
             throw new Error('Art not Found!')
         }
 
-        const oldImageSplit = art.image.split('/')
+        const oldImageSplit = artAlreadyExists.image.split('/')
         const oldFilename = oldImageSplit[oldImageSplit.length - 1]
 
-        await this.storageProvider.delete('pictures', oldFilename)
+        await this.storageProvider.delete('arts', oldFilename)
 
-        const imageURL = await this.storageProvider.save('pictures', image)
+        const imageURL = await this.storageProvider.save('arts', image)
 
-        await this.artsRepository.updateArtImage(id, imageURL)
+        const art = await this.artsRepository.updateArtImage(id, imageURL)
+
+        return art
     }
 }

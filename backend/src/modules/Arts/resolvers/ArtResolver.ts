@@ -48,7 +48,7 @@ export class ArtResolver {
         return art
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Art)
     async saveArt(
         @Arg('title') title: string,
         @Arg('category') category: string,
@@ -58,7 +58,6 @@ export class ArtResolver {
         @Arg('productionDate') productionDate: Date,
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
     ) {
-
         const hashFilename = getHashFilename(filename)
 
         const imagePath = `${tmpFolder}/${hashFilename}`
@@ -72,7 +71,7 @@ export class ArtResolver {
 
         const createArtUseCase = container.resolve(CreateArtUseCase)
 
-        await createArtUseCase.execute({
+        const art = await createArtUseCase.execute({
             dimension,
             categoryTitle: category,
             image: hashFilename,
@@ -82,10 +81,10 @@ export class ArtResolver {
             productionDate
         })
 
-        return true
+        return art
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Art)
     async updateArt(
         @Arg('id') id: string,
         @Arg('title') title: string,
@@ -98,7 +97,7 @@ export class ArtResolver {
 
         const editArtUseCase = container.resolve(EditArtUseCase)
 
-        await editArtUseCase.execute({
+        const art = await editArtUseCase.execute({
             id,
             title,
             uniqueCode,
@@ -108,10 +107,10 @@ export class ArtResolver {
             productionDate
         })
 
-        return true
+        return art
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Art)
     async updateArtImage(
         @Arg('id') id: string,
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
@@ -130,12 +129,9 @@ export class ArtResolver {
 
         const editArtImageUseCase = container.resolve(EditArtImageUseCase)
 
-        await editArtImageUseCase.execute({
-            id,
-            image: hashFilename,
-        })
+        const art = await editArtImageUseCase.execute(id, hashFilename)
 
-        return true
+        return art
     }
 
     @Query(() => Boolean)

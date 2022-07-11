@@ -31,9 +31,9 @@ scalar DateTime
 type Mutation {
   createCategory(title: String!): Category!
   createUser(password: String!, username: String!): User!
-  saveArt(category: String!, description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
-  updateArt(category: String!, description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
-  updateArtImage(file: Upload!, id: String!): Boolean!
+  saveArt(category: String!, description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Art!
+  updateArt(category: String!, description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Art!
+  updateArtImage(file: Upload!, id: String!): Art!
   updateCategory(id: String!, title: String!): Category!
   updateTranslation(categoryTitle: String!, id: String!, language: String!, title: String!): Translation!
   updateUser(id: String!, password: String!, username: String!): Boolean!
@@ -63,6 +63,7 @@ scalar Upload
 type User {
   createdAt: DateTime!
   id: ID!
+  isNewUser: Boolean!
   password: String!
   updatedAt: DateTime!
   username: String!

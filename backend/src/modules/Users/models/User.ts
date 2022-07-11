@@ -13,6 +13,9 @@ export class User {
     password: String
 
     @Field()
+    isNewUser: Boolean
+
+    @Field()
     createdAt: Date
 
     @Field()

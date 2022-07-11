@@ -3,6 +3,8 @@ import { IArtsRepository } from '../modules/Arts/repositories/IArtsRepository'
 import { PrismaArtRepository } from '../modules/Arts/repositories/Implementations/PrismaArtRepository'
 import { ICategoryRepository } from '../modules/Categories/repositories/ICategoryRepository'
 import { PrismaCategoryRepository } from '../modules/Categories/repositories/Implementations/PrismaCategoryRepository'
+import { PrismaTextContentRepository } from '../modules/TextContent/repositories/Implementations/PrismaTextContentRepository'
+import { ITextContentRepository } from '../modules/TextContent/repositories/ITextContentRepository'
 import { PrismaTranslationRepository } from '../modules/Translations/repositories/Implementations/PrismaTranslationsRepository'
 import { ITranslationRepository } from '../modules/Translations/repositories/ITranslationRepository'
 import { PrismaUserRepository } from '../modules/Users/repositories/Implementations/PrismaUserRepository'
@@ -28,6 +30,11 @@ container.registerSingleton<ITranslationRepository>(
 container.registerSingleton<IUserRepository>(
     'UsersRepository',
     PrismaUserRepository
+)
+
+container.registerSingleton<ITextContentRepository>(
+    'TextContentsRepository',
+    PrismaTextContentRepository
 )
 
 const diskStorage = {

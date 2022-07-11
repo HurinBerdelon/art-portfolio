@@ -6,8 +6,8 @@ export class PrismaArtRepository implements IArtsRepository {
 
     private artRepository = prisma.art
 
-    async saveArt({ title, categoryTitle, description, image, uniqueCode, dimension, productionDate }: createArtDTO): Promise<void> {
-        await this.artRepository.create({
+    async saveArt({ title, categoryTitle, description, image, uniqueCode, dimension, productionDate }: createArtDTO): Promise<Art> {
+        return await this.artRepository.create({
             data: {
                 title,
                 categoryTitle,
@@ -63,8 +63,8 @@ export class PrismaArtRepository implements IArtsRepository {
         return arts
     }
 
-    async updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<void> {
-        await this.artRepository.update({
+    async updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<Art> {
+        return await this.artRepository.update({
             where: {
                 id
             },
@@ -79,8 +79,8 @@ export class PrismaArtRepository implements IArtsRepository {
         })
     }
 
-    async updateArtImage(id: string, image: string): Promise<void> {
-        await this.artRepository.update({
+    async updateArtImage(id: string, image: string): Promise<Art> {
+        return await this.artRepository.update({
             where: {
                 id
             },

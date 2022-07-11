@@ -13,6 +13,7 @@ import { tmpFolder } from './config/upload';
 import { CategoryResolver } from './modules/Categories/resolvers/CategoryResolver';
 import { UserResolver } from './modules/Users/resolvers/UserResolver';
 import { TranslationResolver } from './modules/Translations/resolvers/TranslationResolver';
+import { TextContentResolver } from './modules/TextContent/resolvers/TextContentResolver';
 
 export async function app() {
 
@@ -22,6 +23,7 @@ export async function app() {
 			CategoryResolver,
 			TranslationResolver,
 			UserResolver,
+			TextContentResolver
 		],
 		emitSchemaFile: path.resolve(__dirname, 'schema.gql')
 	})

@@ -23,6 +23,7 @@ export const Container = styled.div`
         margin-top: 1rem;
         text-align: center;
         color: ${props => props.theme.colors.textOne};
+        position: relative;
 
         span {
             font-style: italic;

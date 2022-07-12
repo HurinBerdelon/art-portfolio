@@ -10,6 +10,7 @@ import { revalidateSSG } from "../../../../services/revalidate";
 import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
 import { DropImage } from "../../ArtForms/DropImage";
+import { AboutTips } from "../AboutTips";
 import { RichTextEditor } from "../RichTextEditor";
 import { Container } from "./style";
 
@@ -149,7 +150,10 @@ export function UpdateAbout({
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
-                    <h2>Update your <span> {textContentOnUpdate.type}</span> section</h2>
+                    <h2>
+                        Update your <span> {textContentOnUpdate.type}</span> section
+                        <AboutTips category={textContentOnUpdate.type} />
+                    </h2>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}

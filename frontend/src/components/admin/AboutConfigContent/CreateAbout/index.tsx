@@ -9,6 +9,7 @@ import { revalidateSSG } from "../../../../services/revalidate";
 import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
 import { DropImage } from "../../ArtForms/DropImage";
+import { AboutTips } from "../AboutTips";
 import { RichTextEditor } from "../RichTextEditor";
 import { Container } from "./style";
 
@@ -112,7 +113,10 @@ export function CreateAbout({
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
-                    <h2>Create your <span> {category}</span> section</h2>
+                    <h2>
+                        Create your <span> {category}</span> section
+                        <AboutTips category={category} />
+                    </h2>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}

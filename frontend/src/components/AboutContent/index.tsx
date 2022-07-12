@@ -1,31 +1,56 @@
+import { useRouter } from "next/router";
+import ReactHtmlParser from 'react-html-parser'
+import { TextContentSchema } from "../../schemas/TextContent";
 import { Container } from "./style";
 
-export function AboutContent(): JSX.Element {
+interface AboutContentProps {
+    aboutContent: TextContentSchema[]
+}
+
+export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
+
+    const { locale } = useRouter()
+
+    const aboutYourself = {
+        image: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.imageUrl,
+        text: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.text
+    }
+
+    const aboutBusiness = {
+        image: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.imageUrl,
+        text: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.text
+    }
 
     // TODO
     return (
         <Container>
             <h1>About</h1>
 
-            <div className="imageContainer">
-                <img src="/images/logo.png" alt="" />
-            </div>
+            {aboutYourself.text
+                ? (<>
+                    <div className="imageContainer">
+                        <img src={aboutYourself.image} alt='About Yourself' />
+                    </div>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis cumque eos dolore? Possimus, maxime
-                sapiente, provident tempora laborum dolorum autem dolore commodi aliquid fuga impedit natus eveniet nesciunt,
-                earum culpa!
-            </p>
+                    {ReactHtmlParser(aboutYourself.text)}
+                </>)
+                : (
+                    <p>Section under construction</p>
+                )
+            }
 
-            <div className="imageContainer">
-                <img src="/images/logo.png" alt="" />
-            </div>
+            {aboutBusiness.text
+                ? (<>
+                    <div className="imageContainer">
+                        <img src={aboutBusiness.image} alt="About Products or Services" />
+                    </div>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis cumque eos dolore? Possimus, maxime
-                sapiente, provident tempora laborum dolorum autem dolore commodi aliquid fuga impedit natus eveniet nesciunt,
-                earum culpa!
-            </p>
+                    {ReactHtmlParser(aboutBusiness.text)}
+                </>)
+                : (
+                    <p>Section under construction</p>
+                )
+            }
         </Container>
     )
 }

@@ -10,6 +10,7 @@ import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
 import { DropImage } from "../../ArtForms/DropImage";
 import { AboutTips } from "../AboutTips";
+import { ImageFormat } from "../ImageFormat";
 import { RichTextEditor } from "../RichTextEditor";
 import { Container } from "./style";
 
@@ -61,9 +62,6 @@ export function CreateAbout({
         setPreview('')
     }, [onRequestClose])
 
-    function createPreview() {
-    }
-
     function createText(values: FormikValues) {
         createTextContent({
             variables: {
@@ -71,6 +69,7 @@ export function CreateAbout({
                 text: htmlContent,
                 type: category,
                 page: 'about',
+                imageFormat: values.imageFormat,
                 idiom
             }
         }).then(response => {
@@ -97,7 +96,8 @@ export function CreateAbout({
     })
 
     const initialValues = {
-        file: ''
+        file: '',
+        imageFormat: 'square'
     }
 
     return (
@@ -122,15 +122,17 @@ export function CreateAbout({
                         onSubmit={values => handleSubmitForm(values)}
                         validationSchema={imageSchema}
                     >
-                        {({ errors, setFieldValue }) => (
+                        {({ errors, setFieldValue, values }) => (
                             <Form>
                                 <DropImage
                                     errors={errors}
                                     preview={preview}
                                     setFieldValue={setFieldValue}
                                     setPreview={setPreview}
-                                    createPreview={preview ? createPreview : null}
+                                    previewClassName={values.imageFormat}
+                                    createPreview={null}
                                 />
+                                <ImageFormat setFieldValue={setFieldValue} />
                                 <RichTextEditor setHtmlContent={setHtmlContent} />
                                 <button type='submit' className="buttonSubmit">
                                     Save

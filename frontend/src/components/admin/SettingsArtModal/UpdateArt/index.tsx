@@ -78,6 +78,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
 
     useEffect(() => {
         createPreview()
+
     }, [art, onRequestClose])
 
     const handleSubmitForm = (values: FormikValues) => {
@@ -154,7 +155,10 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                             setFieldValue={setFieldValue}
                             preview={preview}
                             setPreview={setPreview}
-                            createPreview={createPreview}
+                            createPreview={() => {
+                                setFieldValue('file', '')
+                                createPreview()
+                            }}
                         />
                         <InputZone
                             initialValues={initialValues}

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 import { AboutConfigContent } from "../../../../components/admin/AboutConfigContent";
 import { AdminLinks } from "../../../../components/admin/AdminLinks";
@@ -16,6 +17,7 @@ export default function AboutConfig(): JSX.Element {
                 <title>Admin | FeCardozo Workshop</title>
             </Head>
 
+            <ToastContainer />
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />

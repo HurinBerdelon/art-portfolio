@@ -25,8 +25,6 @@ export function AboutConfigContent(): JSX.Element {
     const [textContentOnUpdate, setTextContentOnUpdate] = useState<TextContentSchema>()
     const { locales } = useRouter()
 
-    console.log(textContents)
-
     useEffect(() => {
         apolloClient.query({
             query: gql`

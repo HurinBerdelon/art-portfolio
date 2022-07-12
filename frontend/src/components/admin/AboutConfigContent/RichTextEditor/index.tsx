@@ -7,8 +7,6 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import BLOCK_TYPES from '../../../../config/richText/blockTypes'
 import INLINE_STYLES from '../../../../config/richText/inlineTypes'
 
-import ReactHtmlParser from 'react-html-parser'
-
 interface RichTextEditorProps {
     prevContent?: string
     setHtmlContent(htmlContent: string): void

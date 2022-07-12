@@ -11,6 +11,7 @@ import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
 import { DropImage } from "../../ArtForms/DropImage";
 import { AboutTips } from "../AboutTips";
+import { ImageFormat } from "../ImageFormat";
 import { RichTextEditor } from "../RichTextEditor";
 import { Container } from "./style";
 
@@ -83,10 +84,30 @@ export function UpdateAbout({
     }
 
     function updateText(values: FormikValues) {
+
+        if (values.file) {
+            updateTextContentImage({
+                variables: {
+                    id: textContentOnUpdate.id,
+                    file: values.file
+                }
+            }).then(response => {
+                const index = textContents.findIndex(item => item.id === textContentOnUpdate.id)
+                const tempTextContents = [...textContents]
+
+                tempTextContents.splice(index, 1, response.data.updateTextContentImage)
+
+                setTextContents(tempTextContents)
+                toastSuccess(`Image was updated!`)
+                revalidateSSG({ path: 'about' })
+            }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }
+
         updateTextContent({
             variables: {
                 id: textContentOnUpdate.id,
-                text: htmlContent
+                text: htmlContent,
+                imageFormat: values.imageFormat
             }
         }).then(response => {
             const index = textContents.findIndex(item => item.id === textContentOnUpdate.id)
@@ -96,35 +117,17 @@ export function UpdateAbout({
 
             setTextContents(tempTextContents)
             toastSuccess(`Text was updated!`)
-        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
-
-
-        updateTextContentImage({
-            variables: {
-                id: textContentOnUpdate.id,
-                file: values.file
-            }
-        }).then(response => {
-            const index = textContents.findIndex(item => item.id === textContentOnUpdate.id)
-            const tempTextContents = [...textContents]
-
-            tempTextContents.splice(index, 1, response.data.updateTextContentImage)
-
-            setTextContents(tempTextContents)
-            toastSuccess(`Image was updated!`)
-            revalidateSSG({ path: 'about' })
             onRequestClose()
         }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }
 
     function handleSubmitForm(values: FormikValues) {
 
-        console.log('updating', values, htmlContent)
         updateText(values)
     }
 
     const imageSchema = yup.object().shape({
-        file: yup.mixed().required('Image is Required').test('fileFormat', 'Image Only', value => {
+        file: yup.mixed().test('fileFormat', 'Image Only', value => {
             if (value) {
                 return availableImageTypes.includes(value.type)
             } else {
@@ -134,7 +137,8 @@ export function UpdateAbout({
     })
 
     const initialValues = {
-        file: ''
+        file: '',
+        imageFormat: 'square'
     }
 
     return (
@@ -157,17 +161,22 @@ export function UpdateAbout({
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}
-                        validationSchema={imageSchema}
+                        validationSchema={preview ? null : imageSchema}
                     >
-                        {({ errors, setFieldValue }) => (
+                        {({ errors, setFieldValue, values }) => (
                             <Form>
                                 <DropImage
                                     errors={errors}
                                     preview={preview}
                                     setFieldValue={setFieldValue}
                                     setPreview={setPreview}
-                                    createPreview={createPreview}
+                                    previewClassName={values.imageFormat}
+                                    createPreview={() => {
+                                        setFieldValue('file', '')
+                                        createPreview()
+                                    }}
                                 />
+                                <ImageFormat setFieldValue={setFieldValue} />
                                 <RichTextEditor prevContent={textContentOnUpdate.text} setHtmlContent={setHtmlContent} />
                                 <button type='submit' className="buttonSubmit">
                                     Save

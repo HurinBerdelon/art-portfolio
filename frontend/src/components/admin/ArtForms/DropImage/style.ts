@@ -40,6 +40,41 @@ export const Container = styled.div`
         }
     }
 
+    .previewZoneCircle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px dashed ${props => props.theme.colors.textOne};
+        border-radius: 50%;
+        height: 250px;
+        width: 250px;
+        position: relative;
+        
+        
+        .preview {
+            padding: 0.25rem;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            opacity: 0.75;
+        }
+
+        .removeButton {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            font-size: 2rem;
+            color: ${props => props.theme.colors.danger};
+            
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
     .dragZone {
         display: flex;
         flex-direction: column;

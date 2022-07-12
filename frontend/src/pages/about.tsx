@@ -1,11 +1,19 @@
+import { gql } from "@apollo/client";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { AboutContent } from "../components/AboutContent";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { useCurrentTheme } from "../hooks/useTheme";
+import { TextContentSchema } from "../schemas/TextContent";
+import { apolloClient } from "../services/apolloClient";
 
-export default function About(): JSX.Element {
+interface AboutProps {
+    aboutContent: TextContentSchema[]
+}
+
+export default function About({ aboutContent }: AboutProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
 
@@ -17,7 +25,7 @@ export default function About(): JSX.Element {
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
-                <AboutContent />
+                <AboutContent aboutContent={aboutContent} />
                 <Footer />
             </ThemeProvider>
         </>
@@ -25,3 +33,41 @@ export default function About(): JSX.Element {
 }
 
 // TODO
+export const getStaticProps: GetStaticProps = async () => {
+
+    try {
+        const { data } = await apolloClient.query({
+            query: gql`
+                query GetTextContentsByPage {
+                    getTextContentsByPage(page: "about") {
+                        id
+                        type
+                        text
+                        idiom
+                        imageUrl
+                        updatedAt
+                    }
+                }
+            `
+        })
+
+        return {
+            props: {
+                aboutContent: data.getTextContentsByPage
+            },
+            revalidate: 60 * 60 * 24 // = 24 hours
+        }
+    } catch (error) {
+
+        return {
+            props: {
+                arts: [],
+                error: error.message
+            }
+        }
+    }
+
+    return {
+        props: {}
+    }
+}

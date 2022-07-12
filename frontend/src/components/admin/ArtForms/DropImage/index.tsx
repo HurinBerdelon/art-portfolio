@@ -21,12 +21,15 @@ interface ErrorProps {
 interface DropImageProps {
     errors: ErrorProps
     preview: string
+    previewClassName?: string
     setPreview(preview: string): void
     setFieldValue(field: string, value: any): void
     createPreview?: () => void
 }
 
-export function DropImage({ errors, setFieldValue, preview, setPreview, createPreview }: DropImageProps): JSX.Element {
+export function DropImage({
+    errors, setFieldValue, preview, previewClassName = 'square', setPreview, createPreview
+}: DropImageProps): JSX.Element {
 
     const dropzoneRef = createRef<DropzoneRef>()
 
@@ -52,7 +55,7 @@ export function DropImage({ errors, setFieldValue, preview, setPreview, createPr
                 {({ getRootProps, getInputProps, isDragActive }) => (
                     preview
                         ? <div
-                            className={`previewZone`}
+                            className={previewClassName === 'square' ? 'previewZone' : 'previewZoneCircle'}
                         >
                             <img className="preview" src={preview} alt="art preview" />
                             <Tooltip title='Delete Preview'>

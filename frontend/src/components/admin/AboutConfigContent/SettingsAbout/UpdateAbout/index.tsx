@@ -1,18 +1,17 @@
 import { gql, useMutation } from "@apollo/client";
-import { Dialog } from "@headlessui/react";
 import { Form, Formik, FormikValues } from "formik";
 import { useEffect, useState } from "react";
 import * as yup from 'yup'
-import { availableImageTypes } from "../../../../config/availableImageType";
-import { useTextContent } from "../../../../hooks/useTextContent";
-import { TextContentSchema } from "../../../../schemas/TextContent";
-import { revalidateSSG } from "../../../../services/revalidate";
-import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
-import { ModalContentOverlay } from "../../../../styles/global";
-import { DropImage } from "../../ArtForms/DropImage";
-import { AboutTips } from "../AboutTips";
-import { ImageFormat } from "../ImageFormat";
-import { RichTextEditor } from "../RichTextEditor";
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { availableImageTypes } from "../../../../../config/availableImageType";
+import { useTextContent } from "../../../../../hooks/useTextContent";
+import { TextContentSchema } from "../../../../../schemas/TextContent";
+import { revalidateSSG } from "../../../../../services/revalidate";
+import { toastSuccess, toastWarn } from "../../../../../services/toastProvider";
+import { DropImage } from "../../../ArtForms/DropImage";
+import { AboutTips } from "../../AboutTips";
+import { ImageFormat } from "../../ImageFormat";
+import { RichTextEditor } from "../../RichTextEditor";
 import { Container } from "./style";
 
 const UPDATE_TEXT_CONTENT = gql`
@@ -54,15 +53,15 @@ const UPDATE_TEXT_CONTENT_IMAGE = gql`
     }`
 
 interface UpdateAboutProps {
-    isOpen: boolean
     textContentOnUpdate: TextContentSchema
     onRequestClose(): void
+    setIsCardFlipped(isCardFlipped: boolean): void
 }
 
 export function UpdateAbout({
-    isOpen,
     textContentOnUpdate,
-    onRequestClose
+    onRequestClose,
+    setIsCardFlipped
 }: UpdateAboutProps): JSX.Element {
 
     const [htmlContent, setHtmlContent] = useState('')
@@ -142,51 +141,45 @@ export function UpdateAbout({
     }
 
     return (
-        <Dialog open={isOpen} onClose={onRequestClose}>
-            <ModalContentOverlay aria-hidden={true} />
-            <Dialog.Panel>
-                <Container>
-                    <button
-                        type='button'
-                        onClick={onRequestClose}
-                        className='react-modal-close'
-                    >
-                        <img src="/images/close.svg" alt="close-modal-button" />
-                    </button>
 
-                    <h2>
-                        Update your <span> {textContentOnUpdate.type}</span> section
-                        <AboutTips category={textContentOnUpdate.type} />
-                    </h2>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={values => handleSubmitForm(values)}
-                        validationSchema={preview ? null : imageSchema}
-                    >
-                        {({ errors, setFieldValue, values }) => (
-                            <Form>
-                                <DropImage
-                                    errors={errors}
-                                    preview={preview}
-                                    setFieldValue={setFieldValue}
-                                    setPreview={setPreview}
-                                    previewClassName={values.imageFormat}
-                                    createPreview={() => {
-                                        setFieldValue('file', '')
-                                        createPreview()
-                                    }}
-                                />
-                                <ImageFormat setFieldValue={setFieldValue} />
-                                <RichTextEditor prevContent={textContentOnUpdate.text} setHtmlContent={setHtmlContent} />
-                                <button type='submit' className="buttonSubmit">
-                                    Save
-                                </button>
-                            </Form>
-                        )}
-                    </Formik>
-
-                </Container>
-            </Dialog.Panel>
-        </Dialog>
+        <Container>
+            <h2>
+                Update your <span> {textContentOnUpdate.type}</span> section
+                <AboutTips category={textContentOnUpdate.type} />
+            </h2>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={values => handleSubmitForm(values)}
+                validationSchema={preview ? null : imageSchema}
+            >
+                {({ errors, setFieldValue, values }) => (
+                    <Form>
+                        <DropImage
+                            errors={errors}
+                            preview={preview}
+                            setFieldValue={setFieldValue}
+                            setPreview={setPreview}
+                            previewClassName={values.imageFormat}
+                            createPreview={() => {
+                                setFieldValue('file', '')
+                                createPreview()
+                            }}
+                        />
+                        <ImageFormat setFieldValue={setFieldValue} />
+                        <RichTextEditor prevContent={textContentOnUpdate.text} setHtmlContent={setHtmlContent} />
+                        <button type='submit' className="buttonSubmit">
+                            Save
+                        </button>
+                    </Form>
+                )}
+            </Formik>
+            <span
+                className="delete"
+                onClick={() => setIsCardFlipped(true)}
+            >
+                Delete Art
+                <ArrowRightAltIcon />
+            </span>
+        </Container>
     )
 }

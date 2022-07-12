@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 import { apolloClient } from "../services/apolloClient";
 import { toastSuccess, toastWarn } from "../services/toastProvider";
 import { TextContentSchema } from "../schemas/TextContent";
+import { revalidateSSG } from "../services/revalidate";
 
 interface TextContentProviderProps {
     children: ReactNode
@@ -36,6 +37,7 @@ export function TextContentProvider({ children }: TextContentProviderProps) {
             tempTextContents.splice(index, 1)
 
             setTextContents(tempTextContents)
+            revalidateSSG({ path: 'about' })
         }).then(() => toastSuccess(`Text deleted`))
             .catch((error) => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }

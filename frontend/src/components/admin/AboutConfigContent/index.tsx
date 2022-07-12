@@ -4,7 +4,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AddCircle from '@mui/icons-material/AddCircle';
 import InfoIcon from '@mui/icons-material/Info';
 import { useEffect, useState } from "react";
-import { UpdateAbout } from "./UpdateAbout";
 import { useRouter } from "next/router";
 import { languages } from "../../../config/languages";
 import { Popover } from "@headlessui/react";
@@ -14,6 +13,7 @@ import { useTextContent } from "../../../hooks/useTextContent";
 import dayjs from "dayjs";
 import { TextContentSchema } from "../../../schemas/TextContent";
 import { CreateAbout } from "./CreateAbout";
+import { SettingsAbout } from "./SettingsAbout";
 
 export function AboutConfigContent(): JSX.Element {
 
@@ -152,7 +152,7 @@ export function AboutConfigContent(): JSX.Element {
             </table>
 
 
-            <UpdateAbout
+            <SettingsAbout
                 isOpen={isUpdateAboutOpen}
                 onRequestClose={() => setIsUpdateAboutModalOpen(false)}
                 textContentOnUpdate={textContentOnUpdate}

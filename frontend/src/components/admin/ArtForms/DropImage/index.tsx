@@ -6,7 +6,6 @@ import UndoIcon from '@mui/icons-material/Undo';
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { Container } from "./style";
 import { FormikErrors } from "formik";
-import { create } from "domain";
 
 interface ErrorProps {
     title?: string;

@@ -7,6 +7,8 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { apolloClient } from '../../../services/apolloClient';
 import Head from 'next/head';
+import { ThemeProvider } from 'styled-components';
+import { useCurrentTheme } from '../../../hooks/useTheme';
 
 const UPDATE_USER = gql`
     mutation UpdateUser(
@@ -23,6 +25,7 @@ const UPDATE_USER = gql`
 
 export default function ChangePassword(): JSX.Element {
 
+    const { currentTheme } = useCurrentTheme()
     const { data: session } = useSession()
     const router = useRouter()
     const [updateUser] = useMutation(UPDATE_USER)
@@ -52,38 +55,40 @@ export default function ChangePassword(): JSX.Element {
             <Head>
                 <title>Change Password | FeCardozo Workshop</title>
             </Head>
-            <Container>
-                <div className="box">
-                    <h1>Please, Create a new Password</h1>
-                    <Formik
-                        initialValues={initialValues}
-                        onSubmit={handleSubmitForm}
-                        validationSchema={userSchema}
-                    >
-                        {({ errors }) => (
-                            <Form>
-                                <Field
-                                    type="text"
-                                    name='username'
-                                    placeholder={errors.username ? errors.username : "Username"}
-                                    className={errors.username ? 'errorMessage' : ''}
-                                />
-                                <Field
-                                    type="password"
-                                    name='password'
-                                    placeholder="Password"
-                                />
-                                {errors.password ? (
-                                    <div className="errorMessageDiv">
-                                        {String(errors.password)}
-                                    </div>
-                                ) : ""}
-                                <button className='buttonSubmit' type="submit">Save</button>
-                            </Form>
-                        )}
-                    </Formik>
-                </div>
-            </Container>
+            <ThemeProvider theme={currentTheme}>
+                <Container>
+                    <div className="box">
+                        <h1>Please, Create a new Password</h1>
+                        <Formik
+                            initialValues={initialValues}
+                            onSubmit={handleSubmitForm}
+                            validationSchema={userSchema}
+                        >
+                            {({ errors }) => (
+                                <Form>
+                                    <Field
+                                        type="text"
+                                        name='username'
+                                        placeholder={errors.username ? errors.username : "Username"}
+                                        className={errors.username ? 'errorMessage' : ''}
+                                    />
+                                    <Field
+                                        type="password"
+                                        name='password'
+                                        placeholder="Password"
+                                    />
+                                    {errors.password ? (
+                                        <div className="errorMessageDiv">
+                                            {String(errors.password)}
+                                        </div>
+                                    ) : ""}
+                                    <button className='buttonSubmit' type="submit">Save</button>
+                                </Form>
+                            )}
+                        </Formik>
+                    </div>
+                </Container>
+            </ThemeProvider>
         </>
     )
 }

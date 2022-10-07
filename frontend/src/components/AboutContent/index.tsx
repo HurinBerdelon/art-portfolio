@@ -21,7 +21,6 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
         text: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.text
     }
 
-    // TODO
     return (
         <Container>
             <h1>About</h1>

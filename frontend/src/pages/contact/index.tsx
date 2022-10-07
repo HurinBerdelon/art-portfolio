@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { ContactContent } from "../../components/ContactContent";
@@ -27,3 +28,9 @@ export default function contact(): JSX.Element {
 }
 
 // TODO
+export const getStaticProps: GetStaticProps = async () => {
+
+    return {
+        props: {}
+    }
+}

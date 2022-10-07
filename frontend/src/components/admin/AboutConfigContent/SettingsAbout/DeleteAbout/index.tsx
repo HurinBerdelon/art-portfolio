@@ -20,7 +20,7 @@ export function DeleteAbout({ textContentOnUpdate, onRequestClose, setIsCardFlip
     return (
         <Container>
 
-            <h2>Delete Category</h2>
+            <h2>Delete About Content</h2>
             <p>
                 Are you sure you want to delete
                 this content?

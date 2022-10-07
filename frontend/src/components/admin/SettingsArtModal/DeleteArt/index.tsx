@@ -39,10 +39,10 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
     return (
         <Container>
 
-            <h2>Delete Category</h2>
+            <h2>Delete Art</h2>
             <p>
                 Are you sure you want to delete
-                <span> {`category: ${art.title} ?`}</span>
+                <span> {`art: ${art.title} ?`}</span>
             </p>
             <div className="buttons">
                 <button

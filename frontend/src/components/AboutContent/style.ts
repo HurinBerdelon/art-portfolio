@@ -2,16 +2,24 @@ import styled from "styled-components";
 
 export const Container = styled.section`
     background: ${props => props.theme.colors.backgroundOne};
-    min-height: 100%;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     h1, h2, h3, h4 {
-        padding: 1rem;
         color: ${props => props.theme.colors.textOne};
+    }
+
+    h1 {
+        padding: 1rem 2rem ;
         text-align: center;
+    }
+
+    h2, h3, h4 {
+        padding: .25rem 2rem ;
+        text-align: left;
+        width: 100%;
     }
 
     .imageContainer {

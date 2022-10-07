@@ -2,12 +2,13 @@ import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
-import { AboutContent } from "../components/AboutContent";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { useCurrentTheme } from "../hooks/useTheme";
-import { TextContentSchema } from "../schemas/TextContent";
-import { apolloClient } from "../services/apolloClient";
+import { AboutContent } from "../../components/AboutContent";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
+import { useCurrentTheme } from "../../hooks/useTheme";
+import { TextContentSchema } from "../../schemas/TextContent";
+import { apolloClient } from "../../services/apolloClient";
+import { Container } from "./style";
 
 interface AboutProps {
     aboutContent: TextContentSchema[]
@@ -24,15 +25,16 @@ export default function About({ aboutContent }: AboutProps): JSX.Element {
             </Head>
 
             <ThemeProvider theme={currentTheme}>
-                <Header />
-                <AboutContent aboutContent={aboutContent} />
-                <Footer />
+                <Container>
+                    <Header />
+                    <AboutContent aboutContent={aboutContent} />
+                    <Footer />
+                </Container>
             </ThemeProvider>
         </>
     )
 }
 
-// TODO
 export const getStaticProps: GetStaticProps = async () => {
 
     try {

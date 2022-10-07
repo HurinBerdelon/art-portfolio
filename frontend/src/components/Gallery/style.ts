@@ -12,6 +12,7 @@ export const NoArtsContainer = styled.div`
 export const Container = styled.section`
     display: flex;
     flex-direction: column;
+    flex: 1;
     align-items: center;
     padding: 2rem 0;
     gap: 2rem;

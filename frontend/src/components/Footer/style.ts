@@ -4,6 +4,6 @@ export const Container = styled.footer`
     background: ${props => props.theme.colors.boxOne};
     color: ${props => props.theme.colors.textThree};
 
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
     
 `

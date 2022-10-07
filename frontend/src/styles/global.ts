@@ -37,6 +37,8 @@ export const GlobalStyle = createGlobalStyle`
         
         #__next {
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
     }
 

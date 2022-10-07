@@ -7,7 +7,7 @@ export const Container = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.25rem 1rem; // 4px 16px
+    padding: 0.5rem 1rem; // 8px 16px
 
     background: ${props => props.theme.colors.boxOne};
     color: ${props => props.theme.colors.textOne};

@@ -1,3 +1,4 @@
+import { SiteMap } from "./SiteMap";
 import { Container } from "./style";
 
 export function Footer(): JSX.Element {
@@ -5,7 +6,7 @@ export function Footer(): JSX.Element {
     // TODO
     return (
         <Container>
-            SiteMap
+            <SiteMap />
         </Container>
     )
 }

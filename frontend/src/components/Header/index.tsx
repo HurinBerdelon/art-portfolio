@@ -14,8 +14,10 @@ export function Header(): JSX.Element {
                     <h2>FeCardozo</h2>
                 </a>
             </Link>
-            <ThemeSwitcher />
-            <NavBarMenu />
+            <div className="buttons">
+                <ThemeSwitcher />
+                <NavBarMenu />
+            </div>
         </Container>
     )
 }

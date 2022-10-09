@@ -53,12 +53,13 @@ model Art {
 }
 
 model TextContent {
-  id        String   @id @default(uuid())
-  type      String
-  text      String
-  page      String
-  idiom     String
-  imageUrl  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  type        String
+  text        String
+  page        String
+  idiom       String
+  imageUrl    String?
+  imageFormat String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

@@ -14,13 +14,13 @@ export class EditTextContentImageUseCase {
 
     async execute(id: string, image: string): Promise<TextContent> {
 
-        const artAlreadyExists = await this.textContentRepository.findById(id)
+        const textContent = await this.textContentRepository.findById(id)
 
-        if (!artAlreadyExists) {
+        if (!textContent) {
             throw new Error('Art not Found!')
         }
 
-        const oldImageSplit = artAlreadyExists.imageUrl.split('/')
+        const oldImageSplit = textContent.imageUrl.split('/')
         const oldFilename = oldImageSplit[oldImageSplit.length - 1]
 
         await this.storageProvider.delete('pictures', oldFilename)

@@ -11,7 +11,8 @@ export class PrismaTextContentRepository implements ITextContentRepository {
         imageUrl,
         page,
         text,
-        type
+        type,
+        imageFormat
     }: CreateTextContentDTO): Promise<TextContent> {
 
         const textContent = await this.textContentRepository.create({
@@ -20,7 +21,8 @@ export class PrismaTextContentRepository implements ITextContentRepository {
                 imageUrl,
                 page,
                 text,
-                type
+                type,
+                imageFormat
             }
         })
 
@@ -66,14 +68,15 @@ export class PrismaTextContentRepository implements ITextContentRepository {
         return textContents
     }
 
-    async updateText(id: string, text: string): Promise<TextContent> {
+    async updateText(id: string, text: string, imageFormat: string): Promise<TextContent> {
 
         const textContent = await this.textContentRepository.update({
             where: {
                 id
             },
             data: {
-                text
+                text,
+                imageFormat
             }
         })
         return textContent

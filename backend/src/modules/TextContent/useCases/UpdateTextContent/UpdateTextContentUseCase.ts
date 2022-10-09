@@ -9,7 +9,7 @@ export class UpdateTextContentUseCase {
         private textContentRepository: ITextContentRepository
     ) { }
 
-    async execute(id: string, text: string): Promise<TextContent> {
+    async execute(id: string, text: string, imageFormat: string): Promise<TextContent> {
 
         const textContentAlreadyExists = await this.textContentRepository.findById(id)
 
@@ -17,7 +17,7 @@ export class UpdateTextContentUseCase {
             throw new Error(`TextContent not found`)
         }
 
-        const textContent = await this.textContentRepository.updateText(id, text)
+        const textContent = await this.textContentRepository.updateText(id, text, imageFormat)
 
         return textContent
     }

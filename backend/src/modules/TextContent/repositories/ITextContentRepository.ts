@@ -6,6 +6,7 @@ export interface CreateTextContentDTO {
     page: string
     idiom: string
     imageUrl?: string
+    imageFormat?: string
 }
 
 export interface ITextContentRepository {
@@ -14,13 +15,14 @@ export interface ITextContentRepository {
         imageUrl,
         page,
         text,
-        type
+        type,
+        imageFormat
     }: CreateTextContentDTO): Promise<TextContent>
     findById(id: string): Promise<TextContent>
     findByType(type: string): Promise<TextContent[]>
     findByPage(page: string): Promise<TextContent[]>
     findAll(): Promise<TextContent[]>
-    updateText(id: string, text: string): Promise<TextContent>
+    updateText(id: string, text: string, imageFormat: string): Promise<TextContent>
     updateImage(id: string, imageUrl: string): Promise<TextContent>
     delete(id: string): Promise<void>
 }

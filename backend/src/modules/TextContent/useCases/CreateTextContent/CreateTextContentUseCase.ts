@@ -13,7 +13,7 @@ export class CreateTextContentUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ idiom, imageUrl: image, page, text, type }: CreateTextContentDTO): Promise<TextContent> {
+    async execute({ idiom, imageUrl: image, page, text, type, imageFormat }: CreateTextContentDTO): Promise<TextContent> {
 
         const imageUrl = await this.storageProvider.save('pictures', image)
 
@@ -22,7 +22,8 @@ export class CreateTextContentUseCase {
             imageUrl,
             page,
             text,
-            type
+            type,
+            imageFormat
         })
         return textContent
     }

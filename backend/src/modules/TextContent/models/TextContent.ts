@@ -22,6 +22,9 @@ export class TextContent {
     imageUrl?: string
 
     @Field()
+    imageFormat?: string
+
+    @Field()
     createdAt?: Date
 
     @Field()

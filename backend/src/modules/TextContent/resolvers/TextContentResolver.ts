@@ -55,6 +55,7 @@ export class TextContentResolver {
         @Arg('idiom') idiom: string,
         @Arg('page') page: string,
         @Arg('text') text: string,
+        @Arg('imageFormat') imageFormat: string,
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
 
     ) {
@@ -77,7 +78,8 @@ export class TextContentResolver {
             page,
             imageUrl: hashFilename,
             text,
-            type
+            type,
+            imageFormat
         })
 
         return textContent
@@ -86,12 +88,13 @@ export class TextContentResolver {
     @Mutation(() => TextContent)
     async updateTextContent(
         @Arg('id') id: string,
-        @Arg('text') text: string
+        @Arg('text') text: string,
+        @Arg('imageFormat') imageFormat: string,
     ) {
 
         const updateTextContentUseCase = container.resolve(UpdateTextContentUseCase)
 
-        const textContent = await updateTextContentUseCase.execute(id, text)
+        const textContent = await updateTextContentUseCase.execute(id, text, imageFormat)
 
         return textContent
     }

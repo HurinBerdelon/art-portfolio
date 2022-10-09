@@ -12,6 +12,10 @@ export const Container = styled.div`
     svg {
         cursor: pointer;
         color: ${props => props.theme.colors.textThree};
+
+        @media (min-width: 720px) {
+            font-size: 2rem;
+        }
     }
     
     a {

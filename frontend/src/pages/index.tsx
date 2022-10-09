@@ -4,6 +4,7 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../components/Gallery";
 import { Header } from "../components/Header";
+import { NavBar } from "../components/NavBar";
 import { useCurrentTheme } from "../hooks/useTheme";
 import { ArtSchema } from "../schemas/Art";
 import { apolloClient } from "../services/apolloClient"
@@ -23,6 +24,7 @@ export default function Home({ arts }: HomeProps): JSX.Element {
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
+                <NavBar />
                 <Gallery arts={arts} />
             </ThemeProvider>
         </>

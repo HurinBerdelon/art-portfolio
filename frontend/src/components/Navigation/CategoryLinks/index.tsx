@@ -14,7 +14,7 @@ export function CategoryLinks(): JSX.Element {
     const { asPath } = useRouter()
 
     useEffect(() => {
-        const isAtCategoryPage = categories.find(category => category.title === asPath.split('/')[1])
+        const isAtCategoryPage = categories?.find(category => category.title === asPath.split('/')[1])
         if (isAtCategoryPage) setIsShowingCategories(true)
     }, [])
 

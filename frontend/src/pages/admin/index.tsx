@@ -10,6 +10,7 @@ import { ListOfArts } from "../../components/admin/ListOfArts";
 import { ArtProvider } from "../../hooks/useArts";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { AdminLinks } from "../../components/admin/AdminLinks";
+import { NavBar } from "../../components/NavBar";
 
 export default function Admin(): JSX.Element {
 
@@ -25,8 +26,11 @@ export default function Admin(): JSX.Element {
                 <ArtProvider>
                     <Container>
                         <Header />
-                        <AdminLinks />
-                        <ListOfArts />
+                        <NavBar />
+                        <div className="contentContainer">
+                            <AdminLinks />
+                            <ListOfArts />
+                        </div>
                     </Container>
                 </ArtProvider>
             </ThemeProvider>

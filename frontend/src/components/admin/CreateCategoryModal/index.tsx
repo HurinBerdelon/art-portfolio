@@ -19,7 +19,6 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
     const handleSubmitForm = (values: FormikValues) => {
 
         createCategory(values.title)
-        // console.log(values)
 
         onRequestClose()
 
@@ -33,14 +32,6 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
         if (locale === 'en') initialValues['title'] = ''
         else initialValues[locale] = ''
     })
-
-
-    // const saveCategoryShape = {}
-
-    // locales.map(locale => {
-    //     if (locale === 'en') saveCategoryShape['title'] = yup.string().required('Title is required')
-    //     else saveCategoryShape[locale] = yup.string()
-    // })
 
     const saveCategorySchema = yup.object().shape({
         title: yup.string().required('Title is required'),

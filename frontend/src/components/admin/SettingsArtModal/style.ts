@@ -10,7 +10,7 @@ export const Container = styled.div`
     right: 1rem;
     border-radius: 0.5rem;
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     
     background: ${props => props.theme.colors.backgroundTwo};
 
@@ -23,5 +23,22 @@ export const Container = styled.div`
         position: absolute;
         top: 1rem;
         right: 1rem;
+        z-index: 3;
+
+        &:hover {
+            filter: brightness(0.7);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        left: 8rem;
+        right: 8rem;
+        height: 80%;
+        margin: auto;
+
+        .react-card-flip {
+            width: 100%;
+            height: 100%;
+        }
     }
 `

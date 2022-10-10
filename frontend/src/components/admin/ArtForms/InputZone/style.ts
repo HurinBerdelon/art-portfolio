@@ -72,5 +72,21 @@ export const Container = styled.div`
             filter: brightness(1.2);
         }
     }
+
+    @media (min-width: 1024px) {
+        height: 100%;
+
+        input, textarea, select, .buttonSubmit {
+            width: 400px;
+        }
+
+        input, select, .buttonSubmit {
+           height: 2.625rem;
+        }
+
+        textarea {
+            height: 250px;
+        }
+    }
     
 `

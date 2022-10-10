@@ -168,13 +168,13 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                     </Form>
                 )}
             </Formik>
-            <span
+            <button
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
                 Delete Art
                 <ArrowRightAltIcon />
-            </span>
+            </button>
         </Container>
     )
 }

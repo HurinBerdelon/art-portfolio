@@ -65,4 +65,22 @@ export const Container = styled.div`
             }
         }
     }
+
+    @media (min-width: 1024px) {
+        button {
+            font-size: 1.25rem;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+
+        .options {
+            span:hover {
+                cursor: pointer;
+            }
+        }
+
+        font-size: 1.25rem;
+    }
 `

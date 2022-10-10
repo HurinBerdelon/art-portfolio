@@ -38,7 +38,6 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
 
     return (
         <Container>
-
             <h2>Delete Art</h2>
             <p>
                 Are you sure you want to delete

@@ -22,4 +22,15 @@ export const Container = styled.nav`
             color: ${props => props.theme.colors.textThree};
         }
     }
-`
+
+    @media (min-width: 1024px) {
+        a {
+            width: 150px;
+            padding: 0.5rem 2rem;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+    }
+`   

@@ -36,6 +36,7 @@ export const Container = styled.div`
             
             &:hover{
                 cursor: pointer;
+                filter: brightness(1.2);
             }
         }
     }
@@ -91,7 +92,6 @@ export const Container = styled.div`
             justify-content: center;
             align-items: center;
             color: ${props => props.theme.colors.textOne};
-            /* padding: 140px 90px; */
         }
 
         &:hover {
@@ -109,6 +109,7 @@ export const Container = styled.div`
 
             &:hover{
                 cursor: pointer;
+                filter: brightness(1.2);
             }
         }
 
@@ -126,5 +127,23 @@ export const Container = styled.div`
     .isDragActive {
         border: 1px dashed ${props => props.theme.colors.danger};
         color: ${props => props.theme.colors.danger};   
+    }
+
+    @media (min-width: 1024px) {
+        height: 100%;
+
+        .previewZone {
+            .preview {
+                max-height: 520px;
+                max-width: 420px;
+            }
+        }
+
+        .dragZone {
+            p {
+                height: 520px;
+                width: 420px;
+            }
+        }
     }
 `

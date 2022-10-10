@@ -9,7 +9,7 @@ export const Container = styled.section`
             margin-bottom: 0.5rem;
         }
 
-        tbody tr, thead tr{
+        tbody tr, thead tr {
             width: 100%;
             padding: 0 0.5rem;
 
@@ -35,6 +35,10 @@ export const Container = styled.section`
                 svg {
                     cursor: pointer;
                     color: ${props => props.theme.colors.textOne};
+
+                    &:hover {
+                        filter: brightness(2);
+                    }
                 }
 
                 .title {
@@ -57,6 +61,21 @@ export const Container = styled.section`
                 }
             }
         }
-    }
 
+        @media (min-width: 1024px) {
+            tbody tr, thead tr {
+                th, td {
+                    font-size: 1.25rem;
+
+                    .imageContainer {
+                        max-width: 70px;
+
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 `

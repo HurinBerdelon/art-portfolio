@@ -38,6 +38,10 @@ export const Container = styled.div`
             padding: 0.25rem 0rem;
             border-radius: 0.25rem;
             width: 100px;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
 
         .cancelButton {
@@ -49,6 +53,11 @@ export const Container = styled.div`
             background: ${props => props.theme.colors.danger};
             color: ${props => props.theme.colors.textThree};
         }
+    }
+
+    @media (min-width: 1024px) {
+        height: 100%;
+        margin-top: auto;
     }
 
 `

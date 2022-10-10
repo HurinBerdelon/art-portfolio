@@ -27,9 +27,24 @@ export const Container = styled.div`
         align-self: flex-end;
         font-weight: 500;
         color: ${props => props.theme.colors.danger};
+        font-size: 1rem;
         
         svg {
             font-size: 2rem;
+        }
+
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        height: 100%;
+        
+        form {
+            flex-direction: row;
+            height: 100%;
+            width: 100%;
         }
     }
 `

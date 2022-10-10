@@ -10,7 +10,7 @@ export const Container = styled.div`
     right: 1rem;
     border-radius: 0.5rem;
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
@@ -39,5 +39,18 @@ export const Container = styled.div`
         position: absolute;
         top: 1rem;
         right: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+        left: 8rem;
+        right: 8rem;
+        height: 80%;
+        margin: auto;
+
+        form {
+            flex-direction: row;
+            height: 100%;
+            width: 100%;
+        }
     }
 `

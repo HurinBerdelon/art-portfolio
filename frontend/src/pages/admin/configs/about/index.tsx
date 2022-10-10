@@ -3,6 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { AboutConfigContent } from "../../../../components/admin/AboutConfigContent";
 import { AdminLinks } from "../../../../components/admin/AdminLinks";
 import { Header } from "../../../../components/Header";
+import { NavBar } from "../../../../components/NavBar";
 import { useCurrentTheme } from "../../../../hooks/useTheme";
 import { Container } from "./style";
 
@@ -19,8 +20,11 @@ export default function AboutConfig(): JSX.Element {
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
-                    <AdminLinks />
-                    <AboutConfigContent />
+                    <NavBar />
+                    <div className="contentContainer">
+                        <AdminLinks />
+                        <AboutConfigContent />
+                    </div>
                 </Container>
             </ThemeProvider>
         </>

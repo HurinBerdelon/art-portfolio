@@ -154,32 +154,36 @@ export function UpdateAbout({
             >
                 {({ errors, setFieldValue, values }) => (
                     <Form>
-                        <DropImage
-                            errors={errors}
-                            preview={preview}
-                            setFieldValue={setFieldValue}
-                            setPreview={setPreview}
-                            previewClassName={values.imageFormat}
-                            createPreview={() => {
-                                setFieldValue('file', '')
-                                createPreview()
-                            }}
-                        />
-                        <ImageFormat setFieldValue={setFieldValue} />
-                        <RichTextEditor prevContent={textContentOnUpdate.text} setHtmlContent={setHtmlContent} />
-                        <button type='submit' className="buttonSubmit">
-                            Save
-                        </button>
+                        <div className="formContainer">
+                            <DropImage
+                                errors={errors}
+                                preview={preview}
+                                setFieldValue={setFieldValue}
+                                setPreview={setPreview}
+                                previewClassName={values.imageFormat}
+                                createPreview={() => {
+                                    setFieldValue('file', '')
+                                    createPreview()
+                                }}
+                            />
+                            <ImageFormat setFieldValue={setFieldValue} />
+                        </div>
+                        <div className="formContainer2">
+                            <RichTextEditor prevContent={textContentOnUpdate.text} setHtmlContent={setHtmlContent} />
+                            <button type='submit' className="buttonSubmit">
+                                Save
+                            </button>
+                        </div>
                     </Form>
                 )}
             </Formik>
-            <span
+            <button
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
                 Delete Art
                 <ArrowRightAltIcon />
-            </span>
-        </Container>
+            </button>
+        </Container >
     )
 }

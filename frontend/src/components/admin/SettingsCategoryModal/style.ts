@@ -11,7 +11,7 @@ export const Container = styled.div`
     left: 1rem;
     right: 1rem;
     border-radius: 0.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin: auto 0;
 
     display: flex;
@@ -23,5 +23,15 @@ export const Container = styled.div`
         z-index: 2;
         top: 1rem;
         right: 1rem;
+
+        &:hover {
+            filter: brightness(0.7);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        height: 400px;
+        width: 500px;
+        margin: auto;
     }
 `

@@ -29,4 +29,34 @@ export const Container = styled.div`
         
         }
     }
+
+    @media (min-width: 290px) {
+        button {
+            right: 1rem;
+            top: 0.4rem;
+        }
+    }
+
+    @media (min-width: 335px) {
+        button {
+            right: 1rem;
+            top: 2.5rem;
+        }
+    }
+
+    @media (min-width: 426px) {
+        button {
+            right: 0rem;
+            bottom: -1.25rem;
+        }
+    }
+
+    @media (min-width: 510px) {
+        button {
+            right: -3rem;
+            top: 0.3rem;
+        }
+    }
+
+
 `

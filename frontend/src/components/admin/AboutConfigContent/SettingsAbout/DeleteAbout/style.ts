@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
-    margin-top: 50%;
-
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -33,6 +32,10 @@ export const Container = styled.div`
             padding: 0.25rem 0rem;
             border-radius: 0.25rem;
             width: 100px;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
 
         .cancelButton {
@@ -44,6 +47,11 @@ export const Container = styled.div`
             background: ${props => props.theme.colors.danger};
             color: ${props => props.theme.colors.textThree};
         }
+    }
+
+    @media (min-width: 1024px) {
+        margin: auto;
+        height: 100%;
     }
 
 `

@@ -124,25 +124,29 @@ export function CreateAbout({
                     >
                         {({ errors, setFieldValue, values }) => (
                             <Form>
-                                <DropImage
-                                    errors={errors}
-                                    preview={preview}
-                                    setFieldValue={setFieldValue}
-                                    setPreview={setPreview}
-                                    previewClassName={values.imageFormat}
-                                    createPreview={null}
-                                />
-                                <ImageFormat setFieldValue={setFieldValue} />
-                                <RichTextEditor setHtmlContent={setHtmlContent} />
-                                <button type='submit' className="buttonSubmit">
-                                    Save
-                                </button>
+                                <div className="formContainer">
+                                    <DropImage
+                                        errors={errors}
+                                        preview={preview}
+                                        setFieldValue={setFieldValue}
+                                        setPreview={setPreview}
+                                        previewClassName={values.imageFormat}
+                                        createPreview={null}
+                                    />
+                                    <ImageFormat setFieldValue={setFieldValue} />
+                                </div>
+                                <div className="formContainer">
+                                    <RichTextEditor setHtmlContent={setHtmlContent} />
+                                    <button type='submit' className="buttonSubmit">
+                                        Save
+                                    </button>
+                                </div>
                             </Form>
                         )}
                     </Formik>
 
                 </Container>
             </Dialog.Panel>
-        </Dialog>
+        </Dialog >
     )
 }

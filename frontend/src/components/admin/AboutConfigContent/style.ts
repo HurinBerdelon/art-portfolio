@@ -47,13 +47,6 @@ export const Container = styled.div`
             grid-template-columns: 1.25fr repeat(3, 1fr);
         }
 
-        .updateAt {
-            display: flex;
-            width: 100%;
-            border: 1px solid;
-            display: table-cell;
-        }
-
         .title {
             font-size: 1.25rem;
         }
@@ -69,13 +62,40 @@ export const Container = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
-            /* text-align: center; */
             color: ${props => props.theme.colors.textOne};
+
+            svg {
+                cursor: pointer;
+
+                &:hover {
+                    filter: brightness(2);
+                }
+            }
         }
         
     }
 
     button {
         color: ${props => props.theme.colors.textOne};
+    }
+
+    @media (min-width: 1024px) {
+
+        table {
+            tbody tr, thead tr {
+                td, th {
+                    font-size: 1.2rem;
+                }
+            }
+            
+            .settings {
+                font-size: 1rem;
+            }
+        }
+
+        .pageDescription{
+            font-size: 1rem;
+            max-width: 380px;
+        }
     }
 `

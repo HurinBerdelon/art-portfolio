@@ -53,7 +53,7 @@ export function AboutConfigContent(): JSX.Element {
                     </Popover.Button>
                     <Popover.Panel>
                         <p className="pageDescription">
-                            The about page can has two sections, one to talk about yourself and one to talk about your business.
+                            The about page can have two sections, one to talk about yourself and one to talk about your business.
                             Here they are separeted for this sections and for the idioms present on your portfolio.<br />
                             * The date that appears is the last update date, so you can know if a section is up to date.
                         </p>

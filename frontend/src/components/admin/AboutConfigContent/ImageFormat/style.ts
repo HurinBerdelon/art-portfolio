@@ -12,6 +12,10 @@ export const Container = styled.div`
         min-width: 75px;
         font-weight: 500;
 
+        &:hover {
+            filter: brightness(1.2);
+        }
+
         &.active {
             background: ${props => props.theme.colors.buttons};
         }

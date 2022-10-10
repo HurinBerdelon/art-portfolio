@@ -10,7 +10,7 @@ export const Container = styled.div`
     right: 1rem;
     border-radius: 0.5rem;
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
@@ -91,5 +91,14 @@ export const Container = styled.div`
         position: absolute;
         top: 1rem;
         right: 1rem;
+
+        &:hover {
+            filter: brightness(0.7);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        width: 500px;
+        margin: auto;
     }
 `

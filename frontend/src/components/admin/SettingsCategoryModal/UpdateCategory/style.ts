@@ -84,9 +84,14 @@ export const Container = styled.div`
         align-self: flex-end;
         font-weight: 500;
         color: ${props => props.theme.colors.danger};
+        font-size: 1rem;
         
         svg {
             font-size: 2rem;
+        }
+
+        &:hover {
+            filter: brightness(1.2);
         }
     }
 `

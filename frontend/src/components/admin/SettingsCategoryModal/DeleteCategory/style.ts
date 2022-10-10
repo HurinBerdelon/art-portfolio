@@ -37,6 +37,10 @@ export const Container = styled.div`
             padding: 0.25rem 0rem;
             border-radius: 0.25rem;
             width: 100px;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
 
         .cancelButton {

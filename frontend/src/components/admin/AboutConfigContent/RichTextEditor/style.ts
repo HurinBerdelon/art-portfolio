@@ -5,6 +5,8 @@ export const Container = styled.div`
     width: 320px;
     border: 1px solid ${props => props.theme.colors.backgroundTwo};
     border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
 
     .editorMenu {
         padding: 0.25rem 0.5rem;
@@ -36,6 +38,10 @@ export const Container = styled.div`
                 svg {
                     font-size: 1.5rem;
                 }
+
+                &:hover {
+                    filter: brightness(1.2);
+                }
             }
 
             .active {
@@ -51,4 +57,24 @@ export const Container = styled.div`
         color: ${props => props.theme.colors.textOne};
         border-top: 1px solid ${props => props.theme.colors.backgroundTwo};
     }
+
+    @media (min-width: 1024px) {
+        height: 100%;
+
+        .editorContent {
+            height: 100%;
+            .DraftEditor-root {
+                height: 100%;
+                
+                .DraftEditor-editorContainer {
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 1320px) {
+        width: 520px;
+    }
+
 `

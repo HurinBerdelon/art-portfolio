@@ -11,6 +11,7 @@ export const Container = styled.div`
     border-radius: 0.5rem;
     padding: 1rem;
     overflow-y: auto;
+    margin: auto;
     
     background: ${props => props.theme.colors.backgroundTwo};
 
@@ -18,6 +19,11 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+
+    .react-card-flip {
+        width: 100%;
+        height: 100%;
+    }
 
     .react-modal-close {
         position: absolute;
@@ -35,10 +41,5 @@ export const Container = styled.div`
         right: 8rem;
         height: 80%;
         margin: auto;
-
-        .react-card-flip {
-            width: 100%;
-            height: 100%;
-        }
     }
 `

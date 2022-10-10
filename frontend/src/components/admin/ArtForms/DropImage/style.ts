@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
     
     width: 100%;
-    height: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,6 +81,7 @@ export const Container = styled.div`
         justify-content: space-between;
         border: 1px dashed ${props => props.theme.colors.textOne};
         border-radius: 0.25rem;
+        /* border-radius: 50%; */
         cursor: pointer;
         position: relative;
 
@@ -131,6 +131,23 @@ export const Container = styled.div`
 
     @media (min-width: 1024px) {
         height: 100%;
+
+        .previewZone {
+            .preview {
+                max-height: 520px;
+                max-width: 320px;
+            }
+        }
+
+        .dragZone {
+            p {
+                height: 520px;
+                width: 320px;
+            }
+        }
+    }
+
+    @media (min-width: 1320px) {
 
         .previewZone {
             .preview {

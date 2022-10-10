@@ -96,13 +96,13 @@ export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: U
                     </Form>
                 )}
             </Formik>
-            <span
+            <button
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
                 Delete Category
                 <ArrowRightAltIcon />
-            </span>
+            </button>
         </Container>
     )
 }

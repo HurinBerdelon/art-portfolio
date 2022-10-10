@@ -41,4 +41,14 @@ export const Container = styled.section`
             }
         }
     }
+
+    @media (min-width: 1024px) {
+        table {
+            tbody tr, thead tr {
+                td, th {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
 `

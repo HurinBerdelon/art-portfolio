@@ -12,7 +12,6 @@ export function InfoContainer({ currentArt }: InfoContainerProps): JSX.Element {
     return (
         <Container>
             <div className="infos">
-
                 <h2>{currentArt.title}</h2>
                 <p className='dateInfo'>{dayjs(currentArt.productionDate).format('MMMM [of] YYYY')}</p>
                 <p className="dimensionInfo">{currentArt.dimension}</p>

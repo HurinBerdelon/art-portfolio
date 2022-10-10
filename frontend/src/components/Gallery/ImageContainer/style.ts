@@ -20,9 +20,18 @@ export const Container = styled.section`
         position: relative;
         width: 60%;
 
+        img {
+            max-height: 100%;
+        }
+
         .buttonNext, .buttonPrevious {
             display: block;
             position: absolute;
+            color: ${props => props.theme.colors.textOne};
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
 
         .buttonNext {

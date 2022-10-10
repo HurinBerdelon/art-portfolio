@@ -28,7 +28,7 @@ export default function SinglePicture({ art }: SinglePictureProps): JSX.Element 
                 <Container>
                     <Header />
                     <main>
-                        <ImageContainer currentArt={art} />
+                        <ImageContainer shouldRenderButtons={false} currentArt={art} />
                         <InfoContainer currentArt={art} />
                     </main>
                 </Container>

@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { getSession } from 'next-auth/react'
-import { ToastContainer } from 'react-toastify'
 import { Container } from "./style";
 import { apolloClient } from "../../services/apolloClient";
 import { gql } from "@apollo/client";
@@ -22,7 +21,6 @@ export default function Admin(): JSX.Element {
                 <title>Admin | FeCardozo Workshop</title>
             </Head>
 
-            <ToastContainer />
             <ThemeProvider theme={currentTheme}>
                 <ArtProvider>
                     <Container>

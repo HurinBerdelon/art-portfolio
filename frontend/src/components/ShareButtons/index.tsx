@@ -6,12 +6,17 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Container } from "./style";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { Popover } from "@headlessui/react";
+import { toastSuccess } from "../../services/toastProvider";
 
 interface ShareButtonProps {
     currentPictureId: string
 }
 
 export function ShareButton({ currentPictureId }: ShareButtonProps): JSX.Element {
+
+    function handleCopyToClipboard() {
+        toastSuccess('Link Copied to clipboard, but not yet')
+    }
 
     return (
         <Container>
@@ -35,7 +40,7 @@ export function ShareButton({ currentPictureId }: ShareButtonProps): JSX.Element
                         </div>
 
                         <CopyToClipboard text={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}/image/${currentPictureId}`}>
-                            <button className="copyPaste">
+                            <button className="copyPaste" onClick={handleCopyToClipboard} >
                                 <ContentCopyIcon />
                                 <h4>Copy Link</h4>
                             </button>

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 import { AdminLinks } from "../../../components/admin/AdminLinks";
 import { ListOfCategories } from "../../../components/admin/ListOfCategories";
@@ -17,7 +16,6 @@ export default function Categories(): JSX.Element {
                 <title>Admin | FeCardozo Workshop</title>
             </Head>
 
-            <ToastContainer />
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />

@@ -24,6 +24,10 @@ export const Container = styled.section`
             font-style: italic;
         }
 
+        .categoryInfo {
+            text-transform: capitalize;
+        }
+
         .descriptionInfo {
             padding-top: 1rem;
             text-align: justify;
@@ -38,5 +42,12 @@ export const Container = styled.section`
 
     @media (min-width: 1024px) {
         width: 30%;
+        padding-top: 2rem;
+
+        .infos {
+            h2 {
+                margin-bottom: 1rem;
+            }
+        }
     }
 `

@@ -23,7 +23,6 @@ export function CategoryLinks(): JSX.Element {
     }
 
     function capitalize(text: string): string {
-
         return text
             .split('_')
             .join(' ')

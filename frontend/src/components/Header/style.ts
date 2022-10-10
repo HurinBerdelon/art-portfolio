@@ -26,7 +26,7 @@ export const Container = styled.header`
       font-size: 2.125rem; //34px
     }
 
-    @media (min-width: 720px) {
+    @media (min-width: 1024px) {
 		display: none;
 	}
 `

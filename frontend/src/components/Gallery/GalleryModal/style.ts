@@ -9,7 +9,7 @@ export const Container = styled.div`
     right: 1rem;
     border-radius: 0.5rem;
     padding: 1rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     
     display: flex;
     flex-direction: column;
@@ -17,6 +17,10 @@ export const Container = styled.div`
     padding-top: 6rem;
 
     background: ${props => props.theme.colors.backgroundOne};
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+    }
 
     .react-modal-close {
         position: absolute;

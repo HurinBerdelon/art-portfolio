@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        @media (max-width:  1080px) {
+        @media (max-width:  1024px) {
             font-size: 93.75%
         }
 
@@ -40,7 +40,7 @@ export const GlobalStyle = createGlobalStyle`
             display: flex;
             flex-direction: column;
 
-            @media (min-width: 720px) {
+            @media (min-width: 1024px) {
                 flex-direction: row;
             }
         }

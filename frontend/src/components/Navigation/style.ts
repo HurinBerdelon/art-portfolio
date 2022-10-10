@@ -44,7 +44,7 @@ export const Container = styled.nav`
 			}
 		}
 
-		@media (min-width: 720px) {
+		@media (min-width: 1024px) {
 			font-size: 1.6rem;
 		}
     }

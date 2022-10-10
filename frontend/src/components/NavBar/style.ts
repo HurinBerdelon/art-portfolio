@@ -19,12 +19,13 @@ export const Container = styled.aside`
 		h2 {
 			max-width: 200px;
 			text-align: center;
+			font-size: 2rem;
 			margin-top: 1rem;
 		}
 	}	
 
 
-	@media (min-width: 720px) {
+	@media (min-width: 1024px) {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;

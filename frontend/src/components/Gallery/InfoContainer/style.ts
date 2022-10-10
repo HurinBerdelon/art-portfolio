@@ -35,4 +35,8 @@ export const Container = styled.section`
     .shareMedia {
         display: flex;
     }
+
+    @media (min-width: 1024px) {
+        width: 30%;
+    }
 `

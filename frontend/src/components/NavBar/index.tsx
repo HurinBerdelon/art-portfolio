@@ -1,14 +1,15 @@
 
-import Image from "next/image";
 import Link from "next/link";
 import { Navigation } from "../Navigation";
 import { Container } from "./style";
+
+import logoImg from 'images/colored_logo.png'
 
 export function NavBar(): JSX.Element {
     return (
         <Container>
             <div className="sectionHeader">
-                <img src="images/colored_logo.png" alt="logo" />
+                <img src="./images/colored_logo.png" alt="logo" />
                 <Link
                     href={'/'}
                 >

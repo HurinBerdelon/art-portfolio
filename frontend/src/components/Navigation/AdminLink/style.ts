@@ -19,7 +19,7 @@ export const Container = styled.div`
         }
     }
 
-    @media (min-width: 720px) {
+    @media (min-width: 1024px) {
         gap: 1rem;
 
         svg {
@@ -33,7 +33,7 @@ export const Container = styled.div`
         font-weight: 400;
         font-size: 0.8rem;
         
-        @media (min-width: 720px) {
+        @media (min-width: 1024px) {
             font-size: 1.12rem;
         }
     }

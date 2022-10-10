@@ -13,6 +13,10 @@ export const Container = styled.div`
         svg {
             color: ${props => props.theme.colors.textThree};
             margin-left: -0.8rem; // -12.8px
+
+            @media (min-width: 1024px) {
+                font-size: 2rem;
+            }
         }
     }
 

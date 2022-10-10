@@ -13,7 +13,7 @@ export const Container = styled.div`
         cursor: pointer;
         color: ${props => props.theme.colors.textThree};
 
-        @media (min-width: 720px) {
+        @media (min-width: 1024px) {
             font-size: 2rem;
         }
     }

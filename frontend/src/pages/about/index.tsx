@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { AboutContent } from "../../components/AboutContent";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { NavBar } from "../../components/NavBar";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { TextContentSchema } from "../../schemas/TextContent";
 import { apolloClient } from "../../services/apolloClient";
@@ -27,6 +28,7 @@ export default function About({ aboutContent }: AboutProps): JSX.Element {
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
+                    <NavBar />
                     <AboutContent aboutContent={aboutContent} />
                     <Footer />
                 </Container>

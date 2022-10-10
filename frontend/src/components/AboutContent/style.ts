@@ -14,6 +14,8 @@ export const Container = styled.section`
     h1 {
         padding: 1rem 2rem ;
         text-align: center;
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
     }
 
     h2, h3, h4 {
@@ -25,9 +27,10 @@ export const Container = styled.section`
     .imageContainer {
         max-width: 250px;
         height: 200px;
+        margin: auto;
 
         img {
-            object-fit: cover;
+            object-fit: contain;
             width: 100%;
             max-height: 100%;
         }
@@ -36,6 +39,7 @@ export const Container = styled.section`
     .imageContainerCircle {
         width: 200px;
         height: 200px;
+        margin: auto;
 
         img {
             object-fit: cover;
@@ -49,5 +53,26 @@ export const Container = styled.section`
         color: ${props => props.theme.colors.textOne};
         padding: 1rem 2rem;
         text-align: justify;
+    }
+
+    @media (min-width: 1024px) {
+
+        .imageContainer, .imageContainerCircle {
+            margin: 0;
+        }
+
+        .aboutYourselfContent, .aboutBusinessContent {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+
+            .content {
+                width: 50%;
+            }
+        }
+
+        .aboutBusinessContent {
+            flex-direction: row-reverse;
+        }
     }
 `

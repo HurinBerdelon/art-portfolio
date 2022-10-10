@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { ContactContent } from "../../components/ContactContent";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { NavBar } from "../../components/NavBar";
 import { useCurrentTheme } from "../../hooks/useTheme";
 
 export default function contact(): JSX.Element {
@@ -20,6 +21,7 @@ export default function contact(): JSX.Element {
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
+                <NavBar />
                 <ContactContent />
                 <Footer />
             </ThemeProvider>

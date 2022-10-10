@@ -10,11 +10,11 @@ export function ContactContent(): JSX.Element {
 
     return (
         <Container>
-            <h1>Contact Us</h1>
             <div className="imageContainer">
                 <img src="/images/contact-us.png" alt="contact us" />
             </div>
-            <ContactForm />
+            <h1>Get in Touch with me</h1>
+            {/* <ContactForm /> */}
 
             <div className="contactInfos">
                 <div className="contactCard">

@@ -11,6 +11,7 @@ interface ActiveLinkProps extends LinkProps {
 export function ActiveLink({ activeClassName, className = '', children, ...props }: ActiveLinkProps): JSX.Element {
 
     const { asPath } = useRouter()
+    // TODO: fix => Not showing highlight on active link
 
     const classNameActive = asPath === props.href
         ? `${activeClassName} ${className}`

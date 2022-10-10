@@ -9,7 +9,7 @@ export function NavBar(): JSX.Element {
     return (
         <Container>
             <div className="sectionHeader">
-                <img src="./images/colored_logo.png" alt="logo" />
+                <img src="/images/colored_logo.png" alt="logo" />
                 <Link
                     href={'/'}
                 >

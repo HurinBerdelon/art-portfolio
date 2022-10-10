@@ -5,5 +5,9 @@ export const Container = styled.footer`
     color: ${props => props.theme.colors.textThree};
 
     padding: 0.25rem 1rem;
+
+    @media (min-width: 1024px) {
+        display: none;
+    }
     
 `

@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const Container = styled.section`
     
     background: ${props => props.theme.colors.backgroundOne};
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     h1 {
         padding: 1rem;
@@ -12,6 +16,8 @@ export const Container = styled.section`
 
     .imageContainer {
         width: 100%;
+        max-width: 940px;
+        margin: 0 auto;
 
         img {
             object-fit: contain;
@@ -36,5 +42,13 @@ export const Container = styled.section`
                 align-self: center;
             }
         }
+    }
+
+    @media (min-width: 1024px) {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2rem 0;
     }
 `

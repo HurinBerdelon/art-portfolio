@@ -26,26 +26,30 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
             <h1>About</h1>
 
             {aboutYourself.text
-                ? (<>
+                ? (<div className="aboutYourselfContent">
                     <div className="imageContainer">
                         <img src={aboutYourself.image} alt='About Yourself' />
                     </div>
 
-                    {ReactHtmlParser(aboutYourself.text)}
-                </>)
+                    <div className="content">
+                        {ReactHtmlParser(aboutYourself.text)}
+                    </div>
+                </div>)
                 : (
                     <p>Section under construction</p>
                 )
             }
 
             {aboutBusiness.text
-                ? (<>
+                ? (<div className="aboutBusinessContent">
                     <div className="imageContainer">
                         <img src={aboutBusiness.image} alt="About Products or Services" />
                     </div>
 
-                    {ReactHtmlParser(aboutBusiness.text)}
-                </>)
+                    <div className="content">
+                        {ReactHtmlParser(aboutBusiness.text)}
+                    </div>
+                </div>)
                 : (
                     <p>Section under construction</p>
                 )

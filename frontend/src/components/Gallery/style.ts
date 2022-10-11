@@ -17,6 +17,7 @@ export const Container = styled.section`
     padding: 2rem;
     gap: 2rem;
     width: 100%;
+    overflow-y: auto;
     
     background: ${props => props.theme.colors.backgroundOne};
 

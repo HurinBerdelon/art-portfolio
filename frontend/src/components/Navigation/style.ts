@@ -34,7 +34,7 @@ export const Container = styled.nav`
 			}
 
 			&.active::after {
-				
+				width: 20%;
 			}
 
 			&:hover {

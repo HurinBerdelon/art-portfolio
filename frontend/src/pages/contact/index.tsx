@@ -29,7 +29,6 @@ export default function contact(): JSX.Element {
     )
 }
 
-// TODO
 export const getStaticProps: GetStaticProps = async () => {
 
     return {

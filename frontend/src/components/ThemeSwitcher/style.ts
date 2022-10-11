@@ -8,6 +8,10 @@ export const Container = styled.div`
         height: 24px;
         width: 44px;
         border-radius: 1rem;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
     }
 
     .switchEnabled {

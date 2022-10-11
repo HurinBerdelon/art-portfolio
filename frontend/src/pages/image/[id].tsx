@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import Head from "next/head"
 import { GetServerSideProps } from "next/types"
 import { ThemeProvider } from "styled-components"
@@ -63,7 +64,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
-            art: data.artById
+            art: data.artById,
+            ...(await serverSideTranslations(context.locale, ['home'])),
         }
     }
 }

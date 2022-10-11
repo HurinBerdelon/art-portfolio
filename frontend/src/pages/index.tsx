@@ -1,13 +1,17 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
+import { useTranslation } from "next-i18next";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../components/Gallery";
 import { Header } from "../components/Header";
+import { DesktopHeader } from "../components/Header/DesktopHeader";
 import { NavBar } from "../components/NavBar";
 import { useCurrentTheme } from "../hooks/useTheme";
 import { ArtSchema } from "../schemas/Art";
 import { apolloClient } from "../services/apolloClient"
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
 interface HomeProps {
     arts: ArtSchema[]
 }
@@ -15,6 +19,7 @@ interface HomeProps {
 export default function Home({ arts }: HomeProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
+    const { t } = useTranslation()
 
     return (
         <>
@@ -24,6 +29,7 @@ export default function Home({ arts }: HomeProps): JSX.Element {
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
+                <DesktopHeader />
                 <NavBar />
                 <Gallery arts={arts} />
             </ThemeProvider>
@@ -31,7 +37,7 @@ export default function Home({ arts }: HomeProps): JSX.Element {
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     // Tells backend to create an admin user if it does not exists
     await apolloClient.query({
@@ -66,16 +72,18 @@ export const getStaticProps: GetStaticProps = async () => {
 
         return {
             props: {
-                arts: data.arts
+                arts: data.arts,
+                ...(await serverSideTranslations(locale, ['home'])),
             },
-            revalidate: 60 * 60 * 24 // = 24 hours
+            revalidate: 60 * 60 * 24, // = 24 hours
         }
     } catch (error) {
 
         return {
             props: {
                 arts: [],
-                error: error.message
+                error: error.message,
+                ...(await serverSideTranslations(locale, ['home'])),
             }
         }
     }

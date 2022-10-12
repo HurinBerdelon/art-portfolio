@@ -10,7 +10,6 @@ import { toastSuccess } from "../../../services/toastProvider";
 export function SocialMediaLinks(): JSX.Element {
 
     const { t } = useTranslation()
-    // TODO: copy email to clipboard. Copy share link to clipboard in [id] page
 
     function handleCopyToClipboard() {
         toastSuccess(t('common:emailCopied'))

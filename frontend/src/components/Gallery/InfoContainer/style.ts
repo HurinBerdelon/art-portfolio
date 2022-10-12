@@ -22,10 +22,12 @@ export const Container = styled.section`
         .dateInfo {
             font-size: .85rem;
             font-style: italic;
+            text-transform: capitalize;
         }
 
         .categoryInfo {
             text-transform: capitalize;
+            font-weight: 400;
         }
 
         .descriptionInfo {
@@ -47,6 +49,14 @@ export const Container = styled.section`
         .infos {
             h2 {
                 margin-bottom: 1rem;
+            }
+
+            .dateInfo {
+                font-size: 1rem;
+            }
+
+            .categoryInfo, .descriptionIndo {
+                font-size: 1.125rem;
             }
         }
     }

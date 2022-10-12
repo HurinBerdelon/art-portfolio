@@ -6,6 +6,7 @@ import UndoIcon from '@mui/icons-material/Undo';
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { Container } from "./style";
 import { FormikErrors } from "formik";
+import { useTranslation } from "next-i18next";
 
 interface ErrorProps {
     title?: string;
@@ -31,6 +32,7 @@ export function DropImage({
 }: DropImageProps): JSX.Element {
 
     const dropzoneRef = createRef<DropzoneRef>()
+    const { t } = useTranslation()
 
     return (
         <Container>
@@ -57,7 +59,7 @@ export function DropImage({
                             className={previewClassName === 'square' ? 'previewZone' : 'previewZoneCircle'}
                         >
                             <img className="preview" src={preview} alt="art preview" />
-                            <Tooltip title='Delete Preview'>
+                            <Tooltip title={t('admin:deletePreview')}>
                                 <DeleteIcon
                                     className="removeButton"
                                     onClick={() => setPreview('')}
@@ -82,8 +84,8 @@ export function DropImage({
                                 }}
                             />}
                             {isDragActive ?
-                                <p>Drop the file Here</p> :
-                                <p>Click or Drag 'n Drop file here</p>}
+                                <p>{t('admin:dropHere')}</p> :
+                                <p>{t('admin:dragAndDrop')}</p>}
 
                             {errors.file && <div className="errorMessage">{String(errors.file)}</div>}
                         </div>

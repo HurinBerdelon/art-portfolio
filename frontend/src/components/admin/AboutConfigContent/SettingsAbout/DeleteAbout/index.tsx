@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useTextContent } from "../../../../../hooks/useTextContent";
 import { TextContentSchema } from "../../../../../schemas/TextContent";
 import { Container } from "./style";
@@ -11,6 +12,7 @@ interface DeleteAboutProps {
 export function DeleteAbout({ textContentOnUpdate, onRequestClose, setIsCardFlipped }: DeleteAboutProps): JSX.Element {
 
     const { deleteTextContent } = useTextContent()
+    const { t } = useTranslation()
 
     function handleDeleteAbout() {
         deleteTextContent(textContentOnUpdate.id)
@@ -20,23 +22,22 @@ export function DeleteAbout({ textContentOnUpdate, onRequestClose, setIsCardFlip
     return (
         <Container>
 
-            <h2>Delete About Content</h2>
+            <h2>{t('admin:deleteAboutContent')}</h2>
             <p>
-                Are you sure you want to delete
-                this content?
+                {t('admin:deleteAboutConfirmation')}
             </p>
             <div className="buttons">
                 <button
                     className="cancelButton"
                     onClick={() => setIsCardFlipped(false)}
                 >
-                    Cancel
+                    {t('admin:cancel')}
                 </button>
                 <button
                     className="confirmButton"
                     onClick={handleDeleteAbout}
                 >
-                    Confirm
+                    {t('admin:confirm')}
                 </button>
 
             </div>

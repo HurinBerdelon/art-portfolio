@@ -1,5 +1,6 @@
 import { Popover } from "@headlessui/react";
 import InfoIcon from '@mui/icons-material/Info';
+import { useTranslation } from "next-i18next";
 import { Container } from "./style";
 
 interface AboutTipsProps {
@@ -7,6 +8,9 @@ interface AboutTipsProps {
 }
 
 export function AboutTips({ category }: AboutTipsProps): JSX.Element {
+
+    const { t } = useTranslation()
+
     return (
         <Container>
             <Popover>
@@ -17,15 +21,12 @@ export function AboutTips({ category }: AboutTipsProps): JSX.Element {
                     {category === 'aboutYourself'
                         ? (
                             <p>
-                                Good about pages contain information of who you are and your history,
-                                related to the context of your portfolio.
+                                {t('admin:aboutYourselfInfo')}
                             </p>
                         )
                         : (
                             <p>
-                                On the content of your business it is a good idea t o talk about its history,
-                                how it came to life and what products or services you are offering, highlighting its benefits,
-                                as long as talk about your mission with this business.
+                                {t('admin:aboutBusinessInfo')}
                             </p>
                         )
                     }

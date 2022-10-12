@@ -6,6 +6,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import BLOCK_TYPES from '../../../../config/richText/blockTypes'
 import INLINE_STYLES from '../../../../config/richText/inlineTypes'
+import { useTranslation } from "next-i18next";
 
 interface RichTextEditorProps {
     prevContent?: string
@@ -14,6 +15,7 @@ interface RichTextEditorProps {
 
 export function RichTextEditor({ prevContent = '', setHtmlContent }: RichTextEditorProps): JSX.Element {
 
+    const { t } = useTranslation()
     const [editorState, setEditorState] = useState<EditorState>()
     const [editor, setEditor] = useState(false)
     const [activeStates, setActiveStates] = useState({

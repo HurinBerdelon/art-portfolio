@@ -4,12 +4,14 @@ import { Form, Formik, FormikValues } from "formik";
 import { useEffect, useState } from "react";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useArts } from "../../../../hooks/useArts";
-import { ArtSchema, saveArtYupSchema, updateArtYupSchema } from "../../../../schemas/Art";
+import { ArtSchema, createArtSchemas } from "../../../../schemas/Art";
 import { revalidateSSG } from "../../../../services/revalidate";
 import { toastError, toastSuccess } from "../../../../services/toastProvider";
 import { DropImage } from "../../ArtForms/DropImage";
 import { InputZone } from "../../ArtForms/InputZone";
 import { Container } from "./style";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const UPDATE_ART = gql`
     mutation(
@@ -71,6 +73,10 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     const [updateArt] = useMutation(UPDATE_ART)
     const [updateArtImage] = useMutation(UPDATE_ART_IMAGE)
     const [preview, setPreview] = useState<string>()
+    const { t } = useTranslation()
+    const { locale } = useRouter()
+
+    const { saveArtYupSchema, updateArtYupSchema } = createArtSchemas(locale)
 
     function createPreview() {
         setPreview(art.image)
@@ -142,7 +148,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
 
     return (
         <Container>
-            <h2>Update Art</h2>
+            <h2>{t('admin:updateArt')}</h2>
             <Formik
                 initialValues={initialValues}
                 onSubmit={values => handleSubmitForm(values)}
@@ -172,7 +178,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
-                Delete Art
+                {t('admin:deleteArt')}
                 <ArrowRightAltIcon />
             </button>
         </Container>

@@ -11,6 +11,8 @@ import { ArtProvider } from "../../hooks/useArts";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { AdminLinks } from "../../components/admin/AdminLinks";
 import { NavBar } from "../../components/NavBar";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { DesktopHeader } from "../../components/Header/DesktopHeader";
 
 export default function Admin(): JSX.Element {
 
@@ -26,6 +28,7 @@ export default function Admin(): JSX.Element {
                 <ArtProvider>
                     <Container>
                         <Header />
+                        <DesktopHeader />
                         <NavBar />
                         <div className="contentContainer">
                             <AdminLinks />
@@ -45,7 +48,7 @@ interface UserProps {
     isNewUser: string
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
 
 
     const session = await getSession({ req })
@@ -85,7 +88,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
     return {
         props: {
-            session
+            session,
+            ...(await serverSideTranslations(locale, ['admin', 'common'])),
         }
     }
 }

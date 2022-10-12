@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import ReactHtmlParser from 'react-html-parser'
 import { TextContentSchema } from "../../schemas/TextContent";
@@ -10,6 +11,7 @@ interface AboutContentProps {
 export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
 
     const { locale } = useRouter()
+    const { t } = useTranslation()
 
     const aboutYourself = {
         image: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.imageUrl,
@@ -23,7 +25,7 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
 
     return (
         <Container>
-            <h1>About</h1>
+            <h1>{t('common:about')}</h1>
 
             {aboutYourself.text
                 ? (<div className="aboutYourselfContent">
@@ -36,7 +38,7 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
                     </div>
                 </div>)
                 : (
-                    <p>Section under construction</p>
+                    <p>{t('common:underConstruction')}</p>
                 )
             }
 
@@ -51,7 +53,7 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
                     </div>
                 </div>)
                 : (
-                    <p>Section under construction</p>
+                    <p>{t('common:underConstruction')}</p>
                 )
             }
         </Container>

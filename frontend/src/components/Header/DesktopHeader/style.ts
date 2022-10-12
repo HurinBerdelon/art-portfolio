@@ -16,6 +16,7 @@ export const Container = styled.header`
         justify-content: space-evenly;
         align-items: center;
         gap: 1rem;
+        box-shadow: 0.05rem 0.05rem 0.5rem ${props => props.theme.colors.boxTwo};
     }
 
 `

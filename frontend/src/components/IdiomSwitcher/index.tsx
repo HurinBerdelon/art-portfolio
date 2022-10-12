@@ -19,7 +19,7 @@ export function IdiomSwitcher(): JSX.Element {
                 <Popover.Panel>
                     <ul className="availableIdioms">
                         {i18n.locales.map(locale => (
-                            <li>
+                            <li key={locale}>
                                 <Link href={router.asPath} locale={locale}>
                                     <a>
                                         <span>{languages[locale].flag}</span>

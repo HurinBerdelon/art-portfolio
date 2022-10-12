@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         return {
             props: {
                 arts: data.arts,
-                ...(await serverSideTranslations(locale, ['home'])),
+                ...(await serverSideTranslations(locale, ['common'])),
             },
             revalidate: 60 * 60 * 24, // = 24 hours
         }
@@ -83,7 +83,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             props: {
                 arts: [],
                 error: error.message,
-                ...(await serverSideTranslations(locale, ['home'])),
+                ...(await serverSideTranslations(locale, ['common'])),
             }
         }
     }

@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { useTranslation } from "next-i18next";
 import { useArts } from "../../../../hooks/useArts";
 import { ArtSchema } from "../../../../schemas/Art";
 import { apolloClient } from "../../../../services/apolloClient";
@@ -15,6 +16,7 @@ interface DeleteArtProps {
 export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtProps): JSX.Element {
 
     const { arts, setArts } = useArts()
+    const { t } = useTranslation()
 
     function handleDeleteArt() {
         apolloClient.query({
@@ -38,23 +40,23 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
 
     return (
         <Container>
-            <h2>Delete Art</h2>
+            <h2>{t('admin:deleteArt')}</h2>
             <p>
-                Are you sure you want to delete
-                <span> {`art: ${art.title} ?`}</span>
+                {t('admin:deleteArtConfirmation')}
+                <span> {`${t('admin:art')}: ${art.title} ?`}</span>
             </p>
             <div className="buttons">
                 <button
                     className="cancelButton"
                     onClick={() => setIsCardFlipped(false)}
                 >
-                    Cancel
+                    {t('admin:cancel')}
                 </button>
                 <button
                     className="confirmButton"
                     onClick={handleDeleteArt}
                 >
-                    Confirm
+                    {t('admin:confirm')}
                 </button>
 
             </div>

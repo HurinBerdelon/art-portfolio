@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useCategory } from "../../../../hooks/useCategory";
 import { CategorySchema } from "../../../../schemas/Category";
 import { Container } from "./style";
@@ -11,6 +12,7 @@ interface DeleteCategoryProps {
 export function DeleteCategory({ category, onRequestClose, setIsCardFlipped }: DeleteCategoryProps): JSX.Element {
 
     const { deleteCategory } = useCategory()
+    const { t } = useTranslation()
 
     function handleDeleteCategory() {
         deleteCategory(category.id)
@@ -21,23 +23,23 @@ export function DeleteCategory({ category, onRequestClose, setIsCardFlipped }: D
     return (
         <Container>
 
-            <h2>Delete Category</h2>
+            <h2>{t('admin:deleteCategory')}</h2>
             <p>
-                Are you sure you want to delete
-                <span> {`category: ${category.title} ?`}</span>
+                {t('admin:deleteCategoryConfirmation')}
+                <span> {`${t('admin:category')}: ${category.title} ?`}</span>
             </p>
             <div className="buttons">
                 <button
                     className="cancelButton"
                     onClick={() => setIsCardFlipped(false)}
                 >
-                    Cancel
+                    {t('admin:cancel')}
                 </button>
                 <button
                     className="confirmButton"
                     onClick={handleDeleteCategory}
                 >
-                    Confirm
+                    {t('admin:confirm')}
                 </button>
 
             </div>

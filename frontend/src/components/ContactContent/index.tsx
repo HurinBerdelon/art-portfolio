@@ -5,15 +5,18 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import EmailIcon from '@mui/icons-material/Email';
 import { ContactForm } from "./ContactForm";
 import { Container } from "./style";
+import { useTranslation } from 'next-i18next';
 
 export function ContactContent(): JSX.Element {
+
+    const { t } = useTranslation()
 
     return (
         <Container>
             <div className="imageContainer">
                 <img src="/images/contact-us.png" alt="contact us" />
             </div>
-            <h1>Get in Touch with me</h1>
+            <h1>{t('common:getInTouch')}</h1>
             {/* <ContactForm /> */}
 
             <div className="contactInfos">

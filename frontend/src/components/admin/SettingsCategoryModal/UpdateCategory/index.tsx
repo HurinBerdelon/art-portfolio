@@ -6,6 +6,8 @@ import { useCategory } from "../../../../hooks/useCategory";
 import { CategorySchema } from "../../../../schemas/Category";
 import { Container } from "./style";
 import { languages } from "../../../../config/languages";
+import { useTranslation } from "next-i18next";
+import { validationErrorMessages } from "../../../../schemas/validationErrorMessages";
 
 interface UpdateCategoryProps {
     category: CategorySchema
@@ -16,7 +18,8 @@ interface UpdateCategoryProps {
 export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: UpdateCategoryProps): JSX.Element {
 
     const { updateCategory, updateTranslation } = useCategory()
-    const { locales } = useRouter()
+    const { locales, locale } = useRouter()
+    const { t } = useTranslation()
 
     const handleSubmitForm = (values: FormikValues) => {
 
@@ -50,12 +53,12 @@ export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: U
     })
 
     const saveCategorySchema = yup.object().shape({
-        en: yup.string().required('Title is required'),
+        en: yup.string().required(validationErrorMessages.title[locale]),
     })
 
     return (
         <Container>
-            <h2>Update Category</h2>
+            <h2>{t('admin:updateCategory')}</h2>
             <Formik
                 initialValues={initialValues}
                 onSubmit={values => handleSubmitForm(values)}
@@ -84,7 +87,7 @@ export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: U
                                         <Field
                                             type="text"
                                             name={locale}
-                                            placeholder={errors[locale] ? errors[locale] : `${locale} translation`}
+                                            placeholder={errors[locale] ? errors[locale] : `${locale} ${t('admin:translation')}`}
                                             className={errors[locale] ? 'errorMessage' : ''}
                                         />
                                     </div>
@@ -92,7 +95,7 @@ export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: U
                             }
                         })}
 
-                        <button className='buttonSubmit' type="submit">Save</button>
+                        <button className='buttonSubmit' type="submit">{t('admin:save')}</button>
                     </Form>
                 )}
             </Formik>
@@ -100,7 +103,7 @@ export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: U
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
-                Delete Category
+                {t('admin:deleteCategory')}
                 <ArrowRightAltIcon />
             </button>
         </Container>

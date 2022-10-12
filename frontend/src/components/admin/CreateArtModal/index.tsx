@@ -1,9 +1,11 @@
 import { useMutation, gql } from "@apollo/client"
 import { Dialog } from "@headlessui/react"
 import { Form, Formik, FormikValues } from "formik"
+import { useTranslation } from "next-i18next"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useArts } from "../../../hooks/useArts"
-import { ArtSchema, saveArtYupSchema } from "../../../schemas/Art"
+import { ArtSchema, createArtSchemas } from "../../../schemas/Art"
 import { revalidateSSG } from "../../../services/revalidate"
 import { toastSuccess } from "../../../services/toastProvider"
 import { ModalContentOverlay } from "../../../styles/global"
@@ -50,6 +52,11 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
     const [saveArt] = useMutation(CREATE_ART)
     const { setArts, arts } = useArts()
     const [preview, setPreview] = useState<string>()
+    const { t } = useTranslation()
+
+    const { locale } = useRouter()
+
+    const { saveArtYupSchema } = createArtSchemas(locale)
 
     useEffect(() => {
         setPreview('')
@@ -110,7 +117,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
-                    <h2>Save New Art</h2>
+                    <h2>{t('admin:saveNewArt')}</h2>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}

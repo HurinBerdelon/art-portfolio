@@ -1,6 +1,4 @@
-import { Router } from 'next/router'
-import * as yup from 'yup'
-interface TranslationSchema {
+export interface TranslationSchema {
     id: string
     title: string
     language: string

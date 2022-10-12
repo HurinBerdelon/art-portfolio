@@ -2,10 +2,12 @@ import { signIn, useSession } from "next-auth/react";
 import KeyIcon from '@mui/icons-material/Key';
 import { Container } from "./style";
 import { ActiveLink } from "../ActiveLink";
+import { useTranslation } from "next-i18next";
 
 export function AdminLink(): JSX.Element {
 
     const { data: session } = useSession()
+    const { t } = useTranslation()
 
     return (
         <Container>
@@ -21,7 +23,7 @@ export function AdminLink(): JSX.Element {
                 />
             }
 
-            <p>by Fernando Cardozo</p>
+            <p>{t('common:by')} Fernando Cardozo</p>
         </Container>
     )
 }

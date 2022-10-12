@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import { TextContentSchema } from "../../../schemas/TextContent";
 import { CreateAbout } from "./CreateAbout";
 import { SettingsAbout } from "./SettingsAbout";
+import { useTranslation } from "next-i18next";
 
 export function AboutConfigContent(): JSX.Element {
 
@@ -24,6 +25,7 @@ export function AboutConfigContent(): JSX.Element {
     const [idiomOnUpdate, setIdiomOnUpdate] = useState('')
     const [textContentOnUpdate, setTextContentOnUpdate] = useState<TextContentSchema>()
     const { locales } = useRouter()
+    const { t } = useTranslation()
 
     useEffect(() => {
         apolloClient.query({
@@ -46,16 +48,16 @@ export function AboutConfigContent(): JSX.Element {
     return (
         <Container>
             <h3 className="pageTitle">
-                About Page Content
+                {t('admin:aboutPageContent')}
                 <Popover>
                     <Popover.Button>
                         <InfoIcon />
                     </Popover.Button>
                     <Popover.Panel>
                         <p className="pageDescription">
-                            The about page can have two sections, one to talk about yourself and one to talk about your business.
-                            Here they are separeted for this sections and for the idioms present on your portfolio.<br />
-                            * The date that appears is the last update date, so you can know if a section is up to date.
+                            {t('admin:aboutInfo')}
+                            <br />
+                            {t('admin:dateAlert')}
                         </p>
                     </Popover.Panel>
                 </Popover>
@@ -72,7 +74,7 @@ export function AboutConfigContent(): JSX.Element {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>About Yourself</td>
+                        <td>{t('admin:aboutYourself')}</td>
                         {locales.map(locale => {
                             const textContent = textContents
                                 .find(item => item.idiom === locale && item.type === 'aboutYourself')
@@ -110,7 +112,7 @@ export function AboutConfigContent(): JSX.Element {
                         })}
                     </tr>
                     <tr>
-                        <td>About Business</td>
+                        <td>{t('admin:aboutBusiness')}</td>
                         {locales.map(locale => {
 
                             const textContent = textContents

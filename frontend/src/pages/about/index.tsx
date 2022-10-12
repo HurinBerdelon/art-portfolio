@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { AboutContent } from "../../components/AboutContent";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { DesktopHeader } from "../../components/Header/DesktopHeader";
 import { NavBar } from "../../components/NavBar";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { TextContentSchema } from "../../schemas/TextContent";
@@ -28,6 +30,7 @@ export default function About({ aboutContent }: AboutProps): JSX.Element {
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
+                    <DesktopHeader />
                     <NavBar />
                     <AboutContent aboutContent={aboutContent} />
                     <Footer />
@@ -37,7 +40,7 @@ export default function About({ aboutContent }: AboutProps): JSX.Element {
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     try {
         const { data } = await apolloClient.query({
@@ -57,21 +60,19 @@ export const getStaticProps: GetStaticProps = async () => {
 
         return {
             props: {
-                aboutContent: data.getTextContentsByPage
+                aboutContent: data.getTextContentsByPage,
+                ...(await serverSideTranslations(locale, ['common'])),
             },
-            revalidate: 60 * 60 * 24 // = 24 hours
+            revalidate: 60 * 60 * 24, // = 24 hours
         }
     } catch (error) {
 
         return {
             props: {
                 arts: [],
-                error: error.message
+                error: error.message,
+                ...(await serverSideTranslations(locale, ['common'])),
             }
         }
-    }
-
-    return {
-        props: {}
     }
 }

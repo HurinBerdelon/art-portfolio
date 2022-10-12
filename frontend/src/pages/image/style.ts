@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     height: 100%;
+    width: 100%;
     background: ${props => props.theme.colors.backgroundOne};
     display: flex;
     flex-direction: column;
@@ -17,6 +18,14 @@ export const Container = styled.div`
         @media (min-width: 1024px) {
             flex-direction: row;
             padding: 1rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        flex-direction: row;
+
+        main {
+            flex: 1;
         }
     }
 `

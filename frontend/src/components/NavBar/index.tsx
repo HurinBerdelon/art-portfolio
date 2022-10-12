@@ -3,8 +3,6 @@ import Link from "next/link";
 import { Navigation } from "../Navigation";
 import { Container } from "./style";
 
-import logoImg from 'images/colored_logo.png'
-
 export function NavBar(): JSX.Element {
     return (
         <Container>

@@ -6,6 +6,8 @@ import { ThemeProvider } from "styled-components"
 import { ImageContainer } from "../../components/Gallery/ImageContainer"
 import { InfoContainer } from "../../components/Gallery/InfoContainer"
 import { Header } from "../../components/Header"
+import { DesktopHeader } from "../../components/Header/DesktopHeader"
+import { NavBar } from "../../components/NavBar"
 import { useCurrentTheme } from "../../hooks/useTheme"
 import { ArtSchema } from "../../schemas/Art"
 import { apolloClient } from "../../services/apolloClient"
@@ -28,6 +30,8 @@ export default function SinglePicture({ art }: SinglePictureProps): JSX.Element 
             <ThemeProvider theme={currentTheme}>
                 <Container>
                     <Header />
+                    <NavBar />
+                    <DesktopHeader />
                     <main>
                         <ImageContainer shouldRenderButtons={false} currentArt={art} />
                         <InfoContainer currentArt={art} />
@@ -65,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
         props: {
             art: data.artById,
-            ...(await serverSideTranslations(context.locale, ['home'])),
+            ...(await serverSideTranslations(context.locale, ['common'])),
         }
     }
 }

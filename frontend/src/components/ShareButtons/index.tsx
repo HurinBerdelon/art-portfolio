@@ -7,6 +7,7 @@ import { Container } from "./style";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { Popover } from "@headlessui/react";
 import { toastSuccess } from "../../services/toastProvider";
+import { useTranslation } from "next-i18next";
 
 interface ShareButtonProps {
     currentPictureId: string
@@ -14,15 +15,17 @@ interface ShareButtonProps {
 
 export function ShareButton({ currentPictureId }: ShareButtonProps): JSX.Element {
 
+    const { t } = useTranslation()
+
     function handleCopyToClipboard() {
-        toastSuccess('Link Copied to clipboard, but not yet')
+        toastSuccess(t('common:copyToClipboard'))
     }
 
     return (
         <Container>
             <Popover>
                 <Popover.Button className='shareMediaButton'>
-                    <h3>Share</h3>
+                    <h3>{t('common:share')}</h3>
                     <ShareIcon />
                 </Popover.Button>
                 <Popover.Panel>
@@ -42,7 +45,7 @@ export function ShareButton({ currentPictureId }: ShareButtonProps): JSX.Element
                         <CopyToClipboard text={`${process.env.NEXT_PUBLIC_APP_ENDPOINT}/image/${currentPictureId}`}>
                             <button className="copyPaste" onClick={handleCopyToClipboard} >
                                 <ContentCopyIcon />
-                                <h4>Copy Link</h4>
+                                <h4>{t('common:copyLink')}</h4>
                             </button>
                         </CopyToClipboard>
 

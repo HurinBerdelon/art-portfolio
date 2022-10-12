@@ -1,8 +1,11 @@
 import { Field, Form, Formik, FormikValues } from "formik";
+import { useTranslation } from "next-i18next";
 import * as yup from 'yup'
 import { Container } from "./style";
 
 export function ContactForm(): JSX.Element {
+
+    const { t } = useTranslation()
 
     const contactSchema = yup.object().shape({
         name: yup.string().required('Name is Required'),
@@ -16,7 +19,7 @@ export function ContactForm(): JSX.Element {
         message: '',
     }
 
-    // TODO
+    // TODO: send email
     function handleSubmit(values: FormikValues) {
         console.log(values)
     }
@@ -30,7 +33,7 @@ export function ContactForm(): JSX.Element {
             >
                 {({ errors }) => (
                     <Form>
-                        <label htmlFor="name">Name:</label>
+                        <label htmlFor="name">{t('common:name')}:</label>
                         <Field
                             id='name'
                             type='text'
@@ -46,7 +49,7 @@ export function ContactForm(): JSX.Element {
                             placeholder={errors.email ? errors.email : "E-mail"}
                             className={errors.email ? 'errorMessage' : ''}
                         />
-                        <label htmlFor="message">Message:</label>
+                        <label htmlFor="message">{t('common:message')}:</label>
                         <Field
                             id='message'
                             as='textarea'
@@ -54,7 +57,7 @@ export function ContactForm(): JSX.Element {
                             placeholder={errors.message ? errors.message : "Message..."}
                             className={errors.message ? 'errorMessage' : ''}
                         />
-                        <button className="buttonSubmit" type="submit">Send</button>
+                        <button className="buttonSubmit" type="submit">{t('common:send')}</button>
                     </Form>
                 )}
 

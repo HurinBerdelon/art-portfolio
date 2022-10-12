@@ -1,4 +1,5 @@
 import { Field, FormikErrors } from "formik";
+import { useTranslation } from "next-i18next";
 import { useCategory } from "../../../../hooks/useCategory";
 import { Container } from "./style";
 
@@ -21,13 +22,14 @@ interface InputArtProps {
 export function InputZone({ errors, setFieldValue, initialValues }: InputArtProps): JSX.Element {
 
     const { categories } = useCategory()
+    const { t } = useTranslation()
 
     return (
         <Container>
             <Field
                 type="text"
                 name='title'
-                placeholder={errors.title ? errors.title : "Title"}
+                placeholder={errors.title ? errors.title : t('admin:title')}
                 className={errors.title ? 'errorMessage' : ''}
             />
 
@@ -39,7 +41,7 @@ export function InputZone({ errors, setFieldValue, initialValues }: InputArtProp
                 <option
                     disabled
                     value="default">
-                    {errors.categoryTitle ? errors.categoryTitle : "Category"}
+                    {errors.categoryTitle ? errors.categoryTitle : t('admin:category')}
                 </option>
                 {categories.map(category => (
                     <option
@@ -56,29 +58,29 @@ export function InputZone({ errors, setFieldValue, initialValues }: InputArtProp
             <Field
                 type="text"
                 name='uniqueCode'
-                placeholder={errors.uniqueCode ? errors.uniqueCode : "Unique Code"}
+                placeholder={errors.uniqueCode ? errors.uniqueCode : t('admin:uniqueCode')}
                 className={errors.uniqueCode ? 'errorMessage' : ''}
             />
             <Field
                 as='textarea'
                 name='description'
-                placeholder={errors.description ? errors.description : "Description"}
+                placeholder={errors.description ? errors.description : t('admin:description')}
                 className={errors.description ? 'errorMessage' : ''}
             />
             <Field
                 type="text"
                 name='dimension'
-                placeholder={errors.dimension ? errors.dimension : "Dimension"}
+                placeholder={errors.dimension ? errors.dimension : t('admin:dimension')}
                 className={errors.dimension ? 'errorMessage' : ''}
             />
             <Field
                 type="date"
                 name='productionDate'
-                placeholder={errors.productionDate ? errors.productionDate : "Production Date"}
+                placeholder={errors.productionDate ? errors.productionDate : t('admin:productionDate')}
                 className={errors.productionDate ? 'errorMessage' : ''}
             />
 
-            <button className='buttonSubmit' type="submit">Save</button>
+            <button className='buttonSubmit' type="submit">{t('admin:save')}</button>
         </Container>
     )
 }

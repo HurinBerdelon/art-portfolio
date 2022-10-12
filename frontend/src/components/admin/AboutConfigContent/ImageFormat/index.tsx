@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { Container } from "./style";
 
@@ -8,6 +9,7 @@ interface ImageFormatProps {
 export function ImageFormat({ setFieldValue }: ImageFormatProps): JSX.Element {
 
     const [format, setFormat] = useState('square')
+    const { t } = useTranslation()
 
     return (
         <Container>
@@ -19,7 +21,7 @@ export function ImageFormat({ setFieldValue }: ImageFormatProps): JSX.Element {
                     setFieldValue('imageFormat', 'square')
                 }}
             >
-                Square
+                {t('admin:square')}
             </button>
             <button
                 type="button"
@@ -29,7 +31,7 @@ export function ImageFormat({ setFieldValue }: ImageFormatProps): JSX.Element {
                     setFieldValue('imageFormat', 'circle')
                 }}
             >
-                Circle
+                {t('admin:circle')}
             </button>
         </Container>
     )

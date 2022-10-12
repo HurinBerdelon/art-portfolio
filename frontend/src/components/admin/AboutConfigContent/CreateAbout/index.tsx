@@ -1,10 +1,13 @@
 import { gql, useMutation } from "@apollo/client";
 import { Dialog } from "@headlessui/react";
 import { Form, Formik, FormikValues } from "formik";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import * as yup from 'yup'
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { useTextContent } from "../../../../hooks/useTextContent";
+import { validationErrorMessages } from "../../../../schemas/validationErrorMessages";
 import { revalidateSSG } from "../../../../services/revalidate";
 import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
@@ -57,6 +60,8 @@ export function CreateAbout({
     const [preview, setPreview] = useState('')
     const [createTextContent] = useMutation(CREATE_TEXT_CONTENT)
     const { setTextContents, textContents } = useTextContent()
+    const { t } = useTranslation()
+    const { locale } = useRouter()
 
     useEffect(() => {
         setPreview('')
@@ -86,7 +91,7 @@ export function CreateAbout({
     }
 
     const imageSchema = yup.object().shape({
-        file: yup.mixed().required('Image is Required').test('fileFormat', 'Image Only', value => {
+        file: yup.mixed().required(validationErrorMessages.file[locale]).test('fileFormat', validationErrorMessages.imageOnly[locale], value => {
             if (value) {
                 return availableImageTypes.includes(value.type)
             } else {
@@ -114,7 +119,7 @@ export function CreateAbout({
                     </button>
 
                     <h2>
-                        Create your <span> {category}</span> section
+                        {t('admin:createYour')} <span> {t(`admin:${category}`)}</span> {t('admin:section')}
                         <AboutTips category={category} />
                     </h2>
                     <Formik
@@ -138,7 +143,7 @@ export function CreateAbout({
                                 <div className="formContainer">
                                     <RichTextEditor setHtmlContent={setHtmlContent} />
                                     <button type='submit' className="buttonSubmit">
-                                        Save
+                                        {t('admin:save')}
                                     </button>
                                 </div>
                             </Form>

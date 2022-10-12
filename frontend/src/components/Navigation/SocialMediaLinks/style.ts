@@ -19,8 +19,29 @@ export const Container = styled.div`
     }
     
     a {
+        display: flex;
+        align-items: center;
+
         svg:hover {
             filter: brightness(0.8);
+        }
+    }
+
+    .sendMailDesktop {
+        display: none;
+    }
+
+    @media (min-width: 1024px) {
+        .sendMailDesktop {
+            display: flex;
+
+            svg:hover {
+                filter: brightness(0.8);
+            }
+        }
+
+        .sendMailMobile {
+            display: none;
         }
     }
 `

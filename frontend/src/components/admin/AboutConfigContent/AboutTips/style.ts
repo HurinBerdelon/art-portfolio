@@ -12,7 +12,7 @@ export const Container = styled.div`
 
     .content {
         position: absolute;
-        z-index: 1;
+        z-index: 2;
         background: ${props => props.theme.colors.backgroundTwo};
         
         min-width: 180px;
@@ -55,6 +55,10 @@ export const Container = styled.div`
         button {
             right: -3rem;
             top: 0.3rem;
+        }
+
+        .content {
+            right: -10rem;
         }
     }
 

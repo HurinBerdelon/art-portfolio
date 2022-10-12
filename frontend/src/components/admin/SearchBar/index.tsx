@@ -5,6 +5,7 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { Container } from "./style";
 import { useEffect } from "react";
+import { useTranslation } from "next-i18next";
 
 interface SearchBarProps {
     searchingFor: string
@@ -14,8 +15,8 @@ interface SearchBarProps {
 }
 
 const SEARCH_OPTIONS = [
-    { key: 'title', name: 'Title' },
-    { key: 'categoryTitle', name: 'Category' }
+    { key: 'title', name: 'title' },
+    { key: 'categoryTitle', name: 'category' }
 ]
 
 export function SearchBar({
@@ -25,13 +26,16 @@ export function SearchBar({
 }: SearchBarProps): JSX.Element {
 
     const currentSearch = SEARCH_OPTIONS.find(item => item.key === searchingFor)
+    const { t } = useTranslation()
 
     return (
         <Container>
             <Listbox value={searchingFor} onChange={setSearchingFor}>
                 <Listbox.Button>
-                    {currentSearch.name}
-                    <ArrowDropDownIcon />
+                    <>
+                        {t(`admin:${currentSearch.name}`)}
+                        <ArrowDropDownIcon />
+                    </>
                 </Listbox.Button>
                 <Listbox.Options className='options'>
                     {SEARCH_OPTIONS.map(option => (
@@ -43,12 +47,12 @@ export function SearchBar({
                                 selected
                                     ? (<span>
                                         <CheckBoxIcon />
-                                        {option.name}
+                                        {t(`admin:${option.name}`)}
                                     </span>
                                     )
                                     : (<span>
                                         <CheckBoxOutlineBlankIcon />
-                                        {option.name}
+                                        {t(`admin:${option.name}`)}
                                     </span>
                                     )
                             )}

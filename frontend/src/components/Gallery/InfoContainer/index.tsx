@@ -9,6 +9,8 @@ interface InfoContainerProps {
 
 export function InfoContainer({ currentArt }: InfoContainerProps): JSX.Element {
 
+    // TODO: create a util/formatDate function and format date by country
+
     return (
         <Container>
             <div className="infos">

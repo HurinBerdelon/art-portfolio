@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../../components/Gallery";
 import { Header } from "../../components/Header";
+import { DesktopHeader } from "../../components/Header/DesktopHeader";
 import { NavBar } from "../../components/NavBar";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { ArtSchema } from "../../schemas/Art";
@@ -31,6 +33,7 @@ export default function ByCategoryPage({ arts }: ByCategoryPageProps): JSX.Eleme
 
             <ThemeProvider theme={currentTheme}>
                 <Header />
+                <DesktopHeader />
                 <NavBar />
                 <Gallery arts={arts} />
             </ThemeProvider>
@@ -64,7 +67,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
     }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     const { category } = params
 
@@ -89,7 +92,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         return {
             props: {
                 arts: data.artsByCategory,
-                key: category
+                key: category,
+                ...(await serverSideTranslations(locale, ['common'])),
             },
             revalidate: 60 * 60 * 24 // = 24 hours
         }
@@ -98,7 +102,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         return {
             props: {
                 arts: [],
-                error: error.message
+                error: error.message,
+                ...(await serverSideTranslations(locale, ['common'])),
             }
         }
     }

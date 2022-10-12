@@ -6,6 +6,8 @@ import { ModalContentOverlay } from "../../../styles/global"
 import { Container } from "./style"
 import { languages } from '../../../config/languages'
 import { useCategory } from '../../../hooks/useCategory'
+import { useTranslation } from 'next-i18next'
+import { validationErrorMessages } from '../../../schemas/validationErrorMessages'
 
 interface CreateCategoryModalProps {
     isOpen: boolean
@@ -15,6 +17,8 @@ interface CreateCategoryModalProps {
 export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryModalProps): JSX.Element {
 
     const { createCategory } = useCategory()
+    const { t } = useTranslation()
+    const { locale } = useRouter()
 
     const handleSubmitForm = (values: FormikValues) => {
 
@@ -34,7 +38,7 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
     })
 
     const saveCategorySchema = yup.object().shape({
-        title: yup.string().required('Title is required'),
+        title: yup.string().required(validationErrorMessages.title[locale]),
     })
 
     return (
@@ -50,7 +54,7 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
                         <img src="/images/close.svg" alt="close-modal-button" />
                     </button>
 
-                    <h2>Create new Category</h2>
+                    <h2>{t('admin:createNewCategory')}</h2>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={values => handleSubmitForm(values)}
@@ -64,12 +68,12 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
                                     <Field
                                         type="text"
                                         name='title'
-                                        placeholder={errors.title ? errors.title : "Title"}
+                                        placeholder={errors.title ? errors.title : t('admin:title')}
                                         className={errors.title ? 'errorMessage' : ''}
                                     />
                                 </div>
 
-                                <button className='buttonSubmit' type="submit">Save</button>
+                                <button className='buttonSubmit' type="submit">{t('admin:save')}</button>
                             </Form>
                         )}
                     </Formik>

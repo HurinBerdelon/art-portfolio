@@ -13,6 +13,7 @@ import { AboutTips } from "../../AboutTips";
 import { ImageFormat } from "../../ImageFormat";
 import { RichTextEditor } from "../../RichTextEditor";
 import { Container } from "./style";
+import { useTranslation } from "next-i18next";
 
 const UPDATE_TEXT_CONTENT = gql`
     mutation(
@@ -69,6 +70,7 @@ export function UpdateAbout({
     const [updateTextContent] = useMutation(UPDATE_TEXT_CONTENT)
     const [updateTextContentImage] = useMutation(UPDATE_TEXT_CONTENT_IMAGE)
     const { setTextContents, textContents } = useTextContent()
+    const { t } = useTranslation()
 
     function createPreview() {
         setPreview(textContentOnUpdate.imageUrl)
@@ -144,7 +146,7 @@ export function UpdateAbout({
 
         <Container>
             <h2>
-                Update your <span> {textContentOnUpdate.type}</span> section
+                {t('admin:updateYour')} <span> {t(`admin:${textContentOnUpdate.type}`)}</span> {t('admin:section')}
                 <AboutTips category={textContentOnUpdate.type} />
             </h2>
             <Formik
@@ -181,7 +183,7 @@ export function UpdateAbout({
                 className="delete"
                 onClick={() => setIsCardFlipped(true)}
             >
-                Delete Art
+                {t('admin:deleteAbout')}
                 <ArrowRightAltIcon />
             </button>
         </Container >

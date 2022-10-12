@@ -8,6 +8,7 @@ import { ArtSchema } from "../../../schemas/Art";
 import { ArtInfo } from "../ArtInfo";
 import { CreateArtModal } from "../CreateArtModal";
 import { SettingsArtModal } from "../SettingsArtModal";
+import { useTranslation } from "next-i18next";
 
 export function ListOfArts(): JSX.Element {
 
@@ -16,6 +17,7 @@ export function ListOfArts(): JSX.Element {
     const [isCreateArtModalOpen, setIsCreateArtModalOpen] = useState(false)
     const [isUpdateArtModalOpen, setIsUpdateArtModalOpen] = useState(false)
     const [artBeeingUpdated, setArtBeeingUpdated] = useState<ArtSchema>(null)
+    const { t } = useTranslation()
 
     const { arts } = useArts()
 
@@ -59,9 +61,9 @@ export function ListOfArts(): JSX.Element {
                                 onClick={() => setIsCreateArtModalOpen(true)}
                             />
                         </th>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Category</th>
+                        <th>{t('admin:image')}</th>
+                        <th>{t('admin:title')}</th>
+                        <th>{t('admin:category')}</th>
                     </tr>
                 </thead>
                 <tbody>

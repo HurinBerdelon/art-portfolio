@@ -9,6 +9,7 @@ import { apolloClient } from '../../../services/apolloClient';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 import { useCurrentTheme } from '../../../hooks/useTheme';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const UPDATE_USER = gql`
     mutation UpdateUser(
@@ -100,7 +101,7 @@ interface UserProps {
     isNewUser: string
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
 
     const session = await getSession({ req })
 
@@ -138,6 +139,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     }
 
     return {
-        props: {}
+        props: {
+            ...(await serverSideTranslations(locale, ['admin', 'common'])),
+        }
     }
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useState } from "react";
 import { ArtSchema } from "../../schemas/Art";
@@ -13,11 +14,12 @@ export function Gallery({ arts }: GalleryProps): JSX.Element {
     const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>(arts)
     const [currentArt, setCurrentArt] = useState<ArtSchema>(null)
     const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
+    const { t } = useTranslation()
 
     if (arts.length === 0) {
         return (
             <NoArtsContainer>
-                No arts Here yet
+                {t('common:nothingHereYet')}
             </NoArtsContainer>
         )
     }

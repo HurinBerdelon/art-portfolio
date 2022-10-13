@@ -22,7 +22,9 @@ export function IdiomSwitcher(): JSX.Element {
                             <li key={locale}>
                                 <Link href={router.asPath} locale={locale}>
                                     <a>
-                                        <span>{languages[locale].flag}</span>
+                                        <span className={router.locale === locale ? '' : 'deactivated'}>
+                                            {languages[locale].flag}
+                                        </span>
                                         <span>{languages[locale].label}</span>
                                     </a>
                                 </Link>

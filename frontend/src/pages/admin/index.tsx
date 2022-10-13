@@ -7,14 +7,20 @@ import { gql } from "@apollo/client";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/Header";
 import { ListOfArts } from "../../components/admin/ListOfArts";
-import { ArtProvider } from "../../hooks/useArts";
+import { ArtProvider, useArts } from "../../hooks/useArts";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { AdminLinks } from "../../components/admin/AdminLinks";
 import { NavBar } from "../../components/NavBar";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { DesktopHeader } from "../../components/Header/DesktopHeader";
+import { useEffect } from "react";
+import { ArtSchema } from "../../schemas/Art";
 
-export default function Admin(): JSX.Element {
+interface AdminProps {
+    arts: ArtSchema[]
+}
+
+export default function Admin({ arts }: AdminProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
 
@@ -32,7 +38,7 @@ export default function Admin(): JSX.Element {
                         <NavBar />
                         <div className="contentContainer">
                             <AdminLinks />
-                            <ListOfArts />
+                            <ListOfArts arts={arts} />
                         </div>
                     </Container>
                 </ArtProvider>
@@ -49,7 +55,6 @@ interface UserProps {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
-
 
     const session = await getSession({ req })
 
@@ -86,10 +91,40 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
         }
     }
 
-    return {
-        props: {
-            session,
-            ...(await serverSideTranslations(locale, ['admin', 'common'])),
+    try {
+        const { data } = await apolloClient.query({
+            query: gql`
+                query Arts {
+                    arts {
+                        id
+                        title
+                        categoryTitle
+                        description
+                        image
+                        dimension
+                        uniqueCode
+                        productionDate
+                    }
+                }
+            `
+        })
+
+        return {
+            props: {
+                arts: data.arts,
+                session,
+                ...(await serverSideTranslations(locale, ['admin', 'common'])),
+            }
+        }
+    } catch (error) {
+
+        return {
+            props: {
+                arts: [],
+                session,
+                error: error.message,
+                ...(await serverSideTranslations(locale, ['admin', 'common'])),
+            }
         }
     }
 }

@@ -11,15 +11,25 @@ import { useCurrentTheme } from "../hooks/useTheme";
 import { ArtSchema } from "../schemas/Art";
 import { apolloClient } from "../services/apolloClient"
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useArts } from "../hooks/useArts";
+import { useEffect } from "react";
+import { artsPerPage } from "../config/pagination";
 
 interface HomeProps {
     arts: ArtSchema[]
+    numberOfArts: number
 }
 
-export default function Home({ arts }: HomeProps): JSX.Element {
+export default function Home({ arts, numberOfArts }: HomeProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
+    const { setArts, fetchNextArtsPage } = useArts()
     const { t } = useTranslation()
+    // TODO: pagination
+
+    useEffect(() => {
+        setArts(arts)
+    }, [arts])
 
     return (
         <>
@@ -31,7 +41,7 @@ export default function Home({ arts }: HomeProps): JSX.Element {
                 <Header />
                 <DesktopHeader />
                 <NavBar />
-                <Gallery arts={arts} />
+                <Gallery fetchNextPage={fetchNextArtsPage} numberOfArts={numberOfArts} />
             </ThemeProvider>
         </>
     )
@@ -55,13 +65,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     try {
         const { data } = await apolloClient.query({
             query: gql`
-                query Arts {
-                    arts {
+                query ArtsPaginated {
+                    artsPaginated (take: 5, skip: 0) {
                         id
                         title
                         categoryTitle
                         description
-                        image 
+                        image
                         dimension
                         uniqueCode
                         productionDate
@@ -70,9 +80,18 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
             `
         })
 
+        const { data: numberOfArtsData } = await apolloClient.query({
+            query: gql`
+                query NumberOfArts {
+                    numberOfArts (categoryTitle: "undefined") 
+                }
+            `
+        })
+
         return {
             props: {
-                arts: data.arts,
+                arts: data.artsPaginated,
+                numberOfArts: numberOfArtsData.numberOfArts,
                 ...(await serverSideTranslations(locale, ['common'])),
             },
             revalidate: 60 * 60 * 24, // = 24 hours

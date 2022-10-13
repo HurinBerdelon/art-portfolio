@@ -8,6 +8,7 @@ import { SessionProvider } from 'next-auth/react'
 import { CurrentThemeProvider } from '../hooks/useTheme'
 import { TextContentProvider } from '../hooks/useTextContent'
 import { ToastContainer } from 'react-toastify'
+import { ArtProvider } from '../hooks/useArts'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -16,12 +17,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<ToastContainer />
 			<CurrentThemeProvider>
 				<SessionProvider>
-					<CategoryProvider>
-						<TextContentProvider>
-							<GlobalStyle />
-							<Component {...pageProps} />
-						</TextContentProvider>
-					</CategoryProvider>
+					<ArtProvider>
+						<CategoryProvider>
+							<TextContentProvider>
+								<GlobalStyle />
+								<Component {...pageProps} />
+							</TextContentProvider>
+						</CategoryProvider>
+					</ArtProvider>
 				</SessionProvider>
 			</CurrentThemeProvider>
 		</ApolloProvider>

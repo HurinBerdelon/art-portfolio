@@ -1,0 +1,1 @@
+export const artsPerPage = 5

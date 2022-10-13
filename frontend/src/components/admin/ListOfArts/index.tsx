@@ -10,7 +10,11 @@ import { CreateArtModal } from "../CreateArtModal";
 import { SettingsArtModal } from "../SettingsArtModal";
 import { useTranslation } from "next-i18next";
 
-export function ListOfArts(): JSX.Element {
+interface ListOfArtsProps {
+    arts: ArtSchema[]
+}
+
+export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
 
     const [searchingFor, setSearchingFor] = useState('title')
     const [currentInput, setCurrentInput] = useState('')
@@ -19,13 +23,7 @@ export function ListOfArts(): JSX.Element {
     const [artBeeingUpdated, setArtBeeingUpdated] = useState<ArtSchema>(null)
     const { t } = useTranslation()
 
-    const { arts } = useArts()
-
-    const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>()
-
-    useEffect(() => {
-        setArtsOnScreen(arts)
-    }, [arts])
+    const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>(arts)
 
     useEffect(() => {
         if (artsOnScreen) {

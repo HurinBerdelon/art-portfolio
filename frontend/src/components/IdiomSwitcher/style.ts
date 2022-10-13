@@ -41,6 +41,10 @@ export const Container = styled.div`
                     font-size: 1.125rem;
                     text-transform: capitalize;
                 }
+
+                .deactivated {
+                    filter: grayscale(0.8);
+                }
             }
 
             &:hover {

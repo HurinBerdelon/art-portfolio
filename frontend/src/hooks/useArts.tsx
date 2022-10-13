@@ -10,10 +10,8 @@ interface ArtProviderProps {
 interface ArtContextProps {
     arts: ArtSchema[]
     setArts(arts: ArtSchema[]): void
-    // saveArt(values: FormikValues): void
-    // updateArt(values: FormikValues): void
-    // updateArtImage(values: FormikValues): void
-    // deleteArt(id: string): void
+    fetchNextArtsPage: (skip: number, take: number) => void
+    fetchNextCategoryArtsPage: (category: string, skip: number, take: number) => void
 }
 
 const ArtContext = createContext<ArtContextProps>(
@@ -24,29 +22,52 @@ export function ArtProvider({ children }: ArtProviderProps) {
 
     const [arts, setArts] = useState<ArtSchema[]>()
 
-    useEffect(() => {
-
-        apolloClient.query({
+    async function fetchNextArtsPage(skip: number, take: number) {
+        const newPage = await apolloClient.query({
             query: gql`
-                query Arts {
-                    arts {
+            query ArtsPaginated {
+                artsPaginated (skip: ${skip}, take: ${take}) {
+                    id
+                    title
+                    categoryTitle
+                    description
+                    image
+                    dimension
+                    uniqueCode
+                    productionDate
+                }
+            }
+        `
+        })
+        setArts(prevArts => [...prevArts, ...newPage.data.artsPaginated])
+    }
+
+    async function fetchNextCategoryArtsPage(category: string, skip: number, take: number) {
+        const newPage = await apolloClient.query({
+            query: gql`
+            query ArtsByCategory {
+                artsByCategory(
+                        category: "${String(category).replace('-', '_')}",
+                        skip: ${skip},
+                        take: ${take}
+                    ) {
                         id
                         title
                         categoryTitle
                         description
-                        image
+                        image 
                         dimension
                         uniqueCode
                         productionDate
                     }
-                }
-            `
-        }).then(response => setArts(response.data.arts))
-            .catch(() => setArts([]))
-    }, [])
+            }
+        `
+        })
+        setArts(prevArts => [...prevArts, ...newPage.data.artsByCategory])
+    }
 
     return (
-        <ArtContext.Provider value={{ arts, setArts }}>
+        <ArtContext.Provider value={{ arts, setArts, fetchNextArtsPage, fetchNextCategoryArtsPage }}>
             {children}
         </ArtContext.Provider>
     )

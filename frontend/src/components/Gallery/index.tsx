@@ -1,22 +1,36 @@
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
 import { useState } from "react";
+import { artsPerPage } from "../../config/pagination";
+import { useArts } from "../../hooks/useArts";
 import { ArtSchema } from "../../schemas/Art";
 import { GalleryModal } from "./GalleryModal";
 import { Container, NoArtsContainer } from "./style";
 
 interface GalleryProps {
-    arts: ArtSchema[]
+    numberOfArts: number
+    fetchNextPage?: (skip: number, take: number) => void
+    fetchNextPageForCategory?: (category: string, skip: number, take: number) => void
+    categoryPage?: string
 }
 
-export function Gallery({ arts }: GalleryProps): JSX.Element {
+export function Gallery({ fetchNextPage, fetchNextPageForCategory, numberOfArts, categoryPage = undefined }: GalleryProps): JSX.Element {
 
-    const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>(arts)
+    const { arts } = useArts()
+    console.log('numberOfArts', numberOfArts)
+
     const [currentArt, setCurrentArt] = useState<ArtSchema>(null)
     const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
     const { t } = useTranslation()
 
-    if (arts.length === 0) {
+    function handleNextPage() {
+        if (categoryPage) fetchNextPageForCategory(categoryPage, currentPage * artsPerPage, artsPerPage)
+        else fetchNextPage(currentPage * artsPerPage, artsPerPage)
+        setCurrentPage(prevValue => prevValue + 1)
+    }
+
+    if (arts?.length === 0) {
         return (
             <NoArtsContainer>
                 {t('common:nothingHereYet')}
@@ -35,7 +49,7 @@ export function Gallery({ arts }: GalleryProps): JSX.Element {
                 setIsOpen={setIsGalleryModalOpen}
             />
 
-            {artsOnScreen.map(art => (
+            {arts?.map(art => (
                 <Link
                     href={`/image/${art.id}`}
                     key={art.id}
@@ -54,6 +68,12 @@ export function Gallery({ arts }: GalleryProps): JSX.Element {
                     </a>
                 </Link>
             ))}
+
+            {arts?.length < numberOfArts && (
+                <button onClick={handleNextPage}>
+                    Load More
+                </button>
+            )}
         </Container>
     )
 }

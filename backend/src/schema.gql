@@ -45,7 +45,8 @@ type Mutation {
 type Query {
   artById(id: String!): Art!
   arts: [Art!]!
-  artsByCategory(category: String!): [Art!]!
+  artsByCategory(category: String!, skip: Float!, take: Float!): [Art!]!
+  artsPaginated(skip: Float!, take: Float!): [Art!]!
   deleteArt(id: String!): Boolean!
   deleteCategory(id: String!): Boolean!
   deleteTextContent(id: String!): Boolean!
@@ -54,6 +55,7 @@ type Query {
   getTextContents: [TextContent!]!
   getTextContentsByPage(page: String!): [TextContent!]!
   getUser: [User!]!
+  numberOfArts(categoryTitle: String!): Float!
 }
 
 type TextContent {

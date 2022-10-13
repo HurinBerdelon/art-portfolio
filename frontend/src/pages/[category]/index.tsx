@@ -9,6 +9,7 @@ import { Gallery } from "../../components/Gallery";
 import { Header } from "../../components/Header";
 import { DesktopHeader } from "../../components/Header/DesktopHeader";
 import { NavBar } from "../../components/NavBar";
+import { artsPerPage } from "../../config/pagination";
 import { useArts } from "../../hooks/useArts";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { ArtSchema } from "../../schemas/Art";
@@ -88,7 +89,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
                     artsByCategory(
                         category: "${String(category).replace('-', '_')}",
                         skip: 0,
-                        take: 5
+                        take: ${artsPerPage}
                     ) {
                         id
                         title

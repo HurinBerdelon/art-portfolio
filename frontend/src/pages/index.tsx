@@ -66,7 +66,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         const { data } = await apolloClient.query({
             query: gql`
                 query ArtsPaginated {
-                    artsPaginated (take: 5, skip: 0) {
+                    artsPaginated (take: ${artsPerPage}, skip: 0) {
                         id
                         title
                         categoryTitle

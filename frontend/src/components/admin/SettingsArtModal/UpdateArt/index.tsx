@@ -76,6 +76,8 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     const { t } = useTranslation()
     const { locale } = useRouter()
 
+    console.log(arts)
+
     const { saveArtYupSchema, updateArtYupSchema } = createArtSchemas(locale)
 
     function createPreview() {
@@ -90,6 +92,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     const handleSubmitForm = (values: FormikValues) => {
 
         function sortArtsByDate(newArt: ArtSchema) {
+            console.log(arts)
             const tempArts = [...arts]
             const oldArt = arts.find(art => art.id === newArt.id)
             tempArts.splice(tempArts.indexOf(oldArt), 1, newArt)
@@ -133,7 +136,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
             sortArtsByDate(response.data.updateArt)
             toastSuccess(`${values.title} has been updated`)
             onRequestClose()
-        }).catch((error) => toastError(error.message))
+        }).catch((error) => console.log(error))
     }
 
     const initialValues = {

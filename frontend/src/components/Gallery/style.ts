@@ -10,37 +10,44 @@ export const NoArtsContainer = styled.div`
 `
 
 export const Container = styled.section`
+
+    background: ${props => props.theme.colors.backgroundOne};
     display: flex;
-    flex: 1;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
-    gap: 2rem;
-    width: 100%;
+    padding-bottom: .5rem;
     overflow-y: auto;
-    
-    background: ${props => props.theme.colors.backgroundOne};
 
-    .card {
-        width: calc(100% - 2rem);
+    .galleryContent {
+
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        gap: 2rem;
+        width: 100%;       
         
-        .content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            img {
+        .card {
+            width: calc(100% - 2rem);
+            
+            .content {
                 width: 100%;
-                max-height: 450px;
-                object-fit: contain;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    max-height: 450px;
+                    object-fit: contain;
+                }
+
             }
-
         }
-    }
 
-    @media (min-width: 1024px) {
+        @media (min-width: 1024px) {
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
@@ -51,7 +58,7 @@ export const Container = styled.section`
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                
+                    
                 @media (min-width: 1280px) {
                     width: calc((100% - 6rem)/4);
                 }
@@ -80,5 +87,19 @@ export const Container = styled.section`
                 }
             }
         }
+    }
+
+    .LoadMoreButton {
+        background: ${props => props.theme.colors.boxOne};
+        color: ${props => props.theme.colors.textThree};
+        width: fit-content;
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        font-weight: 400;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
 
 `

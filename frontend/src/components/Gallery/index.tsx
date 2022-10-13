@@ -49,28 +49,30 @@ export function Gallery({ fetchNextPage, fetchNextPageForCategory, numberOfArts,
                 setIsOpen={setIsGalleryModalOpen}
             />
 
-            {arts?.map(art => (
-                <Link
-                    href={`/image/${art.id}`}
-                    key={art.id}
-                >
-                    <a
-                        onClick={(event) => {
-                            event.preventDefault()
-                            setCurrentArt(art)
-                            setIsGalleryModalOpen(true)
-                        }}
-                        className='card'
+            <div className="galleryContent">
+                {arts?.map(art => (
+                    <Link
+                        href={`/image/${art.id}`}
+                        key={art.id}
                     >
-                        <div className='content'>
-                            <img src={art.image} alt={art.title} />
-                        </div>
-                    </a>
-                </Link>
-            ))}
+                        <a
+                            onClick={(event) => {
+                                event.preventDefault()
+                                setCurrentArt(art)
+                                setIsGalleryModalOpen(true)
+                            }}
+                            className='card'
+                        >
+                            <div className='content'>
+                                <img src={art.image} alt={art.title} />
+                            </div>
+                        </a>
+                    </Link>
+                ))}
+            </div>
 
             {arts?.length < numberOfArts && (
-                <button onClick={handleNextPage}>
+                <button className="LoadMoreButton" onClick={handleNextPage}>
                     Load More
                 </button>
             )}

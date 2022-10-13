@@ -12,6 +12,9 @@ interface ArtContextProps {
     setArts(arts: ArtSchema[]): void
     fetchNextArtsPage: (skip: number, take: number) => void
     fetchNextCategoryArtsPage: (category: string, skip: number, take: number) => void
+    fetchAllArts: () => void
+    count: number,
+    setCount: (count: number) => void
 }
 
 const ArtContext = createContext<ArtContextProps>(
@@ -21,6 +24,27 @@ const ArtContext = createContext<ArtContextProps>(
 export function ArtProvider({ children }: ArtProviderProps) {
 
     const [arts, setArts] = useState<ArtSchema[]>()
+    const [count, setCount] = useState(0)
+
+    async function fetchAllArts() {
+        const { data } = await apolloClient.query({
+            query: gql`
+                query Arts {
+                    arts {
+                        id
+                        title
+                        categoryTitle
+                        description
+                        image
+                        dimension
+                        uniqueCode
+                        productionDate
+                    }
+                }
+            `
+        })
+        setArts(data.arts)
+    }
 
     async function fetchNextArtsPage(skip: number, take: number) {
         const newPage = await apolloClient.query({
@@ -67,7 +91,10 @@ export function ArtProvider({ children }: ArtProviderProps) {
     }
 
     return (
-        <ArtContext.Provider value={{ arts, setArts, fetchNextArtsPage, fetchNextCategoryArtsPage }}>
+        <ArtContext.Provider value={{
+            arts, setArts, fetchNextArtsPage, fetchNextCategoryArtsPage, fetchAllArts, count,
+            setCount
+        }}>
             {children}
         </ArtContext.Provider>
     )

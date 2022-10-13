@@ -19,10 +19,12 @@ const UPDATE_TEXT_CONTENT = gql`
     mutation(
         $id: String!,
         $text: String!,
+        $imageFormat: String!
         ) {
             updateTextContent(
                 id: $id
                 text: $text, 
+                imageFormat: $imageFormat
             ){
                 id
                 page
@@ -85,6 +87,7 @@ export function UpdateAbout({
     }
 
     function updateText(values: FormikValues) {
+        console.log(values)
 
         if (values.file) {
             updateTextContentImage({
@@ -111,6 +114,7 @@ export function UpdateAbout({
                 imageFormat: values.imageFormat
             }
         }).then(response => {
+
             const index = textContents.findIndex(item => item.id === textContentOnUpdate.id)
             const tempTextContents = [...textContents]
 
@@ -139,7 +143,7 @@ export function UpdateAbout({
 
     const initialValues = {
         file: '',
-        imageFormat: 'square'
+        imageFormat: textContentOnUpdate.imageFormat
     }
 
     return (

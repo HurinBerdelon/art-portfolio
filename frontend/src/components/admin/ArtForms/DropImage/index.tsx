@@ -34,6 +34,8 @@ export function DropImage({
     const dropzoneRef = createRef<DropzoneRef>()
     const { t } = useTranslation()
 
+    // console.log(previewClassName)
+
     return (
         <Container>
             <Dropzone

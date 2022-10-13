@@ -38,6 +38,7 @@ export function AboutConfigContent(): JSX.Element {
                         idiom
                         imageUrl
                         updatedAt
+                        imageFormat
                     }
                 }
             `

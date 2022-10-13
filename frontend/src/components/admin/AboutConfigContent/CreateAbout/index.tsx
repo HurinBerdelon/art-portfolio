@@ -24,13 +24,15 @@ const CREATE_TEXT_CONTENT = gql`
         $page: String!
         $type: String!,
         $idiom: String!,
+        $imageFormat: String!
         ) {
             createTextContent(
                 file: $file,
                 text: $text, 
                 page: $page
                 type: $type, 
-                idiom: $idiom, 
+                idiom: $idiom,
+                imageFormat: $imageFormat
             ){
                 id
                 page

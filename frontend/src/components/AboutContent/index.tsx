@@ -15,12 +15,14 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
 
     const aboutYourself = {
         image: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.imageUrl,
-        text: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.text
+        text: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.text,
+        imageFormat: aboutContent.find(item => item.type === 'aboutYourself' && item.idiom === locale)?.imageFormat
     }
 
     const aboutBusiness = {
         image: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.imageUrl,
-        text: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.text
+        text: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.text,
+        imageFormat: aboutContent.find(item => item.type === 'aboutBusiness' && item.idiom === locale)?.imageFormat
     }
 
     return (
@@ -29,7 +31,7 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
 
             {aboutYourself.text
                 ? (<div className="aboutYourselfContent">
-                    <div className="imageContainer">
+                    <div className={aboutYourself.imageFormat === 'square' ? 'imageContainer' : 'imageContainerCircle'}>
                         <img src={aboutYourself.image} alt='About Yourself' />
                     </div>
 
@@ -44,7 +46,7 @@ export function AboutContent({ aboutContent }: AboutContentProps): JSX.Element {
 
             {aboutBusiness.text
                 ? (<div className="aboutBusinessContent">
-                    <div className="imageContainer">
+                    <div className={aboutYourself.imageFormat === 'square' ? 'imageContainer' : 'imageContainerCircle'}>
                         <img src={aboutBusiness.image} alt="About Products or Services" />
                     </div>
 

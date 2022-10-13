@@ -59,6 +59,11 @@ export const Container = styled.section`
 
         .imageContainer, .imageContainerCircle {
             margin: 0;
+            height: 350px;
+        }
+
+        .imageContainerCircle {
+            width: 350px;
         }
 
         .aboutYourselfContent, .aboutBusinessContent {

@@ -6,4 +6,5 @@ export interface TextContentSchema {
     idiom: string
     imageUrl: string
     updatedAt: Date
+    imageFormat: string
 }

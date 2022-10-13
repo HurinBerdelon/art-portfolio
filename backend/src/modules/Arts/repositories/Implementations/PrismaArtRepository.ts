@@ -40,14 +40,29 @@ export class PrismaArtRepository implements IArtsRepository {
         return art
     }
 
-    async getArtsByCategory(categoryTitle: string): Promise<Art[]> {
+    async getArtsByCategory(categoryTitle: string, skip: number, take: number): Promise<Art[]> {
         const arts = await this.artRepository.findMany({
             where: {
                 categoryTitle
             },
             orderBy: {
                 productionDate: 'desc'
-            }
+            },
+            skip,
+            take,
+
+        })
+
+        return arts
+    }
+
+    async getPaginatedArts(skip: number, take: number): Promise<Art[]> {
+        const arts = await this.artRepository.findMany({
+            orderBy: {
+                productionDate: 'desc'
+            },
+            skip,
+            take
         })
 
         return arts
@@ -57,10 +72,20 @@ export class PrismaArtRepository implements IArtsRepository {
         const arts = await this.artRepository.findMany({
             orderBy: {
                 productionDate: 'desc'
-            }
+            },
         })
 
         return arts
+    }
+
+    async getNumberOfArts(categoryTitle: string): Promise<number> {
+
+        if (categoryTitle === 'undefined') return await this.artRepository.count()
+        else return await this.artRepository.count({
+            where: {
+                categoryTitle
+            }
+        })
     }
 
     async updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<Art> {

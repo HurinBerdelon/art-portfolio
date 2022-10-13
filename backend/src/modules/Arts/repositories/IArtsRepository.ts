@@ -9,8 +9,10 @@ export interface IArtsRepository {
     getArtById(id: string): Promise<Art>
     getArtByUniqueCode(uniqueCode: string): Promise<Art>
 
-    getArtsByCategory(category: string): Promise<Art[]>
+    getArtsByCategory(category: string, skip: number, take: number): Promise<Art[]>
+    getPaginatedArts(skip: number, take: number): Promise<Art[]>
     getAllArts(): Promise<Art[]>
+    getNumberOfArts(categoryTitle: string): Promise<number>
 
     updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<Art>
     updateArtImage(id: string, image: string): Promise<Art>

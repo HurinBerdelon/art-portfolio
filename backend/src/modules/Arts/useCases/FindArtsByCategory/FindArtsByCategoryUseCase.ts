@@ -10,8 +10,8 @@ export class FindArtsByCategory {
         private artsRepository: IArtsRepository
     ) { }
 
-    async execute(categoryTitle: string): Promise<Art[]> {
-        const arts = await this.artsRepository.getArtsByCategory(categoryTitle)
+    async execute(categoryTitle: string, skip: number, take: number): Promise<Art[]> {
+        const arts = await this.artsRepository.getArtsByCategory(categoryTitle, skip, take)
 
         return arts
     }

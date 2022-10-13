@@ -1,0 +1,54 @@
+import styled from "styled-components";
+
+export const Container = styled.section`
+
+    margin-top: 1rem;
+
+    table {
+        width: 100%;
+
+        tbody tr, thead tr {
+            width: 100%;
+            padding: 0 0.5rem;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            td {
+                border-bottom: 1px dashed ${props => props.theme.colors.textOne};
+            }
+
+            .flags {
+                font-size: 1.65rem;
+            }
+
+            .settings {
+                display: flex;
+                justify-content: center;
+            }
+
+            th, td {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                color: ${props => props.theme.colors.textOne};
+                min-height: 40px;
+
+                svg {
+                    cursor: pointer;
+                    color: ${props => props.theme.colors.textOne};
+                }
+            }
+        }
+    }
+
+    @media (min-width: 1024px) {
+        table {
+            tbody tr, thead tr {
+                td, th {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+`

@@ -11,6 +11,10 @@ declare module 'styled-components' {
             boxOne: string,
             boxTwo: string,
 
+            buttons: string,
+            inputBG: string,
+            inputPlaceholder: string,
+
             textOne: string,
             textTwo: string,
             textThree: string,
@@ -18,6 +22,9 @@ declare module 'styled-components' {
             black: string,
             white: string,
             gray: string,
+
+            danger: string
         }
     }
 }
+

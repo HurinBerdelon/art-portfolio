@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from "react
 import { gql } from "@apollo/client";
 import { CategorySchema } from "../schemas/Category";
 import { apolloClient } from "../services/apolloClient";
+import { toastError, toastSuccess, toastWarn } from "../services/toastProvider";
 
 interface UpdateTranslationProps {
     title: string,
@@ -30,10 +31,17 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
 
     const [categories, setCategories] = useState<CategorySchema[]>()
 
-    let tempCategories: CategorySchema[]
+    let tempCategories: CategorySchema[] = []
 
     useEffect(() => {
-        // tempCategories = structuredClone(categories)
+        categories?.map(category => {
+            const tempCategory = {
+                id: category.id,
+                title: category.title,
+                Translations: [...category.Translations]
+            }
+            tempCategories.push(tempCategory)
+        })
     }, [categories])
 
     useEffect(() => {
@@ -53,15 +61,15 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                     }
                 }
             `
-        }).then(data => setCategories(data.data.getCategories))
+        }).then(response => setCategories(response.data.getCategories))
             .catch(() => setCategories([]))
     }, [])
 
     async function createCategory(title: string) {
-        const { data } = await apolloClient.mutate({
+        apolloClient.mutate({
             mutation: gql`
                 mutation CreateCategory {
-                    createCategory(title: "${title}") {
+                    createCategory (title: "${title}") {
                         id
                         title
                         createdAt
@@ -73,13 +81,16 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                     }
                 }
             `
-        })
+        }).then(response => {
+            setCategories(prevCategories => [...prevCategories, response.data.createCategory])
+            toastSuccess(`Category ${title} created!`)
+        }).catch(() => toastError(`Category ${title} already exists!`))
 
-        setCategories(prevCategories => [...prevCategories, data.createCategory])
+
     }
 
     async function updateCategory(id: string, title: string) {
-        const { data } = await apolloClient.mutate({
+        apolloClient.mutate({
             mutation: gql`
                 mutation UpdateCategory {
                     updateCategory(title: "${title}", id: "${id}") {
@@ -94,18 +105,19 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                     }
                 }
             `
-        })
+        }).then(response => {
+            const index = categories.findIndex(item => item.id === id)
+            const tempCategories = [...categories]
 
-        const index = categories.findIndex(item => item.id === id)
-        const tempCategories = [...categories]
+            tempCategories.splice(index, 1, response.data.updateCategory)
 
-        tempCategories.splice(index, 1, data.updateCategory)
-
-        setCategories(tempCategories)
+            setCategories(tempCategories)
+            toastSuccess(`Category ${title} was updated!`)
+        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }
 
     async function updateTranslation({ title, id, categoryTitle, language }: UpdateTranslationProps) {
-        const { data } = await apolloClient.mutate({
+        await apolloClient.mutate({
             mutation: gql`
                 mutation UpdateTranslation {
                     updateTranslation(
@@ -121,19 +133,21 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                     }
                 }
             `
-        })
+        }).then(response => {
+            const category = tempCategories.find(item => item.title === response.data.updateTranslation.categoryTitle)
+            const index = category?.Translations.findIndex(item => item.id === response.data.updateTranslation.id)
+            delete response.data.updateTranslation.categoryTitle
 
-        const category = tempCategories.find(item => item.title === data.updateTranslation.categoryTitle)
-        const index = category?.Translations.findIndex(item => item.id === data.updateTranslation.id)
-        delete data.updateTranslation.categoryTitle
-
-        if (index >= 0) {
-            category.Translations.splice(index, 1, data.updateTranslation)
-            setCategories(tempCategories)
-        } else {
-            category.Translations.push(data.updateTranslation)
-            setCategories(tempCategories)
-        }
+            if (index >= 0) {
+                console.log('adding now')
+                category.Translations.splice(index, 1, response.data.updateTranslation)
+                setCategories(tempCategories)
+            } else {
+                category.Translations.push(response.data.updateTranslation)
+                setCategories(tempCategories)
+            }
+            toastSuccess(`Translation ${title} was updated!`)
+        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }
 
     async function deleteCategory(id: string) {
@@ -150,9 +164,8 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
             tempCategories.splice(index, 1)
 
             setCategories(tempCategories)
-        }).catch(error => console.log(error.message))
-
-
+        }).then(() => toastSuccess(`Category deleted`))
+            .catch(() => toastError(`There are arts registered in this category, please delete them before delete the category`))
     }
 
     return (

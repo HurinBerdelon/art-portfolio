@@ -1,3 +1,4 @@
+import { Art } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { IArtsRepository, updateArtDTO } from '../../repositories/IArtsRepository';
 
@@ -8,20 +9,20 @@ export class EditArtUseCase {
         private artsRepository: IArtsRepository
     ) { }
 
-    async execute({ id, title, categoryTitle, dimension, uniqueCode, description, productionDate }: updateArtDTO): Promise<void> {
+    async execute({ id, title, categoryTitle, dimension, uniqueCode, description, productionDate }: updateArtDTO): Promise<Art> {
 
-        const art = await this.artsRepository.getArtById(id)
+        const artAlreadyExists = await this.artsRepository.getArtById(id)
         const artWithCode = await this.artsRepository.getArtByUniqueCode(uniqueCode)
 
-        if (!art) {
+        if (!artAlreadyExists) {
             throw new Error('Art not Found!')
         }
 
-        if (artWithCode && (art.id != artWithCode.id)) {
+        if (artWithCode && (artAlreadyExists.id != artWithCode.id)) {
             throw new Error(`Code: ${uniqueCode} is already taken for another art`)
         }
 
-        await this.artsRepository.updateArt({
+        const art = await this.artsRepository.updateArt({
             id,
             title,
             categoryTitle,
@@ -30,5 +31,7 @@ export class EditArtUseCase {
             productionDate,
             uniqueCode
         })
+
+        return art
     }
 }

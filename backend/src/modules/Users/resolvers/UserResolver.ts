@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import { container } from "tsyringe";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { User } from "../models/User";
@@ -26,6 +27,13 @@ export class UserResolver {
 
         const users = await getUsersUseCase.execute()
 
+        if (users.length === 0) {
+            const createUserUseCase = container.resolve(CreateUserUseCase)
+            const user = await createUserUseCase.execute('admin', await hash('admin', 8))
+
+            return [user]
+        }
+
         return users
     }
 
@@ -35,9 +43,10 @@ export class UserResolver {
         @Arg('username') username: string,
         @Arg('password') password: string
     ) {
+
         const updateUserUseCase = container.resolve(UpdateUserUseCase)
 
-        const data = { username, password }
+        const data = { username, password: await hash(password, 8) }
 
         await updateUserUseCase.execute(id, data)
 

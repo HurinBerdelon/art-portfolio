@@ -1,4 +1,4 @@
-interface TranslationSchema {
+export interface TranslationSchema {
     id: string
     title: string
     language: string
@@ -7,6 +7,5 @@ interface TranslationSchema {
 export interface CategorySchema {
     id: string
     title: string
-    createdAt: Date
     Translations: TranslationSchema[]
 }

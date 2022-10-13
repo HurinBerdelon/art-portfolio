@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     :root {
@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     html {
-        @media (max-width:  1080px) {
+        @media (max-width:  1024px) {
             font-size: 93.75%
         }
 
@@ -34,6 +34,16 @@ export const GlobalStyle = createGlobalStyle`
     body {
         width: 100vw;
         height: 100vh;
+        
+        #__next {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            @media (min-width: 1024px) {
+                flex-direction: row;
+            }
+        }
     }
 
     body, input, textarea, button {
@@ -55,4 +65,13 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         background: none;
     }
-`
+`;
+
+export const ModalContentOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+`;

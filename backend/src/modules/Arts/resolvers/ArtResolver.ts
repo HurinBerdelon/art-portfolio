@@ -12,6 +12,8 @@ import { EditArtUseCase } from "../useCases/EditArt/EditArtUseCase";
 import { DeleteArtUseCase } from "../useCases/DeleteArt/DeleteArtUseCase";
 import { FindArtsByCategory } from "../useCases/FindArtsByCategory/FindArtsByCategoryUseCase";
 import { EditArtImageUseCase } from "../useCases/EditArtImage/EditArtImageUseCase";
+import { FindPaginatedArtsUseCase } from "../useCases/FindPaginatedArts/FindPaginatedArtsUseCase";
+import { GetNumberOfArtsUseCase } from "../useCases/GetNumberOfArts/GetNumberOfArtsUseCase";
 
 @Resolver()
 export class ArtResolver {
@@ -25,14 +27,39 @@ export class ArtResolver {
         return arts
     }
 
+    @Query(() => Number)
+    async numberOfArts(
+        @Arg('categoryTitle') categoryTitle: string
+    ) {
+        const getNumberOfArtsUseCase = container.resolve(GetNumberOfArtsUseCase)
+
+        const numberOfArts = await getNumberOfArtsUseCase.execute(categoryTitle)
+
+        return numberOfArts
+    }
+
+    @Query(() => [Art])
+    async artsPaginated(
+        @Arg('skip') skip: number,
+        @Arg('take') take: number,
+    ) {
+        const findPaginatedArtsUseCase = container.resolve(FindPaginatedArtsUseCase)
+
+        const arts = await findPaginatedArtsUseCase.execute(skip, take)
+
+        return arts
+    }
+
     @Query(() => [Art])
     async artsByCategory(
         @Arg('category') category: string,
+        @Arg('skip') skip: number,
+        @Arg('take') take: number,
     ) {
 
         const findArtsByCategory = container.resolve(FindArtsByCategory)
 
-        const arts = await findArtsByCategory.execute(category)
+        const arts = await findArtsByCategory.execute(category, skip, take)
 
         return arts
     }
@@ -48,7 +75,7 @@ export class ArtResolver {
         return art
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Art)
     async saveArt(
         @Arg('title') title: string,
         @Arg('category') category: string,
@@ -58,7 +85,6 @@ export class ArtResolver {
         @Arg('productionDate') productionDate: Date,
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
     ) {
-
         const hashFilename = getHashFilename(filename)
 
         const imagePath = `${tmpFolder}/${hashFilename}`
@@ -72,7 +98,7 @@ export class ArtResolver {
 
         const createArtUseCase = container.resolve(CreateArtUseCase)
 
-        await createArtUseCase.execute({
+        const art = await createArtUseCase.execute({
             dimension,
             categoryTitle: category,
             image: hashFilename,
@@ -82,10 +108,10 @@ export class ArtResolver {
             productionDate
         })
 
-        return true
+        return art
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Art)
     async updateArt(
         @Arg('id') id: string,
         @Arg('title') title: string,
@@ -98,7 +124,7 @@ export class ArtResolver {
 
         const editArtUseCase = container.resolve(EditArtUseCase)
 
-        await editArtUseCase.execute({
+        const art = await editArtUseCase.execute({
             id,
             title,
             uniqueCode,
@@ -108,10 +134,10 @@ export class ArtResolver {
             productionDate
         })
 
-        return true
+        return art
     }
 
-    @Mutation(() => Boolean)
+    @Mutation(() => Art)
     async updateArtImage(
         @Arg('id') id: string,
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
@@ -130,12 +156,9 @@ export class ArtResolver {
 
         const editArtImageUseCase = container.resolve(EditArtImageUseCase)
 
-        await editArtImageUseCase.execute({
-            id,
-            image: hashFilename,
-        })
+        const art = await editArtImageUseCase.execute(id, hashFilename)
 
-        return true
+        return art
     }
 
     @Query(() => Boolean)

@@ -33,19 +33,13 @@ export class PrismaUserRepository implements IUserRepository {
     }
 
     async update(id: string, data: updateUserDTO): Promise<void> {
-        if (data.password) {
-
-            await this.userRepository.update({
-                where: { id },
-                data: { password: data.password }
-            })
-
-        } else if (data.username) {
-
-            await this.userRepository.update({
-                where: { id },
-                data: { username: data.username }
-            })
-        }
+        await this.userRepository.update({
+            where: { id },
+            data: {
+                password: data.password,
+                username: data.username,
+                isNewUser: false
+            }
+        })
     }
 }

@@ -6,8 +6,8 @@ export class PrismaArtRepository implements IArtsRepository {
 
     private artRepository = prisma.art
 
-    async saveArt({ title, categoryTitle, description, image, uniqueCode, dimension, productionDate }: createArtDTO): Promise<void> {
-        await this.artRepository.create({
+    async saveArt({ title, categoryTitle, description, image, uniqueCode, dimension, productionDate }: createArtDTO): Promise<Art> {
+        return await this.artRepository.create({
             data: {
                 title,
                 categoryTitle,
@@ -40,14 +40,29 @@ export class PrismaArtRepository implements IArtsRepository {
         return art
     }
 
-    async getArtsByCategory(categoryTitle: string): Promise<Art[]> {
+    async getArtsByCategory(categoryTitle: string, skip: number, take: number): Promise<Art[]> {
         const arts = await this.artRepository.findMany({
             where: {
                 categoryTitle
             },
             orderBy: {
                 productionDate: 'desc'
-            }
+            },
+            skip,
+            take,
+
+        })
+
+        return arts
+    }
+
+    async getPaginatedArts(skip: number, take: number): Promise<Art[]> {
+        const arts = await this.artRepository.findMany({
+            orderBy: {
+                productionDate: 'desc'
+            },
+            skip,
+            take
         })
 
         return arts
@@ -57,14 +72,24 @@ export class PrismaArtRepository implements IArtsRepository {
         const arts = await this.artRepository.findMany({
             orderBy: {
                 productionDate: 'desc'
-            }
+            },
         })
 
         return arts
     }
 
-    async updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<void> {
-        await this.artRepository.update({
+    async getNumberOfArts(categoryTitle: string): Promise<number> {
+
+        if (categoryTitle === 'undefined') return await this.artRepository.count()
+        else return await this.artRepository.count({
+            where: {
+                categoryTitle
+            }
+        })
+    }
+
+    async updateArt({ id, title, categoryTitle, description, dimension, productionDate, uniqueCode }: updateArtDTO): Promise<Art> {
+        return await this.artRepository.update({
             where: {
                 id
             },
@@ -79,8 +104,8 @@ export class PrismaArtRepository implements IArtsRepository {
         })
     }
 
-    async updateArtImage(id: string, image: string): Promise<void> {
-        await this.artRepository.update({
+    async updateArtImage(id: string, image: string): Promise<Art> {
+        return await this.artRepository.update({
             where: {
                 id
             },

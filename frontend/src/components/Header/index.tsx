@@ -1,14 +1,25 @@
 import { Container } from "./style";
-import MenuIcon from '@mui/icons-material/Menu';
 import { NavBarMenu } from "../NavBarMenu";
+import Link from "next/link";
+import { ThemeSwitcher } from "../ThemeSwitcher";
+import { IdiomSwitcher } from "../IdiomSwitcher";
 
 export function Header(): JSX.Element {
 
     return (
         <Container>
-            <h2>FeCardozo</h2>
-            {/* <MenuIcon /> */}
-            <NavBarMenu />
+            <Link
+                href={'/'}
+            >
+                <a>
+                    <h2>FeCardozo</h2>
+                </a>
+            </Link>
+            <div className="buttons">
+                <ThemeSwitcher />
+                <IdiomSwitcher />
+                <NavBarMenu />
+            </div>
         </Container>
     )
 }

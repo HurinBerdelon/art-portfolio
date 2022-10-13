@@ -1,3 +1,4 @@
+import { Art } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { IStorageProvider } from "../../../../shared/providers/storageProvider/IStorageProvider";
 import { createArtDTO, IArtsRepository } from "../../repositories/IArtsRepository";
@@ -12,7 +13,7 @@ export class CreateArtUseCase {
         private storageProvider: IStorageProvider
     ) { }
 
-    async execute({ image, categoryTitle, dimension, description, uniqueCode, title, productionDate }: createArtDTO): Promise<void> {
+    async execute({ image, categoryTitle, dimension, description, uniqueCode, title, productionDate }: createArtDTO): Promise<Art> {
 
         const artAlreadyExistis = await this.artsRepository.getArtByUniqueCode(uniqueCode)
 
@@ -20,9 +21,9 @@ export class CreateArtUseCase {
             throw new Error(`Art with code ${uniqueCode} already exists!`)
         }
 
-        const imageURL = await this.storageProvider.save('pictures', image)
+        const imageURL = await this.storageProvider.save('arts', image)
 
-        await this.artsRepository.saveArt({
+        const art = await this.artsRepository.saveArt({
             title,
             categoryTitle,
             dimension,
@@ -31,5 +32,7 @@ export class CreateArtUseCase {
             uniqueCode,
             productionDate
         })
+
+        return art
     }
 }

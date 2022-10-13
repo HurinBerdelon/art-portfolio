@@ -8,14 +8,19 @@ export function NavBarMenu(): JSX.Element {
     return (
         <Container>
             <Menu>
-                <Menu.Button>
-                    <MenuIcon />
-                </Menu.Button>
-                <Menu.Items className='menuContent'>
-                    <Menu.Item>
-                        <Navigation />
-                    </Menu.Item>
-                </Menu.Items>
+                {({ open }) => (
+                    <>
+                        <div className={open ? 'contentOverlay' : ''}></div>
+                        <Menu.Button>
+                            <MenuIcon />
+                        </Menu.Button>
+                        <Menu.Items className='menuContent'>
+                            <Menu.Item>
+                                <Navigation />
+                            </Menu.Item>
+                        </Menu.Items>
+                    </>
+                )}
             </Menu>
         </Container>
     )

@@ -1,27 +1,35 @@
-import Link from "next/link";
+import { useTranslation } from "next-i18next";
+import { ActiveLink } from "./ActiveLink";
+import { AdminLink } from "./AdminLink";
 import { CategoryLinks } from "./CategoryLinks";
-import { MediaLinks } from "./MediaLinks";
+import { SocialMediaLinks } from "./SocialMediaLinks";
 import { Container } from "./style";
 
 export function Navigation(): JSX.Element {
 
+    const { t } = useTranslation()
+
     return (
         <Container>
-            <Link href='#'>
-                <a className='effectLinks' >Home</a>
-            </Link>
+            <div className="links">
+                <ActiveLink href='/' activeClassName="active" className='effectLinks'>
+                    <a>{t('common:home')}</a>
+                </ActiveLink>
 
-            <CategoryLinks />
+                <CategoryLinks />
 
-            <Link href='#' >
-                <a className='effectLinks'>Contact</a>
-            </Link>
+                <ActiveLink href='/contact' activeClassName="active" className='effectLinks'>
+                    <a>{t('common:contact')}</a>
+                </ActiveLink>
 
-            <Link href='#' >
-                <a className='effectLinks'>About</a>
-            </Link>
+                <ActiveLink href='/about' activeClassName="active" className='effectLinks'>
+                    <a>{t('common:about')}</a>
+                </ActiveLink>
+            </div>
 
-            <MediaLinks />
+            <SocialMediaLinks />
+
+            <AdminLink />
 
         </Container>
     )

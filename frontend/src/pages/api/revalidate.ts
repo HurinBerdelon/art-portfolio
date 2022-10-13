@@ -12,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await res.unstable_revalidate(`/${pathToRevalidate}`)
         return res.json({ revalidated: true })
     } catch (error) {
+        console.log(error.message)
         return res.status(500).send('Error Revalidating')
     }
 }

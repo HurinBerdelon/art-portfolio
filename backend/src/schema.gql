@@ -30,11 +30,14 @@ scalar DateTime
 
 type Mutation {
   createCategory(title: String!): Category!
+  createTextContent(file: Upload!, idiom: String!, imageFormat: String!, page: String!, text: String!, type: String!): TextContent!
   createUser(password: String!, username: String!): User!
-  saveArt(category: String!, description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
-  updateArt(category: String!, description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Boolean!
-  updateArtImage(file: Upload!, id: String!): Boolean!
+  saveArt(category: String!, description: String!, dimension: String!, file: Upload!, productionDate: DateTime!, title: String!, uniqueCode: String!): Art!
+  updateArt(category: String!, description: String!, dimension: String!, id: String!, productionDate: DateTime!, title: String!, uniqueCode: String!): Art!
+  updateArtImage(file: Upload!, id: String!): Art!
   updateCategory(id: String!, title: String!): Category!
+  updateTextContent(id: String!, imageFormat: String!, text: String!): TextContent!
+  updateTextContentImage(file: Upload!, id: String!): TextContent!
   updateTranslation(categoryTitle: String!, id: String!, language: String!, title: String!): Translation!
   updateUser(id: String!, password: String!, username: String!): Boolean!
 }
@@ -42,11 +45,29 @@ type Mutation {
 type Query {
   artById(id: String!): Art!
   arts: [Art!]!
-  artsByCategory(category: String!): [Art!]!
+  artsByCategory(category: String!, skip: Float!, take: Float!): [Art!]!
+  artsPaginated(skip: Float!, take: Float!): [Art!]!
   deleteArt(id: String!): Boolean!
   deleteCategory(id: String!): Boolean!
+  deleteTextContent(id: String!): Boolean!
   getCategories: [Category!]!
+  getTextContentByType(type: String!): [TextContent!]!
+  getTextContents: [TextContent!]!
+  getTextContentsByPage(page: String!): [TextContent!]!
   getUser: [User!]!
+  numberOfArts(categoryTitle: String!): Float!
+}
+
+type TextContent {
+  createdAt: DateTime!
+  id: ID!
+  idiom: String!
+  imageFormat: String!
+  imageUrl: String!
+  page: String!
+  text: String!
+  type: String!
+  updatedAt: DateTime!
 }
 
 type Translation {
@@ -63,6 +84,7 @@ scalar Upload
 type User {
   createdAt: DateTime!
   id: ID!
+  isNewUser: Boolean!
   password: String!
   updatedAt: DateTime!
   username: String!

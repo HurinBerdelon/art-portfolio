@@ -12,6 +12,8 @@ import { EditArtUseCase } from "../useCases/EditArt/EditArtUseCase";
 import { DeleteArtUseCase } from "../useCases/DeleteArt/DeleteArtUseCase";
 import { FindArtsByCategory } from "../useCases/FindArtsByCategory/FindArtsByCategoryUseCase";
 import { EditArtImageUseCase } from "../useCases/EditArtImage/EditArtImageUseCase";
+import { FindPaginatedArtsUseCase } from "../useCases/FindPaginatedArts/FindPaginatedArtsUseCase";
+import { GetNumberOfArtsUseCase } from "../useCases/GetNumberOfArts/GetNumberOfArtsUseCase";
 
 @Resolver()
 export class ArtResolver {
@@ -25,14 +27,39 @@ export class ArtResolver {
         return arts
     }
 
+    @Query(() => Number)
+    async numberOfArts(
+        @Arg('categoryTitle') categoryTitle: string
+    ) {
+        const getNumberOfArtsUseCase = container.resolve(GetNumberOfArtsUseCase)
+
+        const numberOfArts = await getNumberOfArtsUseCase.execute(categoryTitle)
+
+        return numberOfArts
+    }
+
+    @Query(() => [Art])
+    async artsPaginated(
+        @Arg('skip') skip: number,
+        @Arg('take') take: number,
+    ) {
+        const findPaginatedArtsUseCase = container.resolve(FindPaginatedArtsUseCase)
+
+        const arts = await findPaginatedArtsUseCase.execute(skip, take)
+
+        return arts
+    }
+
     @Query(() => [Art])
     async artsByCategory(
         @Arg('category') category: string,
+        @Arg('skip') skip: number,
+        @Arg('take') take: number,
     ) {
 
         const findArtsByCategory = container.resolve(FindArtsByCategory)
 
-        const arts = await findArtsByCategory.execute(category)
+        const arts = await findArtsByCategory.execute(category, skip, take)
 
         return arts
     }

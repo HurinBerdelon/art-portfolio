@@ -27,7 +27,6 @@ export function UpdateCategory({ onRequestClose, category, setIsCardFlipped }: U
 
         Object.keys(values).map(locale => {
             if (locale !== 'en' && values[locale]) {
-                console.log(locale, category)
 
                 updateTranslation({
                     id: category.Translations.find(translation => translation.language === locale)?.id,

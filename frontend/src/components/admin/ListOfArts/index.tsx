@@ -23,13 +23,17 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
     const [artBeeingUpdated, setArtBeeingUpdated] = useState<ArtSchema>(null)
     const { t } = useTranslation()
 
-    const { setArts } = useArts()
+    const { arts: artState, setArts } = useArts()
+    const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>(artState)
 
     useEffect(() => {
         setArts(arts)
     }, [arts])
 
-    const [artsOnScreen, setArtsOnScreen] = useState<ArtSchema[]>(arts)
+
+    useEffect(() => {
+        setArtsOnScreen(artState)
+    }, [artState])
 
     useEffect(() => {
         if (artsOnScreen) {

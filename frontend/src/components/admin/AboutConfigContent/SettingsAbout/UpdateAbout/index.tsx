@@ -33,6 +33,7 @@ const UPDATE_TEXT_CONTENT = gql`
                 idiom,
                 imageUrl
                 updatedAt
+                imageFormat
             }
     }`
 
@@ -52,6 +53,7 @@ const UPDATE_TEXT_CONTENT_IMAGE = gql`
                 idiom,
                 imageUrl
                 updatedAt
+                imageFormat
             }
     }`
 

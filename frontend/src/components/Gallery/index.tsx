@@ -17,7 +17,6 @@ interface GalleryProps {
 export function Gallery({ fetchNextPage, fetchNextPageForCategory, numberOfArts, categoryPage = undefined }: GalleryProps): JSX.Element {
 
     const { arts } = useArts()
-    console.log('numberOfArts', numberOfArts)
 
     const [currentArt, setCurrentArt] = useState<ArtSchema>(null)
     const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)

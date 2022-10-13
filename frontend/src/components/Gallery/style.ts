@@ -13,6 +13,7 @@ export const Container = styled.section`
 
     background: ${props => props.theme.colors.backgroundOne};
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     padding-bottom: .5rem;
@@ -96,6 +97,7 @@ export const Container = styled.section`
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
         font-weight: 400;
+            flex: 1;
 
         &:hover {
             filter: brightness(1.2);

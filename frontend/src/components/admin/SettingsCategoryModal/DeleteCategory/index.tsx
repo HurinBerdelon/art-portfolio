@@ -14,8 +14,8 @@ export function DeleteCategory({ category, onRequestClose, setIsCardFlipped }: D
     const { deleteCategory } = useCategory()
     const { t } = useTranslation()
 
-    function handleDeleteCategory() {
-        deleteCategory(category.id)
+    async function handleDeleteCategory() {
+        await deleteCategory(category.id)
 
         onRequestClose()
     }

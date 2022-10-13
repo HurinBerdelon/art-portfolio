@@ -96,6 +96,8 @@ export const Container = styled.div`
         .pageDescription{
             font-size: 1rem;
             max-width: 380px;
+
+            right: 17%;
         }
     }
 `

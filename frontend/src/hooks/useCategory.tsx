@@ -139,13 +139,13 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
             delete response.data.updateTranslation.categoryTitle
 
             if (index >= 0) {
+                console.log('adding now')
                 category.Translations.splice(index, 1, response.data.updateTranslation)
                 setCategories(tempCategories)
             } else {
                 category.Translations.push(response.data.updateTranslation)
                 setCategories(tempCategories)
             }
-
             toastSuccess(`Translation ${title} was updated!`)
         }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }
@@ -166,8 +166,6 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
             setCategories(tempCategories)
         }).then(() => toastSuccess(`Category deleted`))
             .catch(() => toastError(`There are arts registered in this category, please delete them before delete the category`))
-
-
     }
 
     return (

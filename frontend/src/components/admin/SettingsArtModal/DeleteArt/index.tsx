@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import { useTranslation } from "next-i18next";
+import { useEffect } from "react";
 import { useArts } from "../../../../hooks/useArts";
 import { ArtSchema } from "../../../../schemas/Art";
 import { apolloClient } from "../../../../services/apolloClient";

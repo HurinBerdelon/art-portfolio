@@ -72,7 +72,7 @@ export function Gallery({ fetchNextPage, fetchNextPageForCategory, numberOfArts,
 
             {arts?.length < numberOfArts && (
                 <button className="LoadMoreButton" onClick={handleNextPage}>
-                    Load More
+                    {t('common:loadMore')}
                 </button>
             )}
         </Container>

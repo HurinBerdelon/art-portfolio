@@ -7,6 +7,8 @@ export const NoArtsContainer = styled.div`
     align-items: center;
 
     background: ${props => props.theme.colors.backgroundOne};
+    color: ${props => props.theme.colors.textOne};
+    font-weight: 400;
 `
 
 export const Container = styled.section`

@@ -1,5 +1,8 @@
 import { Art } from "@prisma/client";
+import { resolve } from "path";
+import fs from 'fs'
 import { inject, injectable } from "tsyringe";
+import { tmpFolder } from "../../../../config/upload";
 import { IStorageProvider } from "../../../../shared/providers/storageProvider/IStorageProvider";
 import { createArtDTO, IArtsRepository } from "../../repositories/IArtsRepository";
 
@@ -18,6 +21,8 @@ export class CreateArtUseCase {
         const artAlreadyExistis = await this.artsRepository.getArtByUniqueCode(uniqueCode)
 
         if (artAlreadyExistis) {
+            const originalName = resolve(tmpFolder, image)
+            await fs.promises.unlink(originalName)
             throw new Error(`Art with code ${uniqueCode} already exists!`)
         }
 

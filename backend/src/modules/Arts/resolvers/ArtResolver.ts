@@ -91,12 +91,7 @@ export class ArtResolver {
 
         const imagePath = `${tmpFolder}/${hashFilename}`
 
-        console.log('imagePath', imagePath)
-        fs.readdir('../', (err, files) => console.log(files))
-        fs.readdir('./', (err, files) => console.log(files))
-
         await new Promise(async (resolve, reject) => {
-            console.log('inside promise')
             createReadStream()
                 .pipe(createWriteStream(imagePath))
                 .on('finish', () => {
@@ -107,10 +102,6 @@ export class ArtResolver {
                     reject(false)
                 })
         })
-
-        fs.readdir('./tmp', (err, files) => console.log(files))
-
-        return
 
         const createArtUseCase = container.resolve(CreateArtUseCase)
 
@@ -123,6 +114,8 @@ export class ArtResolver {
             description,
             productionDate
         })
+
+        return
 
         return art
     }

@@ -110,8 +110,14 @@ export class ArtResolver {
             console.log('inside promise')
             createReadStream()
                 .pipe(createWriteStream(imagePath))
-                .on('finish', () => resolve(true))
-                .on('error', () => reject(false))
+                .on('finish', () => {
+                    console.log('onFinish')
+                    resolve(true)
+                })
+                .on('error', () => {
+                    console.log('onError')
+                    reject(false)
+                })
         })
 
         console.log('await promise')

@@ -90,6 +90,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     const handleSubmitForm = (values: FormikValues) => {
 
         function sortArtsByDate(newArt: ArtSchema) {
+
             const tempArts = [...arts]
             const oldArt = arts.find(art => art.id === newArt.id)
             tempArts.splice(tempArts.indexOf(oldArt), 1, newArt)

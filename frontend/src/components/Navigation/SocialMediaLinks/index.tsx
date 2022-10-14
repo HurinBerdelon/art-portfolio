@@ -18,20 +18,20 @@ export function SocialMediaLinks(): JSX.Element {
     return (
         <Container>
             <Tooltip title={t('common:openInstagram')}>
-                <a target='_blank' href={process.env.NEXT_PUBLIC_CONTACT_INSTAGRAM}>
+                <a target='_blank' rel="noreferrer" href={process.env.NEXT_PUBLIC_CONTACT_INSTAGRAM}>
                     <InstagramIcon />
                 </a>
             </Tooltip>
 
             <Tooltip title={t('common:openLinkedin')}>
-                <a target='_blank' href={process.env.NEXT_PUBLIC_CONTACT_LINKEDIN}>
+                <a target='_blank' rel="noreferrer" href={process.env.NEXT_PUBLIC_CONTACT_LINKEDIN}>
                     <LinkedInIcon />
                 </a>
             </Tooltip>
 
             <Tooltip title={t('common:sendMail')}>
                 <>
-                    <a className="sendMailMobile" href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`} target='_blank'>
+                    <a className="sendMailMobile" href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}>
                         <EmailIcon />
                     </a>
                     <CopyToClipboard text={process.env.NEXT_PUBLIC_CONTACT_EMAIL}>

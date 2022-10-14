@@ -15,15 +15,16 @@ interface SettingsArtModalProps {
 
 export function SettingsArtModal({ isOpen, onRequestClose, art }: SettingsArtModalProps): JSX.Element {
 
-    if (!art) {
-        return null
-    }
 
     const [isCardFlipped, setIsCardFlipped] = useState(false)
 
     useEffect(() => {
         setIsCardFlipped(false)
     }, [onRequestClose])
+
+    if (!art) {
+        return null
+    }
 
     return (
         <Dialog open={isOpen} onClose={onRequestClose} >

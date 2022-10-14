@@ -30,7 +30,7 @@ export default function ByCategoryPage({ arts, numberOfArts }: ByCategoryPagePro
 
     useEffect(() => {
         setArts(arts)
-    }, [arts])
+    }, [arts, setArts])
 
     // string.capitalize()
     const title = router.asPath.split('/')[1].replace(/^\w/, (c) => c.toUpperCase())

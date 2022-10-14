@@ -15,15 +15,16 @@ interface SettingsAboutProps {
 
 export function SettingsAbout({ isOpen, onRequestClose, textContentOnUpdate }: SettingsAboutProps): JSX.Element {
 
-    if (!textContentOnUpdate) {
-        return null
-    }
 
     const [isCardFlipped, setIsCardFlipped] = useState(false)
 
     useEffect(() => {
         setIsCardFlipped(false)
     }, [onRequestClose])
+
+    if (!textContentOnUpdate) {
+        return null
+    }
 
     return (
         <Dialog open={isOpen} onClose={onRequestClose}>

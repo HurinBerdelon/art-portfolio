@@ -89,7 +89,6 @@ export function UpdateAbout({
     }
 
     function updateText(values: FormikValues) {
-        console.log(values)
 
         if (values.file) {
             updateTextContentImage({

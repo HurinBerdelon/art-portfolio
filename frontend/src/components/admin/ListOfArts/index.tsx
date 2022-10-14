@@ -28,18 +28,18 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
 
     useEffect(() => {
         setArts(arts)
-    }, [arts])
+    }, [arts, setArts])
 
 
     useEffect(() => {
         setArtsOnScreen(artState)
-    }, [artState])
+    }, [artState, setArtsOnScreen])
 
     useEffect(() => {
         if (artsOnScreen) {
             setArtsOnScreen(arts.filter(art => art[searchingFor].toLowerCase().includes(currentInput.toLowerCase())))
         }
-    }, [currentInput, searchingFor])
+    }, [currentInput, searchingFor, arts])
 
     return (
         <Container>

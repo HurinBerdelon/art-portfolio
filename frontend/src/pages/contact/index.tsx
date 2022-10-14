@@ -9,7 +9,7 @@ import { DesktopHeader } from "../../components/Header/DesktopHeader";
 import { NavBar } from "../../components/NavBar";
 import { useCurrentTheme } from "../../hooks/useTheme";
 
-export default function contact(): JSX.Element {
+export default function Contact(): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
 

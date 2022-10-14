@@ -33,12 +33,12 @@ export function CategoryLinks(): JSX.Element {
                 }
             })
         )
-    }, [categories])
+    }, [categories, locale])
 
     useEffect(() => {
         const isAtCategoryPage = categories?.find(category => category.title === asPath.split('/')[1])
         if (isAtCategoryPage) setIsShowingCategories(true)
-    }, [])
+    }, [asPath, categories])
 
     function toggleShowCategories() {
         setIsShowingCategories(!isShowingCategories)

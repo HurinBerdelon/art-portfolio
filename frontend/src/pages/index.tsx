@@ -28,7 +28,7 @@ export default function Home({ arts, numberOfArts }: HomeProps): JSX.Element {
 
     useEffect(() => {
         setArts(arts)
-    }, [arts])
+    }, [arts, setArts])
 
     return (
         <>

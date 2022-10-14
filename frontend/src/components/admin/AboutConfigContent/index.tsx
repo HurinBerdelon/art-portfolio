@@ -44,7 +44,7 @@ export function AboutConfigContent(): JSX.Element {
             `
         }).then(response => setTextContents(response.data.getTextContentsByPage))
             .catch(() => setTextContents([]))
-    }, [])
+    }, [setTextContents])
 
     return (
         <Container>

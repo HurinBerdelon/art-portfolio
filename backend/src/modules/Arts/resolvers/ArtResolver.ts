@@ -96,7 +96,12 @@ export class ArtResolver {
 
         const hashFilename = getHashFilename(filename)
 
+        console.log('after getHashFilename', hashFilename)
+        console.log('tmpFolder', tmpFolder)
+
         const imagePath = `${tmpFolder}/${hashFilename}`
+
+        console.log('imagePath', imagePath)
 
         await new Promise(async (resolve, reject) =>
             createReadStream()
@@ -104,6 +109,8 @@ export class ArtResolver {
                 .on('finish', () => resolve(true))
                 .on('error', () => reject(false))
         )
+
+        console.log('await promise')
 
         const createArtUseCase = container.resolve(CreateArtUseCase)
 

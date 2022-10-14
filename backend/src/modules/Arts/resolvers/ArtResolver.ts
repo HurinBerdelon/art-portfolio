@@ -86,38 +86,28 @@ export class ArtResolver {
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
     ) {
 
-        console.log(title)
-        console.log(category)
-        console.log(dimension)
-        console.log(description)
-        console.log(uniqueCode)
-        console.log(productionDate)
-        console.log(filename)
-
         const hashFilename = getHashFilename(filename)
-
-        console.log('after getHashFilename', hashFilename)
-        console.log('tmpFolder', tmpFolder)
 
         const imagePath = `${tmpFolder}/${hashFilename}`
 
         console.log('imagePath', imagePath)
-        console.log('readStream', createReadStream)
-        console.log('writeStream', createWriteStream)
-
 
         await new Promise(async (resolve, reject) => {
             console.log('inside promise')
-            createReadStream()
-                .pipe(createWriteStream(imagePath))
-                .on('finish', () => {
-                    console.log('onFinish')
-                    resolve(true)
-                })
-                .on('error', () => {
-                    console.log('onError')
-                    reject(false)
-                })
+            try {
+                createReadStream()
+                    .pipe(createWriteStream(imagePath))
+                    .on('finish', () => {
+                        console.log('onFinish')
+                        resolve(true)
+                    })
+                    .on('error', () => {
+                        console.log('onError')
+                        reject(false)
+                    })
+            } catch (error) {
+                console.log('error: ', error.message)
+            }
         })
 
         console.log('await promise')

@@ -102,13 +102,17 @@ export class ArtResolver {
         const imagePath = `${tmpFolder}/${hashFilename}`
 
         console.log('imagePath', imagePath)
+        console.log('readStream', createReadStream)
+        console.log('writeStream', createWriteStream)
 
-        await new Promise(async (resolve, reject) =>
+
+        await new Promise(async (resolve, reject) => {
+            console.log('inside promise')
             createReadStream()
                 .pipe(createWriteStream(imagePath))
                 .on('finish', () => resolve(true))
                 .on('error', () => reject(false))
-        )
+        })
 
         console.log('await promise')
 

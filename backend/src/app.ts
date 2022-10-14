@@ -49,5 +49,5 @@ export async function app() {
 	// Using Express middleware in Apollo server
 	server.applyMiddleware({ app })
 
-	app.listen(4000, () => console.log(`server running on localhost:4000/graphql`))
+	app.listen(process.env.PORT, () => console.log(`server running on localhost:${process.env.PORT}/graphql`))
 }

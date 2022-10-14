@@ -15,19 +15,13 @@ export class CreateArtUseCase {
 
     async execute({ image, categoryTitle, dimension, description, uniqueCode, title, productionDate }: createArtDTO): Promise<Art> {
 
-        console.log('inside useCase')
-
         const artAlreadyExistis = await this.artsRepository.getArtByUniqueCode(uniqueCode)
-
-        console.log('after calling repository')
 
         if (artAlreadyExistis) {
             throw new Error(`Art with code ${uniqueCode} already exists!`)
         }
 
         const imageURL = await this.storageProvider.save('arts', image)
-
-        console.log('after calling storage provider')
 
         const art = await this.artsRepository.saveArt({
             title,
@@ -38,8 +32,6 @@ export class CreateArtUseCase {
             uniqueCode,
             productionDate
         })
-
-        console.log('after saving art in repository')
 
         return art
     }

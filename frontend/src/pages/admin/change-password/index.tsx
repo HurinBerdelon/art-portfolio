@@ -37,6 +37,9 @@ export default function ChangePassword(): JSX.Element {
     }
 
     async function handleSubmitForm(values: FormikValues) {
+        console.log('handleUpdatePassword')
+        console.log(session.id)
+        console.log(values)
         updateUser({
             variables: {
                 updateUserId: session.id,

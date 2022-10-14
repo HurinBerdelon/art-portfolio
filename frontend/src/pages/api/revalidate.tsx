@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const pathToRevalidate = req.query.path as string
 
-        await res.unstable_revalidate(`/${pathToRevalidate}`)
+        await res.revalidate(`/${pathToRevalidate}`)
         return res.json({ revalidated: true })
     } catch (error) {
         console.log(error.message)

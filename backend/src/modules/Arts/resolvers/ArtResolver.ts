@@ -85,6 +85,15 @@ export class ArtResolver {
         @Arg('productionDate') productionDate: Date,
         @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
     ) {
+
+        console.log(title)
+        console.log(category)
+        console.log(dimension)
+        console.log(description)
+        console.log(uniqueCode)
+        console.log(productionDate)
+        console.log(filename)
+
         const hashFilename = getHashFilename(filename)
 
         const imagePath = `${tmpFolder}/${hashFilename}`

@@ -16,15 +16,15 @@ interface GalleryModalProps {
 
 export function GalleryModal({ arts, currentArt, isOpen, setCurrentArt, setIsOpen }: GalleryModalProps): JSX.Element {
 
+    const [currentIndex, setCurrentIndex] = useState(arts?.indexOf(currentArt))
+
+    useEffect(() => {
+        setCurrentIndex(arts?.indexOf(currentArt))
+    }, [currentArt, arts])
+
     if (!currentArt) {
         return (null)
     }
-
-    const [currentIndex, setCurrentIndex] = useState(arts.indexOf(currentArt))
-
-    useEffect(() => {
-        setCurrentIndex(arts.indexOf(currentArt))
-    }, [currentArt])
 
     function handleCloseModal() { setIsOpen(false) }
 

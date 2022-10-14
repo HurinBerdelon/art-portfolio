@@ -15,15 +15,15 @@ interface SettingsCategoryModalProps {
 
 export function SettingsCategoryModal({ isOpen, onRequestClose, category }: SettingsCategoryModalProps): JSX.Element {
 
-    if (!category) {
-        return null
-    }
-
     const [isCardFlipped, setIsCardFlipped] = useState(false)
 
     useEffect(() => {
         setIsCardFlipped(false)
     }, [onRequestClose])
+
+    if (!category) {
+        return null
+    }
 
     return (
         <Dialog open={isOpen} onClose={onRequestClose}>

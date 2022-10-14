@@ -22,7 +22,7 @@ export function SiteMap(): JSX.Element {
                 <h4>{t('common:categories')}</h4>
                 <ul>
                     {categories?.map(category => (
-                        <li className="categoryLinks">
+                        <li key={category.id} className="categoryLinks">
                             <Link href={`/${category.title}`}>
                                 <a>{category.title}</a>
                             </Link>

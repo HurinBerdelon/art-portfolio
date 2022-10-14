@@ -33,14 +33,14 @@ export function RichTextEditor({ prevContent = '', setHtmlContent }: RichTextEdi
                 ContentState.createFromBlockArray(prevHtmlContent.contentBlocks)
             ))
         setEditor(true)
-    }, [])
+    }, [prevContent])
 
     useEffect(() => {
         if (editorState) {
             const rawContent = convertToRaw(editorState.getCurrentContent())
             setHtmlContent(draftToHtml(rawContent))
         }
-    }, [editorState])
+    }, [editorState, setHtmlContent])
 
     if (!editor) {
         return null

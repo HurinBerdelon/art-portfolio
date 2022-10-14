@@ -2,6 +2,7 @@ import { FileUpload, GraphQLUpload } from "graphql-upload";
 import { container, } from "tsyringe";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { createWriteStream } from 'fs'
+import fs from 'fs'
 
 import { Art } from "../models/Art";
 import { FindAllArtsUseCase } from "../useCases/FindAllArts/FindAllArtsUseCase";
@@ -91,29 +92,27 @@ export class ArtResolver {
         const imagePath = `${tmpFolder}/${hashFilename}`
 
         console.log('imagePath', imagePath)
+        fs.readdir('../', (err, files) => console.log(files))
+        fs.readdir('./', (err, files) => console.log(files))
 
         await new Promise(async (resolve, reject) => {
             console.log('inside promise')
-            try {
-                createReadStream()
-                    .pipe(createWriteStream(imagePath))
-                    .on('finish', () => {
-                        resolve(true)
-                    })
-                    .on('error', (error) => {
-                        console.log('error:', error)
-                        reject(false)
-                    })
-            } catch (error) {
-                console.log('error: ', error.message)
-            }
+            createReadStream()
+                .pipe(createWriteStream(imagePath))
+                .on('finish', () => {
+                    resolve(true)
+                })
+                .on('error', (error) => {
+                    console.log('error:', error)
+                    reject(false)
+                })
         })
 
-        console.log('await promise')
+        fs.readdir('./tmp', (err, files) => console.log(files))
+
+        return
 
         const createArtUseCase = container.resolve(CreateArtUseCase)
-
-        console.log('after create useCase')
 
         const art = await createArtUseCase.execute({
             dimension,
@@ -124,8 +123,6 @@ export class ArtResolver {
             description,
             productionDate
         })
-
-        console.log('after resolve useCase')
 
         return art
     }

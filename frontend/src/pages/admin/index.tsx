@@ -7,13 +7,12 @@ import { gql } from "@apollo/client";
 import { ThemeProvider } from "styled-components";
 import { Header } from "../../components/Header";
 import { ListOfArts } from "../../components/admin/ListOfArts";
-import { ArtProvider, useArts } from "../../hooks/useArts";
+import { ArtProvider } from "../../hooks/useArts";
 import { useCurrentTheme } from "../../hooks/useTheme";
 import { AdminLinks } from "../../components/admin/AdminLinks";
 import { NavBar } from "../../components/NavBar";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { DesktopHeader } from "../../components/Header/DesktopHeader";
-import { useEffect } from "react";
 import { ArtSchema } from "../../schemas/Art";
 
 interface AdminProps {
@@ -56,6 +55,7 @@ interface UserProps {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
 
+    console.log('reached admin')
     const session = await getSession({ req })
 
     if (!session) {
@@ -77,7 +77,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
                     isNewUser
                 }
             }
-        `
+        `,
+        fetchPolicy: "no-cache"
     })
 
     const user: UserProps = data.getUser[0]

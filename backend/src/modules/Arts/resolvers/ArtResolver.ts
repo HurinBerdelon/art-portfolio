@@ -98,11 +98,10 @@ export class ArtResolver {
                 createReadStream()
                     .pipe(createWriteStream(imagePath))
                     .on('finish', () => {
-                        console.log('onFinish')
                         resolve(true)
                     })
-                    .on('error', () => {
-                        console.log('onError')
+                    .on('error', (error) => {
+                        console.log('error:', error)
                         reject(false)
                     })
             } catch (error) {

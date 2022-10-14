@@ -107,6 +107,8 @@ export class ArtResolver {
 
         const createArtUseCase = container.resolve(CreateArtUseCase)
 
+        console.log('after create useCase')
+
         const art = await createArtUseCase.execute({
             dimension,
             categoryTitle: category,
@@ -116,6 +118,8 @@ export class ArtResolver {
             description,
             productionDate
         })
+
+        console.log('after resolve useCase')
 
         return art
     }

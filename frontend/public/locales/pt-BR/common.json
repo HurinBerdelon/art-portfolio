@@ -16,5 +16,6 @@
     "message": "Mensagem",
     "send": "Enviar",
     "copyToClipboard": "Link Copied to clipboard",
-    "emailCopied": "E-mail Copied to clipboard"
+    "emailCopied": "E-mail Copied to clipboard",
+    "loadMore": "Load More"
 }

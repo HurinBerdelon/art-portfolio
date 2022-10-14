@@ -9,7 +9,7 @@ export class GetTranslationByCategoryUseCase {
         private translationsRepository: ITranslationRepository
     ) { }
 
-    async execute(categoryTitle: string): Promise<Translations> {
+    async execute(categoryTitle: string): Promise<Translations[]> {
         const translations = await this.translationsRepository.findByCategory(categoryTitle)
 
         return translations

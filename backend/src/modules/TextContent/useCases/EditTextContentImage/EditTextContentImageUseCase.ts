@@ -1,5 +1,8 @@
 import { TextContent } from '@prisma/client';
+import fs from 'fs'
+import { resolve } from 'path';
 import { inject, injectable } from 'tsyringe';
+import { tmpFolder } from '../../../../config/upload';
 import { IStorageProvider } from '../../../../shared/providers/storageProvider/IStorageProvider';
 import { ITextContentRepository } from '../../repositories/ITextContentRepository';
 
@@ -17,6 +20,8 @@ export class EditTextContentImageUseCase {
         const textContent = await this.textContentRepository.findById(id)
 
         if (!textContent) {
+            const originalName = resolve(tmpFolder, image)
+            await fs.promises.unlink(originalName)
             throw new Error('Art not Found!')
         }
 

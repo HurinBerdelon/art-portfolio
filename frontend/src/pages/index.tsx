@@ -25,7 +25,6 @@ export default function Home({ arts, numberOfArts }: HomeProps): JSX.Element {
     const { currentTheme } = useCurrentTheme()
     const { setArts, fetchNextArtsPage } = useArts()
     const { t } = useTranslation()
-    // TODO: pagination
 
     useEffect(() => {
         setArts(arts)

@@ -41,8 +41,7 @@ export function ArtProvider({ children }: ArtProviderProps) {
                         productionDate
                     }
                 }
-            `,
-            fetchPolicy: "no-cache"
+            `
         })
         setArts(data.arts)
     }
@@ -62,8 +61,7 @@ export function ArtProvider({ children }: ArtProviderProps) {
                     productionDate
                 }
             }
-            `,
-            fetchPolicy: "no-cache"
+            `
         })
         setArts(prevArts => [...prevArts, ...newPage.data.artsPaginated])
     }
@@ -87,8 +85,7 @@ export function ArtProvider({ children }: ArtProviderProps) {
                         productionDate
                     }
                  }
-            `,
-            fetchPolicy: "no-cache"
+            `
         })
         setArts(prevArts => [...prevArts, ...newPage.data.artsByCategory])
     }

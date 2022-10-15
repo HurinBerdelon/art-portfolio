@@ -41,8 +41,7 @@ export function AboutConfigContent(): JSX.Element {
                         imageFormat
                     }
                 }
-            `,
-            fetchPolicy: "no-cache"
+            `
         }).then(response => setTextContents(response.data.getTextContentsByPage))
             .catch(() => setTextContents([]))
     }, [setTextContents])

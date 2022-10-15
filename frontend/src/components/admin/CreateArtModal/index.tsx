@@ -49,7 +49,7 @@ interface CreateArtModalProps {
 
 export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps): JSX.Element {
 
-    const [saveArt] = useMutation(CREATE_ART, { fetchPolicy: "no-cache" })
+    const [saveArt] = useMutation(CREATE_ART)
     const { setArts, arts } = useArts()
     const [preview, setPreview] = useState<string>()
     const { t } = useTranslation()

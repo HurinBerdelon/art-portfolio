@@ -70,8 +70,8 @@ interface UpdateArtProps {
 export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtProps): JSX.Element {
 
     const { arts, setArts } = useArts()
-    const [updateArt] = useMutation(UPDATE_ART, { fetchPolicy: "no-cache" })
-    const [updateArtImage] = useMutation(UPDATE_ART_IMAGE, { fetchPolicy: "no-cache" })
+    const [updateArt] = useMutation(UPDATE_ART)
+    const [updateArtImage] = useMutation(UPDATE_ART_IMAGE)
     const [preview, setPreview] = useState<string>()
     const { t } = useTranslation()
     const { locale } = useRouter()

@@ -76,8 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
                     isNewUser
                 }
             }
-        `,
-        fetchPolicy: "no-cache"
+        `
     })
 
     const user: UserProps = data.getUser[0]
@@ -106,8 +105,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
                         productionDate
                     }
                 }
-            `,
-            fetchPolicy: "no-cache"
+            `
         })
 
         return {

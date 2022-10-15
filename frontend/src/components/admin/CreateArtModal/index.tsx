@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { useArts } from "../../../hooks/useArts"
 import { ArtSchema, createArtSchemas } from "../../../schemas/Art"
 import { revalidateSSG } from "../../../services/revalidate"
-import { toastSuccess } from "../../../services/toastProvider"
+import { toastError, toastSuccess } from "../../../services/toastProvider"
 import { ModalContentOverlay } from "../../../styles/global"
 import { DropImage } from "../ArtForms/DropImage"
 import { InputZone } from "../ArtForms/InputZone"
@@ -53,6 +53,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
     const { setArts, arts } = useArts()
     const [preview, setPreview] = useState<string>()
     const { t } = useTranslation()
+    const [isLoading, setIsLoading] = useState(false)
 
     const { locale } = useRouter()
 
@@ -64,6 +65,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
 
     const handleSubmitForm = (values: FormikValues) => {
 
+        setIsLoading(true)
         function sortArtsByDate(newArt: ArtSchema) {
             const tempArts = [...arts]
             tempArts.push(newArt)
@@ -91,7 +93,14 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
             sortArtsByDate(response.data.saveArt)
             toastSuccess(`${values.title} has been saved`)
             onRequestClose()
-        }).catch((error) => console.log(error.message))
+        }).catch((error) => {
+            if (error.message === 'Art with code asd already exists!') {
+                toastError('Art with code asd already exists!')
+            } else {
+                toastError('Something went wrong, please try again')
+                console.log(error.message)
+            }
+        }).finally(() => setIsLoading(false))
     }
 
     const initialValues = {
@@ -136,6 +145,7 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
                                     errors={errors}
                                     initialValues={initialValues}
                                     setFieldValue={setFieldValue}
+                                    isLoading={isLoading}
                                 />
                             </Form>
                         )}

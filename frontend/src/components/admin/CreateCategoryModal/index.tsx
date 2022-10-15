@@ -8,6 +8,8 @@ import { languages } from '../../../config/languages'
 import { useCategory } from '../../../hooks/useCategory'
 import { useTranslation } from 'next-i18next'
 import { validationErrorMessages } from '../../../schemas/validationErrorMessages'
+import SyncIcon from '@mui/icons-material/Sync';
+import { useState } from 'react'
 
 interface CreateCategoryModalProps {
     isOpen: boolean
@@ -19,10 +21,13 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
     const { createCategory } = useCategory()
     const { t } = useTranslation()
     const { locale } = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmitForm = (values: FormikValues) => {
 
+        setIsLoading(true)
         createCategory(values.title)
+        setIsLoading(false)
 
         onRequestClose()
 
@@ -73,7 +78,12 @@ export function CreateCategoryModal({ isOpen, onRequestClose }: CreateCategoryMo
                                     />
                                 </div>
 
-                                <button className='buttonSubmit' type="submit">{t('admin:save')}</button>
+                                <button
+                                    className='buttonSubmit'
+                                    type="submit"
+                                >
+                                    {isLoading ? <SyncIcon className="loading" /> : t('admin:save')}
+                                </button>
                             </Form>
                         )}
                     </Formik>

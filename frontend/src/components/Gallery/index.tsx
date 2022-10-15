@@ -6,6 +6,7 @@ import { useArts } from "../../hooks/useArts";
 import { ArtSchema } from "../../schemas/Art";
 import { GalleryModal } from "./GalleryModal";
 import { Container, NoArtsContainer } from "./style";
+import SyncIcon from '@mui/icons-material/Sync';
 
 interface GalleryProps {
     numberOfArts: number
@@ -21,12 +22,15 @@ export function Gallery({ fetchNextPage, fetchNextPageForCategory, numberOfArts,
     const [currentArt, setCurrentArt] = useState<ArtSchema>(null)
     const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
+    const [isLoading, setIsLoading] = useState(false)
     const { t } = useTranslation()
 
     function handleNextPage() {
+        setIsLoading(true)
         if (categoryPage) fetchNextPageForCategory(categoryPage, currentPage * artsPerPage, artsPerPage)
         else fetchNextPage(currentPage * artsPerPage, artsPerPage)
         setCurrentPage(prevValue => prevValue + 1)
+        setIsLoading(false)
     }
 
     if (arts?.length === 0) {
@@ -71,8 +75,12 @@ export function Gallery({ fetchNextPage, fetchNextPageForCategory, numberOfArts,
             </div>
 
             {arts?.length < numberOfArts && (
-                <button className="LoadMoreButton" onClick={handleNextPage}>
-                    {t('common:loadMore')}
+                <button
+                    className={`LoadMoreButton`}
+                    onClick={handleNextPage}
+                    disabled={isLoading}
+                >
+                    {isLoading ? <SyncIcon className="loading" /> : t('common:loadMore')}
                 </button>
             )}
         </Container>

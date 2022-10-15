@@ -56,7 +56,6 @@ export function SettingsArtModal({ isOpen, onRequestClose, art }: SettingsArtMod
 
                     </ReactCardFlip>
 
-
                 </Container>
             </Dialog.Panel>
 

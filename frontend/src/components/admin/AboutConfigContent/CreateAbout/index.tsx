@@ -15,6 +15,7 @@ import { DropImage } from "../../ArtForms/DropImage";
 import { AboutTips } from "../AboutTips";
 import { ImageFormat } from "../ImageFormat";
 import { RichTextEditor } from "../RichTextEditor";
+import SyncIcon from '@mui/icons-material/Sync';
 import { Container } from "./style";
 
 const CREATE_TEXT_CONTENT = gql`
@@ -64,12 +65,14 @@ export function CreateAbout({
     const { setTextContents, textContents } = useTextContent()
     const { t } = useTranslation()
     const { locale } = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setPreview('')
     }, [onRequestClose])
 
     function createText(values: FormikValues) {
+        setIsLoading(true)
         createTextContent({
             variables: {
                 file: values.file,
@@ -88,8 +91,8 @@ export function CreateAbout({
     }
 
     function handleSubmitForm(values: FormikValues) {
-
         createText(values)
+        setIsLoading(false)
     }
 
     const imageSchema = yup.object().shape({
@@ -144,8 +147,12 @@ export function CreateAbout({
                                 </div>
                                 <div className="formContainer">
                                     <RichTextEditor setHtmlContent={setHtmlContent} />
-                                    <button type='submit' className="buttonSubmit">
-                                        {t('admin:save')}
+                                    <button
+                                        type='submit'
+                                        className="buttonSubmit"
+                                        disabled={isLoading}
+                                    >
+                                        {isLoading ? <SyncIcon className="loading" /> : t('admin:save')}
                                     </button>
                                 </div>
                             </Form>

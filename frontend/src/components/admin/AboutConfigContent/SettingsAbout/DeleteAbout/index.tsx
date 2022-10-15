@@ -1,7 +1,9 @@
 import { useTranslation } from "next-i18next";
+import { useState } from "react";
 import { useTextContent } from "../../../../../hooks/useTextContent";
 import { TextContentSchema } from "../../../../../schemas/TextContent";
 import { Container } from "./style";
+import SyncIcon from '@mui/icons-material/Sync';
 
 interface DeleteAboutProps {
     textContentOnUpdate: TextContentSchema
@@ -13,9 +15,12 @@ export function DeleteAbout({ textContentOnUpdate, onRequestClose, setIsCardFlip
 
     const { deleteTextContent } = useTextContent()
     const { t } = useTranslation()
+    const [isLoading, setIsLoading] = useState(false)
 
     function handleDeleteAbout() {
+        setIsLoading(true)
         deleteTextContent(textContentOnUpdate.id)
+        setIsLoading(false)
         onRequestClose()
     }
 
@@ -36,8 +41,9 @@ export function DeleteAbout({ textContentOnUpdate, onRequestClose, setIsCardFlip
                 <button
                     className="confirmButton"
                     onClick={handleDeleteAbout}
+                    disabled={isLoading}
                 >
-                    {t('admin:confirm')}
+                    {isLoading ? <SyncIcon className="loading" /> : t('admin:confirm')}
                 </button>
 
             </div>

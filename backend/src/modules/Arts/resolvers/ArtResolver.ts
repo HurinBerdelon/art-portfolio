@@ -115,8 +115,6 @@ export class ArtResolver {
             productionDate
         })
 
-        return
-
         return art
     }
 

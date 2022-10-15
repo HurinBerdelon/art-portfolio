@@ -55,7 +55,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                         updatedAt
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         return {

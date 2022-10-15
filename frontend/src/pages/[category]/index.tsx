@@ -61,7 +61,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
                     title
                 }
             }
-        `
+        `,
+        fetchPolicy: "no-cache"
     })
 
 
@@ -101,7 +102,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
                         productionDate
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         const { data: numberOfArtsData } = await apolloClient.query({
@@ -109,7 +111,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
                 query NumberOfArts {
                     numberOfArts (categoryTitle: "${category}") 
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         return {

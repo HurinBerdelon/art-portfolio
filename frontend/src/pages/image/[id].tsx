@@ -63,7 +63,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     updatedAt
                 }
             }
-        `})
+        `,
+        fetchPolicy: "no-cache"
+    })
 
 
     return {

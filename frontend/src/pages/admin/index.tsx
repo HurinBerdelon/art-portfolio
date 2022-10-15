@@ -106,7 +106,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
                         productionDate
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         return {

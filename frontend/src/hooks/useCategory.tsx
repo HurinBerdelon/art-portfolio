@@ -60,7 +60,8 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                         }
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         }).then(response => setCategories(response.data.getCategories))
             .catch(() => setCategories([]))
     }, [])
@@ -80,7 +81,8 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                         }
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         }).then(response => {
             setCategories(prevCategories => [...prevCategories, response.data.createCategory])
             toastSuccess(`Category ${title} created!`)
@@ -104,7 +106,8 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                         }
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         }).then(response => {
             const index = categories.findIndex(item => item.id === id)
             const tempCategories = [...categories]
@@ -132,7 +135,8 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                         language
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         }).then(response => {
             const category = tempCategories.find(item => item.title === response.data.updateTranslation.categoryTitle)
             const index = category?.Translations.findIndex(item => item.id === response.data.updateTranslation.id)

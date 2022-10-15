@@ -58,7 +58,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                     password
                 }
             }
-        `
+        `,
+        fetchPolicy: "no-cache"
     })
 
     try {
@@ -76,7 +77,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                         productionDate
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         const { data: numberOfArtsData } = await apolloClient.query({
@@ -84,7 +86,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 query NumberOfArts {
                     numberOfArts (categoryTitle: "undefined") 
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         return {

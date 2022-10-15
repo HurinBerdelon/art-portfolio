@@ -71,8 +71,8 @@ export function UpdateAbout({
 
     const [htmlContent, setHtmlContent] = useState('')
     const [preview, setPreview] = useState('')
-    const [updateTextContent] = useMutation(UPDATE_TEXT_CONTENT)
-    const [updateTextContentImage] = useMutation(UPDATE_TEXT_CONTENT_IMAGE)
+    const [updateTextContent] = useMutation(UPDATE_TEXT_CONTENT, { fetchPolicy: "no-cache" })
+    const [updateTextContentImage] = useMutation(UPDATE_TEXT_CONTENT_IMAGE, { fetchPolicy: "no-cache" })
     const { setTextContents, textContents } = useTextContent()
     const { t } = useTranslation()
 

@@ -61,7 +61,7 @@ export function CreateAbout({
 
     const [htmlContent, setHtmlContent] = useState('')
     const [preview, setPreview] = useState('')
-    const [createTextContent] = useMutation(CREATE_TEXT_CONTENT, { fetchPolicy: "no-cache" })
+    const [createTextContent] = useMutation(CREATE_TEXT_CONTENT)
     const { setTextContents, textContents } = useTextContent()
     const { t } = useTranslation()
     const { locale } = useRouter()

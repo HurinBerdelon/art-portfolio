@@ -53,9 +53,30 @@ export const Container = styled.div`
                 border-radius: 0.25rem;
                 font-size: 1.125rem;
                 outline: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .loading {
+                    animation: spin 2s ease infinite;
+
+                    @keyframes spin {
+                        0% {transform: rotate(0deg)}
+                        100% {transform: rotate(360deg)}
+                    }
+
+                    &:hover {
+                        cursor: default;
+                    }
+                };
     
                 &:hover {
                     filter: brightness(1.2);
+                }
+
+                &:disabled {
+                    filter: brightness(1);
+                    cursor: default;
                 }
             }
         }

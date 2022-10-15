@@ -139,7 +139,6 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
             delete response.data.updateTranslation.categoryTitle
 
             if (index >= 0) {
-                console.log('adding now')
                 category.Translations.splice(index, 1, response.data.updateTranslation)
                 setCategories(tempCategories)
             } else {

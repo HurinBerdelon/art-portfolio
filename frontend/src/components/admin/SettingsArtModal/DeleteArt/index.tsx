@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 import { useTranslation } from "next-i18next";
-import { useEffect } from "react";
+import { useState } from "react";
+import SyncIcon from '@mui/icons-material/Sync';
 import { useArts } from "../../../../hooks/useArts";
 import { ArtSchema } from "../../../../schemas/Art";
 import { apolloClient } from "../../../../services/apolloClient";
@@ -18,8 +19,10 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
 
     const { arts, setArts } = useArts()
     const { t } = useTranslation()
+    const [isLoading, setIsLoading] = useState(false)
 
     function handleDeleteArt() {
+        setIsLoading(true)
         apolloClient.query({
             query: gql`
                 query DeleteArt{
@@ -36,6 +39,7 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
         revalidateSSG({ path: art.categoryTitle })
         revalidateSSG({ path: '' })
 
+        setIsLoading(false)
         onRequestClose()
     }
 
@@ -56,8 +60,9 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
                 <button
                     className="confirmButton"
                     onClick={handleDeleteArt}
+                    disabled={isLoading}
                 >
-                    {t('admin:confirm')}
+                    {isLoading ? <SyncIcon className="loading" /> : t('admin:confirm')}
                 </button>
 
             </div>

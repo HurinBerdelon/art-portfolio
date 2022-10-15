@@ -55,7 +55,6 @@ interface UserProps {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
 
-    console.log('reached admin')
     const session = await getSession({ req })
 
     if (!session) {

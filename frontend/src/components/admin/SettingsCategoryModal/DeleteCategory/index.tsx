@@ -2,6 +2,8 @@ import { useTranslation } from "next-i18next";
 import { useCategory } from "../../../../hooks/useCategory";
 import { CategorySchema } from "../../../../schemas/Category";
 import { Container } from "./style";
+import SyncIcon from '@mui/icons-material/Sync';
+import { useState } from "react";
 
 interface DeleteCategoryProps {
     category: CategorySchema
@@ -13,10 +15,13 @@ export function DeleteCategory({ category, onRequestClose, setIsCardFlipped }: D
 
     const { deleteCategory } = useCategory()
     const { t } = useTranslation()
+    const [isLoading, setIsLoading] = useState(false)
 
     async function handleDeleteCategory() {
-        await deleteCategory(category.id)
+        setIsLoading(true)
+        deleteCategory(category.id)
 
+        setIsLoading(false)
         onRequestClose()
     }
 
@@ -38,8 +43,9 @@ export function DeleteCategory({ category, onRequestClose, setIsCardFlipped }: D
                 <button
                     className="confirmButton"
                     onClick={handleDeleteCategory}
+                    disabled={isLoading}
                 >
-                    {t('admin:confirm')}
+                    {isLoading ? <SyncIcon className="loading" /> : t('admin:confirm')}
                 </button>
 
             </div>

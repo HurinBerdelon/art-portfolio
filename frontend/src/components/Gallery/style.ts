@@ -98,11 +98,33 @@ export const Container = styled.section`
         width: fit-content;
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
+        font-size: 1.0rem;
         font-weight: 400;
-            flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 115px;
+
+        .loading {
+            animation: spin 2s ease infinite;
+
+            @keyframes spin {
+                0% {transform: rotate(0deg)}
+                100% {transform: rotate(360deg)}
+            }
+
+            &:hover {
+                cursor: default;
+            }
+        };
 
         &:hover {
             filter: brightness(1.2);
+        }
+
+        &:disabled {
+            filter: brightness(1);
+            cursor: default;
         }
     }
 

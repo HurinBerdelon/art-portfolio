@@ -1,7 +1,9 @@
 import { Field, FormikErrors } from "formik";
 import { useTranslation } from "next-i18next";
+import { useState } from "react";
 import { useCategory } from "../../../../hooks/useCategory";
 import { Container } from "./style";
+import SyncIcon from '@mui/icons-material/Sync';
 
 interface ErrorProps {
     title?: string;
@@ -15,11 +17,12 @@ interface ErrorProps {
 
 interface InputArtProps {
     errors: ErrorProps
+    isLoading: boolean
     setFieldValue(field: string, value: any): void
     initialValues: any
 }
 
-export function InputZone({ errors, setFieldValue, initialValues }: InputArtProps): JSX.Element {
+export function InputZone({ errors, setFieldValue, initialValues, isLoading }: InputArtProps): JSX.Element {
 
     const { categories } = useCategory()
     const { t } = useTranslation()
@@ -80,7 +83,13 @@ export function InputZone({ errors, setFieldValue, initialValues }: InputArtProp
                 className={errors.productionDate ? 'errorMessage' : ''}
             />
 
-            <button className='buttonSubmit' type="submit">{t('admin:save')}</button>
+            <button
+                className='buttonSubmit'
+                type="submit"
+                disabled={isLoading}
+            >
+                {isLoading ? <SyncIcon className="loading" /> : t('admin:save')}
+            </button>
         </Container>
     )
 }

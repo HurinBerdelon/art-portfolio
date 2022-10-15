@@ -75,6 +75,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     const [preview, setPreview] = useState<string>()
     const { t } = useTranslation()
     const { locale } = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
 
     const { saveArtYupSchema, updateArtYupSchema } = createArtSchemas(locale)
 
@@ -88,6 +89,8 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
     }, [art, onRequestClose])
 
     const handleSubmitForm = (values: FormikValues) => {
+
+        setIsLoading(true)
 
         function sortArtsByDate(newArt: ArtSchema) {
 
@@ -111,7 +114,11 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
             }).then((response) => {
                 sortArtsByDate(response.data.updateArtImage)
                 toastSuccess(`${values.title}'s image has been updated`)
-            }).catch((error) => console.log(error.message))
+            }).catch((error) => {
+                setIsLoading(false)
+                toastError('Something went wrong, please try again')
+                console.log(error.message)
+            })
 
         }
 
@@ -134,7 +141,10 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
             sortArtsByDate(response.data.updateArt)
             toastSuccess(`${values.title} has been updated`)
             onRequestClose()
-        }).catch((error) => console.log(error))
+        }).catch((error) => {
+            toastError('Something went wrong, please try again')
+            console.log(error)
+        }).finally(() => setIsLoading(false))
     }
 
     const initialValues = {
@@ -171,6 +181,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                             initialValues={initialValues}
                             errors={errors}
                             setFieldValue={setFieldValue}
+                            isLoading={isLoading}
                         />
                     </Form>
                 )}

@@ -15,8 +15,8 @@ import { TextContentSchema } from "../../../schemas/TextContent";
 import { CreateAbout } from "./CreateAbout";
 import { SettingsAbout } from "./SettingsAbout";
 import { useTranslation } from "next-i18next";
-import { revalidateSSG } from "../../../services/revalidate";
-import { toastSuccess } from "../../../services/toastProvider";
+// import { revalidateSSG } from "../../../services/revalidate";
+// import { toastSuccess } from "../../../services/toastProvider";
 
 export function AboutConfigContent(): JSX.Element {
 
@@ -48,10 +48,10 @@ export function AboutConfigContent(): JSX.Element {
             .catch(() => setTextContents([]))
     }, [setTextContents])
 
-    function handleUpdateAboutPage() {
-        revalidateSSG({ path: 'about' })
-        toastSuccess(t('admin:aboutPageUpdated'))
-    }
+    // function handleUpdateAboutPage() {
+    //     revalidateSSG({ path: 'about' })
+    //     toastSuccess(t('admin:aboutPageUpdated'))
+    // }
 
     return (
         <Container>
@@ -70,13 +70,13 @@ export function AboutConfigContent(): JSX.Element {
                     </Popover.Panel>
                 </Popover>
             </h3>
-
+            {/* 
             <button
                 className="updateAboutPage"
                 onClick={handleUpdateAboutPage}
             >
                 {t('admin:updateAboutPage')}
-            </button>
+            </button> */}
 
             <table>
                 <thead>

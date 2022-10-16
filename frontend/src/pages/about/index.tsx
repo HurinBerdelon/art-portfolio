@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
@@ -40,7 +40,7 @@ export default function About({ aboutContent }: AboutProps): JSX.Element {
     )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
     try {
         const { data } = await apolloClient.query({
@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 aboutContent: data.getTextContentsByPage,
                 ...(await serverSideTranslations(locale, ['common'])),
             },
-            revalidate: 60 * 60 * 24, // = 24 hours
+            // revalidate: 60 * 60 * 24, // = 24 hours
         }
     } catch (error) {
 

@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
-import { GetStaticProps } from "next";
-import { useTranslation } from "next-i18next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { Gallery } from "../components/Gallery";
@@ -24,7 +23,6 @@ export default function Home({ arts, numberOfArts }: HomeProps): JSX.Element {
 
     const { currentTheme } = useCurrentTheme()
     const { setArts, fetchNextArtsPage } = useArts()
-    const { t } = useTranslation()
 
     useEffect(() => {
         setArts(arts)
@@ -46,10 +44,10 @@ export default function Home({ arts, numberOfArts }: HomeProps): JSX.Element {
     )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
     // Tells backend to create an admin user if it does not exists
-    const { data: userData } = await apolloClient.query({
+    await apolloClient.query({
         query: gql`
             query GetUser {
                 getUser {
@@ -86,7 +84,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 query NumberOfArts {
                     numberOfArts (categoryTitle: "undefined") 
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         return {
@@ -95,7 +94,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                 numberOfArts: numberOfArtsData.numberOfArts,
                 ...(await serverSideTranslations(locale, ['common'])),
             },
-            revalidate: 60 * 60 * 24, // = 24 hours
         }
     } catch (error) {
 

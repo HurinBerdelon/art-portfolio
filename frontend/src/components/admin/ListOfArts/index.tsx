@@ -10,8 +10,8 @@ import { CreateArtModal } from "../CreateArtModal";
 import { SettingsArtModal } from "../SettingsArtModal";
 import { useTranslation } from "next-i18next";
 import { useCategory } from "../../../hooks/useCategory";
-import { revalidateSSG } from "../../../services/revalidate";
-import { toastSuccess } from "../../../services/toastProvider";
+// import { revalidateSSG } from "../../../services/revalidate";
+// import { toastSuccess } from "../../../services/toastProvider";
 
 interface ListOfArtsProps {
     arts: ArtSchema[]
@@ -45,11 +45,11 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
         }
     }, [currentInput, searchingFor, arts])
 
-    function handleUpdateArtsPage() {
-        revalidateSSG({ path: '' })
-        categories.forEach(category => revalidateSSG({ path: category.title }))
-        toastSuccess(t('admin:artPagesUpdated'))
-    }
+    // function handleUpdateArtsPage() {
+    //     revalidateSSG({ path: '' })
+    //     categories.forEach(category => revalidateSSG({ path: category.title }))
+    //     toastSuccess(t('admin:artPagesUpdated'))
+    // }
 
     return (
         <Container>
@@ -71,12 +71,12 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                 setCurrentInput={setCurrentInput}
             />
 
-            <button
+            {/* <button
                 className="updateArtsPages"
                 onClick={handleUpdateArtsPage}
             >
                 {t('admin:updateArtsPages')}
-            </button>
+            </button> */}
 
             <table>
                 <thead>

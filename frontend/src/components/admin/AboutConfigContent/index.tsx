@@ -15,6 +15,8 @@ import { TextContentSchema } from "../../../schemas/TextContent";
 import { CreateAbout } from "./CreateAbout";
 import { SettingsAbout } from "./SettingsAbout";
 import { useTranslation } from "next-i18next";
+// import { revalidateSSG } from "../../../services/revalidate";
+// import { toastSuccess } from "../../../services/toastProvider";
 
 export function AboutConfigContent(): JSX.Element {
 
@@ -46,6 +48,11 @@ export function AboutConfigContent(): JSX.Element {
             .catch(() => setTextContents([]))
     }, [setTextContents])
 
+    // function handleUpdateAboutPage() {
+    //     revalidateSSG({ path: 'about' })
+    //     toastSuccess(t('admin:aboutPageUpdated'))
+    // }
+
     return (
         <Container>
             <h3 className="pageTitle">
@@ -63,6 +70,13 @@ export function AboutConfigContent(): JSX.Element {
                     </Popover.Panel>
                 </Popover>
             </h3>
+            {/* 
+            <button
+                className="updateAboutPage"
+                onClick={handleUpdateAboutPage}
+            >
+                {t('admin:updateAboutPage')}
+            </button> */}
 
             <table>
                 <thead>
@@ -75,7 +89,7 @@ export function AboutConfigContent(): JSX.Element {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{t('admin:aboutYourself')}</td>
+                        <td className="label">{t('admin:aboutYourself')}</td>
                         {locales.map(locale => {
                             const textContent = textContents
                                 .find(item => item.idiom === locale && item.type === 'aboutYourself')
@@ -113,7 +127,7 @@ export function AboutConfigContent(): JSX.Element {
                         })}
                     </tr>
                     <tr>
-                        <td>{t('admin:aboutBusiness')}</td>
+                        <td className="label">{t('admin:aboutBusiness')}</td>
                         {locales.map(locale => {
 
                             const textContent = textContents

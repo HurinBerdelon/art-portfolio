@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { CategorySchema } from '../../../schemas/Category';
 import { languages } from '../../../config/languages';
 import { SettingsCategoryModal } from '../SettingsCategoryModal';
+import { useTranslation } from 'next-i18next';
 
 export function ListOfCategories(): JSX.Element {
 
@@ -16,6 +17,7 @@ export function ListOfCategories(): JSX.Element {
     const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] = useState(false)
     const [isUpdateCategoryModalOpen, setIsUpdateCategoryModalOpen] = useState(false)
     const [categoryOnUpdate, setCategoryOnUpdate] = useState<CategorySchema>()
+    const { t } = useTranslation()
 
     function capitalize(text: string): string {
         return text
@@ -41,9 +43,14 @@ export function ListOfCategories(): JSX.Element {
                 <thead>
                     <tr>
                         <th className="settings">
-                            <AddCircleIcon
+                            <button
+                                className="buttonAddCategory"
                                 onClick={() => setIsCreateCategoryModalOpen(true)}
-                            />
+                            >
+                                <AddCircleIcon />
+                                <span>{t('admin:addNewCategory')}</span>
+                            </button>
+
                         </th>
                         {locales.map(locale => (
                             <th className='flags' key={locale}>

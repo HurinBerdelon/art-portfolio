@@ -2,6 +2,29 @@ import styled from "styled-components";
 
 export const Container = styled.section`
     
+    display: flex;
+    flex-direction: column;
+
+    .updateArtsPages {
+        align-self: center;
+        width: fit-content;
+        display: flex;
+        align-items: center;              
+        background: ${props => props.theme.colors.buttons};
+        color: ${props => props.theme.colors.textThree};
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        font-weight: 400;
+
+        @media (min-width: 1024px) {
+            font-size: 1rem;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+    }
+
     table {
         width: 100%;
 
@@ -23,6 +46,19 @@ export const Container = styled.section`
             .settings {
                 display: flex;
                 justify-content: center;
+
+                .buttonAddArt {
+                    display: flex;
+
+                    span {
+                        display: none;
+                    }
+
+                    svg {
+                        font-size: 2rem;
+                        color: ${props => props.theme.colors.textOne};
+                    }
+                }
             }
 
             th, td {
@@ -64,6 +100,33 @@ export const Container = styled.section`
 
         @media (min-width: 1024px) {
             tbody tr, thead tr {
+
+                .settings {
+                    .buttonAddArt {
+                        align-items: center;
+                        gap: 0.5rem;
+                        background: ${props => props.theme.colors.buttons};
+                        border-radius: 0.25rem;
+                        padding: 0.25rem 0.5rem;
+
+                        svg {
+                            font-size: 1.5rem;
+                            color: ${props => props.theme.colors.textThree};
+                        }
+
+                        span {
+                            display: flex;
+                            font-weight: 600;
+                            font-size: 0.85rem;
+                            color: ${props => props.theme.colors.textThree};
+                        }
+
+                        &:hover {
+                            filter: brightness(1.2);
+                        }
+                    }
+                }
+
                 th, td {
                     font-size: 1.25rem;
 

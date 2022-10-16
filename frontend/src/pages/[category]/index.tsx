@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -52,7 +52,9 @@ export default function ByCategoryPage({ arts, numberOfArts }: ByCategoryPagePro
     )
 }
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale, locales }) => {
+
+    const { category } = params
 
     const response = await apolloClient.query({
         query: gql`
@@ -64,22 +66,16 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
         `,
     })
 
-    const paths = response.data.getCategories.map(category => locales.map(locale => {
+    const isCategory = response.data.getCategories.find(item => item.title === category)
+
+    if (!isCategory) {
         return {
-            params: { category: category.title },
-            locale
+            redirect: {
+                destination: '/',
+                permanent: true
+            }
         }
-    })).flat()
-
-    return {
-        paths,
-        fallback: false
     }
-}
-
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-
-    const { category } = params
 
     try {
         const { data } = await apolloClient.query({
@@ -100,7 +96,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
                         productionDate
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         const { data: numberOfArtsData } = await apolloClient.query({
@@ -108,7 +105,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
                 query NumberOfArts {
                     numberOfArts (categoryTitle: "${category}") 
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         return {
@@ -118,7 +116,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
                 key: category,
                 ...(await serverSideTranslations(locale, ['common'])),
             },
-            revalidate: 2 * 60 //60 * 60 * 24 // = 24 hours
+            // revalidate: 60 * 60 * 24 // = 24 hours
         }
     } catch (error) {
 

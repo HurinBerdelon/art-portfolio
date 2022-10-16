@@ -42,5 +42,17 @@
     "deleteAbout": "Deletar Sobre",
     "aboutInfo": "A página sobre pode ter duas seções, uma que fala sobre você e outra que fala sobre seu negócio. Aqui elas estão separadas por essas seções e pelos idiomas disponíveis em seu portfólio.",
     "dateAlert": "* A data presente é a data da última atualização para que você saiba quando a seção foi atualizada a última vez.",
-    "translation": "Tradução"
+    "translation": "Tradução",
+    "updateAboutPage": "Atualizar Página Sobre",
+    "updateArtsPages": "Atualizar Páginas de Artes",
+    "addNewArt": "Salvar Nova Arte",
+    "addNewCategory": "Salvar Nova Categoria",
+    "aboutPageUpdated": "Página Sobre foi atualizada!",
+    "textSaved": "Texto Salvo!",
+    "textUpdated": "Texto Atualizado!",
+    "textDeleted": "Texto Deletado!",
+    "unhandledError": "Algo errado aconteceu, por favor tente novamente!",
+    "imageUpdated": "Imagem foi Atualizada!",
+    "artPagesUpdated": "Página Home e páginas de categorias foram atualizadas",
+    "categoryDeleted": "Categoria foi deletada!"
 }

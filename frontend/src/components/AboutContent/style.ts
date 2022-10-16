@@ -7,6 +7,17 @@ export const Container = styled.section`
     flex-direction: column;
     align-items: center;
 
+    .aboutYourselfContent {
+        margin-bottom: 3rem;
+    }
+
+    .aboutYourselfContent, .aboutBusinessContent {
+
+        .content {
+            padding: 1rem 0;
+        }
+    }
+
     h1, h2, h3, h4 {
         color: ${props => props.theme.colors.textOne};
     }

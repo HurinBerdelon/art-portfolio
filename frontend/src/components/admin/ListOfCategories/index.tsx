@@ -41,9 +41,14 @@ export function ListOfCategories(): JSX.Element {
                 <thead>
                     <tr>
                         <th className="settings">
-                            <AddCircleIcon
+                            <button
+                                className="buttonAddCategory"
                                 onClick={() => setIsCreateCategoryModalOpen(true)}
-                            />
+                            >
+                                <AddCircleIcon />
+                                <span>Add new Art</span>
+                            </button>
+
                         </th>
                         {locales.map(locale => (
                             <th className='flags' key={locale}>

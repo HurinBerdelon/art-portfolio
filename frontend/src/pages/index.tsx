@@ -49,7 +49,7 @@ export default function Home({ arts, numberOfArts }: HomeProps): JSX.Element {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
     // Tells backend to create an admin user if it does not exists
-    await apolloClient.query({
+    const { data: userData } = await apolloClient.query({
         query: gql`
             query GetUser {
                 getUser {
@@ -77,7 +77,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
                         productionDate
                     }
                 }
-            `
+            `,
+            fetchPolicy: "no-cache"
         })
 
         const { data: numberOfArtsData } = await apolloClient.query({

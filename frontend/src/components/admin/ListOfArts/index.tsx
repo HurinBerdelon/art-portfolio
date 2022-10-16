@@ -9,6 +9,9 @@ import { ArtInfo } from "../ArtInfo";
 import { CreateArtModal } from "../CreateArtModal";
 import { SettingsArtModal } from "../SettingsArtModal";
 import { useTranslation } from "next-i18next";
+import { useCategory } from "../../../hooks/useCategory";
+import { revalidateSSG } from "../../../services/revalidate";
+import { toastSuccess } from "../../../services/toastProvider";
 
 interface ListOfArtsProps {
     arts: ArtSchema[]
@@ -21,6 +24,7 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
     const [isCreateArtModalOpen, setIsCreateArtModalOpen] = useState(false)
     const [isUpdateArtModalOpen, setIsUpdateArtModalOpen] = useState(false)
     const [artBeeingUpdated, setArtBeeingUpdated] = useState<ArtSchema>(null)
+    const { categories } = useCategory()
     const { t } = useTranslation()
 
     const { arts: artState, setArts } = useArts()
@@ -40,6 +44,12 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
             setArtsOnScreen(arts.filter(art => art[searchingFor].toLowerCase().includes(currentInput.toLowerCase())))
         }
     }, [currentInput, searchingFor, arts])
+
+    function handleUpdateArtsPage() {
+        revalidateSSG({ path: '' })
+        categories.forEach(category => revalidateSSG({ path: category.title }))
+        toastSuccess(`Home and categories pages has been updated`)
+    }
 
     return (
         <Container>
@@ -61,13 +71,24 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                 setCurrentInput={setCurrentInput}
             />
 
+            <button
+                className="updateArtsPages"
+                onClick={handleUpdateArtsPage}
+            >
+                Update arts pages
+            </button>
+
             <table>
                 <thead>
                     <tr>
                         <th className="settings">
-                            <AddCircleIcon
+                            <button
+                                className="buttonAddArt"
                                 onClick={() => setIsCreateArtModalOpen(true)}
-                            />
+                            >
+                                <AddCircleIcon />
+                                <span>Add new Art</span>
+                            </button>
                         </th>
                         <th>{t('admin:image')}</th>
                         <th>{t('admin:title')}</th>

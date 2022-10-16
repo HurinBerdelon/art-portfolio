@@ -2,6 +2,30 @@ import styled from "styled-components";
 
 export const Container = styled.div`
 
+    display: flex;
+    flex-direction: column;
+
+    .updateAboutPage {
+        align-self: center;
+        width: fit-content;
+        display: flex;
+        align-items: center;              
+        background: ${props => props.theme.colors.buttons};
+        color: ${props => props.theme.colors.textThree};
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+
+        @media (min-width: 1024px) {
+            font-size: 1rem;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+    }
+
     .pageTitle {
         color: ${props => props.theme.colors.textOne};
         margin: 1rem 0;
@@ -45,6 +69,10 @@ export const Container = styled.div`
 
             display: grid;
             grid-template-columns: 1.25fr repeat(3, 1fr);
+        }
+
+        .label {
+            justify-content: start;
         }
 
         .title {

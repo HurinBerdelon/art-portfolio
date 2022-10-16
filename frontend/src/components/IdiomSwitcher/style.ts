@@ -43,7 +43,8 @@ export const Container = styled.div`
                 }
 
                 .deactivated {
-                    filter: grayscale(0.8);
+                    filter: grayscale(1);
+                    color: ${props => props.theme.colors.gray};
                 }
             }
 

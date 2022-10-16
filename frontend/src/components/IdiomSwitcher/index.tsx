@@ -25,7 +25,9 @@ export function IdiomSwitcher(): JSX.Element {
                                         <span className={router.locale === locale ? '' : 'deactivated'}>
                                             {languages[locale].flag}
                                         </span>
-                                        <span>{languages[locale].label}</span>
+                                        <span className={router.locale === locale ? '' : 'deactivated'}>
+                                            {languages[locale].label}
+                                        </span>
                                     </a>
                                 </Link>
                             </li>

@@ -5,7 +5,7 @@ import SyncIcon from '@mui/icons-material/Sync';
 import { useArts } from "../../../../hooks/useArts";
 import { ArtSchema } from "../../../../schemas/Art";
 import { apolloClient } from "../../../../services/apolloClient";
-import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
+import { toastError, toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { Container } from "./style";
 
 interface DeleteArtProps {
@@ -29,7 +29,10 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
                 }
             `
         }).then(() => toastSuccess(`Art ${art.title} was deleted!`))
-            .catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+            .catch(error => {
+                toastError(t('admin:unhandledError'))
+                console.log(error.message)
+            })
 
         const tempArts = [...arts]
         tempArts.splice(arts.indexOf(art), 1)

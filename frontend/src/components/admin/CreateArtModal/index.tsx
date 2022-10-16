@@ -91,10 +91,10 @@ export function CreateArtModal({ isOpen, onRequestClose }: CreateArtModalProps):
             toastSuccess(`${values.title} has been saved`)
             onRequestClose()
         }).catch((error) => {
-            if (error.message === 'Art with code asd already exists!') {
-                toastError('Art with code asd already exists!')
+            if (error.message === `Art with code ${values.uniqueCode} already exists!`) {
+                toastError(`Art with code ${values.uniqueCode} already exists!`)
             } else {
-                toastError('Something went wrong, please try again')
+                toastError(t('admin:unhandledError'))
                 console.log(error.message)
             }
         }).finally(() => setIsLoading(false))

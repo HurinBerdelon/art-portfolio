@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 import { CategorySchema } from "../schemas/Category";
 import { apolloClient } from "../services/apolloClient";
 import { toastError, toastSuccess, toastWarn } from "../services/toastProvider";
+import { useTranslation } from "next-i18next";
 
 interface UpdateTranslationProps {
     title: string,
@@ -30,6 +31,7 @@ const CategoryContext = createContext<CategoryContextProps>(
 export function CategoryProvider({ children }: CategoryProviderProps) {
 
     const [categories, setCategories] = useState<CategorySchema[]>()
+    const { t } = useTranslation()
 
     let tempCategories: CategorySchema[] = []
 
@@ -113,7 +115,10 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
 
             setCategories(tempCategories)
             toastSuccess(`Category ${title} was updated!`)
-        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }).catch(error => {
+            toastError(t('admin:unhandledError'))
+            console.log(error.message)
+        })
     }
 
     async function updateTranslation({ title, id, categoryTitle, language }: UpdateTranslationProps) {
@@ -146,7 +151,10 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
                 setCategories(tempCategories)
             }
             toastSuccess(`Translation ${title} was updated!`)
-        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }).catch(error => {
+            toastError(t('admin:unhandledError'))
+            console.log(error.message)
+        })
     }
 
     async function deleteCategory(id: string) {
@@ -163,8 +171,11 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
             tempCategories.splice(index, 1)
 
             setCategories(tempCategories)
-        }).then(() => toastSuccess(`Category deleted`))
-            .catch(() => toastError(`There are arts registered in this category, please delete them before delete the category`))
+        }).then(() => toastSuccess(t('admin:categoryDeleted')))
+            .catch((error) => {
+                toastError(t('admin:unhandledError'))
+                console.log(error.message)
+            })
     }
 
     return (

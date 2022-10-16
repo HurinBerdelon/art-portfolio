@@ -8,7 +8,7 @@ import * as yup from 'yup'
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { useTextContent } from "../../../../hooks/useTextContent";
 import { validationErrorMessages } from "../../../../schemas/validationErrorMessages";
-import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
+import { toastError, toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
 import { DropImage } from "../../ArtForms/DropImage";
 import { AboutTips } from "../AboutTips";
@@ -83,9 +83,12 @@ export function CreateAbout({
             }
         }).then(response => {
             setTextContents([...textContents, response.data.createTextContent])
-            toastSuccess('Text Saved!')
+            toastSuccess(t('admin:textSaved'))
             onRequestClose()
-        }).catch((error) => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }).catch((error) => {
+            toastError(t('admin:unhandledError'))
+            console.log(error.message)
+        })
     }
 
     function handleSubmitForm(values: FormikValues) {

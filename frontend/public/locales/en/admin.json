@@ -42,5 +42,17 @@
     "deleteAbout": "Delete About",
     "aboutInfo": "The about page can have two sections, one to talk about yourself and one to talk about your business. Here they are separeted for this sections and for the idioms present on your portfolio.",
     "dateAlert": "* The date that appears is the last update date, so you can know if a section is up to date.",
-    "translation": "Translation"
+    "translation": "Translation",
+    "updateAboutPage": "Update About Page",
+    "updateArtsPages": "Update arts pages",
+    "addNewArt": "Add new Art",
+    "addNewCategory": "Add new Category",
+    "aboutPageUpdated": "About page has been updated",
+    "textSaved": "Text Saved!",
+    "textUpdated": "Text was updated!",
+    "textDeleted": "Text deleted",
+    "unhandledError": "Something went wrong, please try again!",
+    "imageUpdated": "Image was updated!",
+    "artPagesUpdated": "Home and categories pages has been updated",
+    "categoryDeleted": "Category deleted"
 }

@@ -6,7 +6,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { availableImageTypes } from "../../../../../config/availableImageType";
 import { useTextContent } from "../../../../../hooks/useTextContent";
 import { TextContentSchema } from "../../../../../schemas/TextContent";
-import { toastSuccess, toastWarn } from "../../../../../services/toastProvider";
+import { toastError, toastSuccess, toastWarn } from "../../../../../services/toastProvider";
 import { DropImage } from "../../../ArtForms/DropImage";
 import { AboutTips } from "../../AboutTips";
 import { ImageFormat } from "../../ImageFormat";
@@ -102,8 +102,11 @@ export function UpdateAbout({
                 tempTextContents.splice(index, 1, response.data.updateTextContentImage)
 
                 setTextContents(tempTextContents)
-                toastSuccess(`Image was updated!`)
-            }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+                toastSuccess(t('admin:imageUpdated'))
+            }).catch(error => {
+                toastError(t('admin:unhandledError'))
+                console.log(error.message)
+            })
         }
 
         updateTextContent({
@@ -120,9 +123,12 @@ export function UpdateAbout({
             tempTextContents.splice(index, 1, response.data.updateTextContent)
 
             setTextContents(tempTextContents)
-            toastSuccess(`Text was updated!`)
+            toastSuccess(t('admin:textUpdated'))
             onRequestClose()
-        }).catch(error => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }).catch(error => {
+            toastError(t('admin:unhandledError'))
+            console.log(error.message)
+        })
     }
 
     function handleSubmitForm(values: FormikValues) {

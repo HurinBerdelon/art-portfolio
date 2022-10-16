@@ -115,7 +115,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                 toastSuccess(`${values.title}'s image has been updated`)
             }).catch((error) => {
                 setIsLoading(false)
-                toastError('Something went wrong, please try again')
+                toastError(t('admin:unhandledError'))
                 console.log(error.message)
             })
 
@@ -136,7 +136,7 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
             toastSuccess(`${values.title} has been updated`)
             onRequestClose()
         }).catch((error) => {
-            toastError('Something went wrong, please try again')
+            toastError(t('admin:unhandledError'))
             console.log(error)
         }).finally(() => setIsLoading(false))
     }

@@ -48,7 +48,7 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
     function handleUpdateArtsPage() {
         revalidateSSG({ path: '' })
         categories.forEach(category => revalidateSSG({ path: category.title }))
-        toastSuccess(`Home and categories pages has been updated`)
+        toastSuccess(t('admin:artPagesUpdated'))
     }
 
     return (
@@ -75,7 +75,7 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                 className="updateArtsPages"
                 onClick={handleUpdateArtsPage}
             >
-                Update arts pages
+                {t('admin:updateArtsPages')}
             </button>
 
             <table>
@@ -87,7 +87,7 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                                 onClick={() => setIsCreateArtModalOpen(true)}
                             >
                                 <AddCircleIcon />
-                                <span>Add new Art</span>
+                                <span>{t('admin:addNewArt')}</span>
                             </button>
                         </th>
                         <th>{t('admin:image')}</th>

@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { gql } from "@apollo/client";
 import { apolloClient } from "../services/apolloClient";
-import { toastSuccess, toastWarn } from "../services/toastProvider";
+import { toastError, toastSuccess, toastWarn } from "../services/toastProvider";
 import { TextContentSchema } from "../schemas/TextContent";
+import { useTranslation } from "next-i18next";
 
 interface TextContentProviderProps {
     children: ReactNode
@@ -21,6 +22,7 @@ const TextContentContext = createContext<TextContentContextProps>(
 export function TextContentProvider({ children }: TextContentProviderProps) {
 
     const [textContents, setTextContents] = useState<TextContentSchema[]>([])
+    const { t } = useTranslation()
 
     async function deleteTextContent(id: string) {
         apolloClient.query({
@@ -36,8 +38,11 @@ export function TextContentProvider({ children }: TextContentProviderProps) {
             tempTextContents.splice(index, 1)
 
             setTextContents(tempTextContents)
-        }).then(() => toastSuccess(`Text deleted`))
-            .catch((error) => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
+        }).then(() => toastSuccess(t('admin:textDeleted')))
+            .catch((error) => {
+                toastError(t('admin:unhandledError'))
+                console.log(error.message)
+            })
     }
 
     return (

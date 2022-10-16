@@ -50,7 +50,7 @@ export function AboutConfigContent(): JSX.Element {
 
     function handleUpdateAboutPage() {
         revalidateSSG({ path: 'about' })
-        toastSuccess(`About page has been updated`)
+        toastSuccess(t('admin:aboutPageUpdated'))
     }
 
     return (
@@ -75,7 +75,7 @@ export function AboutConfigContent(): JSX.Element {
                 className="updateAboutPage"
                 onClick={handleUpdateAboutPage}
             >
-                Update About Page
+                {t('admin:updateAboutPage')}
             </button>
 
             <table>

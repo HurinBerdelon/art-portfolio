@@ -8,7 +8,6 @@ import * as yup from 'yup'
 import { availableImageTypes } from "../../../../config/availableImageType";
 import { useTextContent } from "../../../../hooks/useTextContent";
 import { validationErrorMessages } from "../../../../schemas/validationErrorMessages";
-import { revalidateSSG } from "../../../../services/revalidate";
 import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { ModalContentOverlay } from "../../../../styles/global";
 import { DropImage } from "../../ArtForms/DropImage";
@@ -85,7 +84,6 @@ export function CreateAbout({
         }).then(response => {
             setTextContents([...textContents, response.data.createTextContent])
             toastSuccess('Text Saved!')
-            revalidateSSG({ path: 'about' })
             onRequestClose()
         }).catch((error) => toastWarn(`Unhandled error with message: ${error.message}! Please, contact the developer`))
     }

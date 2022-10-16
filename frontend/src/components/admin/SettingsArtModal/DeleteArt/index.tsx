@@ -5,7 +5,6 @@ import SyncIcon from '@mui/icons-material/Sync';
 import { useArts } from "../../../../hooks/useArts";
 import { ArtSchema } from "../../../../schemas/Art";
 import { apolloClient } from "../../../../services/apolloClient";
-import { revalidateSSG } from "../../../../services/revalidate";
 import { toastSuccess, toastWarn } from "../../../../services/toastProvider";
 import { Container } from "./style";
 
@@ -35,9 +34,6 @@ export function DeleteArt({ art, onRequestClose, setIsCardFlipped }: DeleteArtPr
         const tempArts = [...arts]
         tempArts.splice(arts.indexOf(art), 1)
         setArts(tempArts)
-
-        revalidateSSG({ path: art.categoryTitle })
-        revalidateSSG({ path: '' })
 
         setIsLoading(false)
         onRequestClose()

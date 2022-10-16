@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useArts } from "../../../../hooks/useArts";
 import { ArtSchema, createArtSchemas } from "../../../../schemas/Art";
-import { revalidateSSG } from "../../../../services/revalidate";
 import { toastError, toastSuccess } from "../../../../services/toastProvider";
 import { DropImage } from "../../ArtForms/DropImage";
 import { InputZone } from "../../ArtForms/InputZone";
@@ -133,11 +132,6 @@ export function UpdateArt({ art, onRequestClose, setIsCardFlipped }: UpdateArtPr
                 productionDate: values.productionDate
             }
         }).then((response) => {
-            if (values.category !== art.categoryTitle) {
-                revalidateSSG({ path: values.categoryTitle })
-            }
-            revalidateSSG({ path: art.categoryTitle })
-            revalidateSSG({ path: '' })
             sortArtsByDate(response.data.updateArt)
             toastSuccess(`${values.title} has been updated`)
             onRequestClose()

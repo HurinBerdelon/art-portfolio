@@ -6,6 +6,7 @@ export const Container = styled.section`
     flex: 1;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
 
     .aboutYourselfContent {
         margin-bottom: 3rem;

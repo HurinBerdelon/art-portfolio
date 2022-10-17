@@ -16,10 +16,10 @@ export function ContactContent(): JSX.Element {
             <div className="imageContainer">
                 <img src="/images/contact-us.png" alt="contact us" />
             </div>
-            <h1>{t('common:getInTouch')}</h1>
             {/* <ContactForm /> */}
 
             <div className="contactInfos">
+                <h1>{t('common:getInTouch')}</h1>
                 <div className="contactCard">
                     <Link href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}>
                         <a target='_blank'>

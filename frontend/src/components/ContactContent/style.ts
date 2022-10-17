@@ -9,13 +9,13 @@ export const Container = styled.section`
     justify-content: center;
 
     h1 {
-        padding: 1rem;
+        padding: 1rem 0;
         color: ${props => props.theme.colors.textOne};
         text-align: center;
     }
 
     .imageContainer {
-        width: 100%;
+        width: 80%;
         max-width: 940px;
         margin: 0 auto;
 
@@ -48,7 +48,11 @@ export const Container = styled.section`
         display: flex;
         flex: 1;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
         padding: 2rem 0;
+
+        .imageContainer {
+            width: 40%;
+        }
     }
 `

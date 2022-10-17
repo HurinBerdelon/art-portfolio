@@ -31,4 +31,23 @@ export const Container = styled.aside`
 		justify-content: space-evenly;
 		align-items: center;
 	}
+
+	@media (min-width: 1024px) {
+
+		.sectionHeader {
+			margin-top: 0.5rem;
+
+			h2 {
+				margin-top: 0.5rem;
+			}
+		}
+
+	}
+
+	@media (min-width: 1320px) {
+
+		.sectionHeader {
+			margin-top: 1.25rem;
+		}
+	}
 `

@@ -26,9 +26,28 @@ export const Container = styled.div`
         flex-direction: column;
         gap: 0.25rem; // 4px
         margin-bottom: 0.5rem;
+        font-size: 1.25rem;
 
         overflow-y: auto;
         overflow-x: hidden;
         color: ${props => props.theme.colors.textThree};
+    }
+
+    @media (min-width: 1024px) {
+        .categoriesLink {
+            max-height: 162px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .categoriesLink {
+            max-height: 200px;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        .categoriesLink {
+            max-height: 330px;
+        }
     }
 `

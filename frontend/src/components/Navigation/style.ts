@@ -4,7 +4,7 @@ export const Container = styled.nav`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 100%;
+    flex: 1;
     width: 100%;
     gap: 0.25rem; // 4px
     padding: 2rem; // 16px
@@ -44,8 +44,10 @@ export const Container = styled.nav`
 			}
 		}
 
-		@media (min-width: 1024px) {
-			font-size: 1.6rem;
-		}
     }
+	@media (min-width: 1024px) {
+
+		font-size: 1.6rem;
+		padding: 0 2rem;
+	}
 `

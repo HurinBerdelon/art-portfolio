@@ -4,6 +4,7 @@ export const Container = styled.section`
     
     display: flex;
     flex-direction: column;
+    overflow: auto;
 
     .updateArtsPages {
         align-self: center;

@@ -120,6 +120,150 @@ export function ListOfArts({ arts }: ListOfArtsProps): JSX.Element {
                             <td>{art.categoryTitle}</td>
                         </tr>
                     ))}
+                    {artsOnScreen?.map(art => (
+                        <tr key={art.id}>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                <div className="imageContainer">
+                                    <img src={art.image} alt={art.title} />
+                                </div>
+                            </td>
+                            <td>
+                                <span className="title">
+                                    <ArtInfo art={art} />
+                                    {art.title}
+                                </span>
+                            </td>
+                            <td>{art.categoryTitle}</td>
+                        </tr>
+                    ))}
+                    {artsOnScreen?.map(art => (
+                        <tr key={art.id}>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                <div className="imageContainer">
+                                    <img src={art.image} alt={art.title} />
+                                </div>
+                            </td>
+                            <td>
+                                <span className="title">
+                                    <ArtInfo art={art} />
+                                    {art.title}
+                                </span>
+                            </td>
+                            <td>{art.categoryTitle}</td>
+                        </tr>
+                    ))}
+                    {artsOnScreen?.map(art => (
+                        <tr key={art.id}>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                <div className="imageContainer">
+                                    <img src={art.image} alt={art.title} />
+                                </div>
+                            </td>
+                            <td>
+                                <span className="title">
+                                    <ArtInfo art={art} />
+                                    {art.title}
+                                </span>
+                            </td>
+                            <td>{art.categoryTitle}</td>
+                        </tr>
+                    ))}
+                    {artsOnScreen?.map(art => (
+                        <tr key={art.id}>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                <div className="imageContainer">
+                                    <img src={art.image} alt={art.title} />
+                                </div>
+                            </td>
+                            <td>
+                                <span className="title">
+                                    <ArtInfo art={art} />
+                                    {art.title}
+                                </span>
+                            </td>
+                            <td>{art.categoryTitle}</td>
+                        </tr>
+                    ))}
+                    {artsOnScreen?.map(art => (
+                        <tr key={art.id}>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                <div className="imageContainer">
+                                    <img src={art.image} alt={art.title} />
+                                </div>
+                            </td>
+                            <td>
+                                <span className="title">
+                                    <ArtInfo art={art} />
+                                    {art.title}
+                                </span>
+                            </td>
+                            <td>{art.categoryTitle}</td>
+                        </tr>
+                    ))}
+                    {artsOnScreen?.map(art => (
+                        <tr key={art.id}>
+                            <td className="settings">
+                                <SettingsIcon
+                                    onClick={() => {
+                                        setArtBeeingUpdated(art)
+                                        setIsUpdateArtModalOpen(true)
+                                    }}
+                                />
+                            </td>
+                            <td>
+                                <div className="imageContainer">
+                                    <img src={art.image} alt={art.title} />
+                                </div>
+                            </td>
+                            <td>
+                                <span className="title">
+                                    <ArtInfo art={art} />
+                                    {art.title}
+                                </span>
+                            </td>
+                            <td>{art.categoryTitle}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </Container>

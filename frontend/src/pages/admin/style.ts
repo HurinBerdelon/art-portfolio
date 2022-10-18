@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     background: ${props => props.theme.colors.backgroundOne};
     height: 100%;
+    overflow: auto;
 
     @media (min-width: 1024px) {
         display: flex;

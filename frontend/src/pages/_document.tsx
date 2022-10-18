@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
                 <Head>
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap" rel="stylesheet" />
+                    <link rel="shortcut icon" href="../images/colored_logo.png" />
                     {/* <link rel="shortcut icon" href="/favicon.png" type='image/png' /> */}
                 </Head>
 

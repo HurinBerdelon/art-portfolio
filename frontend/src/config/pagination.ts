@@ -1,1 +1,1 @@
-export const artsPerPage = 5
+export const artsPerPage = 12

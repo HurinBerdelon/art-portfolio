@@ -9,7 +9,7 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
-    "@prisma/client": "3.12.0",
+    "@prisma/client": "^4.16.1",
     "apollo-server": "^3.12.0",
     "apollo-server-express": "^3.12.0",
     "aws-sdk": "2.1405.0",

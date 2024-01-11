@@ -9,129 +9,132 @@ import { DeleteTextContentUseCase } from "../useCases/DeleteTextContent/DeleteTe
 import { EditTextContentImageUseCase } from "../useCases/EditTextContentImage/EditTextContentImageUseCase";
 import { GetAllTextContentsUseCase } from "../useCases/GetAllTextContent/GetAllTextContentsUseCase";
 import { GetTextContentByPageUseCase } from "../useCases/GetTextContentByPage/GetTextContentByPageUseCase";
-import { GetTextContentByTypeUseCase } from "../useCases/GetTextContentByType /GetTextContentByTypeUseCase";
+import { GetTextContentByTypeUseCase } from "../useCases/GetTextContentByType/GetTextContentByTypeUseCase";
 import { UpdateTextContentUseCase } from "../useCases/UpdateTextContent/UpdateTextContentUseCase";
 
 @Resolver()
 export class TextContentResolver {
+  @Query(() => [TextContent])
+  async getTextContents() {
+    const getAllTextContentsUseCase = container.resolve(
+      GetAllTextContentsUseCase
+    );
 
-    @Query(() => [TextContent])
-    async getTextContents() {
+    const textContents = await getAllTextContentsUseCase.execute();
 
-        const getAllTextContentsUseCase = container.resolve(GetAllTextContentsUseCase)
+    return textContents;
+  }
 
-        const textContents = await getAllTextContentsUseCase.execute()
+  @Query(() => [TextContent])
+  async getTextContentsByPage(@Arg("page") page: string) {
+    const getTextContentsByPageUseCase = container.resolve(
+      GetTextContentByPageUseCase
+    );
 
-        return textContents
-    }
+    const textContents = await getTextContentsByPageUseCase.execute(page);
 
-    @Query(() => [TextContent])
-    async getTextContentsByPage(
-        @Arg('page') page: string
-    ) {
+    return textContents;
+  }
 
-        const getTextContentsByPageUseCase = container.resolve(GetTextContentByPageUseCase)
+  @Query(() => [TextContent])
+  async getTextContentByType(@Arg("type") type: string) {
+    const getTextContentsByTypeUseCase = container.resolve(
+      GetTextContentByTypeUseCase
+    );
 
-        const textContents = await getTextContentsByPageUseCase.execute(page)
+    const textContents = await getTextContentsByTypeUseCase.execute(type);
 
-        return textContents
-    }
+    return textContents;
+  }
 
-    @Query(() => [TextContent])
-    async getTextContentByType(
-        @Arg('type') type: string
-    ) {
+  @Mutation(() => TextContent)
+  async createTextContent(
+    @Arg("type") type: string,
+    @Arg("idiom") idiom: string,
+    @Arg("page") page: string,
+    @Arg("text") text: string,
+    @Arg("imageFormat") imageFormat: string,
+    @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
+  ) {
+    const hashFilename = getHashFilename(filename);
 
-        const getTextContentsByTypeUseCase = container.resolve(GetTextContentByTypeUseCase)
+    const imagePath = `${tmpFolder}/${hashFilename}`;
 
-        const textContents = await getTextContentsByTypeUseCase.execute(type)
+    await new Promise(async (resolve, reject) =>
+      createReadStream()
+        .pipe(createWriteStream(imagePath))
+        .on("finish", () => resolve(true))
+        .on("error", () => reject(false))
+    );
 
-        return textContents
-    }
+    const createTextContentUseCase = container.resolve(
+      CreateTextContentUseCase
+    );
 
-    @Mutation(() => TextContent)
-    async createTextContent(
-        @Arg('type') type: string,
-        @Arg('idiom') idiom: string,
-        @Arg('page') page: string,
-        @Arg('text') text: string,
-        @Arg('imageFormat') imageFormat: string,
-        @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
+    const textContent = await createTextContentUseCase.execute({
+      idiom,
+      page,
+      imageUrl: hashFilename,
+      text,
+      type,
+      imageFormat,
+    });
 
-    ) {
+    return textContent;
+  }
 
-        const hashFilename = getHashFilename(filename)
+  @Mutation(() => TextContent)
+  async updateTextContent(
+    @Arg("id") id: string,
+    @Arg("text") text: string,
+    @Arg("imageFormat") imageFormat: string
+  ) {
+    const updateTextContentUseCase = container.resolve(
+      UpdateTextContentUseCase
+    );
 
-        const imagePath = `${tmpFolder}/${hashFilename}`
+    const textContent = await updateTextContentUseCase.execute(
+      id,
+      text,
+      imageFormat
+    );
 
-        await new Promise(async (resolve, reject) =>
-            createReadStream()
-                .pipe(createWriteStream(imagePath))
-                .on('finish', () => resolve(true))
-                .on('error', () => reject(false))
-        )
+    return textContent;
+  }
 
-        const createTextContentUseCase = container.resolve(CreateTextContentUseCase)
+  @Mutation(() => TextContent)
+  async updateTextContentImage(
+    @Arg("id") id: string,
+    @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
+  ) {
+    const hashFilename = getHashFilename(filename);
 
-        const textContent = await createTextContentUseCase.execute({
-            idiom,
-            page,
-            imageUrl: hashFilename,
-            text,
-            type,
-            imageFormat
-        })
+    const imagePath = `${tmpFolder}/${hashFilename}`;
 
-        return textContent
-    }
+    await new Promise(async (resolve, reject) =>
+      createReadStream()
+        .pipe(createWriteStream(imagePath))
+        .on("finish", () => resolve(true))
+        .on("error", () => reject(false))
+    );
 
-    @Mutation(() => TextContent)
-    async updateTextContent(
-        @Arg('id') id: string,
-        @Arg('text') text: string,
-        @Arg('imageFormat') imageFormat: string,
-    ) {
+    const editTextContentImageUseCase = container.resolve(
+      EditTextContentImageUseCase
+    );
 
-        const updateTextContentUseCase = container.resolve(UpdateTextContentUseCase)
+    const art = await editTextContentImageUseCase.execute(id, hashFilename);
 
-        const textContent = await updateTextContentUseCase.execute(id, text, imageFormat)
+    return art;
+  }
 
-        return textContent
-    }
+  @Query(() => Boolean)
+  async deleteTextContent(@Arg("id") id: string) {
+    const deleteTextContentUseCase = container.resolve(
+      DeleteTextContentUseCase
+    );
 
-    @Mutation(() => TextContent)
-    async updateTextContentImage(
-        @Arg('id') id: string,
-        @Arg("file", () => GraphQLUpload) { createReadStream, filename }: FileUpload
-    ) {
+    await deleteTextContentUseCase.execute(id);
 
-        const hashFilename = getHashFilename(filename)
-
-        const imagePath = `${tmpFolder}/${hashFilename}`
-
-        await new Promise(async (resolve, reject) =>
-            createReadStream()
-                .pipe(createWriteStream(imagePath))
-                .on('finish', () => resolve(true))
-                .on('error', () => reject(false))
-        )
-
-        const editTextContentImageUseCase = container.resolve(EditTextContentImageUseCase)
-
-        const art = await editTextContentImageUseCase.execute(id, hashFilename)
-
-        return art
-    }
-
-    @Query(() => Boolean)
-    async deleteTextContent(
-        @Arg('id') id: string
-    ) {
-
-        const deleteTextContentUseCase = container.resolve(DeleteTextContentUseCase)
-
-        await deleteTextContentUseCase.execute(id)
-
-        return true
-    }
+    return true;
+  }
 }

@@ -1,5 +1,5 @@
 import { createWriteStream } from "fs";
-import GraphQLUpload, { FileUpload } from "graphql-upload/GraphQLUpload.mjs";
+import { GraphQLUpload, FileUpload } from "graphql-upload";
 import { container } from "tsyringe";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { getHashFilename, tmpFolder } from "../../../config/upload";

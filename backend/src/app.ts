@@ -2,7 +2,7 @@ import "reflect-metadata";
 import path from "path";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
-import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
+import { graphqlUploadExpress } from "graphql-upload";
 import express from "express";
 import cors from "cors";
 import { ArtResolver } from "./modules/Arts/resolvers/ArtResolver";

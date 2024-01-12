@@ -1,7 +1,8 @@
-import GraphQLUpload, { FileUpload } from "graphql-upload/GraphQLUpload.mjs";
+import { GraphQLUpload, FileUpload } from "graphql-upload";
 import { container } from "tsyringe";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { createWriteStream } from "fs";
+import fs from "fs";
 
 import { Art } from "../models/Art";
 import { FindAllArtsUseCase } from "../useCases/FindAllArts/FindAllArtsUseCase";
